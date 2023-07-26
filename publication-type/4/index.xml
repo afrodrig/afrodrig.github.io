@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>4 | Andres F. Rodriguez</title>
+    <link>/publication-type/4/</link>
+      <atom:link href="/publication-type/4/index.xml" rel="self" type="application/rss+xml" />
+    <description>4</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 01 Jul 2023 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
+      <title>4</title>
+      <link>/publication-type/4/</link>
+    </image>
+    
+    <item>
+      <title>Candidate Entry Into Local Government (fieldwork in progress)</title>
+      <link>/publication/candidate-entry/</link>
+      <pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate>
+      <guid>/publication/candidate-entry/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Improving the Effectiveness of Zambia&#39;s Constituency Development Fund</title>
+      <link>/publication/zambia-cdf/</link>
+      <pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate>
+      <guid>/publication/zambia-cdf/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
