@@ -5,7 +5,7 @@
     <link>/tag/source-themes/</link>
       <atom:link href="/tag/source-themes/index.xml" rel="self" type="application/rss+xml" />
     <description>Source Themes</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 01 Jul 2023 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 30 Apr 2024 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
       <title>Source Themes</title>
@@ -13,9 +13,17 @@
     </image>
     
     <item>
-      <title>Candidate Entry Into Local Government (Fieldwork in Progress)</title>
+      <title>Informal Taxation in Development Projects: the Role of Chiefs in Sierra Leone (Job Market Paper)</title>
+      <link>/publication/job-market_paper/</link>
+      <pubDate>Tue, 30 Apr 2024 00:00:00 +0000</pubDate>
+      <guid>/publication/job-market_paper/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Candidate Entry Into Local Government</title>
       <link>/publication/candidate-entry/</link>
-      <pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 01 Apr 2024 00:00:00 +0000</pubDate>
       <guid>/publication/candidate-entry/</guid>
       <description></description>
     </item>
@@ -25,14 +33,6 @@
       <link>/publication/zambia-cdf/</link>
       <pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate>
       <guid>/publication/zambia-cdf/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Informal Taxation in Development Projects: the Role of Chiefs in Sierra Leone (Job Market Paper)</title>
-      <link>/publication/job-market_paper/</link>
-      <pubDate>Fri, 30 Jun 2023 00:00:00 +0000</pubDate>
-      <guid>/publication/job-market_paper/</guid>
       <description></description>
     </item>
     
