@@ -138,6 +138,62 @@ mark.band {
 .entry-links a.accent { color: var(--color-accent); }
 .entry-open .entry-year { color: var(--color-accent); }
 
+/* ---------- the Paper Wheel ---------- */
+.view-toggle { display: flex; align-items: center; gap: 6px; font-size: 11px; letter-spacing: 0.08em; line-height: 1; }
+.view-btn { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; color: var(--color-muted); padding: 3px 2px; border-bottom: 2px solid transparent; }
+.view-btn.is-active { color: var(--color-ink); border-bottom-color: var(--color-accent); }
+.view-btn:hover { color: var(--color-accent); }
+
+.section-full[data-view="wheel"] .entry-list { display: none; }
+.section-full[data-view="list"] .wheel-view { display: none; }
+
+.wheel-view {
+  flex: 1; min-height: 0; margin-top: var(--s-24);
+  display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 40px;
+}
+.wheel-details { position: relative; min-height: 300px; }
+.wheel-detail {
+  position: absolute; inset: 0; max-width: 560px;
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: opacity var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out),
+    visibility 0s linear var(--dur-short);
+}
+.wheel-detail.is-current { opacity: 1; visibility: visible; transform: none; transition-delay: 140ms, 140ms, 0s; }
+.wd-eyebrow { font-size: 10.5px; letter-spacing: 0.1em; color: var(--color-accent); }
+.wd-title { font-family: var(--font-display); font-size: clamp(1.6rem, 2.3vw, 2.05rem); line-height: 1.12; margin-top: 12px; }
+.wheel-detail .takeaway { margin-top: 12px; }
+
+.wheel { position: relative; min-height: 380px; overflow: visible; }
+.wheel-arc { position: absolute; right: -76px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+.wheel-card {
+  position: absolute; right: 0; top: calc(50% - 36px); width: min(340px, 100%);
+  padding: 13px 17px; text-align: left;
+  background: var(--color-paper); border: 1px solid var(--color-rule-strong);
+  font-size: 13px; font-weight: 500; color: var(--color-muted-2);
+  display: flex; flex-direction: column; gap: 5px;
+  transition: transform 520ms var(--ease-spring), opacity 300ms var(--ease-out),
+    background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+}
+.wheel-card:hover { border-color: var(--color-accent); }
+.wc-title { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wc-tag { font-size: 9px; letter-spacing: 0.1em; color: var(--color-muted); }
+.wheel-card.is-focal {
+  background: var(--color-ink); border-color: var(--color-ink); color: var(--color-ink-inverse); font-size: 14px;
+}
+.wheel-card.is-focal .wc-tag { color: var(--color-muted-inverse); }
+.wheel-hint {
+  position: absolute; right: 0; bottom: 0; z-index: 30;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 10.5px; letter-spacing: 0.1em; color: var(--color-muted); line-height: 1;
+  background: var(--color-paper); padding: 8px 0 8px 14px;
+}
+
+/* wheel degrades to the list on small screens and reduced motion */
+@media (max-width: 880px), (prefers-reduced-motion: reduce) {
+  .view-toggle, .wheel-view { display: none; }
+  .section-full[data-view="wheel"] .entry-list { display: block; }
+}
+
 /* practice */
 .practice-note { margin-top: var(--s-40); font-size: 11px; color: var(--color-muted); border: 1px dashed var(--color-rule-strong); padding: 18px 22px; align-self: flex-start; }
 

@@ -63,6 +63,70 @@
     t.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
   });
 
+  /* ---- LIST / WHEEL toggle ---- */
+  document.querySelectorAll('[data-view-set]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const full = btn.closest('.section-full');
+      full.dataset.view = btn.dataset.viewSet;
+      full.querySelectorAll('.view-btn').forEach((b) => b.classList.toggle('is-active', b === btn));
+    });
+  });
+
+  /* ---- the Paper Wheel ---- */
+  (function paperWheel() {
+    const wheelEl = document.querySelector('.wheel');
+    if (!wheelEl) return;
+    const cards = [...wheelEl.querySelectorAll('.wheel-card')];
+    const details = [...document.querySelectorAll('.wheel-detail')];
+    const full = document.querySelector('#panel-research .section-full');
+    const SPACING = 88, ROT = 3.2, DRIFT = 16;
+    let focal = 0;
+
+    function layout() {
+      cards.forEach((c, i) => {
+        const off = i - focal;
+        c.style.transform =
+          'translate(' + (-Math.abs(off) * DRIFT) + 'px, ' + (off * SPACING) + 'px) ' +
+          'rotate(' + (off * ROT) + 'deg) scale(' + (off === 0 ? 1 : 0.94) + ')';
+        c.style.opacity = off === 0 ? '1' : String(Math.max(0.4, 0.8 - Math.abs(off) * 0.18));
+        c.style.zIndex = String(20 - Math.abs(off));
+        c.classList.toggle('is-focal', off === 0);
+        c.setAttribute('aria-pressed', off === 0 ? 'true' : 'false');
+      });
+      details.forEach((d, i) => d.classList.toggle('is-current', i === focal));
+    }
+    function goTo(i) {
+      const next = Math.min(cards.length - 1, Math.max(0, i));
+      if (next === focal) return;
+      focal = next;
+      layout();
+    }
+
+    cards.forEach((c, i) => c.addEventListener('click', () => goTo(i)));
+
+    // scroll rotates — accumulated, snapping card by card, interruptible
+    let acc = 0, cooling = false;
+    wheelEl.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      if (cooling) return;
+      acc += e.deltaY;
+      if (Math.abs(acc) > 60) {
+        goTo(focal + (acc > 0 ? 1 : -1));
+        acc = 0;
+        cooling = true;
+        setTimeout(() => { cooling = false; }, 160);
+      }
+    }, { passive: false });
+
+    document.addEventListener('keydown', (e) => {
+      if (stage.dataset.state !== 'research' || full.dataset.view !== 'wheel') return;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { e.preventDefault(); goTo(focal + 1); }
+      if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { e.preventDefault(); goTo(focal - 1); }
+    });
+
+    layout();
+  })();
+
   /* ---- boot ---- */
   apply(mobile() ? 'landing' : fromHash());
   // one orchestrated load reveal, then never again

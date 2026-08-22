@@ -208,13 +208,49 @@ function researchPanel() {
     <p class="section-desc">Governance, public goods and beliefs — Sierra Leone, Zambia, Colombia.</p>
     ${preview}
   </div>
-  <div class="section-full">
+  <div class="section-full" data-view="wheel">
     <header class="section-head">
       <div>
         <div class="eyebrow mono">01 · ${esc(site.sections.find(s => s.key === 'research').eyebrow).toUpperCase()} · 2019–PRESENT</div>
         <h2 class="display-2">Research</h2>
       </div>
+      <div class="view-toggle mono">
+        <button class="view-btn" data-view-set="list">LIST</button>
+        <span class="muted">/</span>
+        <button class="view-btn is-active" data-view-set="wheel">WHEEL</button>
+      </div>
     </header>
+
+    <div class="wheel-view">
+      <div class="wheel-details">
+        ${papers.map((p, i) => `
+        <article class="wheel-detail ${i === 0 ? 'is-current' : ''}" data-detail="${i}">
+          <div class="wd-eyebrow mono">${esc([p.status, p.method, p.country].filter(Boolean).join(' · ')).toUpperCase()}</div>
+          <h3 class="wd-title">${esc(p.title)}</h3>
+          <p class="takeaway">${band(p.takeaway, p.highlight)}</p>
+          <div class="entry-links mono">
+            ${p.links?.pdf ? `<a class="accent" href="${p.links.pdf}">PAPER</a>` : ''}
+            ${p.links?.slides ? `<a href="${p.links.slides}">SLIDES</a>` : ''}
+            ${p.links?.data ? `<a href="${p.links.data}">DATA</a>` : ''}
+          </div>
+        </article>`).join('')}
+      </div>
+      <div class="wheel" aria-label="Papers — scroll or use arrow keys to rotate">
+        <svg class="wheel-arc" width="150" height="620" viewBox="0 0 150 620" fill="none" aria-hidden="true">
+          <path d="M 146 0 A 500 500 0 0 0 146 620" stroke="#669bbc" stroke-width="1" stroke-dasharray="3 6" opacity="0.55"/>
+        </svg>
+        ${papers.map((p, i) => `
+        <button class="wheel-card" data-card="${i}">
+          <span class="wc-title">${esc(p.title.split(':')[0])}</span>
+          <span class="wc-tag mono">${esc(p.status ?? '').toUpperCase()}</span>
+        </button>`).join('')}
+        <div class="wheel-hint mono">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 2v11M4 9l4 4 4-4"/></svg>
+          SCROLL ROTATES THE WHEEL
+        </div>
+      </div>
+    </div>
+
     <div class="entry-list">${entries}</div>
     ${colophon}
   </div>
