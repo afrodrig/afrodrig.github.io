@@ -23,6 +23,10 @@ other way around.
 One page-level state machine. The viewport is divided into vertical panels; **no top nav bar
 exists anywhere**.
 
+**Sections**: Research (01), Practice (02), The Lab (03). There is NO About/CV pane —
+the identity panel already carries the short bio, contact, and the CV (PDF) link
+(decided 2026-08-22; the web-CV content in `content/cv.yml` is parked for future use).
+
 **State: LANDING** (grid at 1440px: `560 / 380 / 260 / 240`)
 - Panel 1 — identity (tinted `--color-panel`): name (display serif, ~62px, two lines),
   role line, bridge statement (~65ch max, with one marigold-banded phrase), a `NOW:` line
@@ -32,8 +36,11 @@ exists anywhere**.
   bottom-anchored preview (Research: fanned paper cards; others: hairline-separated lists).
 - Hover on a section panel: background tints to `--color-panel-hover`, preview rises 8px,
   `ENTER →` affordance appears. All springs (§6).
+- The Research preview's stacked paper cards are INDIVIDUALLY clickable: each opens
+  Research with the Wheel focused on that paper (hover: accent border). The panel
+  itself and ENTER open Research at the featured paper.
 
-**State: SECTION OPEN** (e.g. Research; grid: `96 / 1098 / 82 / 82 / 82`)
+**State: SECTION OPEN** (e.g. Research; grid: `96 / expanded / 82 / 82`)
 - Identity compresses to a 96px rail: monogram, vertical name (writing-mode: vertical-rl),
   back affordance at bottom. ESC or back restores LANDING.
 - The opened section expands; the other sections compress to labeled slivers (number +
@@ -53,13 +60,6 @@ CASE STUDIES — serif-titled entries using the expanded-entry pattern (title, 1
 context, mono links; may cross-link into Lab artifacts, e.g. `THE RUBRIC → LAB`);
 ESSAYS — dated list rows (title + mono year). Ends with the colophon.
 
-**About & CV section anatomy**: header (eyebrow + "About", `CV (PDF) ↓` link right).
-Two-column grid (~300px / 1fr): LEFT — portrait photo + contact block (email in accent,
-Scholar/GitHub, location in mono). RIGHT — bio (2 short paragraphs, one banded phrase)
-followed by the **web CV rendered from `content/cv.yml`**: mono sub-heads (POSITIONS,
-EDUCATION, …) with year-column rows, closing with "Full vita in the PDF →". The web CV
-is the always-current source; the PDF is the long-form download. Ends with the colophon.
-
 **Lab section anatomy** (settled: card carousel): intro clause in the header row, then a
 carousel of artifact cards — focal card centered (~600px), neighbors peeking from the
 panel edges, prev/next hairline-square buttons, numbered mono pagination (active number
@@ -74,7 +74,7 @@ single-card column.
 **Photo**: the real portrait (`avatar.jpg`, 270×270 from the current site) lives in the
 identity panel on the landing (~128px square, hairline border), and repeats small
 (~40px) at the top of the compressed rail in every open-section state — the photo
-becomes the identity mark when the panel compresses. About shows it at ~300px.
+becomes the identity mark when the panel compresses.
 
 **Colophon (the footer)**: there is NO global footer chrome. Contact lives permanently
 in the identity panel/rail. Every scrolling section pane ends with a colophon row:
@@ -201,7 +201,12 @@ or hand-rolled FLIP; kinetics.colorion.co presets are approved sources.
 
 ## 8. The Paper Wheel
 
-Papers orbit a circular axis anchored off the right edge (arc: dashed 1px `--color-data`).
+Papers orbit ONE real circle — cards and the dashed arc share the same geometry, or the
+wheel reads as fake. Spec: radius R = 900px, circle center off-screen LEFT of the wheel
+column at (focal-anchor-x − R, mid-height); the focal card sits at the circle's rightmost
+point; each step is 6° along the circle (x = −R(1−cosθ), y = R·sinθ, tilt ≈ 5.1°/step).
+The arc path is drawn by JS through the cards' anchors at the current container size
+(redrawn on open and on resize) — never a static decorative curve.
 - At rest: focal card inked (`--color-ink` fill), neighbors recede (scale .92, 60% ink,
   slight rotation following the arc).
 - Scroll/drag/arrow keys rotate the wheel; it carries momentum and snaps card-by-card

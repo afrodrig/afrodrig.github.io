@@ -35,17 +35,15 @@ mark.band {
 /* ---------- the stage: five panels, one grid, four-and-a-half states ---------- */
 .stage {
   display: grid; height: 100vh; min-height: 640px;
-  grid-template-columns: 39fr 26.4fr 18fr 16.6fr 0fr;
+  grid-template-columns: 39fr 26.4fr 18fr 16.6fr;
   transition: grid-template-columns 560ms var(--ease-spring);
 }
-.stage[data-state="research"] { grid-template-columns: 96px minmax(0, 1fr) 82px 82px 82px; }
-.stage[data-state="practice"] { grid-template-columns: 96px 82px minmax(0, 1fr) 82px 82px; }
-.stage[data-state="lab"]      { grid-template-columns: 96px 82px 82px minmax(0, 1fr) 82px; }
-.stage[data-state="about"]    { grid-template-columns: 96px 82px 82px 82px minmax(0, 1fr); }
+.stage[data-state="research"] { grid-template-columns: 96px minmax(0, 1fr) 82px 82px; }
+.stage[data-state="practice"] { grid-template-columns: 96px 82px minmax(0, 1fr) 82px; }
+.stage[data-state="lab"]      { grid-template-columns: 96px 82px 82px minmax(0, 1fr); }
 
 .panel { position: relative; min-width: 0; overflow: hidden; border-right: 1px solid var(--color-rule); }
 .panel:last-of-type { border-right: 0; }
-.stage[data-state="landing"] #panel-about { border-right: 0; }
 
 /* content faces: preview / full / sliver — crossfade AFTER the geometry lands */
 .section-preview, .section-full, .sliver-face, .identity-full, .identity-rail {
@@ -96,7 +94,11 @@ mark.band {
   position: absolute; left: 0; width: min(300px, 92%); padding: 13px 16px;
   background: var(--color-paper); border: 1px solid var(--color-rule);
   font-size: 13px; font-weight: 500; color: var(--color-muted);
+  font-family: inherit; text-align: left; cursor: pointer;
+  transition: border-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
 }
+.stack-card:hover { border-color: var(--color-accent); color: var(--color-ink); }
+.stack-card.stack-focal:hover { border-color: var(--color-accent); color: var(--color-ink-inverse); }
 .stack-card > span:first-child { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .stack-card.sc0 { top: 8px; transform: rotate(-2deg); }
 .stack-card.sc1 { top: 70px; transform: rotate(-0.6deg); border-color: var(--color-rule-strong); color: var(--color-muted-2); }
@@ -149,22 +151,24 @@ mark.band {
 
 .wheel-view {
   flex: 1; min-height: 0; margin-top: var(--s-24);
-  display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 40px;
+  display: grid; grid-template-columns: minmax(0, 1fr) 356px; gap: 48px;
 }
 .wheel-details { position: relative; min-height: 300px; }
 .wheel-detail {
-  position: absolute; inset: 0; max-width: 560px;
+  position: absolute; inset: 0; max-width: 640px;
   opacity: 0; visibility: hidden; transform: translateY(8px);
   transition: opacity var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out),
     visibility 0s linear var(--dur-short);
 }
 .wheel-detail.is-current { opacity: 1; visibility: visible; transform: none; transition-delay: 140ms, 140ms, 0s; }
 .wd-eyebrow { font-size: 10.5px; letter-spacing: 0.1em; color: var(--color-accent); }
-.wd-title { font-family: var(--font-display); font-size: clamp(1.6rem, 2.3vw, 2.05rem); line-height: 1.12; margin-top: 12px; }
-.wheel-detail .takeaway { margin-top: 12px; }
+.wd-title { font-family: var(--font-display); font-size: clamp(1.9rem, 2.9vw, 2.6rem); line-height: 1.1; margin-top: 14px; }
+.wd-authors { margin-top: 10px; font-size: 14px; color: var(--color-muted-2); }
+.wheel-detail .takeaway { margin-top: 16px; font-size: 16px; line-height: 1.65; max-width: 58ch; }
+.wheel-detail .entry-links { margin-top: 20px; font-size: 11.5px; }
 
 .wheel { position: relative; min-height: 380px; overflow: visible; }
-.wheel-arc { position: absolute; right: -76px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+.wheel-arc { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
 .wheel-card {
   position: absolute; right: 0; top: calc(50% - 36px); width: min(340px, 100%);
   padding: 13px 17px; text-align: left;

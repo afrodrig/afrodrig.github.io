@@ -108,7 +108,7 @@ function band(text, phrase) {
 const site = parseYaml(readFileSync(C('site.yml'), 'utf8'));
 const bio = parseDoc(C('bio.md'));
 const practice = parseDoc(C('practice.md'));
-const cv = parseYaml(readFileSync(C('cv.yml'), 'utf8'));
+const cv = parseYaml(readFileSync(C('cv.yml'), 'utf8')); // kept for future use (About pane removed)
 const papers = readdirSync(C('papers')).filter(f => f.endsWith('.md'))
   .map(f => parseDoc(C(join('papers', f))))
   .map(d => ({ ...d.meta, abstract: d.body }))
@@ -155,7 +155,6 @@ function identityPanel() {
         ${site.links.scholar ? `<a href="${site.links.scholar}">Scholar</a>` : ''}
         ${site.links.github ? `<a href="${site.links.github}">GitHub</a>` : ''}
         <a href="${site.links.cv}">CV (PDF)</a>
-        <button class="linklike" data-open="about">About &amp; CV &rarr;</button>
       </div>
     </div>
   </div>
@@ -171,13 +170,15 @@ function identityPanel() {
 
 function researchPanel() {
   const featured = papers.find(p => p.featured) ?? papers[0];
+  const previewPapers = [...papers.filter(p => p !== featured).slice(0, 2), featured];
   const preview = `
   <div class="preview">
     <div class="stack">
-      ${papers.filter(p => p !== featured).slice(0, 2).map((p, i) =>
-        `<div class="stack-card sc${i}"><span>${esc(p.title.split(':')[0])}</span></div>`).join('')}
-      <div class="stack-card stack-focal"><span>${esc(featured.title.split(':')[0])}</span>
-        <span class="mono tag-inverse">${esc(featured.status).toUpperCase()}</span></div>
+      ${previewPapers.map((p, pos) => `
+      <button class="stack-card ${p === featured ? 'stack-focal' : 'sc' + pos}" data-focus-paper="${papers.indexOf(p)}" aria-label="Open ${esc(p.title)} in the wheel">
+        <span>${esc(p.title.split(':')[0])}</span>
+        ${p === featured ? `<span class="mono tag-inverse">${esc(featured.status).toUpperCase()}</span>` : ''}
+      </button>`).join('')}
     </div>
     <span class="enter mono">ENTER
       <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
@@ -225,8 +226,9 @@ function researchPanel() {
       <div class="wheel-details">
         ${papers.map((p, i) => `
         <article class="wheel-detail ${i === 0 ? 'is-current' : ''}" data-detail="${i}">
-          <div class="wd-eyebrow mono">${esc([p.status, p.method, p.country].filter(Boolean).join(' · ')).toUpperCase()}</div>
+          <div class="wd-eyebrow mono">${esc([p.status, p.method, p.country, p.year].filter(Boolean).join(' · ')).toUpperCase()}</div>
           <h3 class="wd-title">${esc(p.title)}</h3>
+          ${authorsLine(p.authors) ? `<div class="wd-authors">${esc(authorsLine(p.authors))}</div>` : ''}
           <p class="takeaway">${band(p.takeaway, p.highlight)}</p>
           <div class="entry-links mono">
             ${p.links?.pdf ? `<a class="accent" href="${p.links.pdf}">PAPER</a>` : ''}
@@ -236,8 +238,8 @@ function researchPanel() {
         </article>`).join('')}
       </div>
       <div class="wheel" aria-label="Papers — scroll or use arrow keys to rotate">
-        <svg class="wheel-arc" width="150" height="620" viewBox="0 0 150 620" fill="none" aria-hidden="true">
-          <path d="M 146 0 A 500 500 0 0 0 146 620" stroke="#669bbc" stroke-width="1" stroke-dasharray="3 6" opacity="0.55"/>
+        <svg class="wheel-arc" fill="none" aria-hidden="true">
+          <path d="" stroke="#669bbc" stroke-width="1" stroke-dasharray="3 6" opacity="0.55"/>
         </svg>
         ${papers.map((p, i) => `
         <button class="wheel-card" data-card="${i}">
@@ -329,55 +331,6 @@ function labPanel() {
 </section>`;
 }
 
-function aboutPanel() {
-  const posRows = (cv.positions ?? []).map(p => `
-    <div class="cv-row"><div class="mono cv-year">${esc(p.years)}</div>
-      <div>${esc(p.role)}, <span class="muted-strong">${esc(p.org)}</span></div></div>`).join('');
-  const eduRows = (cv.education ?? []).map(e => `
-    <div class="cv-row"><div class="mono cv-year">${esc(e.years)}</div>
-      <div>${esc(e.degree)}, <span class="muted-strong">${esc(e.org)}</span></div></div>`).join('');
-  return `
-<section class="panel panel-section" id="panel-about" data-key="about">
-  ${sliverFace('04', 'about', 'About & CV')}
-  <div class="section-preview" data-open="about">
-    <div class="eyebrow mono">04</div>
-    <h2 class="display-2">About &amp; CV</h2>
-  </div>
-  <div class="section-full">
-    <header class="section-head">
-      <div>
-        <div class="eyebrow mono">04 · ABOUT &amp; CV</div>
-        <h2 class="display-2">About</h2>
-      </div>
-      <a class="accent mono" href="${site.links.cv}">CV (PDF) &darr;</a>
-    </header>
-    <div class="about-grid">
-      <div class="about-side">
-        <img class="about-photo" src="assets/avatar.jpg" alt="Portrait of ${esc(site.name)}">
-        <div class="about-contact">
-          <a class="accent" href="mailto:${site.email}">${esc(site.email)}</a>
-          <div class="identity-links">
-            ${site.links.scholar ? `<a href="${site.links.scholar}">Google Scholar</a>` : ''}
-            ${site.links.github ? `<a href="${site.links.github}">GitHub</a>` : ''}
-          </div>
-          <div class="mono muted">${esc(site.location).toUpperCase()}</div>
-        </div>
-      </div>
-      <div class="about-main">
-        <p>I&rsquo;m a development economist working on governance and public goods in West Africa and Latin America. As Impact &amp; Learning Manager at Stanford Impact Labs, I design how a funder learns from a portfolio of applied social science &mdash; my job is to <mark class="band">make evidence usable</mark>, not just rigorous.</p>
-        <p>Before Stanford Impact Labs, my fieldwork took me to Sierra Leone, Zambia and Colombia, working with chiefs, councils and entrepreneurs on how institutions shape everyday economic life.</p>
-        <div class="cv-block">
-          <div class="cv-head mono">POSITIONS</div>${posRows}
-          <div class="cv-head mono">EDUCATION</div>${eduRows}
-          <div class="cv-more"><a class="accent" href="${site.links.cv}">Grants, fellowships &amp; the full vita in the PDF &rarr;</a></div>
-        </div>
-      </div>
-    </div>
-    ${colophon}
-  </div>
-</section>`;
-}
-
 /* ---------- page shell ---------- */
 const html = `<!doctype html>
 <html lang="en">
@@ -398,7 +351,6 @@ ${identityPanel()}
 ${researchPanel()}
 ${practicePanel()}
 ${labPanel()}
-${aboutPanel()}
 </main>
 <script src="assets/site.js"></script>
 </body>
