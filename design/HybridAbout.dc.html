@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; background: #fafbfc; }
+    a { color: #0e2e42; text-decoration: none; }
+    a:hover { color: #c1121f; }
+  </style>
+</helmet>
+<div style="width: 1440px; height: 900px; background: #fafbfc; color: #0e2e42; font-family: Geist, 'Helvetica Neue', sans-serif; box-sizing: border-box; display: grid; grid-template-columns: 96px 1098px 82px 82px 82px; overflow: hidden">
+
+  <!-- Identity rail -->
+  <div style="background: #eef1f4; border-right: 1px solid #dfe4e8; padding: 28px 0; display: flex; flex-direction: column; align-items: center; box-sizing: border-box">
+    <img src="avatar.jpg" alt="" style="width: 40px; height: 40px; object-fit: cover; border: 1px solid #c8d1d8; display: block">
+    <div style="margin-top: 28px; font-family: 'Instrument Serif', Georgia, serif; font-size: 21px; writing-mode: vertical-rl; color: #44586a">Andrés F. Rodríguez</div>
+    <a href="#" style="margin-top: auto; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid #c8d1d8" aria-label="Back to landing">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#c1121f" stroke-width="1.5"><path d="M14 8H3M7 4L3 8l4 4"/></svg>
+    </a>
+  </div>
+
+  <!-- About panel, expanded -->
+  <div style="border-right: 1px solid #dfe4e8; padding: 46px 56px 0 60px; display: flex; flex-direction: column; box-sizing: border-box; overflow: hidden">
+    <div style="display: flex; align-items: baseline; justify-content: space-between">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #5b6c7a">04 &middot; ABOUT &amp; CV</div>
+        <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 52px; line-height: 1">About</div>
+      </div>
+      <a href="#" style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: #c1121f">CV (PDF) &darr;</a>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 56px; margin-top: 34px; min-height: 0">
+      <!-- Left: photo + contact -->
+      <div style="display: flex; flex-direction: column; gap: 24px">
+        <img src="avatar.jpg" alt="Portrait of Andrés F. Rodríguez" style="width: 300px; height: 300px; object-fit: cover; border: 1px solid #c8d1d8; display: block">
+        <div style="display: flex; flex-direction: column; gap: 9px; font-size: 13.5px; color: #4e6170">
+          <a href="#" style="color: #c1121f">afrodrig@stanford.edu</a>
+          <div style="display: flex; gap: 18px"><a href="#">Google Scholar</a><a href="#">GitHub</a></div>
+          <div style="font-family: 'Geist Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; color: #5b6c7a">STANFORD, CALIFORNIA</div>
+        </div>
+      </div>
+
+      <!-- Right: bio + web CV -->
+      <div style="display: flex; flex-direction: column; min-height: 0">
+        <p style="margin: 0; font-size: 15.5px; font-weight: 300; line-height: 1.65; color: #2c4356; max-width: 60ch">I&rsquo;m a development economist working on governance and public goods in West Africa and Latin America. As Impact &amp; Learning Manager at Stanford Impact Labs, I design how a funder learns from a portfolio of applied social science &mdash; my job is to <span style="background: linear-gradient(180deg, transparent 38%, #ffe38f 38%, #ffe38f 92%, transparent 92%)">make evidence usable</span>, not just rigorous.</p>
+        <p style="margin: 14px 0 0 0; font-size: 15.5px; font-weight: 300; line-height: 1.65; color: #2c4356; max-width: 60ch">Before Stanford Impact Labs, my fieldwork took me to Sierra Leone, Zambia and Colombia, working with chiefs, councils and entrepreneurs on how institutions shape everyday economic life.</p>
+
+        <!-- Web CV, rendered from cv.yml -->
+        <div style="margin-top: 30px; display: flex; flex-direction: column">
+          <div style="font-family: 'Geist Mono', monospace; font-size: 10.5px; letter-spacing: 0.14em; color: #5b6c7a; padding-bottom: 10px; border-bottom: 1px solid #dfe4e8">POSITIONS</div>
+          <div style="display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 18px; padding: 11px 0; border-bottom: 1px solid #dfe4e8; align-items: baseline">
+            <div style="font-family: 'Geist Mono', monospace; font-size: 11px; color: #5b6c7a">2024&mdash;</div>
+            <div style="font-size: 14.5px">Impact &amp; Learning Manager, <span style="color: #44586a">Stanford Impact Labs</span></div>
+          </div>
+          <div style="display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 18px; padding: 11px 0; border-bottom: 1px solid #dfe4e8; align-items: baseline">
+            <div style="font-family: 'Geist Mono', monospace; font-size: 11px; color: #5b6c7a">2021, 23</div>
+            <div style="font-size: 14.5px">Consultant, <span style="color: #44586a">International Growth Centre (LSE)</span></div>
+          </div>
+          <div style="display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 18px; padding: 11px 0; border-bottom: 1px solid #dfe4e8; align-items: baseline">
+            <div style="font-family: 'Geist Mono', monospace; font-size: 11px; color: #5b6c7a">2019&ndash;21</div>
+            <div style="font-size: 14.5px">Research Assistant to Katherine Casey, <span style="color: #44586a">Stanford GSB</span></div>
+          </div>
+
+          <div style="font-family: 'Geist Mono', monospace; font-size: 10.5px; letter-spacing: 0.14em; color: #5b6c7a; padding: 20px 0 10px 0; border-bottom: 1px solid #dfe4e8">EDUCATION</div>
+          <div style="display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 18px; padding: 11px 0; border-bottom: 1px solid #dfe4e8; align-items: baseline">
+            <div style="font-family: 'Geist Mono', monospace; font-size: 11px; color: #5b6c7a">2018&ndash;24</div>
+            <div style="font-size: 14.5px">Ph.D., Economics, <span style="color: #44586a">Stanford University</span></div>
+          </div>
+          <div style="display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 18px; padding: 11px 0; border-bottom: 1px solid #dfe4e8; align-items: baseline">
+            <div style="font-family: 'Geist Mono', monospace; font-size: 11px; color: #5b6c7a">2015&ndash;18</div>
+            <div style="font-size: 14.5px">M.A., Economics, <span style="font-style: italic">cum laude</span>, <span style="color: #44586a">Universidad de los Andes</span></div>
+          </div>
+          <div style="display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 18px; padding: 11px 0; align-items: baseline">
+            <div style="font-family: 'Geist Mono', monospace; font-size: 11px; color: #5b6c7a">2011&ndash;15</div>
+            <div style="font-size: 14.5px">B.A., Economics, <span style="font-style: italic">summa cum laude</span>, <span style="color: #44586a">Universidad de los Andes</span></div>
+          </div>
+          <div style="padding-top: 12px; font-size: 13px"><a href="#" style="color: #c1121f">Grants, fellowships &amp; the full vita in the PDF &rarr;</a></div>
+        </div>
+
+        <!-- Colophon: how every scrolling pane ends -->
+        <div style="margin-top: auto; border-top: 1px solid #dfe4e8; padding: 16px 0 18px 0; display: flex; justify-content: space-between; align-items: baseline; font-family: 'Geist Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; color: #5b6c7a">
+          <div style="display: flex; gap: 22px"><a href="#" style="color: #c1121f">EMAIL</a><a href="#" style="color: #5b6c7a">SCHOLAR</a><a href="#" style="color: #5b6c7a">GITHUB</a><a href="#" style="color: #5b6c7a">CV</a></div>
+          <div>UPDATED AUG 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sliver panels -->
+  <div style="border-right: 1px solid #dfe4e8; padding: 40px 0 32px 0; display: flex; flex-direction: column; align-items: center; box-sizing: border-box">
+    <div style="font-family: 'Geist Mono', monospace; font-size: 10.5px; color: #5b6c7a">01</div>
+    <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 26px; writing-mode: vertical-rl; margin-top: 16px">Research</div>
+  </div>
+  <div style="border-right: 1px solid #dfe4e8; padding: 40px 0 32px 0; display: flex; flex-direction: column; align-items: center; box-sizing: border-box">
+    <div style="font-family: 'Geist Mono', monospace; font-size: 10.5px; color: #5b6c7a">02</div>
+    <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 26px; writing-mode: vertical-rl; margin-top: 16px">Practice</div>
+  </div>
+  <div style="padding: 40px 0 32px 0; display: flex; flex-direction: column; align-items: center; box-sizing: border-box">
+    <div style="font-family: 'Geist Mono', monospace; font-size: 10.5px; color: #5b6c7a">03</div>
+    <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 26px; writing-mode: vertical-rl; margin-top: 16px">The Lab</div>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

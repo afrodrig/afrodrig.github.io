@@ -1,0 +1,47 @@
+/* tokens.css — the Atlas Cooled system. Source of truth: DESIGN.md §3–§6.
+   Change colors/type/motion HERE, never inline. */
+:root {
+  /* surfaces */
+  --color-paper:         #FAFBFC;
+  --color-panel:         #EEF1F4;
+  --color-panel-hover:   #F3F6F8;
+  --color-card:          #FBFCFD;
+  --color-rule:          #DFE4E8;
+  --color-rule-strong:   #C8D1D8;
+
+  /* ink — Deep Space Blue, no black anywhere */
+  --color-ink:           #0E2E42;
+  --color-ink-body:      #2C4356;
+  --color-muted:         #5B6C7A;
+  --color-muted-2:       #44586A;
+  --color-ink-inverse:   #EDF3F7;
+  --color-muted-inverse: #B8C6CE;
+
+  /* roles */
+  --color-accent:        #C1121F;  /* interactive only */
+  --color-accent-deep:   #780000;  /* pressed only */
+  --color-data:          #669BBC;  /* data/figures only */
+  --color-data-strong:   #4E7FA3;
+  --color-highlight:     #FFE38F;  /* marigold band device only */
+  --color-focus:         #C1121F;
+
+  /* type */
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Geist', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', monospace;
+
+  /* spacing (4pt scale) */
+  --s-2: 0.125rem; --s-4: 0.25rem; --s-8: 0.5rem; --s-12: 0.75rem;
+  --s-16: 1rem; --s-24: 1.5rem; --s-40: 2.5rem; --s-64: 4rem; --s-96: 6rem;
+
+  /* motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long: 420ms;
+  /* spring-flavored curve for the panel machine (slight overshoot, natural settle) */
+  --ease-spring: linear(0, 0.0035 0.5%, 0.0546 2.5%, 0.3357 7.5%, 0.5677 11.5%, 0.7441 15%,
+    0.8851 18.5%, 0.9643 21.5%, 1.0159 24.5%, 1.0465 27.5%, 1.0587 31%, 1.0522 35.5%,
+    1.0227 43.5%, 1.0042 50.5%, 0.9957 58%, 0.9972 68.5%, 1.0002 87%, 1);
+}

@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; background: #fafbfc; }
+    a { color: #0e2e42; text-decoration: none; }
+    a:hover { color: #c1121f; }
+  </style>
+</helmet>
+<div style="width: 1440px; height: 900px; background: #fafbfc; color: #0e2e42; font-family: Geist, 'Helvetica Neue', sans-serif; box-sizing: border-box; display: grid; grid-template-columns: 96px 1098px 82px 82px 82px; overflow: hidden">
+
+  <!-- Identity rail -->
+  <div style="background: #eef1f4; border-right: 1px solid #dfe4e8; padding: 28px 0; display: flex; flex-direction: column; align-items: center; box-sizing: border-box">
+    <img src="avatar.jpg" alt="" style="width: 40px; height: 40px; object-fit: cover; border: 1px solid #c8d1d8; display: block">
+    <div style="margin-top: 28px; font-family: 'Instrument Serif', Georgia, serif; font-size: 21px; writing-mode: vertical-rl; color: #44586a">Andrés F. Rodríguez</div>
+    <a href="#" style="margin-top: auto; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid #c8d1d8" aria-label="Back to landing">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#c1121f" stroke-width="1.5"><path d="M14 8H3M7 4L3 8l4 4"/></svg>
+    </a>
+  </div>
+
+  <!-- Lab panel, expanded -->
+  <div style="border-right: 1px solid #dfe4e8; padding: 44px 56px 0 60px; display: flex; flex-direction: column; box-sizing: border-box; position: relative; overflow: hidden">
+    <div style="display: flex; align-items: baseline; justify-content: space-between">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #5b6c7a">03 &middot; BUILT TO SHARE</div>
+        <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 52px; line-height: 1">The Lab</div>
+      </div>
+      <div style="font-size: 13.5px; font-weight: 300; color: #44586a">Interactive artifacts &mdash; every card opens the real thing.</div>
+    </div>
+
+    <!-- Card carousel -->
+    <div style="position: relative; height: 552px; margin-top: 26px">
+
+      <!-- prev card, peeking -->
+      <div style="position: absolute; left: -252px; top: 28px; width: 420px; background: #fbfcfd; border: 1px solid #dfe4e8; box-sizing: border-box">
+        <svg width="418" height="180" viewBox="0 0 418 180" fill="none" aria-hidden="true" style="display: block">
+          <rect width="418" height="180" fill="#eef1f4"/>
+          <g stroke="#669bbc" stroke-width="1.3">
+            <rect x="130" y="30" width="200" height="120"/>
+            <path d="M130 60h200M130 90h200M130 120h200M180 30v120M230 30v120M280 30v120"/>
+          </g>
+          <rect x="232" y="92" width="46" height="26" fill="#669bbc" opacity="0.45"/>
+          <rect x="182" y="62" width="46" height="26" fill="#c1121f" opacity="0.85"/>
+        </svg>
+        <div style="padding: 20px 24px 24px 24px; display: flex; flex-direction: column; gap: 9px">
+          <div style="font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: #5b6c7a">ARTIFACT &middot; 01 &middot; FRAMEWORK</div>
+          <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 25px; line-height: 1.15">Evaluation rubric kit</div>
+          <div style="font-size: 13px; line-height: 1.55; color: #44586a">The scoring framework behind a portfolio tournament &mdash; criteria, weights, and worked examples.</div>
+          <div style="font-family: 'Geist Mono', monospace; font-size: 12px; margin-top: 4px; color: #44586a">42 proposals &rarr; one ranked portfolio</div>
+        </div>
+      </div>
+
+      <!-- focal card -->
+      <div style="position: absolute; left: 50%; transform: translateX(-50%); top: 0; width: 600px; background: #fbfcfd; border: 1px solid #c8d1d8; box-sizing: border-box">
+        <svg width="598" height="248" viewBox="0 0 598 248" fill="none" aria-hidden="true" style="display: block">
+          <rect width="598" height="248" fill="#0e2e42"/>
+          <g stroke="#24506e" stroke-width="1"><path d="M0 62h598M0 124h598M0 186h598M120 0v248M240 0v248M360 0v248M480 0v248"/></g>
+          <rect x="42" y="150" width="30" height="60" fill="#669bbc"/>
+          <rect x="84" y="120" width="30" height="90" fill="#669bbc" opacity="0.65"/>
+          <rect x="126" y="90" width="30" height="120" fill="#c1121f"/>
+          <rect x="168" y="168" width="30" height="42" fill="#669bbc" opacity="0.4"/>
+          <path d="M250 180 L310 130 L370 150 L430 92 L490 110 L550 66" stroke="#8fb8d4" stroke-width="2"/>
+          <circle cx="430" cy="92" r="4.5" fill="#ffe38f"/>
+          <circle cx="310" cy="130" r="3.5" fill="#8fb8d4"/>
+          <circle cx="490" cy="110" r="3.5" fill="#8fb8d4"/>
+          <text x="42" y="46" fill="#8fb8d4" font-family="Geist Mono" font-size="11" letter-spacing="2">PORTFOLIO VIEW &mdash; LIVE</text>
+        </svg>
+        <div style="padding: 24px 30px 28px 30px; display: flex; flex-direction: column; gap: 10px">
+          <div style="font-family: 'Geist Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em; color: #5b6c7a">ARTIFACT &middot; 02 &middot; INTERACTIVE DASHBOARD</div>
+          <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 31px; line-height: 1.12">Portfolio learning dashboard</div>
+          <div style="font-size: 14px; line-height: 1.6; color: #44586a; max-width: 60ch">Every investment in one live view: what each project proposed, what it has produced, and what that means for the next decision &mdash; built for the questions a funder actually asks.</div>
+          <div style="font-family: 'Geist Mono', monospace; font-size: 13px; margin-top: 2px"><span style="background: linear-gradient(180deg, transparent 38%, #ffe38f 38%, #ffe38f 92%, transparent 92%)">what changed, project by project</span></div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 6px">
+            <div style="font-family: 'Geist Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; color: #5b6c7a">STANFORD IMPACT LABS &middot; 2026</div>
+            <a href="#" style="display: inline-flex; align-items: center; gap: 8px; font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: #c1121f; line-height: 1">OPEN THE DASHBOARD
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#c1121f" stroke-width="1.5"><path d="M6 3h7v7M13 3L3 13"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- next card, peeking -->
+      <div style="position: absolute; right: -252px; top: 28px; width: 420px; background: #fbfcfd; border: 1px solid #dfe4e8; box-sizing: border-box">
+        <svg width="418" height="180" viewBox="0 0 418 180" fill="none" aria-hidden="true" style="display: block">
+          <rect width="418" height="180" fill="#d9e6ef"/>
+          <g fill="#0e2e42">
+            <circle cx="60" cy="120" r="4"/><circle cx="95" cy="88" r="4"/><circle cx="128" cy="132" r="4"/>
+            <circle cx="160" cy="70" r="4"/><circle cx="196" cy="104" r="4"/><circle cx="230" cy="52" r="4"/>
+          </g>
+          <circle cx="160" cy="70" r="9" stroke="#c1121f" stroke-width="1.5" fill="none"/>
+          <g stroke="#0e2e42" stroke-width="1.3" fill="none">
+            <ellipse cx="330" cy="52" rx="42" ry="14"/>
+            <path d="M288 52v76c0 8 19 14 42 14s42-6 42-14V52"/>
+            <path d="M288 90c0 8 19 14 42 14s42-6 42-14"/>
+          </g>
+        </svg>
+        <div style="padding: 20px 24px 24px 24px; display: flex; flex-direction: column; gap: 9px">
+          <div style="font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: #5b6c7a">ARTIFACT &middot; 03 &middot; OPEN DATA</div>
+          <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 25px; line-height: 1.15">Open field data</div>
+          <div style="font-size: 13px; line-height: 1.55; color: #44586a">Documented datasets from completed experiments, ready for reuse and replication.</div>
+          <div style="font-family: 'Geist Mono', monospace; font-size: 12px; margin-top: 4px; color: #44586a">documented, versioned, citable</div>
+        </div>
+      </div>
+
+      <!-- prev / next controls -->
+      <a href="#" aria-label="Previous artifact" style="position: absolute; left: 12px; top: 244px; width: 48px; height: 48px; border: 1px solid #c8d1d8; background: #fafbfc; display: flex; align-items: center; justify-content: center">
+        <svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="#0e2e42" stroke-width="1.5"><path d="M14 8H3M7 4L3 8l4 4"/></svg>
+      </a>
+      <a href="#" aria-label="Next artifact" style="position: absolute; right: 12px; top: 244px; width: 48px; height: 48px; border: 1px solid #c8d1d8; background: #fafbfc; display: flex; align-items: center; justify-content: center">
+        <svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="#0e2e42" stroke-width="1.5"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+      </a>
+    </div>
+
+    <!-- pagination -->
+    <div style="display: flex; justify-content: center; align-items: center; gap: 22px; font-family: 'Geist Mono', monospace; font-size: 11.5px; letter-spacing: 0.08em; color: #5b6c7a; margin-top: 14px; line-height: 1">
+      <a href="#" style="color: #5b6c7a">01</a>
+      <span style="display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; background: #c1121f; color: #fafbfc">02</span>
+      <a href="#" style="color: #5b6c7a">03</a>
+      <span style="color: #8b98a3">02 / 03</span>
+    </div>
+
+    <!-- Colophon -->
+    <div style="margin-top: auto; border-top: 1px solid #dfe4e8; padding: 16px 0 18px 0; display: flex; justify-content: space-between; align-items: baseline; font-family: 'Geist Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; color: #5b6c7a">
+      <div style="display: flex; gap: 22px"><a href="#" style="color: #c1121f">EMAIL</a><a href="#" style="color: #5b6c7a">SCHOLAR</a><a href="#" style="color: #5b6c7a">GITHUB</a><a href="#" style="color: #5b6c7a">CV</a></div>
+      <div>UPDATED AUG 2026</div>
+    </div>
+  </div>
+
+  <!-- Sliver panels -->
+  <div style="border-right: 1px solid #dfe4e8; padding: 40px 0 32px 0; display: flex; flex-direction: column; align-items: center; box-sizing: border-box">
+    <div style="font-family: 'Geist Mono', monospace; font-size: 10.5px; color: #5b6c7a">01</div>
+    <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 26px; writing-mode: vertical-rl; margin-top: 16px">Research</div>
+  </div>
+  <div style="border-right: 1px solid #dfe4e8; padding: 40px 0 32px 0; display: flex; flex-direction: column; align-items: center; box-sizing: border-box">
+    <div style="font-family: 'Geist Mono', monospace; font-size: 10.5px; color: #5b6c7a">02</div>
+    <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 26px; writing-mode: vertical-rl; margin-top: 16px">Practice</div>
+  </div>
+  <div style="padding: 40px 0 32px 0; display: flex; flex-direction: column; align-items: center; box-sizing: border-box">
+    <div style="font-family: 'Geist Mono', monospace; font-size: 10.5px; color: #5b6c7a">04</div>
+    <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 26px; writing-mode: vertical-rl; margin-top: 16px">About &amp; CV</div>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

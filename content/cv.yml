@@ -1,0 +1,49 @@
+# Web CV — rendered as the About section's always-current vita.
+# Populated from files/cv.pdf (job-market-era). Edit here to update the site; keep the PDF for long form.
+
+positions:
+  - years: "2024—"
+    role: "Impact & Learning Manager"
+    org: "Stanford Impact Labs, Stanford University"
+  - years: "2021, 2023"
+    role: "Consultant"
+    org: "International Growth Centre (LSE)"
+  - years: "2019–2021"
+    role: "Research Assistant to Katherine Casey"
+    org: "Stanford Graduate School of Business"
+  - years: "2019–2020"
+    role: "Research Assistant to Matthew Gentzkow"
+    org: "Stanford University"
+  - years: "2014–2018"
+    role: "Research Assistant to Leopoldo Fergusson"
+    org: "Universidad de los Andes"
+
+education:
+  # NOTE: cv.pdf says "Ph.D. Candidate in Economics, 2018-2024" — TODO(confirm): completed?
+  - years: "2018–2024"
+    degree: "Ph.D., Economics"
+    org: "Stanford University"
+    note: "Fields: Development Economics, Political Economy, Causal Inference"
+  - years: "2015–2018"
+    degree: "M.A., Economics, cum laude"
+    org: "Universidad de los Andes, Colombia"
+  - years: "2011–2015"
+    degree: "B.A., Economics, summa cum laude"
+    org: "Universidad de los Andes, Colombia"
+
+grants:
+  - "Fellowship & Stage 2 Funding to Study Decentralization in Zambia, Stanford Impact Labs, 2023"
+  - "Susan Ford Dorsey Innovation Africa Fellowship, Center for African Studies, Stanford, 2022"
+  - "Young Scholars Research Fund, International Growth Centre, 2021"
+  - "Fund for Research in Economics, The Weiss Fund, 2021"
+  - "Graduate Research Award, Stanford King Center for Global Development, 2020"
+  - "Moshe & Margaret Alafi Fellowship, School of Humanities and Sciences, Stanford, 2018–2019"
+
+teaching:
+  - "TA, Stanford: intermediate micro, game theory, honors thesis, behavioral economics (2020–2022)"
+  - "TA, Universidad de los Andes: intro micro, game theory, advanced growth theory (2015–2018)"
+
+skills: "R, Python, Stata, Matlab, ArcGIS, SurveyCTO, Mathematica"
+languages: "Spanish (native), English (fluent)"
+
+talks: []        # TODO(update): selected talks & workshops if wanted on the site

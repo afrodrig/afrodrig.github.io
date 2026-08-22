@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; background: #fafbfc; }
+    a { color: #0e2e42; text-decoration: none; }
+    a:hover { color: #c1121f; }
+  </style>
+</helmet>
+<div style="width: 1440px; height: 900px; background: #fafbfc; color: #0e2e42; font-family: Geist, 'Helvetica Neue', sans-serif; box-sizing: border-box; display: grid; grid-template-columns: 96px 1098px 82px 82px 82px; overflow: hidden">
+
+  <!-- Identity panel, compressed to a rail -->
+  <div style="background: #eef1f4; border-right: 1px solid #dfe4e8; padding: 28px 0 28px 0; display: flex; flex-direction: column; align-items: center; box-sizing: border-box">
+    <img src="avatar.jpg" alt="" style="width: 40px; height: 40px; object-fit: cover; border: 1px solid #c8d1d8; display: block">
+    <div style="margin-top: 32px; font-family: 'Instrument Serif', Georgia, serif; font-size: 21px; writing-mode: vertical-rl; color: #44586a">Andrés F. Rodríguez</div>
+    <a href="#" style="margin-top: auto; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid #c8d1d8" aria-label="Back to landing">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#c1121f" stroke-width="1.5"><path d="M14 8H3M7 4L3 8l4 4"/></svg>
+    </a>
+  </div>
+
+  <!-- Research panel, expanded -->
+  <div style="border-right: 1px solid #dfe4e8; padding: 48px 0 0 60px; display: flex; flex-direction: column; box-sizing: border-box; position: relative; overflow: hidden">
+    <div style="display: flex; align-items: baseline; justify-content: space-between; padding-right: 56px">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #5b6c7a">01 &middot; FOUR FIELD EXPERIMENTS &middot; 2019&ndash;PRESENT</div>
+        <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 52px; line-height: 1">Research</div>
+      </div>
+      <div style="display: flex; gap: 4px; font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.08em; align-items: center; line-height: 1">
+        <a href="#" style="color: #5b6c7a; padding: 3px 2px">LIST</a>
+        <span style="color: #5b6c7a; padding: 3px 6px">/</span>
+        <span style="color: #0e2e42; border-bottom: 2px solid #c1121f; padding: 3px 2px">WHEEL</span>
+      </div>
+    </div>
+
+    <!-- Wheel view: detail spread left, arc right -->
+    <div style="flex: 1; display: grid; grid-template-columns: minmax(0, 1fr) 400px; margin-top: 36px; min-height: 0">
+
+      <!-- Focal paper, unfolded -->
+      <div style="display: flex; flex-direction: column; gap: 14px; padding-right: 48px; max-width: 560px">
+        <div style="font-family: 'Geist Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em; color: #c1121f">JOB MARKET PAPER &middot; FIELD EXPERIMENT &middot; SIERRA LEONE</div>
+        <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 33px; line-height: 1.12">Informal Taxation in Development Projects: The Role of Chiefs in Sierra Leone</div>
+        <p style="margin: 0; font-size: 15px; font-weight: 300; line-height: 1.6; color: #33495a; max-width: 480px">When chiefs mobilize labor for public goods, <span style="background: linear-gradient(180deg, transparent 38%, #ffe38f 38%, #ffe38f 92%, transparent 92%)">who actually pays?</span> Randomized selection methods measure whether citizens take costly action to avoid the call &mdash; and whether the burden lands on the poor.</p>
+        <div style="border: 1px solid #dfe4e8; padding: 18px 22px 14px 22px; display: flex; flex-direction: column; gap: 9px; max-width: 380px; box-sizing: border-box">
+          <svg width="300" height="104" viewBox="0 0 300 104" fill="none" aria-hidden="true">
+            <path d="M16 6v86" stroke="#c8d1d8" stroke-width="1"/>
+            <path d="M16 92h272" stroke="#c8d1d8" stroke-width="1"/>
+            <rect x="42" y="44" width="40" height="48" fill="#669bbc"/>
+            <rect x="104" y="62" width="40" height="30" fill="#669bbc" opacity="0.55"/>
+            <rect x="166" y="28" width="40" height="64" fill="#c1121f"/>
+            <rect x="228" y="70" width="40" height="22" fill="#669bbc" opacity="0.35"/>
+          </svg>
+          <div style="font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.08em; color: #5b6c7a">KEY FIGURE &mdash; ANIMATES ON OPEN</div>
+        </div>
+        <div style="display: flex; gap: 24px; font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.06em">
+          <a href="#" style="color: #c1121f">PAPER</a>
+          <a href="#" style="color: #5b6c7a">SLIDES</a>
+          <a href="#" style="color: #5b6c7a">BIBTEX</a>
+          <a href="#" style="color: #5b6c7a">DATA</a>
+        </div>
+      </div>
+
+      <!-- The wheel, at the right edge -->
+      <div style="position: relative; min-height: 0">
+        <svg style="position: absolute; right: -60px; top: -40px" width="120" height="640" viewBox="0 0 120 640" fill="none" aria-hidden="true">
+          <path d="M116 0 A 470 470 0 0 0 116 640" stroke="#669bbc" stroke-width="1" stroke-dasharray="3 6" opacity="0.55"/>
+        </svg>
+        <div style="position: absolute; right: 24px; top: 30px; width: 330px; padding: 13px 17px; background: #fafbfc; border: 1px solid #dfe4e8; transform: rotate(-3deg); box-sizing: border-box">
+          <div style="font-size: 13px; font-weight: 500; color: #7e8b96">Improving Zambia&rsquo;s Constituency Development Fund</div>
+        </div>
+        <div style="position: absolute; right: 10px; top: 110px; width: 340px; padding: 13px 17px; background: #fafbfc; border: 1px solid #c8d1d8; transform: rotate(-1.2deg); box-sizing: border-box">
+          <div style="font-size: 13px; font-weight: 500; color: #44586a">Candidate Entry Into Local Government</div>
+        </div>
+        <div style="position: absolute; right: 2px; top: 196px; width: 348px; padding: 16px 19px; background: #0e2e42; box-sizing: border-box">
+          <div style="font-size: 14px; font-weight: 500; color: #edf3f7; line-height: 1.35">Informal Taxation: The Role of Chiefs</div>
+          <div style="margin-top: 6px; display: flex; align-items: center; gap: 8px">
+            <div style="width: 18px; height: 2px; background: #c1121f"></div>
+            <div style="font-family: 'Geist Mono', monospace; font-size: 9.5px; letter-spacing: 0.1em; color: #b8c6ce">IN FOCUS</div>
+          </div>
+        </div>
+        <div style="position: absolute; right: 12px; top: 290px; width: 338px; padding: 13px 17px; background: #fafbfc; border: 1px solid #c8d1d8; transform: rotate(1.4deg); box-sizing: border-box">
+          <div style="font-size: 13px; font-weight: 500; color: #44586a">Too Much or Too Little Faith in Success?</div>
+        </div>
+        <div style="position: absolute; right: 30px; top: 372px; display: flex; align-items: center; gap: 10px; font-family: 'Geist Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em; color: #5b6c7a; line-height: 1">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#5b6c7a" stroke-width="1.4"><path d="M8 2v11M4 9l4 4 4-4"/></svg>
+          SCROLL ROTATES THE WHEEL
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Compressed sliver panels -->
+  <div style="border-right: 1px solid #dfe4e8; padding: 40px 0 32px 0; display: flex; flex-direction: column; align-items: center; box-sizing: border-box">
+    <div style="font-family: 'Geist Mono', monospace; font-size: 10.5px; color: #5b6c7a">02</div>
+    <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 26px; writing-mode: vertical-rl; margin-top: 16px">Practice</div>
+  </div>
+  <div style="border-right: 1px solid #dfe4e8; padding: 40px 0 32px 0; display: flex; flex-direction: column; align-items: center; box-sizing: border-box">
+    <div style="font-family: 'Geist Mono', monospace; font-size: 10.5px; color: #5b6c7a">03</div>
+    <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 26px; writing-mode: vertical-rl; margin-top: 16px">The Lab</div>
+  </div>
+  <div style="padding: 40px 0 32px 0; display: flex; flex-direction: column; align-items: center; box-sizing: border-box">
+    <div style="font-family: 'Geist Mono', monospace; font-size: 10.5px; color: #5b6c7a">04</div>
+    <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 26px; writing-mode: vertical-rl; margin-top: 16px">About &amp; CV</div>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

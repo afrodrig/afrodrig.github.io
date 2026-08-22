@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; background: #fafaf8; }
+    a { color: #232326; text-decoration: none; }
+    a:hover { color: #2b3ec2; }
+  </style>
+</helmet>
+<div style="width: 1440px; height: 900px; background: #fafaf8; color: #232326; font-family: Geist, 'Helvetica Neue', sans-serif; box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden">
+
+  <!-- Masthead strip -->
+  <div style="height: 84px; display: flex; align-items: center; justify-content: space-between; padding: 0 44px; border-bottom: 1px solid #e4e4df; box-sizing: border-box">
+    <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 27px; letter-spacing: 0.005em">Andrés F. Rodríguez</div>
+    <div style="display: flex; gap: 28px; font-family: 'Geist Mono', monospace; font-size: 11.5px; letter-spacing: 0.1em; align-items: center; line-height: 1">
+      <a href="#" style="color: #63635c">EMAIL</a>
+      <a href="#" style="color: #63635c">CV</a>
+    </div>
+  </div>
+
+  <!-- The four panels: uneven vertical splits, each IS a destination -->
+  <div style="flex: 1; display: grid; grid-template-columns: 545px 330px 380px 185px; min-height: 0">
+
+    <!-- 01 Research — shown hovered: tinted, preview risen -->
+    <div style="background: #f2f3fa; border-right: 1px solid #e4e4df; padding: 48px 44px 40px 44px; display: flex; flex-direction: column; box-sizing: border-box; position: relative">
+      <div style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #6f6f78">01 &middot; FOUR FIELD EXPERIMENTS</div>
+      <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 58px; line-height: 1.02; margin-top: 10px">Research</div>
+      <div style="margin-top: 16px; font-size: 15px; font-weight: 300; line-height: 1.55; color: #55555c; max-width: 330px">Governance, public goods and belief formation &mdash; experiments in Sierra Leone, Zambia and Colombia.</div>
+
+      <!-- preview: papers fanned on an arc (the wheel, at rest) -->
+      <div style="margin-top: auto; position: relative; height: 300px">
+        <div style="position: absolute; left: 6px; top: 24px; width: 420px; padding: 15px 20px; background: #fafaf8; border: 1px solid #dcdce4; transform: rotate(-2.4deg); box-sizing: border-box">
+          <div style="font-size: 14px; font-weight: 500; color: #63635c">Candidate Entry Into Local Government</div>
+        </div>
+        <div style="position: absolute; left: 14px; top: 92px; width: 430px; padding: 15px 20px; background: #fafaf8; border: 1px solid #c9c9d6; transform: rotate(-0.8deg); box-sizing: border-box">
+          <div style="font-size: 14px; font-weight: 500; color: #55555c">Too Much or Too Little Faith in Success?</div>
+        </div>
+        <div style="position: absolute; left: 20px; top: 162px; width: 436px; padding: 18px 22px; background: #232326; transform: rotate(0.7deg); box-sizing: border-box">
+          <div style="font-size: 15px; font-weight: 500; color: #fafaf8; line-height: 1.4">Informal Taxation: The Role of Chiefs</div>
+          <div style="margin-top: 6px; font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: #9d9da8">JOB MARKET PAPER &middot; SIERRA LEONE</div>
+        </div>
+        <div style="position: absolute; right: 0; bottom: 8px; display: flex; align-items: center; gap: 10px; font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: #2b3ec2; line-height: 1">
+          ENTER
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#2b3ec2" stroke-width="1.5"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 Practice -->
+    <div style="border-right: 1px solid #e4e4df; padding: 48px 36px 40px 40px; display: flex; flex-direction: column; box-sizing: border-box">
+      <div style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #6f6f78">02 &middot; THE DAY JOB</div>
+      <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 44px; line-height: 1.04; margin-top: 10px">Practice</div>
+      <div style="margin-top: 16px; font-size: 14.5px; font-weight: 300; line-height: 1.55; color: #55555c">Impact measurement and learning for a portfolio of applied social science at Stanford Impact Labs.</div>
+      <div style="margin-top: auto; display: flex; flex-direction: column">
+        <div style="padding: 13px 0; border-top: 1px solid #e4e4df; font-size: 14px; font-weight: 400">How I think about measurement</div>
+        <div style="padding: 13px 0; border-top: 1px solid #e4e4df; font-size: 14px; font-weight: 400">Rubrics &amp; theories of change</div>
+        <div style="padding: 13px 0 0 0; border-top: 1px solid #e4e4df; font-size: 14px; font-weight: 400">Portfolio-level evidence</div>
+      </div>
+    </div>
+
+    <!-- 03 Lab -->
+    <div style="border-right: 1px solid #e4e4df; padding: 48px 36px 40px 40px; display: flex; flex-direction: column; box-sizing: border-box">
+      <div style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #6f6f78">03 &middot; BUILT TO SHARE</div>
+      <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 44px; line-height: 1.04; margin-top: 10px">The Lab</div>
+      <div style="margin-top: 16px; font-size: 14.5px; font-weight: 300; line-height: 1.55; color: #55555c">Interactive dashboards, usable frameworks and open data &mdash; knowledge in actionable form.</div>
+      <div style="margin-top: auto; display: flex; flex-direction: column">
+        <div style="padding: 13px 0; border-top: 1px solid #e4e4df; display: flex; align-items: center; gap: 12px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#63635c" stroke-width="1.6"><rect x="3" y="3" width="18" height="18"/><path d="M7 16v-5M12 16V8M17 16v-5"/></svg>
+          <div style="font-size: 14px">Portfolio learning dashboard</div>
+        </div>
+        <div style="padding: 13px 0; border-top: 1px solid #e4e4df; display: flex; align-items: center; gap: 12px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#63635c" stroke-width="1.6"><path d="M4 4h16v4H4zM4 10h16v4H4zM4 16h10v4H4z"/></svg>
+          <div style="font-size: 14px">Evaluation rubric kit</div>
+        </div>
+        <div style="padding: 13px 0 0 0; border-top: 1px solid #e4e4df; display: flex; align-items: center; gap: 12px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#63635c" stroke-width="1.6"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
+          <div style="font-size: 14px">Open field datasets</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 About — compressed sliver (what every panel becomes when another expands) -->
+    <div style="padding: 48px 0 40px 0; display: flex; flex-direction: column; align-items: center; box-sizing: border-box">
+      <div style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #6f6f78">04</div>
+      <div style="font-family: 'Instrument Serif', Georgia, serif; font-size: 40px; line-height: 1; margin-top: 14px; writing-mode: vertical-rl">About &amp; CV</div>
+      <div style="margin-top: auto; width: 6px; height: 6px; background: #2b3ec2"></div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

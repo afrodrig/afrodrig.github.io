@@ -1,0 +1,26 @@
+# Site-wide settings. Rendered into the identity panel, rail, and contact rows.
+name: "Andrés F. Rodríguez"
+monogram: "AR"
+role: "Development economist · Impact & Learning, Stanford Impact Labs"  # TODO(update): confirm current title
+email: "afrodrig@stanford.edu"
+location: "Stanford, California"
+
+# Section order defines panel order on the landing (identity panel is always first).
+sections:
+  - key: research
+    title: "Research"
+    eyebrow: "Four field experiments"   # keep honest — update the count with the papers
+  - key: practice
+    title: "Practice"
+    eyebrow: "Case studies & essays"
+  - key: lab
+    title: "The Lab"
+    eyebrow: "Built to share"
+  - key: about
+    title: "About & CV"
+    eyebrow: ""
+
+links:
+  scholar: ""      # TODO(update): Google Scholar URL
+  github: ""       # TODO(update): GitHub URL
+  cv: "/files/cv.pdf"   # TODO(update): current CV

@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap">
+  <style>
+    body { margin: 0; background: #f2f2ef; }
+    a { color: #2547f4; text-decoration: none; }
+    a:hover { color: #16181d; }
+  </style>
+</helmet>
+<div style="width: 2520px; height: 800px; background: #f2f2ef; color: #2a2a28; font-family: 'IBM Plex Mono', monospace; box-sizing: border-box; padding: 48px; display: flex; flex-direction: column; gap: 28px">
+
+  <div style="display: flex; align-items: baseline; gap: 24px">
+    <div style="font-size: 20px; font-weight: 500; letter-spacing: -0.01em">The Paper Wheel &mdash; interaction storyboard</div>
+    <div style="font-size: 13px; color: #7a7a74; font-style: italic">papers orbit a circular axis; scroll rotates, focus enlarges, click unfolds. Spring physics throughout (no fixed-duration easing).</div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; flex: 1">
+
+    <!-- FRAME 1: at rest -->
+    <div style="display: flex; flex-direction: column; gap: 16px">
+      <div style="border: 1.5px solid #2a2a28; background: #ffffff; flex: 1; overflow: hidden">
+        <svg width="100%" height="100%" viewBox="0 0 760 500" fill="none" preserveAspectRatio="xMidYMid meet">
+          <!-- page chrome -->
+          <rect x="36" y="36" width="200" height="14" fill="#d8d8d2"/>
+          <rect x="36" y="64" width="140" height="10" fill="#e6e6e0"/>
+          <rect x="36" y="120" width="240" height="42" fill="none" stroke="#d8d8d2" stroke-width="1.5"/>
+          <text x="52" y="146" fill="#7a7a74" font-family="IBM Plex Mono" font-size="13">RESEARCH / 04 PAPERS</text>
+          <!-- orbit guide -->
+          <path d="M 480 -150 A 560 560 0 0 1 480 650" stroke="#2547f4" stroke-width="1" stroke-dasharray="3 6" opacity="0.5"/>
+          <!-- cards on the arc -->
+          <g transform="rotate(-16 520 40)"><rect x="380" y="-4" width="280" height="76" fill="#ffffff" stroke="#c9c9c2" stroke-width="1.5"/><text x="400" y="40" fill="#a2a29a" font-family="IBM Plex Mono" font-size="13">Zambia CDF</text></g>
+          <g transform="rotate(-8 530 140)"><rect x="390" y="102" width="280" height="76" fill="#ffffff" stroke="#c9c9c2" stroke-width="1.5"/><text x="410" y="146" fill="#6e6e66" font-family="IBM Plex Mono" font-size="13">Candidate Entry</text></g>
+          <!-- focal card -->
+          <g><rect x="368" y="212" width="330" height="96" fill="#16181d"/><text x="392" y="252" fill="#ffffff" font-family="IBM Plex Mono" font-size="15">Chiefs &amp; Informal</text><text x="392" y="274" fill="#ffffff" font-family="IBM Plex Mono" font-size="15">Taxation &mdash; JMP</text><rect x="392" y="286" width="54" height="3" fill="#2547f4"/></g>
+          <g transform="rotate(8 530 400)"><rect x="390" y="342" width="280" height="76" fill="#ffffff" stroke="#c9c9c2" stroke-width="1.5"/><text x="410" y="386" fill="#6e6e66" font-family="IBM Plex Mono" font-size="13">Entrepreneur Beliefs</text></g>
+          <g transform="rotate(16 520 500)"><rect x="380" y="448" width="280" height="76" fill="#ffffff" stroke="#c9c9c2" stroke-width="1.5"/><text x="400" y="492" fill="#a2a29a" font-family="IBM Plex Mono" font-size="13">&mdash;</text></g>
+          <!-- annotations -->
+          <path d="M 300 260 L 356 260" stroke="#2547f4" stroke-width="1.2"/>
+          <circle cx="300" cy="260" r="3" fill="#2547f4"/>
+          <text x="120" y="252" fill="#2547f4" font-family="IBM Plex Mono" font-size="12">focal card: full opacity,</text>
+          <text x="120" y="268" fill="#2547f4" font-family="IBM Plex Mono" font-size="12">scale 1.0, inverted ink</text>
+          <text x="500" y="470" fill="#2547f4" font-family="IBM Plex Mono" font-size="12" transform="rotate(16 500 470)"></text>
+          <path d="M 250 380 L 330 372" stroke="#2547f4" stroke-width="1.2"/>
+          <circle cx="250" cy="380" r="3" fill="#2547f4"/>
+          <text x="90 " y="376" fill="#2547f4" font-family="IBM Plex Mono" font-size="12">neighbors recede:</text>
+          <text x="90" y="392" fill="#2547f4" font-family="IBM Plex Mono" font-size="12">scale .92, 60% ink</text>
+        </svg>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline">
+        <div style="background: #2a2a28; color: #f2f2ef; font-size: 13px; padding: 4px 10px; font-weight: 500">1</div>
+        <div style="font-size: 13px; line-height: 1.6; color: #55554f">At rest. Papers sit on a circular axis anchored off the right edge &mdash; a wheel, not a list. The focal card is inked; neighbors recede in scale and opacity along the arc.</div>
+      </div>
+    </div>
+
+    <!-- FRAME 2: scrolling -->
+    <div style="display: flex; flex-direction: column; gap: 16px">
+      <div style="border: 1.5px solid #2a2a28; background: #ffffff; flex: 1; overflow: hidden">
+        <svg width="100%" height="100%" viewBox="0 0 760 500" fill="none" preserveAspectRatio="xMidYMid meet">
+          <rect x="36" y="36" width="200" height="14" fill="#d8d8d2"/>
+          <rect x="36" y="64" width="140" height="10" fill="#e6e6e0"/>
+          <path d="M 480 -150 A 560 560 0 0 1 480 650" stroke="#2547f4" stroke-width="1" stroke-dasharray="3 6" opacity="0.5"/>
+          <!-- rotation arrow -->
+          <path d="M 430 90 A 470 470 0 0 0 428 428" stroke="#2547f4" stroke-width="2"/>
+          <path d="M 420 416 l 8 14 14 -8" stroke="#2547f4" stroke-width="2" fill="none"/>
+          <text x="330" y="110" fill="#2547f4" font-family="IBM Plex Mono" font-size="12">scroll = rotation</text>
+          <text x="330" y="126" fill="#2547f4" font-family="IBM Plex Mono" font-size="12">(wheel has inertia,</text>
+          <text x="330" y="142" fill="#2547f4" font-family="IBM Plex Mono" font-size="12">snaps with a spring)</text>
+          <!-- cards mid-rotation: previous focal moving up, next arriving -->
+          <g transform="rotate(-12 525 90)"><rect x="386" y="50" width="280" height="76" fill="#ffffff" stroke="#c9c9c2" stroke-width="1.5"/><text x="406" y="94" fill="#a2a29a" font-family="IBM Plex Mono" font-size="13">Candidate Entry</text></g>
+          <g transform="rotate(-4 535 190)"><rect x="392" y="152" width="290" height="80" fill="#ffffff" stroke="#6e6e66" stroke-width="1.5"/><text x="412" y="198" fill="#55554f" font-family="IBM Plex Mono" font-size="14">Chiefs &amp; Informal Tax.</text></g>
+          <!-- ghost trails for arriving focal -->
+          <rect x="380" y="300" width="316" height="90" fill="none" stroke="#2547f4" stroke-width="1" opacity="0.25" transform="rotate(5 538 345)"/>
+          <rect x="374" y="288" width="322" height="92" fill="none" stroke="#2547f4" stroke-width="1" opacity="0.5" transform="rotate(2 535 334)"/>
+          <g><rect x="368" y="276" width="330" height="96" fill="#16181d"/><text x="392" y="316" fill="#ffffff" font-family="IBM Plex Mono" font-size="15">Entrepreneur Beliefs</text><text x="392" y="338" fill="#ffffff" font-family="IBM Plex Mono" font-size="15">&mdash; Working paper</text><rect x="392" y="350" width="54" height="3" fill="#2547f4"/></g>
+          <g transform="rotate(12 525 470)"><rect x="386" y="430" width="280" height="76" fill="#ffffff" stroke="#c9c9c2" stroke-width="1.5"/><text x="406" y="474" fill="#a2a29a" font-family="IBM Plex Mono" font-size="13">Zambia CDF</text></g>
+          <path d="M 250 330 L 356 330" stroke="#2547f4" stroke-width="1.2"/>
+          <circle cx="250" cy="330" r="3" fill="#2547f4"/>
+          <text x="96" y="322" fill="#2547f4" font-family="IBM Plex Mono" font-size="12">next card springs into</text>
+          <text x="96" y="338" fill="#2547f4" font-family="IBM Plex Mono" font-size="12">focus: overshoot + settle</text>
+        </svg>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline">
+        <div style="background: #2a2a28; color: #f2f2ef; font-size: 13px; padding: 4px 10px; font-weight: 500">2</div>
+        <div style="font-size: 13px; line-height: 1.6; color: #55554f">Scroll rotates the wheel. The wheel carries momentum and snaps card-by-card with a spring (slight overshoot, natural settle). Keyboard arrows and drag do the same &mdash; interruptible at any moment.</div>
+      </div>
+    </div>
+
+    <!-- FRAME 3: unfold -->
+    <div style="display: flex; flex-direction: column; gap: 16px">
+      <div style="border: 1.5px solid #2a2a28; background: #ffffff; flex: 1; overflow: hidden">
+        <svg width="100%" height="100%" viewBox="0 0 760 500" fill="none" preserveAspectRatio="xMidYMid meet">
+          <!-- receded wheel at right edge -->
+          <path d="M 700 -100 A 480 480 0 0 1 700 600" stroke="#c9c9c2" stroke-width="1" stroke-dasharray="3 6"/>
+          <g transform="rotate(-8 720 140)"><rect x="648" y="110" width="150" height="52" fill="#ffffff" stroke="#d8d8d2" stroke-width="1.5"/></g>
+          <g><rect x="640" y="224" width="160" height="56" fill="#ffffff" stroke="#a2a29a" stroke-width="1.5"/></g>
+          <g transform="rotate(8 720 360)"><rect x="648" y="338" width="150" height="52" fill="#ffffff" stroke="#d8d8d2" stroke-width="1.5"/></g>
+          <!-- expanded detail spread -->
+          <rect x="36" y="48" width="560" height="404" fill="#16181d"/>
+          <text x="68" y="98" fill="#8f93a0" font-family="IBM Plex Mono" font-size="11">JOB MARKET PAPER &middot; SIERRA LEONE &middot; FIELD EXPERIMENT</text>
+          <text x="68" y="132" fill="#ffffff" font-family="IBM Plex Mono" font-size="19">Informal Taxation in Development</text>
+          <text x="68" y="158" fill="#ffffff" font-family="IBM Plex Mono" font-size="19">Projects: The Role of Chiefs</text>
+          <!-- visual abstract: mini chart -->
+          <rect x="68" y="186" width="240" height="150" fill="none" stroke="#3a3f4d" stroke-width="1"/>
+          <path d="M 84 316 L 84 202" stroke="#5a6172" stroke-width="1"/>
+          <path d="M 84 316 L 292 316" stroke="#5a6172" stroke-width="1"/>
+          <rect x="104" y="252" width="34" height="64" fill="#5fc9ae"/>
+          <rect x="152" y="272" width="34" height="44" fill="#5fc9ae" opacity="0.6"/>
+          <rect x="200" y="234" width="34" height="82" fill="#e6b355"/>
+          <rect x="248" y="288" width="34" height="28" fill="#e6b355" opacity="0.6"/>
+          <text x="84" y="352" fill="#8f93a0" font-family="IBM Plex Mono" font-size="10">the key figure, animated on open</text>
+          <!-- finding + links -->
+          <text x="336" y="206" fill="#b9bfcc" font-family="IBM Plex Mono" font-size="12">One-sentence finding</text>
+          <rect x="336" y="218" width="220" height="8" fill="#3a3f4d"/>
+          <rect x="336" y="234" width="190" height="8" fill="#3a3f4d"/>
+          <rect x="336" y="250" width="205" height="8" fill="#3a3f4d"/>
+          <rect x="336" y="292" width="70" height="26" fill="none" stroke="#e6b355" stroke-width="1.2"/>
+          <text x="348" y="309" fill="#e6b355" font-family="IBM Plex Mono" font-size="11">PDF</text>
+          <rect x="418" y="292" width="82" height="26" fill="none" stroke="#e6b355" stroke-width="1.2"/>
+          <text x="428" y="309" fill="#e6b355" font-family="IBM Plex Mono" font-size="11">BibTeX</text>
+          <rect x="512" y="292" width="70" height="26" fill="none" stroke="#e6b355" stroke-width="1.2"/>
+          <text x="524" y="309" fill="#e6b355" font-family="IBM Plex Mono" font-size="11">Data</text>
+          <text x="68" y="420" fill="#5a6172" font-family="IBM Plex Mono" font-size="11">ESC or scroll returns to the wheel &mdash; card folds back to its slot</text>
+          <!-- unfold annotation -->
+          <path d="M 620 250 L 596 250" stroke="#2547f4" stroke-width="1.2"/>
+          <circle cx="620" cy="250" r="3" fill="#2547f4"/>
+          <text x="608" y="470" fill="#2547f4" font-family="IBM Plex Mono" font-size="12">wheel recedes,</text>
+          <text x="608" y="486" fill="#2547f4" font-family="IBM Plex Mono" font-size="12">stays navigable</text>
+        </svg>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: baseline">
+        <div style="background: #2a2a28; color: #f2f2ef; font-size: 13px; padding: 4px 10px; font-weight: 500">3</div>
+        <div style="font-size: 13px; line-height: 1.6; color: #55554f">Click unfolds. The focal card expands in place into a visual abstract &mdash; key figure animates in, one-sentence finding, PDF/BibTeX/data. The wheel recedes but stays live at the edge; ESC folds everything back.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":2520,"height":800}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
