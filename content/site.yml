@@ -1,7 +1,9 @@
 # Site-wide settings. Rendered into the identity panel, rail, and contact rows.
 name: "Andrés F. Rodríguez"
 monogram: "AR"
-role: "Development economist · Impact & Learning, Stanford Impact Labs"  # TODO(update): confirm current title
+role: "Development economist · Impact & Learning Manager, Stanford Impact Labs"  # title per cv.pdf 2026-08
+credentials: "PhD in Economics, Stanford · BA & MA, Universidad de los Andes"
+supported: "Work supported by J-PAL, the International Growth Centre, the Weiss Fund & the Stanford King Center"   # TODO(update): confirm funder list/wording
 email: "afrodrig@stanford.edu"
 location: "Stanford, California"
 url: "https://afrodrig.github.io/"   # canonical URL — used for og: tags and JSON-LD
@@ -11,12 +13,13 @@ url: "https://afrodrig.github.io/"   # canonical URL — used for og: tags and J
 sections:
   - key: research
     title: "Research"
-    eyebrow: "Four field experiments"   # keep honest — update the count with the papers
+    eyebrow: "Five working papers"   # keep honest — update the count with the papers
   - key: practice
     title: "Practice"
     eyebrow: "Case studies, essays & tools"   # TODO(update): Andrés — confirm wording
 
 links:
-  scholar: ""      # TODO(update): Google Scholar URL
-  github: ""       # TODO(update): GitHub URL
-  cv: "/files/cv.pdf"   # TODO(update): current CV
+  scholar: ""      # TODO(update): Google Scholar URL (not on cv.pdf)
+  github: "https://github.com/afrodrig"
+  linkedin: "https://www.linkedin.com/in/af-rodriguez/"
+  cv: "/files/cv.pdf"

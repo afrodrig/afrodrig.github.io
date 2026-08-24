@@ -64,6 +64,7 @@ mark.band {
 }
 .id-name { flex: none; }
 .role { flex: none; margin-top: var(--s-12); font-size: 15px; font-weight: 400; color: var(--color-muted-2); max-width: 30ch; }
+.credline { flex: none; margin-top: var(--s-8); font-size: 10px; letter-spacing: 0.1em; color: var(--color-muted-2); }
 .id-loc { flex: none; margin-top: var(--s-12); font-size: 10.5px; letter-spacing: 0.12em; color: var(--color-muted-2); }
 
 .id-foot {
@@ -72,26 +73,36 @@ mark.band {
 }
 .id-contacts { display: flex; flex-direction: column; gap: 10px; font-size: 13.5px; }
 .identity-links { display: flex; flex-wrap: wrap; gap: 18px; color: var(--color-muted-2); }
-.id-collapse, .id-expand {
+.id-collapse {
   width: 44px; height: 44px; flex: none;
   border: 1px solid var(--color-rule-strong);
   display: flex; align-items: center; justify-content: center;
   color: var(--color-muted-2);
   transition: color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
 }
-.id-collapse:hover, .id-expand:hover { color: var(--color-accent); border-color: var(--color-accent); }
+.id-collapse:hover { color: var(--color-accent); border-color: var(--color-accent); }
 
-/* collapsed rail face */
+/* collapsed rail face — ONE whole click target that expands the spine (merged from
+   main c6aba8f), with the shared vertical-bar hover language: the accent edge */
 .id-rail {
   position: absolute; inset: 0; z-index: 8; background: var(--color-panel);
   display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 24px 0 20px;
+  width: 100%; cursor: pointer;
   opacity: 0; visibility: hidden;
   transition: opacity var(--dur-short) var(--ease-out), visibility 0s linear var(--dur-short);
 }
 .frame.is-collapsed .id-rail { opacity: 1; visibility: visible; transition-delay: 300ms, 0s; }
+.id-rail:hover, .id-rail:focus-visible { background: var(--color-rule); box-shadow: inset 3px 0 0 var(--color-accent); }
 .rail-photo { width: 40px; height: 40px; object-fit: cover; object-position: 50% 22%; border-radius: 50%; border: 1px solid var(--color-rule-strong); }
 .rail-name { font-family: var(--font-display); font-size: 19px; writing-mode: vertical-rl; color: var(--color-muted-2); }
-.id-expand { margin-top: auto; }
+.id-rail:hover .rail-name, .id-rail:focus-visible .rail-name { color: var(--color-ink); }
+.rail-mark {
+  margin-top: auto; width: 40px; height: 40px; flex: none;
+  border: 1px solid var(--color-rule-strong);
+  display: flex; align-items: center; justify-content: center; color: var(--color-accent);
+  transition: border-color var(--dur-micro) var(--ease-out);
+}
+.id-rail:hover .rail-mark, .id-rail:focus-visible .rail-mark { border-color: var(--color-accent); }
 
 /* ---------- the record nav: horizontal hero strip, sticky, controls navigation ----------
    Every entry returns to its section's start. Hover is color-only — nothing moves
@@ -317,6 +328,27 @@ mark.band {
     linear-gradient(0deg, var(--color-accent) 0 0) 180px 92px/16px 16px no-repeat,
     linear-gradient(0deg, var(--color-data) 0 0) 242px 92px/16px 16px no-repeat;
 }
+/* applied AI pilot: a review pipeline — a queue of proposals flowing to one decision */
+.lab-cover-pilot::after {
+  background:
+    linear-gradient(transparent 61px, #24506e 61px, #24506e 62px, transparent 62px) 0 0/100% 62px,
+    linear-gradient(90deg, transparent 119px, #24506e 119px, #24506e 120px, transparent 120px) 0 0/120px 100%,
+    linear-gradient(0deg, var(--color-data) 0 0) 40px 79px/22px 22px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) 72px 79px/22px 22px no-repeat,
+    linear-gradient(0deg, var(--color-data-strong) 0 0) 104px 79px/22px 22px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) 134px 89px/34px 2px no-repeat,
+    linear-gradient(0deg, var(--color-accent) 0 0) 176px 71px/38px 38px no-repeat;
+}
+/* talks & mentoring: fieldwork at every scale — ascending blocks */
+.lab-cover-mentoring::after {
+  background:
+    linear-gradient(transparent 61px, #24506e 61px, #24506e 62px, transparent 62px) 0 0/100% 62px,
+    linear-gradient(90deg, transparent 119px, #24506e 119px, #24506e 120px, transparent 120px) 0 0/120px 100%,
+    linear-gradient(0deg, var(--color-data) 0 0) 40px 118px/24px 24px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) 76px 96px/32px 46px no-repeat,
+    linear-gradient(0deg, var(--color-data-strong) 0 0) 120px 72px/42px 70px no-repeat,
+    linear-gradient(0deg, var(--color-accent) 0 0) 174px 40px/12px 12px no-repeat;
+}
 /* essay: manuscript lines with a drop-cap block */
 .lab-cover-essay::after {
   background:
@@ -334,10 +366,16 @@ mark.band {
 .lab-pitch { font-size: 14px; color: var(--color-muted-2); max-width: 58ch; }
 .lab-keyline { font-size: 12.5px; }
 .lab-foot { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-16); margin-top: auto; padding-top: var(--s-8); font-size: 10.5px; }
+.lab-foot-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px 14px; }
+.lab-foot-links a { color: var(--color-muted); }
+.lab-foot-links a:hover, .lab-foot-links a.accent { color: var(--color-accent); }
+.lab-foot-links a.accent:hover { color: var(--color-accent-deep); }
 
-/* ---------- colophon ---------- */
+/* ---------- record foot: funder line + colophon ---------- */
+.record-foot { margin: 0 64px; }
+.supported { padding: 0 0 14px 0; font-size: 10px; letter-spacing: 0.1em; color: var(--color-muted); }
 .colophon {
-  margin: 0 64px; border-top: 1px solid var(--color-rule);
+  border-top: 1px solid var(--color-rule);
   padding: 16px 0 22px 0; display: flex; justify-content: space-between; align-items: baseline;
   font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; color: var(--color-muted);
 }
@@ -405,7 +443,8 @@ html:not(.js) .id-collapse { display: none; }
   .wheel-view, .view-toggle, .wheel-count { display: none; }
   .track[data-view="wheel"] .entry-list { display: block; }
   .practice-sec { padding: 64px 24px 48px; }
-  .colophon { margin: 0 24px; flex-wrap: wrap; gap: 10px; }
+  .record-foot { margin: 0 24px; }
+  .colophon { flex-wrap: wrap; gap: 10px; }
   .entry { grid-template-columns: 1fr; gap: 4px; }
   .entry-year { padding-top: 0; }
   /* the shelf stays horizontal on mobile — swipe with the next card peeking */

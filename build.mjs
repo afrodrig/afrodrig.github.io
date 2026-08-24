@@ -135,14 +135,18 @@ const RESEARCH_DESC = 'Governance, public goods and beliefs — Sierra Leone, Za
 
 /* ---------- shared bits ---------- */
 const colophon = `
-<footer class="colophon">
-  <div class="colophon-links">
-    <a class="accent" href="mailto:${site.email}">EMAIL</a>
-    ${site.links.scholar ? `<a href="${site.links.scholar}">SCHOLAR</a>` : ''}
-    ${site.links.github ? `<a href="${site.links.github}">GITHUB</a>` : ''}
-    <a href="${site.links.cv}">CV</a>
+<footer class="record-foot">
+  ${site.supported ? `<div class="supported mono">${esc(site.supported).toUpperCase()}</div>` : ''}
+  <div class="colophon">
+    <div class="colophon-links">
+      <a class="accent" href="mailto:${site.email}">EMAIL</a>
+      ${site.links.scholar ? `<a href="${site.links.scholar}">SCHOLAR</a>` : ''}
+      ${site.links.github ? `<a href="${site.links.github}">GITHUB</a>` : ''}
+      ${site.links.linkedin ? `<a href="${site.links.linkedin}">LINKEDIN</a>` : ''}
+      <a href="${site.links.cv}">CV</a>
+    </div>
+    <div>UPDATED ${STAMP}</div>
   </div>
-  <div>UPDATED ${STAMP}</div>
 </footer>`;
 
 /* ---------- identity spine (sticky left panel) ---------- */
@@ -152,6 +156,7 @@ function identityAside() {
   <div class="id-full">
     <h1 class="display id-name">${esc(site.name).replace(' F. ', ' F.<br>')}</h1>
     <div class="role">${esc(site.role)}</div>
+    ${site.credentials ? `<div class="credline mono">${esc(site.credentials).toUpperCase()}</div>` : ''}
     <img class="portrait" src="assets/portrait.jpg" alt="Portrait of ${esc(site.name)}">
     <div class="id-loc mono">${esc(site.location).toUpperCase()}</div>
   </div>
@@ -161,6 +166,7 @@ function identityAside() {
       <div class="identity-links">
         ${site.links.scholar ? `<a href="${site.links.scholar}">Scholar</a>` : ''}
         ${site.links.github ? `<a href="${site.links.github}">GitHub</a>` : ''}
+        ${site.links.linkedin ? `<a href="${site.links.linkedin}">LinkedIn</a>` : ''}
         <a href="${site.links.cv}">CV (PDF)</a>
       </div>
     </div>
@@ -168,13 +174,13 @@ function identityAside() {
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg>
     </button>
   </div>
-  <div class="id-rail">
+  <button class="id-rail" aria-label="Expand the identity panel">
     <img src="assets/portrait.jpg" alt="" class="rail-photo">
-    <div class="rail-name">${esc(site.name)}</div>
-    <button class="id-expand" aria-label="Expand the identity panel">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg>
-    </button>
-  </div>
+    <span class="rail-name">${esc(site.name)}</span>
+    <span class="rail-mark" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg>
+    </span>
+  </button>
 </aside>`;
 }
 
@@ -246,12 +252,20 @@ const abstractBlock = (p) => !p.abstract ? '' : `
             <div class="abstract-wrap"><div><div class="abstract-body">${mdLite(p.abstract)}</div></div></div>
           </div>`;
 
-const paperLinks = (p) => `
+// Mono links row: primary links + supplemental links (extra_links: [{label, url}]).
+// Omitted entirely when a paper has no links at all.
+const paperLinks = (p) => {
+  const parts = [
+    p.links?.pdf ? `<a class="accent" href="${p.links.pdf}">PAPER</a>` : '',
+    p.links?.slides ? `<a href="${p.links.slides}">SLIDES</a>` : '',
+    p.links?.data ? `<a href="${p.links.data}">DATA</a>` : '',
+    ...(p.extra_links ?? []).map(l => `<a href="${l.url}">${esc(l.label).toUpperCase()}</a>`),
+  ].filter(Boolean);
+  return parts.length ? `
           <div class="entry-links mono">
-            ${p.links?.pdf ? `<a class="accent" href="${p.links.pdf}">PAPER</a>` : ''}
-            ${p.links?.slides ? `<a href="${p.links.slides}">SLIDES</a>` : ''}
-            ${p.links?.data ? `<a href="${p.links.data}">DATA</a>` : ''}
-          </div>`;
+            ${parts.join('\n            ')}
+          </div>` : '';
+};
 
 function researchSection() {
   const eyebrow = site.sections.find(s => s.key === 'research').eyebrow;
@@ -329,10 +343,13 @@ function practiceSection() {
     { title: 'Portfolio learning dashboard', kind: 'interactive dashboard', status: 'in-progress',
       pitch: 'Every investment in one live view: what each project proposed, what it has produced, and what that means for the next decision.', keyline: 'what changed, project by project', link: '' },
   ];
+  // Real pieces lead the shelf; placeholder teasers trail (per main 75a6697:
+  // "card stream first, teasers to the bottom").
   const boxes = [
-    ...items.map(it => ({ title: it.title, kind: it.kind ?? 'Piece', status: 'in progress', pitch: '', keyline: '', link: '' })),
     ...labCards.map(c => ({ title: c.title, kind: c.kind ?? 'tool', status: c.status ?? '',
-      pitch: c.pitch ?? c.body ?? '', keyline: c.keyline ?? '', link: c.link ?? '' })),
+      pitch: c.pitch ?? c.body ?? '', keyline: c.keyline ?? '', link: c.link ?? '',
+      extra_links: c.extra_links ?? [] })),
+    ...items.map(it => ({ title: it.title, kind: it.kind ?? 'Piece', status: 'in progress', pitch: '', keyline: '', link: '', extra_links: [] })),
   ];
   const kindKey = (k) => String(k).toLowerCase().split(' ').pop().replace(/[^a-z]/g, '');
   return `
@@ -367,7 +384,11 @@ function practiceSection() {
         ${c.keyline ? `<div class="lab-keyline mono">${esc(c.keyline)}</div>` : ''}
         <div class="lab-foot">
           <span class="mono muted">${esc(c.status).toUpperCase()}</span>
-          ${c.link ? `<a class="accent mono" href="${c.link}">OPEN &nearr;</a>` : `<span class="mono muted">COMING SOON</span>`}
+          <span class="lab-foot-links">
+            ${(c.extra_links ?? []).map(l => `<a class="mono" href="${l.url}">${esc(l.label).toUpperCase()} &nearr;</a>`).join('')}
+            ${c.link ? `<a class="accent mono" href="${c.link}">OPEN &nearr;</a>`
+              : (c.extra_links?.length ? '' : `<span class="mono muted">COMING SOON</span>`)}
+          </span>
         </div>
       </div>
     </article>`).join('')}

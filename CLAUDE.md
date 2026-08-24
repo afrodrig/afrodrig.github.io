@@ -72,7 +72,15 @@ content/
   portrait.jpg (avatar.jpg retired; circles only for the small round mark), wheel
   detail centered on the focal card's axis, paper `keywords:` on wheel cards, practice
   items as {title, kind} teaser rows, and the no-motion-on-hover principle.
-- TODO: content pass (bio and paper metadata are seeded from the OLD site and need
-  Andrés's updates — grep for `TODO(update)`; Scholar/GitHub URLs empty in site.yml);
-  artifact items are placeholders pending real deliverables; key-figure data per paper
-  (schema wired, no fabricated numbers).
+- 2026-08-24 content pass from cv.pdf (made on main, merged here): five papers in CV
+  order (candidate entry featured, registered report at JDE; limits-exposure added),
+  real abstracts behind toggles, supplemental IGC/SIL links via `extra_links:`, paper
+  PDFs intentionally UNLINKED (drafts marked do-not-disseminate — Andrés decides when
+  to host them); two real Practice pieces (AI-assisted grant review with AFIRE talk
+  link; field research talks & mentoring) leading the shelf, teasers trailing;
+  bio/role/NOW rebuilt around scholar + SIL dual identity; credentials line + funder
+  line from site.yml; GitHub/LinkedIn links live; rail = one click target with the
+  accent-edge hover.
+- TODO: Scholar URL; tune `TODO(update)` seeds (keywords, short titles, takeaways,
+  bio voice); practice case-study/essay teasers still placeholders; key-figure data
+  per paper (schema wired, no fabricated numbers).

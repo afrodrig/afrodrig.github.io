@@ -262,18 +262,19 @@
     });
   });
 
-  /* ============ identity panel collapse ============ */
+  /* ============ identity panel collapse ============
+     The collapsed rail is ONE whole click target that expands the spine. */
   const collapseBtn = document.querySelector('.id-collapse');
-  const expandBtn = document.querySelector('.id-expand');
+  const railBtn = document.querySelector('.id-rail');
   function setCollapsed(on) {
     frame.classList.toggle('is-collapsed', on);
     if (collapseBtn) collapseBtn.setAttribute('aria-expanded', String(!on));
-    const target = on ? expandBtn : collapseBtn;
+    const target = on ? railBtn : collapseBtn;
     if (target) target.focus({ preventScroll: true });
     setTimeout(() => { measure(); if (wheelAPI) wheelAPI.drawArc(); apply(); }, 620);
   }
   if (collapseBtn) collapseBtn.addEventListener('click', () => setCollapsed(true));
-  if (expandBtn) expandBtn.addEventListener('click', () => setCollapsed(false));
+  if (railBtn) railBtn.addEventListener('click', () => setCollapsed(false));
 
   /* ============ abstract toggles ============ */
   document.addEventListener('click', (e) => {

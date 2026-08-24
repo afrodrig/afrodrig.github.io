@@ -1,30 +1,48 @@
 ---
-title: "Informal Taxation in Development Projects: The Role of Chiefs in Sierra Leone"
+title: "Informal Taxation in Rural Sierra Leone"   # title per cv.pdf (June 2024 draft carries the longer chiefs title)
 short: "Informal taxation & chiefs"   # TODO(update): display title for landing rows + wheel cards
 keywords: ["informal taxation", "traditional chiefs", "public goods"]   # TODO(update): shown under the title on the landing
 authors: []                    # solo-authored
-year: 2024                     # TODO(update): confirm
-status: "Job market paper"     # TODO(update): current status (working paper? under review?)
+year: 2024
+status: "Working paper"
 country: "Sierra Leone"
 method: "Field experiment"
 takeaway: >
-  When chiefs mobilize labor for public goods, who actually pays? Randomized selection
-  methods measure whether citizens take costly action to avoid the call — and whether
-  the burden lands on the poor.
+  When chiefs mobilize labor for public goods, who actually pays? Randomizing how
+  contributors are selected — chiefs versus lotteries versus progressive surveys —
+  shows chiefs distort behavior slightly less than the alternatives, but their taxes
+  still land hardest on poorer households, who accept lower wages to avoid the call.
 highlight: "who actually pays?"   # phrase eligible for the marigold band (must appear in takeaway)
 links:
-  pdf: "/files/job-market-paper.pdf"   # TODO(update): latest version
+  pdf: ""       # intentionally unlinked for now (2026-08-24) — supplemental links only
   slides: ""
   bibtex: ""
   data: ""
+extra_links:
+  - label: "IGC policy brief"
+    url: "https://www.theigc.org/publications/customary-leaders-governance-rural-sierra-leone"
 figure:
   src: ""     # TODO(update): key-figure asset for the Wheel unfold (SVG/PNG)
   alt: ""
-featured: true    # featured = the focal card when the Wheel is at rest
-order: 1
+featured: false
+order: 3
 ---
 
-<!-- Optional full abstract (shown behind a toggle). TODO(update): paste current abstract. -->
-This paper investigates the relative efficiency of traditional leaders when informally
-taxing citizens in low-income states and whether this comes at the expense of relatively
-poor households.
+This paper investigates the relative merit of traditional leaders in promoting
+cooperative behavior when informally taxing citizens' labor in low-income states and
+whether this comes at the expense of relatively poor households. I designed a field
+experiment to measure whether citizens distort their behavior when facing informal
+taxation schemes by engaging in costly actions to avoid contributing their labor to a
+public good. I randomize communities into different methods to select contributors and
+compare the status quo of selection by chiefs versus two alternatives: random lotteries
+and progressive selection based on household surveys. Results show that chiefs' informal
+taxes distort individual behavior slightly less than the alternative mechanisms,
+revealing that chiefs can indeed promote pro-social behavior but not in a magnitude
+suggesting large efficiency gains. However, chief selection leads to less overall
+participant effort during the experiment, suggesting that chiefs' involvement does alter
+people's incentives during income-generating tasks. When focusing on differences by
+wealth, I also find chiefs do generate distortions among this group, which are more
+likely to accept lower wages to avoid being informally taxed by chiefs. On the other
+hand, progressive selection is slightly more distortionary than chief selection in terms
+of people avoiding informal taxes through costly actions, shifting costs toward people
+with intermediate levels of wealth.

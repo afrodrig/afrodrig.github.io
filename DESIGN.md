@@ -36,16 +36,21 @@ the rest of the web-CV data stays parked).
 **The spine** (left column, `clamp(300px, 32vw, 430px)`, tinted `--color-panel`,
 `position: sticky; top: 0; height: 100dvh`) — **STATIC** (amended 2026-08-23 evening:
 Andrés cut the scroll-shrink morph; the photo stays prominent at every scroll depth):
-- Name in display serif (two lines), role line, then the **hero portrait** — a
-  full-width RECTANGULAR block that absorbs the panel's leftover vertical space
+- Name in display serif (two lines), role line, a mono **credentials line**
+  (`site.yml credentials` — merged from main 2026-08-24), then the **hero portrait** —
+  a full-width RECTANGULAR block that absorbs the panel's leftover vertical space
   (flex-grow, `object-fit` crop at `50% 30%`, hairline border, square corners; merged
   from main 2026-08-23: the photo is the panel's anchor, not a badge) — then the
-  location in mono as a caption. Contacts (email in accent, Scholar/GitHub/CV)
+  location in mono as a caption. Contacts (email in accent, Scholar/GitHub/LinkedIn/CV)
   anchored at the bottom, always visible.
 - **Manual collapse**: a 44px hairline-square button (chevron) beside the contacts
   collapses the spine to a 76px rail — small photo (40px circle, face-biased crop
-  `50% 22%` — circles are for the small mark only), vertical name, expand button.
-  The grid columns transition with the spring curve (§6 conscious exception).
+  `50% 22%` — circles are for the small mark only), vertical name, chevron mark. The
+  rail is **one whole click target** that expands the spine (merged from main c6aba8f),
+  and it uses the shared vertical-bar hover language: **the accent edge** — a 3px
+  `--color-accent` bar on its left edge, surface darkened one step to `--color-rule`,
+  name to ink (merged from main 8c839f2). The grid columns transition with the spring
+  curve (§6 conscious exception).
 - Retired with the morph (2026-08-23 evening): the compact masthead, the spine's
   section index, and the spine ledger-fill. Navigation now lives in the record's
   section strip.
@@ -81,7 +86,9 @@ Andrés cut the scroll-shrink morph; the photo stays prominent at every scroll d
   is a box, and NOTHING in the section is loose text (decided 2026-08-23 late: the
   teaser rows and in-progress note were removed — "content lives only in the boxes").
   Content reveals once on entry.
-- **Colophon** — one per page, at the very end.
+- **Record foot** — one per page, at the very end: the mono **funder line**
+  (`site.yml supported` — quiet credibility, merged from main 2026-08-24) above the
+  colophon row (EMAIL · SCHOLAR · GITHUB · LINKEDIN · CV + the UPDATED stamp).
 
 **Magnetic snap** (2026-08-23 evening — "the scrolling should fall into the right
 place"): the page has exactly four desktop rest states — About (y = 0), the pinned
@@ -99,8 +106,11 @@ shareable. ESC returns to the top.
 boxes, and the section is sized as ONE PAGE: 48px top padding, 180px covers, so
 head → shelf fits a laptop fold after the snap): intro line (one banded phrase
 allowed), then **the shelf** — a horizontal scroll rail (`overflow-x: auto`,
-snap-start, hidden scrollbar) of uniform boxes, ~400px wide, equal height. One box per piece, whatever its stream: `practice.md` items
-and `content/lab/` artifacts render identically. Controls row above the rail:
+snap-start, hidden scrollbar) of uniform boxes, ~400px wide, equal height. One box per piece, whatever its stream: `content/lab/`
+pieces and `practice.md` items render identically, **real pieces first, placeholder
+teasers last** (merged from main 75a6697). A box foot carries status left and links
+right: any `extra_links:` (mono, muted → accent on hover) plus `OPEN →` in accent
+when a live deliverable exists; `COMING SOON` only when there is nothing to link. Controls row above the rail:
 hairline top rule, mono `01 / 04` counter left, hairline-square prev/next buttons
 right (disabled at the ends; the whole row hides when everything fits). Box anatomy,
 top to bottom: **cover art** (full-bleed top; original CSS/SVG art in the palette,
@@ -246,6 +256,10 @@ or hand-rolled FLIP; kinetics.colorion.co presets are approved sources.
   d0c41fe: moving click targets caused missed clicks). Hover states are color and
   background only; secondary glyphs (an arrow beside a row) may nudge via transform,
   the target itself never does.
+- **All vertical bars share one hover language: the accent edge** (merged from main
+  8c839f2 — a plain tint is invisible on a narrow bar, a full ink flood too heavy):
+  3px `--color-accent` bar on the left edge + surface darkened one step. Currently
+  applies to the collapsed spine rail.
 - `@media (prefers-reduced-motion: reduce)`: all spatial motion collapses to opacity
   crossfade; the research track does not pin; the wheel renders as the list; the
   magnetic snap is off.
@@ -288,6 +302,11 @@ The arc path is drawn by JS through the cards' anchors at the current container 
 - Cards carry the paper's `short:` title over a mono line of its `keywords:` (fallback:
   status · country — merged from main 2026-08-23; keywords differentiate cards better
   than repeated status tags, which live in the detail eyebrow).
+- **Links row**: PAPER (accent, only when a PDF is actually hosted) · SLIDES · DATA,
+  then any `extra_links:` (`[{label, url}]` — IGC blogs, policy briefs, project pages;
+  merged from main 2026-08-24). Papers may legitimately have NO links (drafts marked
+  do-not-disseminate stay unlinked); the row is omitted entirely then — never a dead
+  or placeholder link.
 - The detail spread (takeaway, links, abstract behind an `ABSTRACT` toggle) crossfades
   with each rotation, **vertically centered on the focal card's axis**. The focused
   paper is deep-linkable: `#/research/<slug>` (slug = paper filename, minus any year
