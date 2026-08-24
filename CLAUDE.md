@@ -62,7 +62,11 @@ content/
   identity spine (large portrait that travels into a compact masthead on scroll, section
   index, manual collapse to a rail), hero = serif lede + typographic index, Research as
   a pinned scroll track that rotates the Paper Wheel, Practice flowing after, one
-  colophon. DESIGN.md §2/§6/§8/§11 amended accordingly.
+  colophon. DESIGN.md §2/§6/§8/§11 amended accordingly. Main's parallel 2026-08-23
+  decisions merged in: portrait.jpg as the spine's rectangular hero block (avatar.jpg
+  retired; circles only for the small round mark), ledger-fill ruled lines (now under
+  the spine's compact index), wheel detail centered on the focal card's axis, paper
+  `keywords:` on wheel cards, practice items as {title, kind} teaser rows.
 - TODO: content pass (bio and paper metadata are seeded from the OLD site and need
   Andrés's updates — grep for `TODO(update)`; Scholar/GitHub URLs empty in site.yml);
   artifact items are placeholders pending real deliverables; key-figure data per paper

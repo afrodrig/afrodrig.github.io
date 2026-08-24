@@ -114,12 +114,21 @@
     M.morphEnd = Math.max(240, (M.trackTop ?? hero.offsetHeight) - 120);
     if (portrait) {
       const dock = aside.querySelector('.portrait-dock');
-      if (M.mob || !dock) { portrait.style.transform = ''; M.morph = null; }
+      if (M.mob || !dock) { portrait.style.transform = ''; portrait.style.opacity = ''; M.morph = null; }
       else {
         portrait.style.transform = '';          // measure at rest
+        portrait.style.opacity = '';
         const a = portrait.getBoundingClientRect();
         const b = dock.getBoundingClientRect();
-        M.morph = a.width ? { dx: b.left - a.left, dy: b.top - a.top, s: b.width / a.width } : null;
+        if (a.width) {
+          // uniform scale, centers mapped: the rectangle shrinks onto the round mark
+          const s = b.width / a.width;
+          M.morph = {
+            s,
+            dx: (b.left + b.width / 2) - (a.left + a.width * s / 2),
+            dy: (b.top + b.height / 2) - (a.top + a.height * s / 2),
+          };
+        } else M.morph = null;
       }
     }
   }
@@ -151,6 +160,8 @@
         const e = easeInOut(p);
         portrait.style.transform = 'translate3d(' + (M.morph.dx * e).toFixed(2) + 'px, ' +
           (M.morph.dy * e).toFixed(2) + 'px, 0) scale(' + (1 + (M.morph.s - 1) * e).toFixed(4) + ')';
+        // the rectangle hands off to the round mark at the very end of the travel
+        portrait.style.opacity = p < 0.82 ? '1' : Math.max(0, 1 - (p - 0.82) / 0.16).toFixed(3);
       }
     }
 

@@ -7,9 +7,12 @@ intro: >
 highlight: "evaluation that gets used"   # marigold band phrase — must appear in intro
 # Landing-panel preview rows (placeholders until real pieces exist):
 items:
-  - "Scoring a portfolio of research bets"
-  - "Evaluation that gets used"
-  - "A theory of change you can test"
+  - title: "Scoring a portfolio of research bets"
+    kind: "Case study"
+  - title: "Evaluation that gets used"
+    kind: "Essay"
+  - title: "A theory of change you can test"
+    kind: "Essay"
 ---
 
 <!--

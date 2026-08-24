@@ -32,16 +32,22 @@ web-CV content in `content/cv.yml` is parked for future use).
 
 **The spine** (left column, `clamp(300px, 32vw, 430px)`, tinted `--color-panel`,
 `position: sticky; top: 0; height: 100dvh`):
-- **At the top of the page — portrait-forward**: large circular portrait
-  (`min(clamp(148px, 15vw, 212px), 26vh)`, hairline border), name in display serif
-  (two lines), role line, location in mono. Contacts (email in accent, Scholar/GitHub/CV)
-  anchored at the bottom, always visible.
+- **At the top of the page — portrait-forward**: name in display serif (two lines),
+  role line, then the **hero portrait** — a full-width RECTANGULAR block that absorbs
+  the panel's leftover vertical space (flex-grow, `object-fit` crop at `50% 30%`,
+  hairline border, square corners; merged from main 2026-08-23: the photo is the
+  panel's anchor, not a badge) — then the location in mono as a caption. Contacts
+  (email in accent, Scholar/GitHub/CV) anchored at the bottom, always visible.
 - **Scrolled — index-forward**: as the reader scrolls the hero, the portrait *travels*
-  (transform-only FLIP interpolation, scroll-linked) into a 44px dock beside a compact
-  one-line name, while the full face crossfades out and a **section index** fades in:
-  hairline rows, mono number + serif title, active row gets the 6px accent square +
-  accent text (the §7 menu-row convention). The Research row carries a live mono paper
-  counter (`02/04`). The compact name links back to the top.
+  (transform-only, uniform scale, centers mapped, scroll-linked) down to the 44px
+  round mark of the compact masthead and hands off to it with a late fade
+  (rectangle → small circle; circles are for the small mark only). The full face
+  crossfades out and a **section index** fades in: hairline rows, mono number + serif
+  title, active row gets the 6px accent square + accent text (the §7 menu-row
+  convention). The Research row carries a live mono paper counter (`02/04`). Below the
+  index, **blank ruled lines at the row rhythm fill the leftover height and fade out**
+  (the ledger-fill device, merged from main) — the spine reads as a ledger page being
+  filled in. The compact name links back to the top.
 - **Manual collapse**: a 44px hairline-square button (chevron) beside the contacts
   collapses the spine to a 76px rail — small photo, vertical name, expand button.
   The grid columns transition with the spring curve (§6 conscious exception).
@@ -58,9 +64,14 @@ web-CV content in `content/cv.yml` is parked for future use).
   tall; its inner pane sticks at `top: 0` while page scroll rotates the Paper Wheel
   card-by-card (§8). Header keeps the stacked eyebrow + serif title left and the
   `LIST / WHEEL` toggle right (WHEEL default on desktop), plus a mono `01 / 04` counter.
+  The detail spread is **vertically centered on the focal card's axis** (the focal card
+  sits at mid-height; the detail shares that axis — merged from main 2026-08-23).
   List view unpins the track and shows hairline-separated entries, year in a mono side
   column.
-- **PRACTICE** — a flowing section (§ anatomy below), content reveals once on entry.
+- **PRACTICE** — a flowing section (§ anatomy below): intro, then the coming pieces as
+  **ruled teaser rows** (title over a mono `kind` line, from `practice.md` items —
+  merged from main 2026-08-23), the in-progress note, then the artifact cards.
+  Content reveals once on entry.
 - **Colophon** — one per page, at the very end.
 
 **Deep links**: `#research`, `#practice`, and per-paper `#/research/<slug>` all work;
@@ -79,11 +90,14 @@ in accent linking to the live deliverable. If artifacts multiply, they get the c
 treatment (focal card ~600px, peeking neighbors, hairline-square prev/next, mono
 pagination); on mobile, a single-card column. Ends with the colophon.
 
-**Photo**: the real portrait (`avatar.jpg`, 270×270 from the current site) is the spine's
-anchor — a **large circle** (~150–212px, hairline border) above the name at the top of
-the page (amended 2026-08-23 again: portrait-forward landing). It is ONE element: on
-scroll it travels and scales into the 44px dock of the compact masthead — the same photo
-becomes the identity mark. The collapsed rail repeats it at 40px.
+**Photo**: the editorial portrait (`portrait.jpg`, 805×951, warm terracotta setting that
+echoes the accent red; `avatar.jpg` retired) is the spine's hero block — full inner
+width, hairline border, square corners, flex-grown to fill the panel's spare height
+(`object-position: 50% 30%` keeps the face as it crops; mobile fixes it at 4:5). On
+scroll the SAME image shrinks uniformly onto the 44px round mark of the compact
+masthead (face-biased crop `50% 22%`) and hands off with a late fade. The collapsed
+rail repeats the mark at 40px. **Circles are for the small mark only; the hero is
+always a rectangle** (merged from main 2026-08-23).
 
 **Colophon (the footer)**: there is NO global footer chrome. Contact lives permanently
 in the identity panel/rail. Every scrolling section pane ends with a colophon row:
@@ -243,9 +257,13 @@ The arc path is drawn by JS through the cards' anchors at the current container 
   position and wheel state never disagree. The wheel rolls into place (an arc-following
   entrance) the first time the track shows. The `SCROLL ROTATES THE WHEEL` hint fades
   out after the first rotation.
+- Cards carry the paper's `short:` title over a mono line of its `keywords:` (fallback:
+  status · country — merged from main 2026-08-23; keywords differentiate cards better
+  than repeated status tags, which live in the detail eyebrow).
 - The detail spread (takeaway, links, abstract behind an `ABSTRACT` toggle) crossfades
-  with each rotation. The focused paper is deep-linkable: `#/research/<slug>` (slug =
-  paper filename, minus any year prefix).
+  with each rotation, **vertically centered on the focal card's axis**. The focused
+  paper is deep-linkable: `#/research/<slug>` (slug = paper filename, minus any year
+  prefix).
 - Accessibility: the wheel is a progressive enhancement over a semantic `<ul>` of papers.
   Keyboard operable; reduced-motion and mobile get the list.
 

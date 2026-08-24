@@ -3,7 +3,7 @@
 // Edit CONTENT in content/*.yml|md (text lives there, never here).
 // Edit STRUCTURE in the render functions below. Run: node build.mjs
 
-import { readFileSync, writeFileSync, readdirSync, copyFileSync, existsSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 const ROOT = new URL('.', import.meta.url).pathname;
@@ -153,14 +153,14 @@ function identityAside() {
   return `
 <aside class="identity" id="identity">
   <div class="id-full">
-    <img class="portrait" src="assets/avatar.jpg" alt="Portrait of ${esc(site.name)}">
     <h1 class="display id-name">${esc(site.name).replace(' F. ', ' F.<br>')}</h1>
     <div class="role">${esc(site.role)}</div>
+    <img class="portrait" src="assets/portrait.jpg" alt="Portrait of ${esc(site.name)}">
     <div class="id-loc mono">${esc(site.location).toUpperCase()}</div>
   </div>
   <div class="id-scrolled">
     <div class="idc-head">
-      <span class="portrait-dock" aria-hidden="true"></span>
+      <img class="portrait-dock" src="assets/portrait.jpg" alt="" aria-hidden="true">
       <a class="idc-name" href="#top" aria-label="Back to the top">${esc(site.name)}</a>
     </div>
     <nav class="id-index" aria-label="Sections">
@@ -173,6 +173,7 @@ function identityAside() {
         </span>
       </a>`).join('')}
     </nav>
+    <div class="ledger-fill" aria-hidden="true"></div>
   </div>
   <div class="id-foot">
     <div class="id-contacts">
@@ -188,7 +189,7 @@ function identityAside() {
     </button>
   </div>
   <div class="id-rail">
-    <img src="assets/avatar.jpg" alt="" class="rail-photo">
+    <img src="assets/portrait.jpg" alt="" class="rail-photo">
     <div class="rail-name">${esc(site.name)}</div>
     <button class="id-expand" aria-label="Expand the identity panel">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg>
@@ -285,7 +286,7 @@ function researchSection() {
         ${wheelPapers.map((p, i) => `
         <button class="wheel-card" data-card="${i}" data-slug="${esc(p.slug)}">
           <span class="wc-title">${esc(p.short ?? p.title.split(':')[0])}</span>
-          <span class="wc-tag mono">${esc(p.status ?? '').toUpperCase()}</span>
+          <span class="wc-tag mono">${esc((Array.isArray(p.keywords) && p.keywords.length ? p.keywords : [p.status, p.country].filter(Boolean)).join(' · ')).toUpperCase()}</span>
         </button>`).join('')}
         <div class="wheel-hint mono">
           <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M8 2v11M4 9l4 4 4-4"/></svg>
@@ -301,7 +302,7 @@ function researchSection() {
 
 /* ---------- practice (absorbed The Lab 2026-08-23) ---------- */
 function practiceSection() {
-  const items = practice.meta.items ?? [];
+  const items = (practice.meta.items ?? []).map(it => typeof it === 'string' ? { title: it } : it);
   const cards = labItems.length ? labItems : [
     { title: 'Portfolio learning dashboard', kind: 'interactive dashboard', status: 'in-progress',
       pitch: 'Every investment in one live view: what each project proposed, what it has produced, and what that means for the next decision.', keyline: 'what changed, project by project', link: '' },
@@ -315,11 +316,18 @@ function practiceSection() {
     </div>
   </header>
   <p class="section-intro" data-reveal style="--i:1">${band(practice.meta.intro, practice.meta.highlight)}</p>
-  <div class="practice-note mono" data-reveal style="--i:2">FIRST PIECES IN PROGRESS — CASE STUDIES AND ESSAYS LAND HERE.</div>
-  <div class="artifacts-label eyebrow mono" data-reveal style="--i:3">ARTIFACTS</div>
+  <div class="practice-teasers" data-reveal style="--i:2">
+    ${items.map(it => `
+    <div class="p-teaser">
+      <span class="pt-title">${esc(it.title)}</span>
+      ${it.kind ? `<span class="row-meta mono">${esc(it.kind).toUpperCase()}</span>` : ''}
+    </div>`).join('')}
+  </div>
+  <div class="practice-note mono" data-reveal style="--i:3">FIRST PIECES IN PROGRESS — CASE STUDIES AND ESSAYS LAND HERE.</div>
+  <div class="artifacts-label eyebrow mono" data-reveal style="--i:4">ARTIFACTS</div>
   <div class="lab-cards">
     ${cards.map((c, i) => `
-    <article class="lab-card ${i === 0 ? 'lab-focal' : ''}" data-reveal style="--i:${4 + i}">
+    <article class="lab-card ${i === 0 ? 'lab-focal' : ''}" data-reveal style="--i:${5 + i}">
       <div class="lab-cover lab-cover-${(c.kind ?? 'tool').split(' ').pop()}" aria-hidden="true"></div>
       <div class="lab-body">
         <div class="eyebrow mono">ARTIFACT · 0${i + 1} · ${esc(c.kind ?? '').toUpperCase()}</div>
@@ -344,7 +352,7 @@ const jsonLd = JSON.stringify({
   name: site.name, jobTitle: 'Development economist',
   affiliation: { '@type': 'Organization', name: 'Stanford Impact Labs' },
   email: `mailto:${site.email}`, url: site.url,
-  image: `${site.url}assets/avatar.jpg`,
+  image: `${site.url}assets/portrait.jpg`,
   ...(sameAs.length ? { sameAs } : {}),
 });
 const html = `<!doctype html>
@@ -360,7 +368,7 @@ const html = `<!doctype html>
 <meta property="og:title" content="${esc(site.name)}">
 <meta property="og:description" content="${esc(site.role)}">
 <meta property="og:url" content="${site.url}">
-<meta property="og:image" content="${site.url}assets/avatar.jpg">
+<meta property="og:image" content="${site.url}assets/portrait.jpg">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -384,6 +392,4 @@ ${colophon}
 </html>`;
 
 writeFileSync(join(ROOT, 'index.html'), html);
-if (!existsSync(join(ROOT, 'assets'))) mkdirSync(join(ROOT, 'assets'));
-if (existsSync(join(ROOT, 'design/avatar.jpg'))) copyFileSync(join(ROOT, 'design/avatar.jpg'), join(ROOT, 'assets/avatar.jpg'));
 console.log(`built index.html — ${papers.length} papers, ${labItems.length} lab items, stamp ${STAMP}`);

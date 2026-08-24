@@ -51,34 +51,50 @@ mark.band {
   background: var(--color-panel); border-right: 1px solid var(--color-rule);
   display: flex; flex-direction: column; overflow: hidden;
 }
-.id-full { padding: 44px 44px 0; flex: 1; min-height: 0; }
+.id-full { padding: 44px 44px 0; flex: 1; min-height: 0; display: flex; flex-direction: column; }
+/* the portrait is the panel's anchor (main, 2026-08-23): a full-width RECTANGLE that
+   absorbs the leftover vertical space and crops adaptively, keeping the face */
 .portrait {
   display: block; position: relative; z-index: 6;
-  width: var(--portrait-size, 200px); height: var(--portrait-size, 200px);
-  object-fit: cover; border-radius: 50%; border: 1px solid var(--color-rule-strong);
+  width: 100%; flex: 1 1 auto; min-height: 120px;
+  margin-top: var(--s-24);
+  object-fit: cover; object-position: 50% 30%;
+  border: 1px solid var(--color-rule-strong);
   transform-origin: top left;
 }
-.identity { --portrait-size: min(clamp(148px, 15vw, 212px), 26vh); }
-.id-name { margin-top: var(--s-24); }
-.role { margin-top: var(--s-12); font-size: 15px; font-weight: 400; color: var(--color-muted-2); max-width: 30ch; }
-.id-loc { margin-top: var(--s-16); font-size: 10.5px; letter-spacing: 0.12em; color: var(--color-muted-2); }
+.id-name { flex: none; }
+.role { flex: none; margin-top: var(--s-12); font-size: 15px; font-weight: 400; color: var(--color-muted-2); max-width: 30ch; }
+.id-loc { flex: none; margin-top: var(--s-12); font-size: 10.5px; letter-spacing: 0.12em; color: var(--color-muted-2); }
 
-/* scrolled face: compact masthead + the section index (fades in as --p rises) */
+/* scrolled face: compact masthead + the section index (fades in as --p rises);
+   below the index, blank ruled lines at the row rhythm fill the leftover height
+   and fade out — the spine reads as a ledger page being filled in */
 .id-scrolled {
-  position: absolute; top: 0; left: 0; right: 0; z-index: 4;
+  position: absolute; top: 0; left: 0; right: 0; bottom: 110px; z-index: 4;
   padding: 36px 44px 0;
+  display: flex; flex-direction: column;
   visibility: hidden; pointer-events: none;
+}
+.id-scrolled .ledger-fill {
+  flex: 1 1 auto; min-height: 0; margin-top: var(--s-24);
+  background: repeating-linear-gradient(180deg, var(--color-rule) 0 1px, transparent 1px 57px);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 90%);
+  mask-image: linear-gradient(180deg, #000 0%, transparent 90%);
 }
 .identity.is-scrolled .id-scrolled { visibility: visible; }
 .identity.is-compact .id-scrolled { pointer-events: auto; }
 .identity.is-compact .id-full { pointer-events: none; }
 .identity.is-docked .id-full > :not(.portrait) { visibility: hidden; }
 
-.idc-head { display: flex; align-items: center; gap: 14px; min-height: 44px; }
-.portrait-dock { width: 44px; height: 44px; flex: none; border-radius: 50%; border: 1px solid var(--color-rule-strong); }
+.idc-head { display: flex; align-items: center; gap: 14px; min-height: 44px; flex: none; }
+.portrait-dock {
+  display: block; width: 44px; height: 44px; flex: none;
+  object-fit: cover; object-position: 50% 22%;   /* face-biased crop for the small mark */
+  border-radius: 50%; border: 1px solid var(--color-rule-strong);
+}
 .idc-name { font-family: var(--font-display); font-size: 19px; line-height: 1.2; }
 
-.id-index { margin-top: var(--s-24); display: flex; flex-direction: column; }
+.id-index { margin-top: var(--s-24); display: flex; flex-direction: column; flex: none; }
 .idx { display: block; border-top: 1px solid var(--color-rule); }
 .idx:last-child { border-bottom: 1px solid var(--color-rule); }
 .idx-inner {
@@ -125,7 +141,7 @@ mark.band {
   transition: opacity var(--dur-short) var(--ease-out), visibility 0s linear var(--dur-short);
 }
 .frame.is-collapsed .id-rail { opacity: 1; visibility: visible; transition-delay: 300ms, 0s; }
-.rail-photo { width: 40px; height: 40px; object-fit: cover; border-radius: 50%; border: 1px solid var(--color-rule-strong); }
+.rail-photo { width: 40px; height: 40px; object-fit: cover; object-position: 50% 22%; border-radius: 50%; border: 1px solid var(--color-rule-strong); }
 .rail-name { font-family: var(--font-display); font-size: 19px; writing-mode: vertical-rl; color: var(--color-muted-2); }
 .id-expand { margin-top: auto; }
 
@@ -137,7 +153,10 @@ mark.band {
     transform: translateY(calc(var(--p, 0) * -10px));
   }
   /* the compact face waits until the portrait is most of the way home */
-  .id-scrolled { opacity: clamp(0, calc((var(--p, 0) - 0.38) * 1.62), 1); }
+  .id-scrolled { opacity: clamp(0, calc((var(--p, 0) - 0.5) * 2), 1); }
+  /* ...and the round mark itself appears only for the handoff, as the
+     traveling rectangle fades out over it (p ≈ 0.8 → 1) */
+  .id-scrolled .portrait-dock { opacity: clamp(0, calc((var(--p, 0) - 0.8) * 6), 1); }
 }
 
 /* ---------- hero: lede + typographic index ---------- */
@@ -208,6 +227,7 @@ mark.band {
 .wheel-details { position: relative; min-height: 300px; }
 .wheel-detail {
   position: absolute; inset: 0; max-width: 640px;
+  display: flex; flex-direction: column; justify-content: center;  /* centered on the focal card's axis */
   opacity: 0; visibility: hidden; transform: translateY(8px);
   transition: opacity var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out),
     visibility 0s linear var(--dur-short);
@@ -216,7 +236,7 @@ mark.band {
 .wd-eyebrow { font-size: 10.5px; letter-spacing: 0.1em; color: var(--color-muted); text-transform: uppercase; }
 .wd-title { font-family: var(--font-display); font-size: clamp(1.9rem, 2.9vw, 2.6rem); line-height: 1.1; margin-top: 14px; overflow-wrap: anywhere; min-width: 0; }
 .wd-authors { margin-top: 10px; font-size: 14px; color: var(--color-muted-2); }
-.wheel-detail .takeaway { margin-top: var(--s-16); font-size: 16px; line-height: 1.65; max-width: 58ch; }
+.wheel-detail .takeaway { margin-top: var(--s-16); font-size: 17px; line-height: 1.65; max-width: 58ch; }
 .wheel-detail .entry-links { margin-top: 20px; font-size: 11.5px; }
 
 .wheel { position: relative; min-height: 380px; overflow: visible; }
@@ -276,7 +296,13 @@ mark.band {
 
 /* ---------- practice ---------- */
 .practice-sec { padding: 96px 64px 64px; }
-.practice-note { margin-top: var(--s-40); font-size: 11px; color: var(--color-muted); border: 1px dashed var(--color-rule-strong); padding: 18px 22px; display: inline-block; }
+/* teaser rows: coming pieces as ruled ledger rows — title over a mono kind line */
+.practice-teasers { margin-top: var(--s-24); max-width: 560px; }
+.p-teaser { display: flex; flex-direction: column; gap: 5px; padding: 13px 0; border-top: 1px solid var(--color-rule); }
+.p-teaser:last-child { border-bottom: 1px solid var(--color-rule); }
+.pt-title { font-size: 14.5px; font-weight: 400; color: var(--color-muted-2); }
+.row-meta { font-size: 10px; letter-spacing: 0.1em; color: var(--color-muted); text-transform: uppercase; }
+.practice-note { margin-top: var(--s-24); font-size: 11px; color: var(--color-muted); border: 1px dashed var(--color-rule-strong); padding: 18px 22px; display: inline-block; }
 
 /* artifact cards (former Lab — now a stream inside Practice) */
 .artifacts-label { margin-top: var(--s-40); padding-bottom: var(--s-8); border-bottom: 1px solid var(--color-rule); }
@@ -364,7 +390,7 @@ html:not(.js) .id-scrolled, html:not(.js) .id-collapse { display: none; }
   .identity { position: static; height: auto; min-height: 0; border-right: 0; border-bottom: 1px solid var(--color-rule); }
   .id-scrolled, .id-rail, .id-collapse { display: none; }
   .id-full { padding: 32px 24px 0; flex: none; }
-  .identity { --portrait-size: 104px; }
+  .portrait { flex: none; aspect-ratio: 4 / 5; height: auto; min-height: 0; }
   .id-foot { padding: 20px 24px 28px; }
   .hero { padding: 48px 24px 72px; }
   .track { height: auto; }
