@@ -63,10 +63,14 @@ web-CV content in `content/cv.yml` is parked for future use).
   landing** — a peer of the section slivers, not a strip with a hidden arrow (amended
   2026-08-23: only the bottom arrow was clickable, and nothing said the landing IS the
   about page). Anatomy: photo circle, mono `ABOUT` tag, vertical name
-  (writing-mode: vertical-rl), back-arrow mark at the bottom. Hovering tints the rail
-  like a sliver. ESC still restores LANDING.
+  (writing-mode: vertical-rl), back-arrow mark at the bottom. ESC still restores LANDING.
 - The opened section expands; the other sections compress to labeled slivers (number +
   vertical title) that remain clickable.
+- **All vertical bars share one hover language: the ink flood** (amended 2026-08-23 —
+  the panel-hover tint was invisible on the narrow bars). Hovering or keyboard-focusing
+  the rail or a sliver floods it `--color-ink` with inverse text — "inked = you can go
+  here," the same vocabulary as the wheel's focal card. The subtle tint remains for the
+  full-width landing panels only.
 - Transition: panel widths spring to the new grid (interruptible); content crossfades in
   ~220ms AFTER the geometry lands. Never animate width via CSS transitions on layout
   properties — use transforms/FLIP or the spring library (§6).
