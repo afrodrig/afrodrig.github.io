@@ -44,9 +44,16 @@ web-CV content in `content/cv.yml` is parked for future use).
   kind label), and **blank ruled lines at the same rhythm fill the remaining height,
   fading out** — the panel reads as a ledger page being filled in. No fanned/stacked
   cards (replaced 2026-08-23 — the mixed card states read as inconsistent).
-- Hover on a section panel: background tints to `--color-panel-hover`, preview rises 8px,
-  the `ENTER →` arrow nudges right. The `ENTER →` button is **always visible** (amended
-  2026-08-23: hover-reveal hid the affordance — discoverability beats minimalism).
+- Hover on a section panel: background tints to `--color-panel-hover`; the `ENTER →`
+  arrow nudges right. The `ENTER →` button is **always visible** (amended 2026-08-23:
+  hover-reveal hid the affordance — discoverability beats minimalism). **Nothing moves
+  on panel hover** — the earlier 8px preview rise moved click targets under the cursor
+  and caused missed clicks (removed 2026-08-23).
+- Every preview row is a real button with a **resting chevron** at its right edge
+  (muted at rest — clickability is visible before hover). Hovering or focusing a row
+  pops a **full-bleed card** behind it (near-white surface, strong hairline border,
+  opacity-only) and turns the title + chevron accent; the chevron nudges right via
+  transform. Research rows open the Wheel at that paper; Practice rows open Practice.
 - The Research preview rows are INDIVIDUALLY clickable: each opens Research with the
   Wheel focused on that paper (hover: accent). The panel itself and ENTER open Research
   at the featured paper. Papers carry a `short:` display title so rows never truncate.

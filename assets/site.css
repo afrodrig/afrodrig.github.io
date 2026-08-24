@@ -97,26 +97,44 @@ mark.band {
 .preview-block {
   flex: 1; min-height: 0; margin-top: var(--s-24);
   display: flex; flex-direction: column;
-  transition: transform var(--dur-short) var(--ease-out);
 }
-.stage[data-state="landing"] .panel-section:hover .preview-block { transform: translateY(-8px); }
+/* no motion on panel hover — moving click targets caused missed clicks (2026-08-23) */
 .ledger-fill {
   flex: 1; min-height: 0;
   background: repeating-linear-gradient(180deg, var(--color-rule) 0 1px, transparent 1px 66px);
   -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 90%);
   mask-image: linear-gradient(180deg, #000 0%, transparent 90%);
 }
-/* row anatomy (both panels): title line + mono keyword/kind line */
+/* row anatomy (both panels): title line + mono keyword/kind line.
+   Every row is a button; hover/focus pops a full-bleed card behind it. */
 .preview-row, .preview-paper {
+  position: relative;
   display: flex; flex-direction: column; gap: 5px; width: 100%;
-  padding: 14px 0; border-top: 1px solid var(--color-rule);
-  text-align: left;
+  padding: 14px 24px 14px 0; border-top: 1px solid var(--color-rule);
+  text-align: left; cursor: pointer;
 }
+.preview-row > *, .preview-paper > * { position: relative; z-index: 1; }
+.preview-row::before, .preview-paper::before {
+  content: ""; position: absolute; inset: -1px -16px; z-index: 0;
+  background: var(--color-card); border: 1px solid var(--color-rule-strong);
+  opacity: 0; transition: opacity var(--dur-micro) var(--ease-out);
+  pointer-events: none;
+}
+.preview-row:hover::before, .preview-row:focus-visible::before,
+.preview-paper:hover::before, .preview-paper:focus-visible::before { opacity: 1; }
 .row-meta { font-size: 10px; letter-spacing: 0.1em; color: var(--color-muted); text-transform: uppercase; }
 .pr-title { font-size: 14.5px; font-weight: 400; color: var(--color-muted-2); }
+.preview-row:hover .pr-title { color: var(--color-ink); }
+.row-go {
+  position: absolute; right: 2px; top: 50%; transform: translateY(-50%);
+  display: inline-flex; color: var(--color-muted);
+  transition: color var(--dur-micro) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+}
+.preview-row:hover .row-go, .preview-paper:hover .row-go {
+  color: var(--color-accent); transform: translateY(-50%) translateX(3px);
+}
 
 /* landing paper rows — each opens Research focused on that paper */
-.preview-paper { cursor: pointer; transition: color var(--dur-micro) var(--ease-out); }
 .pp-title { font-family: var(--font-display); font-size: 17px; line-height: 1.25; color: var(--color-ink); }
 .preview-paper:hover .pp-title { color: var(--color-accent); }
 .preview-paper:active .pp-title { color: var(--color-accent-deep); }

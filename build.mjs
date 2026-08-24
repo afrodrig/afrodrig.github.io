@@ -190,6 +190,9 @@ const enterBtn = (key, label) => `
       <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
     </button>`;
 
+// resting chevron on clickable rows — clickability must be visible before hover
+const rowGo = `<span class="row-go" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>`;
+
 function researchPanel() {
   const preview = `
   <div class="preview-block">
@@ -198,6 +201,7 @@ function researchPanel() {
       <button class="preview-paper" data-focus-paper="${wheelIndex(p)}" aria-label="Open ${esc(p.title)} in the wheel">
         <span class="pp-title">${esc(p.short ?? p.title.split(':')[0])}</span>
         <span class="row-meta mono">${esc((Array.isArray(p.keywords) && p.keywords.length ? p.keywords : [p.status, p.country].filter(Boolean)).join(' · ')).toUpperCase()}</span>
+        ${rowGo}
       </button>`).join('')}
     </div>
     <div class="ledger-fill" aria-hidden="true"></div>
@@ -301,10 +305,11 @@ function practicePanel() {
     <div class="preview-block">
       <div class="preview-list">
         ${previewRows.map(it => `
-        <div class="preview-row">
+        <button class="preview-row" data-open="practice" aria-label="Open Practice">
           <span class="pr-title">${esc(it.title)}</span>
           ${it.kind ? `<span class="row-meta mono">${esc(it.kind).toUpperCase()}</span>` : ''}
-        </div>`).join('')}
+          ${rowGo}
+        </button>`).join('')}
       </div>
       <div class="ledger-fill" aria-hidden="true"></div>
     </div>
