@@ -130,11 +130,8 @@ const STAMP = new Date().toLocaleDateString('en-US', { month: 'short', year: 'nu
 const V = Date.now().toString(36); // asset cache-buster, refreshed every build
 const authorsLine = (a) => (Array.isArray(a) && a.length) ? `with ${a.join(', ')}` : '';
 
-// Section descriptions shown in the hero index (structural copy, not bio content).
-const SECTION_DESC = {
-  research: 'Governance, public goods and beliefs — Sierra Leone, Zambia, Colombia.',
-  practice: 'How impact measurement works in the field — and the tools I build doing it.',
-};
+// Section context line under the Research head (structural copy, not bio content).
+const RESEARCH_DESC = 'Governance, public goods and beliefs — Sierra Leone, Zambia, Colombia.';
 
 /* ---------- shared bits ---------- */
 const colophon = `
@@ -157,23 +154,6 @@ function identityAside() {
     <div class="role">${esc(site.role)}</div>
     <img class="portrait" src="assets/portrait.jpg" alt="Portrait of ${esc(site.name)}">
     <div class="id-loc mono">${esc(site.location).toUpperCase()}</div>
-  </div>
-  <div class="id-scrolled">
-    <div class="idc-head">
-      <img class="portrait-dock" src="assets/portrait.jpg" alt="" aria-hidden="true">
-      <a class="idc-name" href="#top" aria-label="Back to the top">${esc(site.name)}</a>
-    </div>
-    <nav class="id-index" aria-label="Sections">
-      ${site.sections.map((s, i) => `
-      <a class="idx" href="#${s.key}" data-idx="${s.key}">
-        <span class="idx-inner">
-          <span class="idx-num mono">0${i + 1}</span>
-          <span class="idx-title">${esc(s.title)}</span>
-          ${s.key === 'research' ? `<span class="idx-count mono" aria-hidden="true"><span class="idx-cur">01</span>/${pad2(wheelPapers.length)}</span>` : ''}
-        </span>
-      </a>`).join('')}
-    </nav>
-    <div class="ledger-fill" aria-hidden="true"></div>
   </div>
   <div class="id-foot">
     <div class="id-contacts">
@@ -198,23 +178,30 @@ function identityAside() {
 </aside>`;
 }
 
-/* ---------- hero: lede + the typographic index ---------- */
-function hero() {
+/* ---------- record nav: the horizontal hero strip that controls navigation ----------
+   Sticky at the record's top; every entry returns to that section's start. */
+function recordNav() {
+  const items = [
+    { key: 'about', num: '00', title: 'About' },
+    ...site.sections.map((s, i) => ({ key: s.key, num: '0' + (i + 1), title: s.title })),
+  ];
   return `
-<section class="hero" id="top">
-  <p class="lede">${band(bio.body, bio.meta.highlight)}</p>
-  <div class="nowline mono"><span class="nowrule"></span>NOW: ${esc(bio.meta.now).toUpperCase()}</div>
-  <nav class="hero-index" aria-label="Site sections">
-    ${site.sections.map((s, i) => `
-    <a class="hix" href="#${s.key}">
-      <span class="eyebrow mono">0${i + 1} · ${esc(s.eyebrow).toUpperCase()}</span>
-      <span class="hix-row">
-        <span class="hix-title">${esc(s.title)}</span>
-        <svg class="hix-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v17M5 13l7 7 7-7"/></svg>
-      </span>
-      <span class="hix-desc">${esc(SECTION_DESC[s.key] ?? '')}</span>
+<header class="record-nav-wrap">
+  <nav class="record-nav" aria-label="Sections">
+    ${items.map(it => `
+    <a class="rnav" href="#${it.key}" data-idx="${it.key}">
+      <span class="rnav-num mono">${it.num}</span><span class="rnav-title">${esc(it.title)}</span>
     </a>`).join('')}
   </nav>
+</header>`;
+}
+
+/* ---------- about: the record opens with the bridge statement ---------- */
+function aboutSection() {
+  return `
+<section class="about" id="about">
+  <p class="lede">${band(bio.body, bio.meta.highlight)}</p>
+  <div class="nowline mono"><span class="nowrule"></span>NOW: ${esc(bio.meta.now).toUpperCase()}</div>
 </section>`;
 }
 
@@ -256,6 +243,7 @@ function researchSection() {
       <div class="head-stack">
         <div class="eyebrow mono">01 · ${esc(eyebrow).toUpperCase()} · 2019–PRESENT</div>
         <h2 class="display-2">Research</h2>
+        <p class="section-desc">${esc(RESEARCH_DESC)}</p>
       </div>
       <div class="head-side">
         <div class="view-toggle mono">
@@ -381,7 +369,8 @@ const html = `<!doctype html>
 <div class="frame" id="frame">
 ${identityAside()}
 <main class="flow">
-${hero()}
+${recordNav()}
+${aboutSection()}
 ${researchSection()}
 ${practiceSection()}
 ${colophon}

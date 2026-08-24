@@ -53,70 +53,18 @@ mark.band {
 }
 .id-full { padding: 44px 44px 0; flex: 1; min-height: 0; display: flex; flex-direction: column; }
 /* the portrait is the panel's anchor (main, 2026-08-23): a full-width RECTANGLE that
-   absorbs the leftover vertical space and crops adaptively, keeping the face */
+   absorbs the leftover vertical space and crops adaptively, keeping the face.
+   STATIC since 2026-08-23 evening — the scroll-shrink effect was cut at Andrés's request. */
 .portrait {
-  display: block; position: relative; z-index: 6;
+  display: block;
   width: 100%; flex: 1 1 auto; min-height: 120px;
   margin-top: var(--s-24);
   object-fit: cover; object-position: 50% 30%;
   border: 1px solid var(--color-rule-strong);
-  transform-origin: top left;
 }
 .id-name { flex: none; }
 .role { flex: none; margin-top: var(--s-12); font-size: 15px; font-weight: 400; color: var(--color-muted-2); max-width: 30ch; }
 .id-loc { flex: none; margin-top: var(--s-12); font-size: 10.5px; letter-spacing: 0.12em; color: var(--color-muted-2); }
-
-/* scrolled face: compact masthead + the section index (fades in as --p rises);
-   below the index, blank ruled lines at the row rhythm fill the leftover height
-   and fade out — the spine reads as a ledger page being filled in */
-.id-scrolled {
-  position: absolute; top: 0; left: 0; right: 0; bottom: 110px; z-index: 4;
-  padding: 36px 44px 0;
-  display: flex; flex-direction: column;
-  visibility: hidden; pointer-events: none;
-}
-.id-scrolled .ledger-fill {
-  flex: 1 1 auto; min-height: 0; margin-top: var(--s-24);
-  background: repeating-linear-gradient(180deg, var(--color-rule) 0 1px, transparent 1px 57px);
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 90%);
-  mask-image: linear-gradient(180deg, #000 0%, transparent 90%);
-}
-.identity.is-scrolled .id-scrolled { visibility: visible; }
-.identity.is-compact .id-scrolled { pointer-events: auto; }
-.identity.is-compact .id-full { pointer-events: none; }
-.identity.is-docked .id-full > :not(.portrait) { visibility: hidden; }
-
-.idc-head { display: flex; align-items: center; gap: 14px; min-height: 44px; flex: none; }
-.portrait-dock {
-  display: block; width: 44px; height: 44px; flex: none;
-  object-fit: cover; object-position: 50% 22%;   /* face-biased crop for the small mark */
-  border-radius: 50%; border: 1px solid var(--color-rule-strong);
-}
-.idc-name { font-family: var(--font-display); font-size: 19px; line-height: 1.2; }
-
-.id-index { margin-top: var(--s-24); display: flex; flex-direction: column; flex: none; }
-.idx { display: block; border-top: 1px solid var(--color-rule); }
-.idx:last-child { border-bottom: 1px solid var(--color-rule); }
-.idx-inner {
-  position: relative; display: flex; align-items: baseline; gap: 14px; padding: 14px 0;
-  transition: transform var(--dur-short) var(--ease-out);
-}
-.idx:hover .idx-inner { transform: translateX(7px); }
-.idx-inner::before {
-  content: ""; position: absolute; left: -18px; top: 50%; margin-top: -3px;
-  width: 6px; height: 6px; background: var(--color-accent);
-  opacity: 0; transition: opacity var(--dur-micro) var(--ease-out);
-}
-.idx.is-active .idx-inner::before { opacity: 1; }
-.idx.is-active .idx-title { color: var(--color-accent); }
-.idx-num { font-size: 10.5px; color: var(--color-muted-2); }
-.idx-title { font-family: var(--font-display); font-size: 25px; line-height: 1.1; }
-.idx-count {
-  margin-left: auto; font-size: 10.5px; color: var(--color-muted-2);
-  font-variant-numeric: tabular-nums;
-  opacity: 0; transition: opacity var(--dur-micro) var(--ease-out);
-}
-.idx.is-active .idx-count { opacity: 1; }
 
 .id-foot {
   flex: none; padding: 20px 44px 28px;
@@ -145,22 +93,32 @@ mark.band {
 .rail-name { font-family: var(--font-display); font-size: 19px; writing-mode: vertical-rl; color: var(--color-muted-2); }
 .id-expand { margin-top: auto; }
 
-/* the scroll morph itself (desktop only): --p ∈ [0,1] is set by JS from scroll position.
-   Scrubbed properties are transform/opacity ONLY — DESIGN.md §6 Ledger Scroll exception. */
-@media (min-width: 881px) {
-  .id-full > :not(.portrait) {
-    opacity: calc(1 - var(--p, 0) * 1.55);
-    transform: translateY(calc(var(--p, 0) * -10px));
-  }
-  /* the compact face waits until the portrait is most of the way home */
-  .id-scrolled { opacity: clamp(0, calc((var(--p, 0) - 0.5) * 2), 1); }
-  /* ...and the round mark itself appears only for the handoff, as the
-     traveling rectangle fades out over it (p ≈ 0.8 → 1) */
-  .id-scrolled .portrait-dock { opacity: clamp(0, calc((var(--p, 0) - 0.8) * 6), 1); }
+/* ---------- the record nav: horizontal hero strip, sticky, controls navigation ----------
+   Every entry returns to its section's start. Hover is color-only — nothing moves
+   on targets you're about to click (merged from main, 2026-08-23). */
+.record-nav-wrap {
+  position: sticky; top: 0; z-index: 40;
+  background: var(--color-paper);
+  border-bottom: 1px solid var(--color-rule);
+  padding: 0 64px;
+}
+.record-nav { display: flex; align-items: center; gap: 44px; height: var(--nav-h); }
+.rnav { position: relative; display: inline-flex; align-items: baseline; gap: 10px; line-height: 1; padding: 12px 0; }
+.rnav-num { font-size: 10.5px; color: var(--color-muted); }
+.rnav-title { font-family: var(--font-display); font-size: 20px; line-height: 1; }
+.rnav:hover .rnav-title, .rnav:hover .rnav-num { color: var(--color-accent); }
+.rnav:active .rnav-title { color: var(--color-accent-deep); }
+.rnav.is-active .rnav-title { color: var(--color-accent); }
+.rnav.is-active::before {
+  content: ""; position: absolute; left: -16px; top: 50%; margin-top: -3px;
+  width: 6px; height: 6px; background: var(--color-accent);
 }
 
-/* ---------- hero: lede + typographic index ---------- */
-.hero { padding: 72px 64px 96px; max-width: 900px; }
+/* sticky-nav offset for native anchor jumps and the pinned track (gate 56) */
+.about, .track, .practice-sec { scroll-margin-top: var(--nav-h); }
+
+/* ---------- about: the record opens with the lede ---------- */
+.about { padding: 56px 64px 88px; max-width: 900px; }
 .lede {
   font-family: var(--font-display);
   font-size: clamp(1.4rem, 1.9vw, 1.75rem); line-height: 1.45;
@@ -169,32 +127,10 @@ mark.band {
 .nowline { margin-top: var(--s-24); display: flex; align-items: center; gap: 12px; font-size: 11px; letter-spacing: 0.1em; color: var(--color-accent); line-height: 1; }
 .nowrule { width: 22px; height: 1px; background: var(--color-accent); flex: none; }
 
-.hero-index { margin-top: var(--s-40); display: block; }
-.hix {
-  display: block; position: relative;
-  border-top: 1px solid var(--color-rule);
-  padding: 20px 12px 22px 0;
-  transition: background-color var(--dur-micro) var(--ease-out);
-}
-.hix:last-child { border-bottom: 1px solid var(--color-rule); }
-.hix:hover { background: var(--color-panel-hover); }
-.hix-row { display: flex; align-items: center; justify-content: space-between; gap: var(--s-24); margin-top: 6px; }
-.hix-title {
-  font-family: var(--font-display);
-  font-size: clamp(2.4rem, 4.4vw, 3.7rem); line-height: 1.05;
-  overflow-wrap: anywhere; min-width: 0;
-}
-.hix-arrow {
-  flex: none; color: var(--color-muted);
-  transition: transform var(--dur-short) var(--ease-out), color var(--dur-micro) var(--ease-out);
-}
-.hix:hover .hix-arrow { color: var(--color-accent); transform: translateY(5px); }
-.hix:active .hix-arrow { color: var(--color-accent-deep); }
-.hix-desc { display: block; margin-top: 10px; font-size: 14px; color: var(--color-muted-2); max-width: 52ch; }
-
 /* ---------- shared section chrome ---------- */
 .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-24); flex-wrap: wrap; }
 .section-head .head-stack { display: flex; flex-direction: column; gap: var(--s-8); }
+.section-desc { font-size: 14px; color: var(--color-muted-2); max-width: 52ch; }
 .head-side { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
 .section-intro { margin-top: var(--s-16); font-size: 15.5px; color: var(--color-ink-body); max-width: 62ch; }
 
@@ -202,10 +138,11 @@ mark.band {
    Track height = 100vh + steps × 55vh; the pin stays while page scroll turns the wheel. */
 .track { height: calc(100vh + var(--steps, 3) * 55vh); }
 .pin {
-  position: sticky; top: 0;
-  height: 100vh; height: 100dvh; min-height: 600px;
+  position: sticky; top: var(--nav-h);
+  height: calc(100vh - var(--nav-h)); height: calc(100dvh - var(--nav-h));
+  min-height: 540px;
   display: flex; flex-direction: column;
-  padding: 48px 64px 20px;
+  padding: 44px 64px 20px;
 }
 .track[data-view="wheel"] .pin { overflow: hidden; }
 .track[data-view="wheel"] .entry-list { display: none; }
@@ -345,39 +282,29 @@ mark.band {
 [data-reveal].is-in { opacity: 1; transform: none; }
 html:not(.js) [data-reveal] { opacity: 1; transform: none; }
 
-/* ---------- page-load reveal (hero + spine, staggered ≤ 500ms) ---------- */
+/* ---------- page-load reveal (about + spine, staggered ≤ 500ms) ---------- */
 @keyframes reveal { to { opacity: 1; transform: none; } }
-.js .hero > *, .js .id-full > * { opacity: 0; transform: translateY(10px); animation: reveal var(--dur-long) var(--ease-out) forwards; }
+.js .about > *, .js .id-full > * { opacity: 0; transform: translateY(10px); animation: reveal var(--dur-long) var(--ease-out) forwards; }
 .js .id-full > :nth-child(1) { animation-delay: 0ms; }
 .js .id-full > :nth-child(2) { animation-delay: 80ms; }
 .js .id-full > :nth-child(3) { animation-delay: 160ms; }
 .js .id-full > :nth-child(4) { animation-delay: 240ms; }
-.js .hero > :nth-child(1) { animation-delay: 120ms; }
-.js .hero > :nth-child(2) { animation-delay: 220ms; }
-.js .hero > :nth-child(3) { animation-delay: 320ms; }
-/* once settled, the animation is removed so the scroll morph owns opacity/transform */
-.js.settled .hero > *, .js.settled .id-full > * { animation: none; opacity: 1; transform: none; }
-@media (min-width: 881px) {
-  .js.settled .id-full > :not(.portrait) {
-    opacity: calc(1 - var(--p, 0) * 1.55);
-    transform: translateY(calc(var(--p, 0) * -10px));
-  }
-}
+.js .about > :nth-child(1) { animation-delay: 140ms; }
+.js .about > :nth-child(2) { animation-delay: 240ms; }
 
 /* ---------- no-JS: everything reads as a plain vertical page ---------- */
 html:not(.js) .track { height: auto; }
 html:not(.js) .pin { position: static; height: auto; min-height: 0; overflow: visible; padding-bottom: 64px; }
 html:not(.js) .wheel-view, html:not(.js) .view-toggle, html:not(.js) .wheel-count { display: none; }
 html:not(.js) .track[data-view="wheel"] .entry-list { display: block; }
-html:not(.js) .id-scrolled, html:not(.js) .id-collapse { display: none; }
+html:not(.js) .id-collapse { display: none; }
 
 /* ---------- reduced motion: wheel becomes the list, morph becomes a crossfade ---------- */
 @media (prefers-reduced-motion: reduce) {
   .frame { transition: none; }
   *, *::before, *::after { animation-duration: 150ms !important; transition-duration: 150ms !important; }
-  .js .hero > *, .js .id-full > * { animation: none; opacity: 1; transform: none; }
+  .js .about > *, .js .id-full > * { animation: none; opacity: 1; transform: none; }
   [data-reveal] { opacity: 1; transform: none; transition: none; }
-  .id-full > :not(.portrait) { transform: none; }
   .track { height: auto; }
   .pin { position: static; height: auto; min-height: 0; overflow: visible; padding-bottom: 64px; }
   .wheel-view, .view-toggle, .wheel-count { display: none; }
@@ -388,11 +315,16 @@ html:not(.js) .id-scrolled, html:not(.js) .id-collapse { display: none; }
 @media (max-width: 880px) {
   .frame { display: block; }
   .identity { position: static; height: auto; min-height: 0; border-right: 0; border-bottom: 1px solid var(--color-rule); }
-  .id-scrolled, .id-rail, .id-collapse { display: none; }
+  .id-rail, .id-collapse { display: none; }
   .id-full { padding: 32px 24px 0; flex: none; }
   .portrait { flex: none; aspect-ratio: 4 / 5; height: auto; min-height: 0; }
   .id-foot { padding: 20px 24px 28px; }
-  .hero { padding: 48px 24px 72px; }
+  .record-nav-wrap { position: static; padding: 0 24px; }
+  .record-nav { gap: 28px; height: 56px; }
+  .rnav-title { font-size: 17px; }
+  .rnav.is-active::before { display: none; }
+  .about { padding: 40px 24px 64px; }
+  .js .about > * { animation: none; opacity: 1; transform: none; }
   .track { height: auto; }
   .pin { position: static; height: auto; min-height: 0; overflow: visible; padding: 48px 24px 56px; }
   .wheel-view, .view-toggle, .wheel-count { display: none; }
@@ -403,6 +335,6 @@ html:not(.js) .id-scrolled, html:not(.js) .id-collapse { display: none; }
   .entry-year { padding-top: 0; }
   .lab-cards { flex-direction: column; }
   .lab-card, .lab-card.lab-focal { width: 100%; }
-  .js .hero > *, .js .id-full > * { animation: none; opacity: 1; transform: none; }
+  .js .id-full > * { animation: none; opacity: 1; transform: none; }
   [data-reveal] { opacity: 1; transform: none; transition: none; }
 }

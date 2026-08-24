@@ -1,5 +1,5 @@
-/* site.js — the Ledger Scroll engine: identity morph, pinned wheel track, index nav.
-   Behavior only. Scrubbed properties are transform/opacity ONLY (DESIGN.md §6). */
+/* site.js — the Ledger Scroll engine: pinned wheel track, record nav, magnetic snap.
+   Behavior only. The identity spine is STATIC (scroll morph removed 2026-08-23). */
 (function () {
   'use strict';
   const doc = document.documentElement;
@@ -10,13 +10,12 @@
   const isStatic = () => reduced.matches || mqMobile.matches;
 
   const frame = document.getElementById('frame');
-  const aside = document.getElementById('identity');
-  const hero = document.getElementById('top');
+  const navWrap = document.querySelector('.record-nav-wrap');
+  const about = document.getElementById('about');
   const track = document.getElementById('research');
   const pin = track ? track.querySelector('.pin') : null;
   const practiceSec = document.getElementById('practice');
-  const portrait = aside ? aside.querySelector('.portrait') : null;
-  const idxLinks = [...document.querySelectorAll('.idx')];
+  const navLinks = [...document.querySelectorAll('.rnav')];
 
   /* ============ the Paper Wheel ============
      Cards ride one real circle (R = 900px, 6°/step); the dashed arc is drawn
@@ -29,7 +28,7 @@
     const arcSvg = wheelEl.querySelector('.wheel-arc');
     const arcPath = arcSvg.querySelector('path');
     const hint = wheelEl.querySelector('.wheel-hint');
-    const counters = [...document.querySelectorAll('.count-cur, .idx-cur')];
+    const counters = [...document.querySelectorAll('.count-cur')];
     const R = 900;                    // circle radius (px)
     const STEP = 6 * Math.PI / 180;   // 6° between cards
     let focal = 0;
@@ -105,37 +104,20 @@
   /* ============ measurements ============ */
   let M = null;
   function measure() {
-    if (!hero) return;
-    M = { vh: window.innerHeight, mob: mqMobile.matches, trackTop: null, trackLen: 1 };
-    if (track && pin) {
-      M.trackTop = track.offsetTop;
-      M.trackLen = Math.max(1, track.offsetHeight - pin.offsetHeight);
-    }
-    M.morphEnd = Math.max(240, (M.trackTop ?? hero.offsetHeight) - 120);
-    if (portrait) {
-      const dock = aside.querySelector('.portrait-dock');
-      if (M.mob || !dock) { portrait.style.transform = ''; portrait.style.opacity = ''; M.morph = null; }
-      else {
-        portrait.style.transform = '';          // measure at rest
-        portrait.style.opacity = '';
-        const a = portrait.getBoundingClientRect();
-        const b = dock.getBoundingClientRect();
-        if (a.width) {
-          // uniform scale, centers mapped: the rectangle shrinks onto the round mark
-          const s = b.width / a.width;
-          M.morph = {
-            s,
-            dx: (b.left + b.width / 2) - (a.left + a.width * s / 2),
-            dy: (b.top + b.height / 2) - (a.top + a.height * s / 2),
-          };
-        } else M.morph = null;
-      }
-    }
+    if (!track || !pin) return;
+    const navH = navWrap ? navWrap.offsetHeight : 0;
+    M = {
+      vh: window.innerHeight,
+      mob: mqMobile.matches,
+      navH,
+      trackTop: track.offsetTop - navH,          // pin engages here (pin top = navH)
+      trackLen: Math.max(1, track.offsetHeight - pin.offsetHeight),
+      practiceTop: practiceSec ? practiceSec.offsetTop - navH : Infinity,
+    };
   }
 
   /* ============ the scroll engine (rAF-throttled) ============ */
   const clamp01 = (v) => Math.max(0, Math.min(1, v));
-  const easeInOut = (t) => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
 
   let lastHash = location.hash;
   function setHash(h) {
@@ -148,37 +130,19 @@
     if (!M) return;
     const y = window.scrollY;
 
-    // 1) identity morph: portrait travels to its dock, faces crossfade
-    if (!M.mob) {
-      let p = clamp01(y / M.morphEnd);
-      if (reduced.matches) p = p < 0.5 ? 0 : 1;
-      aside.style.setProperty('--p', p.toFixed(4));
-      aside.classList.toggle('is-scrolled', p > 0.02);
-      aside.classList.toggle('is-compact', p > 0.5);
-      aside.classList.toggle('is-docked', p > 0.98);
-      if (M.morph && portrait) {
-        const e = easeInOut(p);
-        portrait.style.transform = 'translate3d(' + (M.morph.dx * e).toFixed(2) + 'px, ' +
-          (M.morph.dy * e).toFixed(2) + 'px, 0) scale(' + (1 + (M.morph.s - 1) * e).toFixed(4) + ')';
-        // the rectangle hands off to the round mark at the very end of the travel
-        portrait.style.opacity = p < 0.82 ? '1' : Math.max(0, 1 - (p - 0.82) / 0.16).toFixed(3);
-      }
-    }
-
-    // 2) track progress → wheel rotation (quantized: snaps card-by-card)
-    if (track && M.trackTop != null && wheelAPI && !isStatic() && track.dataset.view === 'wheel') {
+    // 1) track progress → wheel rotation (quantized: snaps card-by-card)
+    if (wheelAPI && !isStatic() && track.dataset.view === 'wheel') {
       const prog = clamp01((y - M.trackTop) / M.trackLen);
       wheelAPI.setFocal(Math.round(prog * (wheelAPI.count - 1)), true);
     }
 
-    // 3) active section (spine index) + shareable hash
-    let section = 'top';
-    if (track && M.trackTop != null) {
-      const mid = y + M.vh * 0.5;
-      if (mid >= M.trackTop) section = 'research';
-      if (practiceSec && mid >= practiceSec.offsetTop) section = 'practice';
-    }
-    idxLinks.forEach((el) => el.classList.toggle('is-active', el.dataset.idx === section));
+    // 2) active section (record nav) + shareable hash — thresholds sit midway
+    // between the rest points the snap engine produces (0, trackTop, practiceTop)
+    const endPin = M.trackTop + M.trackLen;
+    let section = 'about';
+    if (y >= M.trackTop / 2) section = 'research';
+    if (practiceSec && y >= (endPin + M.practiceTop) / 2) section = 'practice';
+    navLinks.forEach((el) => el.classList.toggle('is-active', el.dataset.idx === section));
     if (section === 'research') {
       const slug = (wheelAPI && !isStatic() && track.dataset.view === 'wheel') ? wheelAPI.slug() : null;
       setHash(slug ? '#/research/' + slug : '#research');
@@ -186,31 +150,60 @@
     else setHash('');
   }
 
+  /* ============ magnetic snap: the in-between zones resolve to a boundary ============
+     Zone A: between About and the pinned track. Zone B: between the last paper and
+     Practice. After scroll goes idle inside a zone, glide to the boundary in the
+     direction of travel — the page always comes to rest in the right place. */
+  let snapping = false, snapT = 0, lastY = window.scrollY, dir = 1;
+
+  function maybeSnap() {
+    if (snapping || !M || isStatic() || !track || track.dataset.view !== 'wheel') return;
+    const y = window.scrollY, EPS = 6;
+    const endPin = M.trackTop + M.trackLen;
+    let target = null;
+    if (y > EPS && y < M.trackTop - EPS) target = dir > 0 ? M.trackTop : 0;
+    else if (y > endPin + EPS && y < M.practiceTop - EPS) target = dir > 0 ? M.practiceTop : endPin;
+    if (target == null) return;
+    snapping = true;
+    window.scrollTo({ top: Math.round(target), behavior: 'smooth' });
+    const t0 = performance.now();
+    (function arrive() {
+      if (Math.abs(window.scrollY - target) < 2 || performance.now() - t0 > 1400) { snapping = false; return; }
+      requestAnimationFrame(arrive);
+    })();
+  }
+
+  // the user taking over (wheel/touch) cancels a snap in flight
+  ['wheel', 'touchstart'].forEach((ev) =>
+    addEventListener(ev, () => { snapping = false; }, { passive: true }));
+
   let ticking = false;
   addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y !== lastY) { dir = y > lastY ? 1 : -1; lastY = y; }
+    if (!snapping) { clearTimeout(snapT); snapT = setTimeout(maybeSnap, 150); }
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(() => { ticking = false; apply(); });
   }, { passive: true });
 
-  // once settled, load animations are removed so the morph owns opacity/transform
-  setTimeout(() => doc.classList.add('settled'), 800);
-  addEventListener('scroll', () => doc.classList.add('settled'), { once: true, passive: true });
-
   /* ============ navigation ============ */
   const smooth = () => reduced.matches ? 'auto' : 'smooth';
 
   function scrollToSection(key, animate) {
+    const behavior = animate === false ? 'auto' : smooth();
+    if (key === 'about') { window.scrollTo({ top: 0, behavior }); return; }
     const el = document.getElementById(key);
     if (!el) return;
-    if (key === 'research' && M && M.trackTop != null && !isStatic()) {
-      window.scrollTo({ top: M.trackTop, behavior: animate === false ? 'auto' : smooth() });
+    if (M && !isStatic()) {
+      const top = key === 'research' ? M.trackTop : M.practiceTop;
+      window.scrollTo({ top: Math.round(top), behavior });
     } else {
-      el.scrollIntoView({ behavior: animate === false ? 'auto' : smooth() });
+      el.scrollIntoView({ behavior });
     }
   }
   function scrollToPaper(i, animate) {
-    if (!M || M.trackTop == null || !wheelAPI) return;
+    if (!M || !wheelAPI) return;
     const top = M.trackTop + (i / Math.max(1, wheelAPI.count - 1)) * M.trackLen;
     window.scrollTo({ top: Math.round(top), behavior: animate === false ? 'auto' : smooth() });
   }
@@ -218,14 +211,8 @@
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a[href^="#"]');
     if (a) {
-      const href = a.getAttribute('href');
-      if (href === '#top') {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: smooth() });
-        return;
-      }
-      const key = href.slice(1);
-      if (key === 'research' || key === 'practice') {
+      const key = a.getAttribute('href').slice(1);
+      if (key === 'about' || key === 'research' || key === 'practice') {
         e.preventDefault();
         scrollToSection(key);
         return;
@@ -239,7 +226,7 @@
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') { window.scrollTo({ top: 0, behavior: smooth() }); return; }
-    if (!wheelAPI || isStatic() || !M || M.trackTop == null || track.dataset.view !== 'wheel') return;
+    if (!wheelAPI || isStatic() || !M || track.dataset.view !== 'wheel') return;
     const y = window.scrollY;
     if (y < M.trackTop - M.vh * 0.5 || y > M.trackTop + M.trackLen + M.vh * 0.5) return;
     if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { e.preventDefault(); scrollToPaper(wheelAPI.focal() + 1); }
@@ -248,7 +235,7 @@
 
   addEventListener('popstate', () => {
     lastHash = location.hash;
-    const m = location.hash.match(/^#\/?(research|practice)(?:\/([\w-]+))?/);
+    const m = location.hash.match(/^#\/?(about|research|practice)(?:\/([\w-]+))?/);
     if (!m) { window.scrollTo({ top: 0 }); return; }
     if (m[1] === 'research' && m[2] && wheelAPI && !isStatic()) {
       const i = wheelAPI.slugIndex(m[2]);
@@ -266,7 +253,7 @@
       track.querySelectorAll('.view-btn').forEach((b) => b.classList.toggle('is-active', b === btn));
       measure();
       if (view === 'list') {
-        window.scrollTo({ top: track.offsetTop, behavior: 'auto' });
+        window.scrollTo({ top: Math.round(M.trackTop), behavior: 'auto' });
       } else if (wheelAPI) {
         scrollToPaper(focalBefore, false);
         requestAnimationFrame(wheelAPI.drawArc);
@@ -329,15 +316,16 @@
 
   /* ============ boot ============ */
   measure();
+  // the hash the page ARRIVED with — never the ones our own scrollspy writes later
+  const bootHash = location.hash;
   const gotoBootTarget = (animate) => {
-    const m = location.hash.match(/^#\/?(research|practice)(?:\/([\w-]+))?/);
+    const m = bootHash.match(/^#\/?(about|research|practice)(?:\/([\w-]+))?/);
     if (!m) return;
-    doc.classList.add('settled');   // deep link: skip the landing reveal entirely
     if (m[1] === 'research' && m[2] && wheelAPI && !isStatic()) {
       const i = wheelAPI.slugIndex(m[2]);
-      if (i >= 0) { scrollToPaper(i, animate); return; }
+      if (i >= 0) { scrollToPaper(i, false); return; }
     }
-    scrollToSection(m[1], animate);
+    scrollToSection(m[1], false);
   };
   gotoBootTarget(false);
   apply();

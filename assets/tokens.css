@@ -34,6 +34,9 @@
   --s-2: 0.125rem; --s-4: 0.25rem; --s-8: 0.5rem; --s-12: 0.75rem;
   --s-16: 1rem; --s-24: 1.5rem; --s-40: 2.5rem; --s-64: 4rem; --s-96: 6rem;
 
+  /* chrome: the record's sticky nav strip (secondary sticky elements offset by this) */
+  --nav-h: 64px;
+
   /* motion */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in: cubic-bezier(0.7, 0, 0.84, 0);

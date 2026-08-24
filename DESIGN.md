@@ -22,7 +22,9 @@ other way around.
 
 Rewritten 2026-08-23 (replaces the horizontal panel state machine, which read as "a bit
 too much"). One vertical page: a **sticky identity spine** on the left, the **record**
-(all content) scrolling on the right. **No top nav bar exists anywhere.**
+(all content) scrolling on the right. **No global site chrome**: identity lives in the
+spine; the record carries its own **section strip** (a column header, not a site nav —
+see below). Generic wordmark-plus-links top navs remain banned (§9).
 
 **Sections**: Research (01), Practice (02). Practice absorbs the former Lab — case studies,
 essays, and shareable artifacts live in one section (decided 2026-08-23; the `content/lab/`
@@ -31,35 +33,34 @@ already carries the portrait, role, contact, and the CV (PDF) link (decided 2026
 web-CV content in `content/cv.yml` is parked for future use).
 
 **The spine** (left column, `clamp(300px, 32vw, 430px)`, tinted `--color-panel`,
-`position: sticky; top: 0; height: 100dvh`):
-- **At the top of the page — portrait-forward**: name in display serif (two lines),
-  role line, then the **hero portrait** — a full-width RECTANGULAR block that absorbs
-  the panel's leftover vertical space (flex-grow, `object-fit` crop at `50% 30%`,
-  hairline border, square corners; merged from main 2026-08-23: the photo is the
-  panel's anchor, not a badge) — then the location in mono as a caption. Contacts
-  (email in accent, Scholar/GitHub/CV) anchored at the bottom, always visible.
-- **Scrolled — index-forward**: as the reader scrolls the hero, the portrait *travels*
-  (transform-only, uniform scale, centers mapped, scroll-linked) down to the 44px
-  round mark of the compact masthead and hands off to it with a late fade
-  (rectangle → small circle; circles are for the small mark only). The full face
-  crossfades out and a **section index** fades in: hairline rows, mono number + serif
-  title, active row gets the 6px accent square + accent text (the §7 menu-row
-  convention). The Research row carries a live mono paper counter (`02/04`). Below the
-  index, **blank ruled lines at the row rhythm fill the leftover height and fade out**
-  (the ledger-fill device, merged from main) — the spine reads as a ledger page being
-  filled in. The compact name links back to the top.
+`position: sticky; top: 0; height: 100dvh`) — **STATIC** (amended 2026-08-23 evening:
+Andrés cut the scroll-shrink morph; the photo stays prominent at every scroll depth):
+- Name in display serif (two lines), role line, then the **hero portrait** — a
+  full-width RECTANGULAR block that absorbs the panel's leftover vertical space
+  (flex-grow, `object-fit` crop at `50% 30%`, hairline border, square corners; merged
+  from main 2026-08-23: the photo is the panel's anchor, not a badge) — then the
+  location in mono as a caption. Contacts (email in accent, Scholar/GitHub/CV)
+  anchored at the bottom, always visible.
 - **Manual collapse**: a 44px hairline-square button (chevron) beside the contacts
-  collapses the spine to a 76px rail — small photo, vertical name, expand button.
+  collapses the spine to a 76px rail — small photo (40px circle, face-biased crop
+  `50% 22%` — circles are for the small mark only), vertical name, expand button.
   The grid columns transition with the spring curve (§6 conscious exception).
+- Retired with the morph (2026-08-23 evening): the compact masthead, the spine's
+  section index, and the spine ledger-fill. Navigation now lives in the record's
+  section strip.
 
 **The record** (right column), top to bottom:
-- **HERO** — the bridge statement as a display-serif lede (one marigold-banded phrase),
-  the `NOW:` line in accent mono, then the **typographic index**: one oversized row per
-  section — mono eyebrow (`01 · FOUR FIELD EXPERIMENTS`) stacked ABOVE a huge serif
-  title (never beside it), one-line description, a drawn down-arrow at the row's right.
-  Rows are real links (`#research`, `#practice`), hover tints the row
-  `--color-panel-hover` and nudges the arrow down 5px. The index IS the hero — it, and
-  the spine index after it, are the site's navigation.
+- **THE SECTION STRIP** (replaces the oversized typographic index, 2026-08-23 evening:
+  "the hero headings were too big — a normal horizontal hero controlling navigation").
+  Sticky at the record's top (`--nav-h` = 64px, paper background, hairline bottom):
+  one entry per section — `00 About · 01 Research · 02 Practice` — mono number beside
+  a serif title (20px). The active entry gets the 6px accent square + accent text
+  (§7 menu-row convention). Hover is color-only — **nothing moves on targets you're
+  about to click** (principle merged from main d0c41fe). Every entry returns to its
+  section's START, from anywhere. Static (non-sticky) on mobile.
+- **ABOUT** — the bridge statement as a display-serif lede (one marigold-banded
+  phrase) and the `NOW:` line in accent mono. Deliberately short; the pinned Research
+  head peeking below it is the scroll invitation (no dead middle).
 - **RESEARCH** — a pinned track: the section wrapper is `100vh + (papers − 1) × 55vh`
   tall; its inner pane sticks at `top: 0` while page scroll rotates the Paper Wheel
   card-by-card (§8). Header keeps the stacked eyebrow + serif title left and the
@@ -74,9 +75,17 @@ web-CV content in `content/cv.yml` is parked for future use).
   Content reveals once on entry.
 - **Colophon** — one per page, at the very end.
 
-**Deep links**: `#research`, `#practice`, and per-paper `#/research/<slug>` all work;
-scrolling updates the hash (replaceState) so the current paper is always shareable.
-ESC returns to the top.
+**Magnetic snap** (2026-08-23 evening — "the scrolling should fall into the right
+place"): the page has exactly four desktop rest states — About (y = 0), the pinned
+Research track (paper by paper), and Practice. The two transition zones between them
+(About → track start; last paper → Practice) resolve automatically: when scrolling
+goes idle inside a zone, the page glides to the boundary in the direction of travel.
+No scroll hijacking — native scrolling is never intercepted, and a new gesture cancels
+a glide in flight. Off on mobile, in list view, and under reduced motion.
+
+**Deep links**: `#about`, `#research`, `#practice`, and per-paper `#/research/<slug>`
+all work; scrolling updates the hash (replaceState) so the current paper is always
+shareable. ESC returns to the top.
 
 **Practice section anatomy** (amended 2026-08-23 — absorbs the former Lab): intro line
 (one banded phrase allowed), then the streams as content exists: CASE STUDIES —
@@ -90,14 +99,14 @@ in accent linking to the live deliverable. If artifacts multiply, they get the c
 treatment (focal card ~600px, peeking neighbors, hairline-square prev/next, mono
 pagination); on mobile, a single-card column. Ends with the colophon.
 
-**Photo**: the editorial portrait (`portrait.jpg`, 805×951, warm terracotta setting that
-echoes the accent red; `avatar.jpg` retired) is the spine's hero block — full inner
-width, hairline border, square corners, flex-grown to fill the panel's spare height
-(`object-position: 50% 30%` keeps the face as it crops; mobile fixes it at 4:5). On
-scroll the SAME image shrinks uniformly onto the 44px round mark of the compact
-masthead (face-biased crop `50% 22%`) and hands off with a late fade. The collapsed
-rail repeats the mark at 40px. **Circles are for the small mark only; the hero is
-always a rectangle** (merged from main 2026-08-23).
+**Photo**: the editorial portrait (`portrait.jpg`, recropped on main 2026-08-23 —
+face + torso, hands kept; warm terracotta setting that echoes the accent red;
+`avatar.jpg` retired) is the spine's hero block — full inner width, hairline border,
+square corners, flex-grown to fill the panel's spare height (`object-position: 50% 30%`
+keeps the face as it crops; mobile fixes it at 4:5). It is STATIC at every scroll
+depth (the shrink-on-scroll morph was cut 2026-08-23 evening). The collapsed rail
+repeats it as a 40px circle (face-biased crop `50% 22%`). **Circles are for the small
+mark only; the hero is always a rectangle** (merged from main 2026-08-23).
 
 **Colophon (the footer)**: there is NO global footer chrome. Contact lives permanently
 in the identity panel/rail. Every scrolling section pane ends with a colophon row:
@@ -210,17 +219,24 @@ or hand-rolled FLIP; kinetics.colorion.co presets are approved sources.
 - One orchestrated page-load reveal (staggered ≤500ms total, 60ms steps).
   IntersectionObserver reveal-once for sections entering the viewport. No parallax.
   No infinite loops.
-- **Scroll-linked motion (the Ledger Scroll exception, 2026-08-23)** — exactly TWO
-  scroll-driven behaviors exist, both rAF-throttled, both transform/opacity only:
-  1. the **identity morph** — scroll progress over the hero drives the portrait's
-     travel to its dock and the crossfade between the spine's two faces;
-  2. the **research track** — scroll progress through the pinned track sets the wheel's
+- **Scroll-linked motion (the Ledger Scroll exception, 2026-08-23; identity morph
+  REMOVED the same evening — the spine is static)** — exactly TWO scroll-driven
+  behaviors exist:
+  1. the **research track** — scroll progress through the pinned track sets the wheel's
      focal index, QUANTIZED card-by-card (the spring transition animates each snap;
-     card positions are never raw-scrubbed).
-  Nothing else may scrub on scroll. No decorative parallax, ever.
+     card positions are never raw-scrubbed; rAF-throttled, transform/opacity only);
+  2. the **magnetic snap** — after scrolling goes idle inside a transition zone
+     (About↔track, last-paper↔Practice), the page glides to the boundary in the
+     direction of travel via native `scrollTo({behavior:'smooth'})`. Never intercepts
+     a gesture; a new gesture cancels the glide.
+  Nothing else may scrub or move on scroll. No decorative parallax, ever.
+- **Nothing moves on hover on the thing you're about to click** (merged from main
+  d0c41fe: moving click targets caused missed clicks). Hover states are color and
+  background only; secondary glyphs (an arrow beside a row) may nudge via transform,
+  the target itself never does.
 - `@media (prefers-reduced-motion: reduce)`: all spatial motion collapses to opacity
-  crossfade; the identity morph becomes a threshold crossfade (no travel); the research
-  track does not pin; the wheel renders as the list.
+  crossfade; the research track does not pin; the wheel renders as the list; the
+  magnetic snap is off.
 
 ## 7. Components
 
@@ -270,8 +286,9 @@ The arc path is drawn by JS through the cards' anchors at the current container 
 ## 9. Anti-slop gates (enforced subset — full source: github.com/Nutlope/hallmark)
 
 Run before shipping any page. Every answer must be NO:
-1. Top nav bar with wordmark-left + links-right + hairline? (Navigation is the hero
-   index + the spine index.)
+1. Generic top nav bar — wordmark-left + links-right + CTA button? (The record's
+   section strip is the one sanctioned strip: numbered serif section entries in the
+   record column only; identity stays in the spine, no wordmark, no buttons.)
 2. Any italic heading or italic display type?
 3. Pure #FFF/#000, cream/warm paper, or purple-blue gradient anywhere?
 4. Eyebrow/label rendered BESIDE a heading (same row)?
@@ -295,10 +312,11 @@ Run before shipping any page. Every answer must be NO:
 
 ## 11. Responsive
 
-- Breakpoint ~880px: the spine becomes a static header block (portrait 104px, no morph,
-  no collapse, no scrolled face); the record follows as a plain vertical page; the
-  research track does not pin; the wheel becomes the list; the LIST/WHEEL toggle hides.
-- The identity morph and grid-column springs don't run on mobile.
+- Breakpoint ~880px: the spine becomes a static header block (full-width 4:5 portrait,
+  no collapse); the section strip goes static (non-sticky); the record follows as a
+  plain vertical page; the research track does not pin; the wheel becomes the list;
+  the LIST/WHEEL toggle hides; the magnetic snap is off.
+- Grid-column springs don't run on mobile.
 - Test at 320 / 375 / 768 / 1280 / 1440. No horizontal scroll ever.
 
 ## 12. References

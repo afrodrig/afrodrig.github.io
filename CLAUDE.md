@@ -37,8 +37,8 @@ content/
 - **Stack**: plain HTML/CSS/JS, zero dependencies. `node build.mjs` reads `content/` and
   generates `index.html` (NEVER edit index.html by hand — it's build output). Styles:
   `assets/tokens.css` (design tokens) + `assets/site.css` (layout/states). Behavior:
-  `assets/site.js` (the Ledger Scroll engine: identity morph, pinned wheel track,
-  hash routing, entry unfold).
+  `assets/site.js` (the Ledger Scroll engine: pinned wheel track, record nav
+  scrollspy, magnetic section snap, hash routing, entry unfold).
   Preview locally: `python3 -m http.server 4173` (or the `site` entry in .claude/launch.json).
   After ANY content edit: run `node build.mjs` and commit both the content file and index.html.
 - Hosted on GitHub Pages from this repo (afrodrig.github.io). The repo is public — nothing
@@ -58,15 +58,17 @@ content/
   papers carry a `short:` display title, per-paper deep links (`#/research/<slug>`),
   abstract toggles, favicon + og/JSON-LD meta, build-versioned asset URLs.
   **2026-08-23 second revision (branch claude/website-vertical-redesign-061bd7): the
-  horizontal panel machine was replaced by the vertical "Ledger Scroll"** — sticky
-  identity spine (large portrait that travels into a compact masthead on scroll, section
-  index, manual collapse to a rail), hero = serif lede + typographic index, Research as
-  a pinned scroll track that rotates the Paper Wheel, Practice flowing after, one
-  colophon. DESIGN.md §2/§6/§8/§11 amended accordingly. Main's parallel 2026-08-23
-  decisions merged in: portrait.jpg as the spine's rectangular hero block (avatar.jpg
-  retired; circles only for the small round mark), ledger-fill ruled lines (now under
-  the spine's compact index), wheel detail centered on the focal card's axis, paper
-  `keywords:` on wheel cards, practice items as {title, kind} teaser rows.
+  horizontal panel machine was replaced by the vertical "Ledger Scroll"** — STATIC
+  sticky identity spine (name, role, full-width rectangular portrait.jpg hero block,
+  contacts; manual collapse to a rail), the record opens with a sticky section strip
+  (00 About · 01 Research · 02 Practice — every entry returns to its section's start)
+  over a short About lede, Research as a pinned scroll track that rotates the Paper
+  Wheel, Practice flowing after, one colophon. Transition zones between sections
+  resolve via magnetic snap (idle scroll inside a zone glides to the boundary).
+  DESIGN.md §2/§6/§8/§11 amended accordingly. Merged from main the same day:
+  portrait.jpg (avatar.jpg retired; circles only for the small round mark), wheel
+  detail centered on the focal card's axis, paper `keywords:` on wheel cards, practice
+  items as {title, kind} teaser rows, and the no-motion-on-hover principle.
 - TODO: content pass (bio and paper metadata are seeded from the OLD site and need
   Andrés's updates — grep for `TODO(update)`; Scholar/GitHub URLs empty in site.yml);
   artifact items are placeholders pending real deliverables; key-figure data per paper
