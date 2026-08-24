@@ -294,6 +294,49 @@
     t.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
   });
 
+  /* ============ the practice shelf: horizontal rail + paging controls ============ */
+  (function shelf() {
+    const rail = document.querySelector('.lab-cards');
+    if (!rail) return;
+    const controls = document.querySelector('.shelf-controls');
+    const cur = document.querySelector('.shelf-cur');
+    const btns = [...document.querySelectorAll('.shelf-btn')];
+    const step = () => (rail.firstElementChild ? rail.firstElementChild.offsetWidth : 400) + 24;
+    function update() {
+      const max = rail.scrollWidth - rail.clientWidth;
+      if (controls) controls.classList.toggle('is-idle', max < 8);
+      if (cur) {
+        const i = Math.min(rail.children.length, Math.round(rail.scrollLeft / step()) + 1);
+        cur.textContent = String(i).padStart(2, '0');
+      }
+      btns.forEach((b) => {
+        b.disabled = parseInt(b.dataset.shelf, 10) < 0
+          ? rail.scrollLeft <= 2
+          : rail.scrollLeft >= max - 2;
+      });
+    }
+    let paging = null;   // pending paging target (index), so rapid clicks accumulate
+    let st = false;
+    rail.addEventListener('scroll', () => {
+      if (st) return;
+      st = true;
+      requestAnimationFrame(() => {
+        st = false;
+        if (paging != null && Math.abs(rail.scrollLeft - paging * step()) < 4) paging = null;
+        update();
+      });
+    }, { passive: true });
+    ['wheel', 'touchstart'].forEach((ev) =>
+      rail.addEventListener(ev, () => { paging = null; }, { passive: true }));
+    btns.forEach((b) => b.addEventListener('click', () => {
+      const from = paging != null ? paging : Math.round(rail.scrollLeft / step());
+      paging = Math.max(0, Math.min(rail.children.length - 1, from + parseInt(b.dataset.shelf, 10)));
+      rail.scrollTo({ left: paging * step(), behavior: smooth() });
+    }));
+    addEventListener('resize', () => setTimeout(update, 150));
+    update();
+  })();
+
   /* ============ scroll reveals (reveal-once) ============ */
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((ents) => {

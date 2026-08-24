@@ -231,24 +231,53 @@ mark.band {
 .abstract-body p { font-size: 14px; line-height: 1.6; color: var(--color-muted-2); max-width: 58ch; }
 .abstract-body p + p { margin-top: var(--s-8); }
 
-/* ---------- practice ---------- */
+/* ---------- practice: the shelf ----------
+   Content lives ONLY in the boxes (2026-08-23): one horizontally scrolled rail of
+   uniform cards — pieces and artifacts alike. Hairline-square prev/next + mono
+   counter; the rail itself scroll-snaps and hides its scrollbar. */
 .practice-sec { padding: 96px 64px 64px; }
-/* teaser rows: coming pieces as ruled ledger rows — title over a mono kind line */
-.practice-teasers { margin-top: var(--s-24); max-width: 560px; }
-.p-teaser { display: flex; flex-direction: column; gap: 5px; padding: 13px 0; border-top: 1px solid var(--color-rule); }
-.p-teaser:last-child { border-bottom: 1px solid var(--color-rule); }
-.pt-title { font-size: 14.5px; font-weight: 400; color: var(--color-muted-2); }
-.row-meta { font-size: 10px; letter-spacing: 0.1em; color: var(--color-muted); text-transform: uppercase; }
-.practice-note { margin-top: var(--s-24); font-size: 11px; color: var(--color-muted); border: 1px dashed var(--color-rule-strong); padding: 18px 22px; display: inline-block; }
+.shelf-controls {
+  margin-top: var(--s-40); padding-top: var(--s-12);
+  border-top: 1px solid var(--color-rule);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.shelf-controls.is-idle { visibility: hidden; }  /* everything fits — nothing to page */
+.shelf-count { font-size: 10.5px; letter-spacing: 0.1em; color: var(--color-muted); font-variant-numeric: tabular-nums; line-height: 1; }
+.shelf-cur { color: var(--color-ink); }
+.shelf-btns { display: flex; gap: 10px; }
+.shelf-btn {
+  width: 44px; height: 44px;
+  border: 1px solid var(--color-rule-strong);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-muted-2);
+  transition: color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+}
+.shelf-btn:hover:not(:disabled) { color: var(--color-accent); border-color: var(--color-accent); }
+.shelf-btn:disabled { opacity: 0.55; cursor: not-allowed; }
 
-/* artifact cards (former Lab — now a stream inside Practice) */
-.artifacts-label { margin-top: var(--s-40); padding-bottom: var(--s-8); border-bottom: 1px solid var(--color-rule); }
-.lab-cards { margin-top: var(--s-24); display: flex; gap: var(--s-24); align-items: flex-start; }
-.lab-card { background: var(--color-card); border: 1px solid var(--color-rule); width: 420px; flex: none; max-width: 100%; }
-.lab-card.lab-focal { width: 560px; border-color: var(--color-rule-strong); }
-.lab-cover { height: 200px; background: var(--color-ink); position: relative; overflow: hidden; }
+.lab-cards {
+  margin-top: var(--s-24);
+  display: flex; gap: var(--s-24); align-items: stretch;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+.lab-cards::-webkit-scrollbar { display: none; }
+.lab-card {
+  flex: none; width: min(400px, 86vw);
+  scroll-snap-align: start;
+  display: flex; flex-direction: column;
+  background: var(--color-card); border: 1px solid var(--color-rule);
+}
+.lab-cover { flex: none; height: 200px; background: var(--color-ink); position: relative; overflow: hidden; }
+/* original CSS art per kind (never borrowed illustration) — all ride the same ledger grid */
 .lab-cover::after {
   content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(transparent 61px, #24506e 61px, #24506e 62px, transparent 62px) 0 0/100% 62px,
+    linear-gradient(90deg, transparent 119px, #24506e 119px, #24506e 120px, transparent 120px) 0 0/120px 100%;
+}
+.lab-cover-dashboard::after {
   background:
     linear-gradient(transparent 61px, #24506e 61px, #24506e 62px, transparent 62px) 0 0/100% 62px,
     linear-gradient(90deg, transparent 119px, #24506e 119px, #24506e 120px, transparent 120px) 0 0/120px 100%,
@@ -257,11 +286,34 @@ mark.band {
     linear-gradient(0deg, var(--color-data) 0 0) 79px 95px/28px 85px no-repeat,
     linear-gradient(0deg, var(--color-data-strong) 0 0) 157px 140px/28px 40px no-repeat;
 }
-.lab-body { padding: 22px 26px 24px 26px; display: flex; flex-direction: column; gap: 10px; }
-.lab-title { font-family: var(--font-display); font-size: 27px; line-height: 1.12; overflow-wrap: anywhere; min-width: 0; }
+/* case study: a field timeline — baseline with square waypoints */
+.lab-cover-study::after {
+  background:
+    linear-gradient(transparent 61px, #24506e 61px, #24506e 62px, transparent 62px) 0 0/100% 62px,
+    linear-gradient(90deg, transparent 119px, #24506e 119px, #24506e 120px, transparent 120px) 0 0/120px 100%,
+    linear-gradient(0deg, var(--color-data) 0 0) 40px 99px/240px 2px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) 56px 92px/16px 16px no-repeat,
+    linear-gradient(0deg, var(--color-data-strong) 0 0) 118px 92px/16px 16px no-repeat,
+    linear-gradient(0deg, var(--color-accent) 0 0) 180px 92px/16px 16px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) 242px 92px/16px 16px no-repeat;
+}
+/* essay: manuscript lines with a drop-cap block */
+.lab-cover-essay::after {
+  background:
+    linear-gradient(transparent 61px, #24506e 61px, #24506e 62px, transparent 62px) 0 0/100% 62px,
+    linear-gradient(90deg, transparent 119px, #24506e 119px, #24506e 120px, transparent 120px) 0 0/120px 100%,
+    linear-gradient(0deg, var(--color-accent) 0 0) 40px 52px/26px 26px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) 78px 52px/180px 8px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) 78px 70px/142px 8px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) 40px 96px/218px 8px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) 40px 114px/174px 8px no-repeat,
+    linear-gradient(0deg, var(--color-data-strong) 0 0) 40px 132px/120px 8px no-repeat;
+}
+.lab-body { flex: 1; padding: 22px 26px 24px 26px; display: flex; flex-direction: column; gap: 10px; }
+.lab-title { font-family: var(--font-display); font-size: 25px; line-height: 1.12; overflow-wrap: anywhere; min-width: 0; }
 .lab-pitch { font-size: 14px; color: var(--color-muted-2); max-width: 58ch; }
 .lab-keyline { font-size: 12.5px; }
-.lab-foot { display: flex; justify-content: space-between; align-items: baseline; margin-top: 6px; font-size: 10.5px; }
+.lab-foot { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-16); margin-top: auto; padding-top: var(--s-8); font-size: 10.5px; }
 
 /* ---------- colophon ---------- */
 .colophon {
@@ -333,8 +385,8 @@ html:not(.js) .id-collapse { display: none; }
   .colophon { margin: 0 24px; flex-wrap: wrap; gap: 10px; }
   .entry { grid-template-columns: 1fr; gap: 4px; }
   .entry-year { padding-top: 0; }
-  .lab-cards { flex-direction: column; }
-  .lab-card, .lab-card.lab-focal { width: 100%; }
+  /* the shelf stays horizontal on mobile — swipe with the next card peeking */
+  .lab-cards { margin-inline: -24px; padding-inline: 24px; scroll-padding-inline: 24px; }
   .js .id-full > * { animation: none; opacity: 1; transform: none; }
   [data-reveal] { opacity: 1; transform: none; transition: none; }
 }

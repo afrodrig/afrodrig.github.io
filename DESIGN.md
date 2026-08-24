@@ -69,9 +69,10 @@ Andrés cut the scroll-shrink morph; the photo stays prominent at every scroll d
   sits at mid-height; the detail shares that axis — merged from main 2026-08-23).
   List view unpins the track and shows hairline-separated entries, year in a mono side
   column.
-- **PRACTICE** — a flowing section (§ anatomy below): intro, then the coming pieces as
-  **ruled teaser rows** (title over a mono `kind` line, from `practice.md` items —
-  merged from main 2026-08-23), the in-progress note, then the artifact cards.
+- **PRACTICE** — a flowing section (§ anatomy below): intro, then **THE SHELF** — one
+  horizontally scrolled rail of uniform boxes; every piece (case study, essay, tool)
+  is a box, and NOTHING in the section is loose text (decided 2026-08-23 late: the
+  teaser rows and in-progress note were removed — "content lives only in the boxes").
   Content reveals once on entry.
 - **Colophon** — one per page, at the very end.
 
@@ -87,17 +88,20 @@ a glide in flight. Off on mobile, in list view, and under reduced motion.
 all work; scrolling updates the hash (replaceState) so the current paper is always
 shareable. ESC returns to the top.
 
-**Practice section anatomy** (amended 2026-08-23 — absorbs the former Lab): intro line
-(one banded phrase allowed), then the streams as content exists: CASE STUDIES —
-serif-titled entries using the expanded-entry pattern (title, 1–2 line context, mono
-links); ESSAYS — dated list rows (title + mono year); ARTIFACTS — the former Lab cards
-under a mono label. Card anatomy, top to bottom: **cover image** (full-bleed top;
-original SVG art in the palette — never stock or borrowed illustration), mono eyebrow
-(`ARTIFACT · 02 · INTERACTIVE DASHBOARD`), serif title, 2–3 line description, ONE
-marigold-banded key line (focal card only), attribution line, and `OPEN THE <THING> →`
-in accent linking to the live deliverable. If artifacts multiply, they get the carousel
-treatment (focal card ~600px, peeking neighbors, hairline-square prev/next, mono
-pagination); on mobile, a single-card column. Ends with the colophon.
+**Practice section anatomy** (re-amended 2026-08-23 late — content lives ONLY in the
+boxes): intro line (one banded phrase allowed), then **the shelf** — a horizontal
+scroll rail (`overflow-x: auto`, snap-start, hidden scrollbar) of uniform boxes,
+~400px wide, equal height. One box per piece, whatever its stream: `practice.md` items
+and `content/lab/` artifacts render identically. Controls row above the rail:
+hairline top rule, mono `01 / 04` counter left, hairline-square prev/next buttons
+right (disabled at the ends; the whole row hides when everything fits). Box anatomy,
+top to bottom: **cover art** (full-bleed top; original CSS/SVG art in the palette,
+one composition per `kind` — dashboard bars, case-study timeline, essay manuscript
+lines — never stock or borrowed illustration), mono eyebrow (`02 · ESSAY`), serif
+title, optional 2–3 line description and mono key line, and a foot with status +
+`OPEN →` in accent when a live deliverable exists (else `COMING SOON`). No marigold
+inside boxes — the intro carries the section's one band. On mobile the shelf stays
+horizontal (full-bleed gutters, ~86vw cards, next box peeking). Ends with the colophon.
 
 **Photo**: the editorial portrait (`portrait.jpg`, recropped on main 2026-08-23 —
 face + torso, hands kept; warm terracotta setting that echoes the accent red;

@@ -290,11 +290,19 @@ function researchSection() {
 
 /* ---------- practice (absorbed The Lab 2026-08-23) ---------- */
 function practiceSection() {
+  // ONE stream (2026-08-23: content lives only in the boxes) — practice.md items and
+  // content/lab/ artifacts render as uniform boxes on a horizontally scrolled shelf.
   const items = (practice.meta.items ?? []).map(it => typeof it === 'string' ? { title: it } : it);
-  const cards = labItems.length ? labItems : [
+  const labCards = labItems.length ? labItems : [
     { title: 'Portfolio learning dashboard', kind: 'interactive dashboard', status: 'in-progress',
       pitch: 'Every investment in one live view: what each project proposed, what it has produced, and what that means for the next decision.', keyline: 'what changed, project by project', link: '' },
   ];
+  const boxes = [
+    ...items.map(it => ({ title: it.title, kind: it.kind ?? 'Piece', status: 'in progress', pitch: '', keyline: '', link: '' })),
+    ...labCards.map(c => ({ title: c.title, kind: c.kind ?? 'tool', status: c.status ?? '',
+      pitch: c.pitch ?? c.body ?? '', keyline: c.keyline ?? '', link: c.link ?? '' })),
+  ];
+  const kindKey = (k) => String(k).toLowerCase().split(' ').pop().replace(/[^a-z]/g, '');
   return `
 <section class="practice-sec" id="practice">
   <header class="section-head" data-reveal style="--i:0">
@@ -304,27 +312,29 @@ function practiceSection() {
     </div>
   </header>
   <p class="section-intro" data-reveal style="--i:1">${band(practice.meta.intro, practice.meta.highlight)}</p>
-  <div class="practice-teasers" data-reveal style="--i:2">
-    ${items.map(it => `
-    <div class="p-teaser">
-      <span class="pt-title">${esc(it.title)}</span>
-      ${it.kind ? `<span class="row-meta mono">${esc(it.kind).toUpperCase()}</span>` : ''}
-    </div>`).join('')}
+  <div class="shelf-controls" data-reveal style="--i:2">
+    <span class="shelf-count mono" aria-hidden="true"><span class="shelf-cur">01</span> / ${pad2(boxes.length)}</span>
+    <div class="shelf-btns">
+      <button class="shelf-btn" data-shelf="-1" aria-label="Scroll to the previous piece" disabled>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg>
+      </button>
+      <button class="shelf-btn" data-shelf="1" aria-label="Scroll to the next piece">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg>
+      </button>
+    </div>
   </div>
-  <div class="practice-note mono" data-reveal style="--i:3">FIRST PIECES IN PROGRESS — CASE STUDIES AND ESSAYS LAND HERE.</div>
-  <div class="artifacts-label eyebrow mono" data-reveal style="--i:4">ARTIFACTS</div>
-  <div class="lab-cards">
-    ${cards.map((c, i) => `
-    <article class="lab-card ${i === 0 ? 'lab-focal' : ''}" data-reveal style="--i:${5 + i}">
-      <div class="lab-cover lab-cover-${(c.kind ?? 'tool').split(' ').pop()}" aria-hidden="true"></div>
+  <div class="lab-cards" data-reveal style="--i:3" role="region" aria-label="Practice pieces" tabindex="0">
+    ${boxes.map((c, i) => `
+    <article class="lab-card">
+      <div class="lab-cover lab-cover-${kindKey(c.kind)}" aria-hidden="true"></div>
       <div class="lab-body">
-        <div class="eyebrow mono">ARTIFACT · 0${i + 1} · ${esc(c.kind ?? '').toUpperCase()}</div>
+        <div class="eyebrow mono">${pad2(i + 1)} · ${esc(c.kind).toUpperCase()}</div>
         <h3 class="lab-title">${esc(c.title)}</h3>
-        <p class="lab-pitch">${esc(c.pitch ?? c.body ?? '')}</p>
+        ${c.pitch ? `<p class="lab-pitch">${esc(c.pitch)}</p>` : ''}
         ${/* no band here: the Practice intro already carries this screen's one marigold band */''}
         ${c.keyline ? `<div class="lab-keyline mono">${esc(c.keyline)}</div>` : ''}
         <div class="lab-foot">
-          <span class="mono muted">${esc(c.status ?? '').toUpperCase()}</span>
+          <span class="mono muted">${esc(c.status).toUpperCase()}</span>
           ${c.link ? `<a class="accent mono" href="${c.link}">OPEN &nearr;</a>` : `<span class="mono muted">COMING SOON</span>`}
         </div>
       </div>
