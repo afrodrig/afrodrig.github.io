@@ -168,13 +168,14 @@ function identityPanel() {
       </div>
     </div>
   </div>
-  <div class="identity-rail">
+  <button class="identity-rail" data-open="landing" aria-label="About — back to the landing">
     <img src="assets/portrait.jpg" alt="" class="rail-photo">
-    <div class="rail-name">${esc(site.name)}</div>
-    <button class="rail-back" data-open="landing" aria-label="Back to landing">
+    <span class="mono rail-tag">ABOUT</span>
+    <span class="rail-name">${esc(site.name)}</span>
+    <span class="rail-back" aria-hidden="true">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 8H3M7 4L3 8l4 4"/></svg>
-    </button>
-  </div>
+    </span>
+  </button>
 </section>`;
 }
 

@@ -59,8 +59,12 @@ web-CV content in `content/cv.yml` is parked for future use).
   at the featured paper. Papers carry a `short:` display title so rows never truncate.
 
 **State: SECTION OPEN** (e.g. Research; grid: `96 / expanded / 82`)
-- Identity compresses to a 96px rail: monogram, vertical name (writing-mode: vertical-rl),
-  back affordance at bottom. ESC or back restores LANDING.
+- Identity compresses to a 96px rail that is **one whole click target back to the
+  landing** — a peer of the section slivers, not a strip with a hidden arrow (amended
+  2026-08-23: only the bottom arrow was clickable, and nothing said the landing IS the
+  about page). Anatomy: photo circle, mono `ABOUT` tag, vertical name
+  (writing-mode: vertical-rl), back-arrow mark at the bottom. Hovering tints the rail
+  like a sliver. ESC still restores LANDING.
 - The opened section expands; the other sections compress to labeled slivers (number +
   vertical title) that remain clickable.
 - Transition: panel widths spring to the new grid (interruptible); content crossfades in
