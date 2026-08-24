@@ -158,6 +158,7 @@ function identityPanel() {
   <div class="identity-full">
     <h1 class="display">${esc(site.name).replace(' F. ', ' F.<br>')}</h1>
     <div class="role">${esc(site.role)}</div>
+    ${site.credentials ? `<div class="credline mono">${esc(site.credentials).toUpperCase()}</div>` : ''}
     <img class="portrait" src="assets/portrait.jpg" alt="Portrait of ${esc(site.name)}">
     <p class="statement">${band(bio.body, bio.meta.highlight)}</p>
     <div class="nowline mono"><span class="nowrule"></span>NOW: ${esc(bio.meta.now).toUpperCase()}</div>
@@ -284,6 +285,7 @@ function researchPanel() {
     </div>
 
     <div class="entry-list">${entries}</div>
+    ${site.supported ? `<div class="supported mono">${esc(site.supported).toUpperCase()}</div>` : ''}
     ${colophon}
   </div>
 </section>`;
@@ -297,8 +299,8 @@ function practicePanel() {
       pitch: 'Every investment in one live view: what each project proposed, what it has produced, and what that means for the next decision.', keyline: 'what changed, project by project', link: '' },
   ];
   const previewRows = [
-    ...items.map(it => typeof it === 'string' ? { title: it } : it),
     ...cards.map(c => ({ title: c.title, kind: [c.kind, c.status === 'in-progress' ? 'in progress' : c.status].filter(Boolean).join(' · ') })),
+    ...items.map(it => typeof it === 'string' ? { title: it } : it),
   ].slice(0, 4);
   return `
 <section class="panel panel-section" id="panel-practice" data-key="practice">
