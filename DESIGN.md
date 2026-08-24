@@ -18,47 +18,54 @@ other way around.
 - **Copy voice**: first person, plain language, short sentences. Every paper gets a
   1–2 sentence plain-language takeaway; abstracts are secondary, behind a toggle.
 
-## 2. Architecture — the "Ledger × Index" hybrid
+## 2. Architecture — the "Ledger Scroll" (spine + record)
 
-One page-level state machine. The viewport is divided into vertical panels; **no top nav bar
-exists anywhere**.
+Rewritten 2026-08-23 (replaces the horizontal panel state machine, which read as "a bit
+too much"). One vertical page: a **sticky identity spine** on the left, the **record**
+(all content) scrolling on the right. **No top nav bar exists anywhere.**
 
 **Sections**: Research (01), Practice (02). Practice absorbs the former Lab — case studies,
 essays, and shareable artifacts live in one section (decided 2026-08-23; the `content/lab/`
-folder still feeds the artifact cards). There is NO About/CV pane — the identity panel
-already carries the short bio, contact, and the CV (PDF) link (decided 2026-08-22; the
+folder still feeds the artifact cards). There is NO About/CV pane — the spine
+already carries the portrait, role, contact, and the CV (PDF) link (decided 2026-08-22; the
 web-CV content in `content/cv.yml` is parked for future use).
 
-**State: LANDING** (grid at 1440px: `39fr / 33fr / 28fr`)
-- Panel 1 — identity (tinted `--color-panel`): name (display serif, two lines) with the
-  **circular portrait beside it** (name left, photo right — decided 2026-08-23), role line,
-  bridge statement (~65ch max, with one marigold-banded phrase), a `NOW:` line in accent
-  mono, contact links anchored at the bottom.
-- Panels 2–3 — Research / Practice. Each: mono eyebrow (`01 · FOUR FIELD EXPERIMENTS`)
-  stacked ABOVE a serif title (never beside it), 1–2 line description, bottom-anchored
-  preview: **hairline-separated list rows** (Research: year in mono + short paper title;
-  Practice: piece/artifact titles). No fanned/stacked cards (replaced 2026-08-23 — the
-  mixed card states read as inconsistent).
-- Hover on a section panel: background tints to `--color-panel-hover`, preview rises 8px,
-  `ENTER →` affordance appears (a real focusable button — it also appears on keyboard
-  focus). All springs (§6).
-- The Research preview rows are INDIVIDUALLY clickable: each opens Research with the
-  Wheel focused on that paper (hover: accent). The panel itself and ENTER open Research
-  at the featured paper. Papers carry a `short:` display title so rows never truncate.
+**The spine** (left column, `clamp(300px, 32vw, 430px)`, tinted `--color-panel`,
+`position: sticky; top: 0; height: 100dvh`):
+- **At the top of the page — portrait-forward**: large circular portrait
+  (`min(clamp(148px, 15vw, 212px), 26vh)`, hairline border), name in display serif
+  (two lines), role line, location in mono. Contacts (email in accent, Scholar/GitHub/CV)
+  anchored at the bottom, always visible.
+- **Scrolled — index-forward**: as the reader scrolls the hero, the portrait *travels*
+  (transform-only FLIP interpolation, scroll-linked) into a 44px dock beside a compact
+  one-line name, while the full face crossfades out and a **section index** fades in:
+  hairline rows, mono number + serif title, active row gets the 6px accent square +
+  accent text (the §7 menu-row convention). The Research row carries a live mono paper
+  counter (`02/04`). The compact name links back to the top.
+- **Manual collapse**: a 44px hairline-square button (chevron) beside the contacts
+  collapses the spine to a 76px rail — small photo, vertical name, expand button.
+  The grid columns transition with the spring curve (§6 conscious exception).
 
-**State: SECTION OPEN** (e.g. Research; grid: `96 / expanded / 82`)
-- Identity compresses to a 96px rail: monogram, vertical name (writing-mode: vertical-rl),
-  back affordance at bottom. ESC or back restores LANDING.
-- The opened section expands; the other sections compress to labeled slivers (number +
-  vertical title) that remain clickable.
-- Transition: panel widths spring to the new grid (interruptible); content crossfades in
-  ~220ms AFTER the geometry lands. Never animate width via CSS transitions on layout
-  properties — use transforms/FLIP or the spring library (§6).
+**The record** (right column), top to bottom:
+- **HERO** — the bridge statement as a display-serif lede (one marigold-banded phrase),
+  the `NOW:` line in accent mono, then the **typographic index**: one oversized row per
+  section — mono eyebrow (`01 · FOUR FIELD EXPERIMENTS`) stacked ABOVE a huge serif
+  title (never beside it), one-line description, a drawn down-arrow at the row's right.
+  Rows are real links (`#research`, `#practice`), hover tints the row
+  `--color-panel-hover` and nudges the arrow down 5px. The index IS the hero — it, and
+  the spine index after it, are the site's navigation.
+- **RESEARCH** — a pinned track: the section wrapper is `100vh + (papers − 1) × 55vh`
+  tall; its inner pane sticks at `top: 0` while page scroll rotates the Paper Wheel
+  card-by-card (§8). Header keeps the stacked eyebrow + serif title left and the
+  `LIST / WHEEL` toggle right (WHEEL default on desktop), plus a mono `01 / 04` counter.
+  List view unpins the track and shows hairline-separated entries, year in a mono side
+  column.
+- **PRACTICE** — a flowing section (§ anatomy below), content reveals once on entry.
+- **Colophon** — one per page, at the very end.
 
-**Research section anatomy**: header row (eyebrow + serif title left, `LIST / WHEEL`
-toggle right; WHEEL is default on desktop). Wheel view: detail spread left (~60%),
-the wheel at the right edge (§8). List view: hairline-separated entries, year in a
-mono side column.
+**Deep links**: `#research`, `#practice`, and per-paper `#/research/<slug>` all work;
+scrolling updates the hash (replaceState) so the current paper is always shareable.
+ESC returns to the top.
 
 **Practice section anatomy** (amended 2026-08-23 — absorbs the former Lab): intro line
 (one banded phrase allowed), then the streams as content exists: CASE STUDIES —
@@ -72,11 +79,11 @@ in accent linking to the live deliverable. If artifacts multiply, they get the c
 treatment (focal card ~600px, peeking neighbors, hairline-square prev/next, mono
 pagination); on mobile, a single-card column. Ends with the colophon.
 
-**Photo**: the real portrait (`avatar.jpg`, 270×270 from the current site) lives in the
-identity panel on the landing — a **circle** (~124px, hairline border) sitting beside
-the name (amended 2026-08-23; the square read as stiff) — and repeats small (~40px
-circle) at the top of the compressed rail in every open-section state — the photo
-becomes the identity mark when the panel compresses.
+**Photo**: the real portrait (`avatar.jpg`, 270×270 from the current site) is the spine's
+anchor — a **large circle** (~150–212px, hairline border) above the name at the top of
+the page (amended 2026-08-23 again: portrait-forward landing). It is ONE element: on
+scroll it travels and scales into the 44px dock of the compact masthead — the same photo
+becomes the identity mark. The collapsed rail repeats it at 40px.
 
 **Colophon (the footer)**: there is NO global footer chrome. Contact lives permanently
 in the identity panel/rail. Every scrolling section pane ends with a colophon row:
@@ -181,15 +188,25 @@ or hand-rolled FLIP; kinetics.colorion.co presets are approved sources.
   wheel rotation snap, preview rise. Reference: stiffness ~170, damping ~24.
 - **Easing** (`--ease-out`): link hovers, crossfades, menu-row nudges (translateX 7px).
 - Animate ONLY `transform` and `opacity`. Never width/height/top/left/margin/padding.
-  **Conscious exception (amended 2026-08-23)**: the panel machine may transition
+  **Conscious exception (amended 2026-08-23)**: the spine collapse may transition
   `grid-template-columns`, and the list-entry/abstract unfolds may transition
   `grid-template-rows`, both with the spring-flavored `linear()` curve — a FLIP
   implementation over text-filled columns distorts type mid-flight and isn't worth it.
   These two cases only; everything else stays transform/opacity.
-- One orchestrated page-load reveal (staggered ≤500ms total, 60ms steps). No scroll-driven
-  scrubbing; IntersectionObserver reveal-once only. No parallax. No infinite loops.
+- One orchestrated page-load reveal (staggered ≤500ms total, 60ms steps).
+  IntersectionObserver reveal-once for sections entering the viewport. No parallax.
+  No infinite loops.
+- **Scroll-linked motion (the Ledger Scroll exception, 2026-08-23)** — exactly TWO
+  scroll-driven behaviors exist, both rAF-throttled, both transform/opacity only:
+  1. the **identity morph** — scroll progress over the hero drives the portrait's
+     travel to its dock and the crossfade between the spine's two faces;
+  2. the **research track** — scroll progress through the pinned track sets the wheel's
+     focal index, QUANTIZED card-by-card (the spring transition animates each snap;
+     card positions are never raw-scrubbed).
+  Nothing else may scrub on scroll. No decorative parallax, ever.
 - `@media (prefers-reduced-motion: reduce)`: all spatial motion collapses to opacity
-  crossfade; the wheel renders as the list.
+  crossfade; the identity morph becomes a threshold crossfade (no travel); the research
+  track does not pin; the wheel renders as the list.
 
 ## 7. Components
 
@@ -203,7 +220,8 @@ or hand-rolled FLIP; kinetics.colorion.co presets are approved sources.
   tick. Square corners.
 - **Key figure block**: hairline border box, inline SVG chart (steel bars + one red),
   mono caption `KEY FIGURE — ANIMATES ON OPEN`. Every decorative SVG: `aria-hidden="true"`.
-- **Sliver panel**: mono number top, vertical serif title, optional 6px accent dot bottom.
+- **Collapsed rail**: small round photo top, vertical serif name, hairline-square expand
+  button bottom.
 - **Icons**: hand-drawn inline SVG, stroke-based, 1.5–1.7px stroke, one style site-wide.
   Emoji are banned as icons.
 
@@ -215,11 +233,16 @@ column at (focal-anchor-x − R, mid-height); the focal card sits at the circle'
 point; each step is 6° along the circle (x = −R(1−cosθ), y = R·sinθ, tilt ≈ 5.1°/step).
 The arc path is drawn by JS through the cards' anchors at the current container size
 (redrawn on open and on resize) — never a static decorative curve.
-- At rest: focal card inked (`--color-ink` fill), neighbors recede (scale .92, 60% ink,
-  slight rotation following the arc). The featured paper starts **mid-arc** (a neighbor
-  above, the rest below) so the circle reads immediately — never top-of-stack.
-- Scroll/arrow keys rotate the wheel, snapping card-by-card with the spring curve. The
-  `SCROLL ROTATES THE WHEEL` hint fades out after the first rotation.
+- At rest: focal card inked (`--color-ink` fill), neighbors recede (scale .94, reduced
+  opacity, slight rotation following the arc). **The featured paper LEADS the sequence**
+  (amended 2026-08-23 for the Ledger Scroll: the wheel is now a scroll narrative, so the
+  featured paper is focal when the track pins and the rest trail below along the arc —
+  the fan of trailing cards makes the circle read immediately).
+- **Rotation driver**: page scroll through the pinned track (quantized snaps, §6), card
+  clicks, and arrow keys — each jumps the page to that paper's scroll offset, so scroll
+  position and wheel state never disagree. The wheel rolls into place (an arc-following
+  entrance) the first time the track shows. The `SCROLL ROTATES THE WHEEL` hint fades
+  out after the first rotation.
 - The detail spread (takeaway, links, abstract behind an `ABSTRACT` toggle) crossfades
   with each rotation. The focused paper is deep-linkable: `#/research/<slug>` (slug =
   paper filename, minus any year prefix).
@@ -229,7 +252,8 @@ The arc path is drawn by JS through the cards' anchors at the current container 
 ## 9. Anti-slop gates (enforced subset — full source: github.com/Nutlope/hallmark)
 
 Run before shipping any page. Every answer must be NO:
-1. Top nav bar with wordmark-left + links-right + hairline? (Navigation is vertical panels.)
+1. Top nav bar with wordmark-left + links-right + hairline? (Navigation is the hero
+   index + the spine index.)
 2. Any italic heading or italic display type?
 3. Pure #FFF/#000, cream/warm paper, or purple-blue gradient anywhere?
 4. Eyebrow/label rendered BESIDE a heading (same row)?
@@ -253,9 +277,10 @@ Run before shipping any page. Every answer must be NO:
 
 ## 11. Responsive
 
-- Breakpoint ~880px: panels become stacked full-width rows (identity first, as a compact
-  header card); slivers become rows; the wheel becomes the list; the LIST/WHEEL toggle hides.
-- Panel-grid springs don't run on mobile — plain section navigation.
+- Breakpoint ~880px: the spine becomes a static header block (portrait 104px, no morph,
+  no collapse, no scrolled face); the record follows as a plain vertical page; the
+  research track does not pin; the wheel becomes the list; the LIST/WHEEL toggle hides.
+- The identity morph and grid-column springs don't run on mobile.
 - Test at 320 / 375 / 768 / 1280 / 1440. No horizontal scroll ever.
 
 ## 12. References

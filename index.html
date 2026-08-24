@@ -16,25 +16,45 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/tokens.css?v=mt6k0sms">
-<link rel="stylesheet" href="assets/site.css?v=mt6k0sms">
+<link rel="stylesheet" href="assets/tokens.css?v=mt6lk3rb">
+<link rel="stylesheet" href="assets/site.css?v=mt6lk3rb">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Andrés F. Rodríguez","jobTitle":"Development economist","affiliation":{"@type":"Organization","name":"Stanford Impact Labs"},"email":"mailto:afrodrig@stanford.edu","url":"https://afrodrig.github.io/","image":"https://afrodrig.github.io/assets/avatar.jpg"}</script>
 </head>
 <body>
-<main class="stage" data-state="landing">
+<div class="frame" id="frame">
 
-<section class="panel panel-identity" id="panel-identity">
-  <div class="identity-full">
-    <div class="identity-head">
-      <h1 class="display">Andrés F.<br>Rodríguez</h1>
-      <img class="portrait" src="assets/avatar.jpg" alt="Portrait of Andrés F. Rodríguez">
-    </div>
+<aside class="identity" id="identity">
+  <div class="id-full">
+    <img class="portrait" src="assets/avatar.jpg" alt="Portrait of Andrés F. Rodríguez">
+    <h1 class="display id-name">Andrés F.<br>Rodríguez</h1>
     <div class="role">Development economist · Impact &amp; Learning, Stanford Impact Labs</div>
-    <p class="statement">I run field experiments on governance and public goods — and build the measurement
-tools that help funders and social-sector teams act on evidence. Research on one side,
-practice on the other; <mark class="band">this site is the bridge</mark>.</p>
-    <div class="nowline mono"><span class="nowrule"></span>NOW: MEASURING A PORTFOLIO'S IMPACT BEFORE IT EXISTS</div>
-    <div class="identity-foot">
+    <div class="id-loc mono">STANFORD, CALIFORNIA</div>
+  </div>
+  <div class="id-scrolled">
+    <div class="idc-head">
+      <span class="portrait-dock" aria-hidden="true"></span>
+      <a class="idc-name" href="#top" aria-label="Back to the top">Andrés F. Rodríguez</a>
+    </div>
+    <nav class="id-index" aria-label="Sections">
+      
+      <a class="idx" href="#research" data-idx="research">
+        <span class="idx-inner">
+          <span class="idx-num mono">01</span>
+          <span class="idx-title">Research</span>
+          <span class="idx-count mono" aria-hidden="true"><span class="idx-cur">01</span>/04</span>
+        </span>
+      </a>
+      <a class="idx" href="#practice" data-idx="practice">
+        <span class="idx-inner">
+          <span class="idx-num mono">02</span>
+          <span class="idx-title">Practice</span>
+          
+        </span>
+      </a>
+    </nav>
+  </div>
+  <div class="id-foot">
+    <div class="id-contacts">
       <a class="accent" href="mailto:afrodrig@stanford.edu">afrodrig@stanford.edu</a>
       <div class="identity-links">
         
@@ -42,83 +62,72 @@ practice on the other; <mark class="band">this site is the bridge</mark>.</p>
         <a href="/files/cv.pdf">CV (PDF)</a>
       </div>
     </div>
+    <button class="id-collapse" aria-label="Collapse the identity panel" aria-expanded="true">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg>
+    </button>
   </div>
-  <div class="identity-rail">
+  <div class="id-rail">
     <img src="assets/avatar.jpg" alt="" class="rail-photo">
     <div class="rail-name">Andrés F. Rodríguez</div>
-    <button class="rail-back" data-open="landing" aria-label="Back to landing">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 8H3M7 4L3 8l4 4"/></svg>
+    <button class="id-expand" aria-label="Expand the identity panel">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg>
     </button>
   </div>
+</aside>
+<main class="flow">
+
+<section class="hero" id="top">
+  <p class="lede">I run field experiments on governance and public goods — and build the measurement
+tools that help funders and social-sector teams act on evidence. Research on one side,
+practice on the other; <mark class="band">this site is the bridge</mark>.</p>
+  <div class="nowline mono"><span class="nowrule"></span>NOW: MEASURING A PORTFOLIO'S IMPACT BEFORE IT EXISTS</div>
+  <nav class="hero-index" aria-label="Site sections">
+    
+    <a class="hix" href="#research">
+      <span class="eyebrow mono">01 · FOUR FIELD EXPERIMENTS</span>
+      <span class="hix-row">
+        <span class="hix-title">Research</span>
+        <svg class="hix-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v17M5 13l7 7 7-7"/></svg>
+      </span>
+      <span class="hix-desc">Governance, public goods and beliefs — Sierra Leone, Zambia, Colombia.</span>
+    </a>
+    <a class="hix" href="#practice">
+      <span class="eyebrow mono">02 · CASE STUDIES, ESSAYS &AMP; TOOLS</span>
+      <span class="hix-row">
+        <span class="hix-title">Practice</span>
+        <svg class="hix-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v17M5 13l7 7 7-7"/></svg>
+      </span>
+      <span class="hix-desc">How impact measurement works in the field — and the tools I build doing it.</span>
+    </a>
+  </nav>
 </section>
 
-<section class="panel panel-section" id="panel-research" data-key="research">
-  
-  <button class="sliver-face" data-open="research" aria-label="Open Research">
-    <span class="mono">01</span><span class="sliver-title">Research</span>
-  </button>
-  <div class="section-preview" data-open="research">
-    <div class="eyebrow mono">01 · FOUR FIELD EXPERIMENTS</div>
-    <h2 class="display-2">Research</h2>
-    <p class="section-desc">Governance, public goods and beliefs — Sierra Leone, Zambia, Colombia.</p>
-    
-  <div class="preview-list preview-papers">
-    
-    <button class="preview-paper" data-focus-paper="1" aria-label="Open Informal Taxation in Development Projects: The Role of Chiefs in Sierra Leone in the wheel">
-      <span class="pp-year mono">2024</span>
-      <span class="pp-title">Informal taxation &amp; chiefs</span>
-    </button>
-    <button class="preview-paper" data-focus-paper="0" aria-label="Open Candidate Entry Into Local Government in the wheel">
-      <span class="pp-year mono">2023</span>
-      <span class="pp-title">Candidate entry into local government</span>
-    </button>
-    <button class="preview-paper" data-focus-paper="2" aria-label="Open Improving the Use of Zambia's Constituency Development Fund (CDF) in the wheel">
-      <span class="pp-year mono">now</span>
-      <span class="pp-title">Zambia's Constituency Development Fund</span>
-    </button>
-    <button class="preview-paper" data-focus-paper="3" aria-label="Open Too Much or Too Little Faith in Success? Experimental Evidence from Colombian Entrepreneurs in the wheel">
-      <span class="pp-year mono">2022</span>
-      <span class="pp-title">Entrepreneurs' beliefs about success</span>
-    </button>
-  </div>
-  
-    <button class="enter mono" data-open="research" aria-label="Open Research">ENTER
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
-    </button>
-  </div>
-  <div class="section-full" data-view="wheel">
+<section class="track" id="research" style="--steps:3" data-view="wheel">
+  <div class="pin">
     <header class="section-head">
       <div class="head-stack">
         <div class="eyebrow mono">01 · FOUR FIELD EXPERIMENTS · 2019–PRESENT</div>
         <h2 class="display-2">Research</h2>
       </div>
-      <div class="view-toggle mono">
-        <button class="view-btn" data-view-set="list">LIST</button>
-        <span class="muted">/</span>
-        <button class="view-btn is-active" data-view-set="wheel">WHEEL</button>
+      <div class="head-side">
+        <div class="view-toggle mono">
+          <button class="view-btn" data-view-set="list">LIST</button>
+          <span class="muted">/</span>
+          <button class="view-btn is-active" data-view-set="wheel">WHEEL</button>
+        </div>
+        <div class="wheel-count mono" aria-hidden="true"><span class="count-cur">01</span> / 04</div>
       </div>
     </header>
 
     <div class="wheel-view">
       <div class="wheel-details">
         
-        <article class="wheel-detail " data-detail="0">
-          <div class="wd-eyebrow mono">WORKING PAPER · RANDOMIZED TRIAL · SIERRA LEONE · 2023</div>
-          <h3 class="wd-title">Candidate Entry Into Local Government</h3>
-          <div class="wd-authors">with Katherine Casey, Niccoló Meriggi, Abou Bakarr Kamara</div>
-          <p class="takeaway">How do you get high-integrity, representative citizens to stand for local office? We evaluate an intervention designed with government and civil-society partners ahead of Sierra Leone's 2023 local council elections.</p>
-          <div class="entry-links mono">
-            <a class="accent" href="/files/pap-candidate-entry.pdf">PAPER</a>
-            
-            
-          </div>
-          
-        </article>
-        <article class="wheel-detail is-current" data-detail="1">
+        <article class="wheel-detail is-current" data-detail="0">
           <div class="wd-eyebrow mono">JOB MARKET PAPER · FIELD EXPERIMENT · SIERRA LEONE · 2024</div>
           <h3 class="wd-title">Informal Taxation in Development Projects: The Role of Chiefs in Sierra Leone</h3>
           
           <p class="takeaway">When chiefs mobilize labor for public goods, <mark class="band">who actually pays?</mark> Randomized selection methods measure whether citizens take costly action to avoid the call — and whether the burden lands on the poor.</p>
+          
           <div class="entry-links mono">
             <a class="accent" href="/files/job-market-paper.pdf">PAPER</a>
             
@@ -132,11 +141,25 @@ taxing citizens in low-income states and whether this comes at the expense of re
 poor households.</p></div></div></div>
           </div>
         </article>
+        <article class="wheel-detail " data-detail="1">
+          <div class="wd-eyebrow mono">WORKING PAPER · RANDOMIZED TRIAL · SIERRA LEONE · 2023</div>
+          <h3 class="wd-title">Candidate Entry Into Local Government</h3>
+          <div class="wd-authors">with Katherine Casey, Niccoló Meriggi, Abou Bakarr Kamara</div>
+          <p class="takeaway">How do you get high-integrity, representative citizens to stand for local office? We evaluate an intervention designed with government and civil-society partners ahead of Sierra Leone's 2023 local council elections.</p>
+          
+          <div class="entry-links mono">
+            <a class="accent" href="/files/pap-candidate-entry.pdf">PAPER</a>
+            
+            
+          </div>
+          
+        </article>
         <article class="wheel-detail " data-detail="2">
           <div class="wd-eyebrow mono">IN DESIGN · INTERVENTION DESIGN WITH GOVERNMENT PARTNERS · ZAMBIA · 2024</div>
           <h3 class="wd-title">Improving the Use of Zambia's Constituency Development Fund (CDF)</h3>
           <div class="wd-authors">with Katherine Casey, Jeremy Bowles, Shahrukh Wani</div>
           <p class="takeaway">Zambia massively scaled its Constituency Development Fund to decentralize public infrastructure spending. We work with government partners on how the fund's design shapes what communities actually get.</p>
+          
           <div class="entry-links mono">
             
             
@@ -149,6 +172,7 @@ poor households.</p></div></div></div>
           <h3 class="wd-title">Too Much or Too Little Faith in Success? Experimental Evidence from Colombian Entrepreneurs</h3>
           <div class="wd-authors">with Réka Zempléni</div>
           <p class="takeaway">Most new businesses in Colombia fail. Do entrepreneurs enter because they misjudge their odds? We separate the roles of ambiguity preferences, confidence, and optimism.</p>
+          
           <div class="entry-links mono">
             <a class="accent" href="/files/entrepreneurship_zempleni_rod.pdf">PAPER</a>
             
@@ -157,18 +181,18 @@ poor households.</p></div></div></div>
           
         </article>
       </div>
-      <div class="wheel" data-initial="1" aria-label="Papers — scroll or use arrow keys to rotate">
+      <div class="wheel" data-initial="0" aria-label="Papers — scroll to rotate the wheel">
         <svg class="wheel-arc" fill="none" aria-hidden="true">
           <path d="" stroke="#669bbc" stroke-width="1" stroke-dasharray="3 6" opacity="0.55"/>
         </svg>
         
-        <button class="wheel-card" data-card="0" data-slug="candidate-entry">
-          <span class="wc-title">Candidate entry into local government</span>
-          <span class="wc-tag mono">WORKING PAPER</span>
-        </button>
-        <button class="wheel-card" data-card="1" data-slug="informal-taxation">
+        <button class="wheel-card" data-card="0" data-slug="informal-taxation">
           <span class="wc-title">Informal taxation &amp; chiefs</span>
           <span class="wc-tag mono">JOB MARKET PAPER</span>
+        </button>
+        <button class="wheel-card" data-card="1" data-slug="candidate-entry">
+          <span class="wc-title">Candidate entry into local government</span>
+          <span class="wc-tag mono">WORKING PAPER</span>
         </button>
         <button class="wheel-card" data-card="2" data-slug="zambia-cdf">
           <span class="wc-title">Zambia's Constituency Development Fund</span>
@@ -179,7 +203,7 @@ poor households.</p></div></div></div>
           <span class="wc-tag mono">WORKING PAPER</span>
         </button>
         <div class="wheel-hint mono">
-          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 2v11M4 9l4 4 4-4"/></svg>
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M8 2v11M4 9l4 4 4-4"/></svg>
           SCROLL ROTATES THE WHEEL
         </div>
       </div>
@@ -193,6 +217,7 @@ poor households.</p></div></div></div>
         <div class="entry-meta">Field experiment · Sierra Leone</div>
         <div class="entry-more">
           <p class="takeaway">When chiefs mobilize labor for public goods, <mark class="band">who actually pays?</mark> Randomized selection methods measure whether citizens take costly action to avoid the call — and whether the burden lands on the poor.</p>
+          
           <div class="entry-links mono">
             <a class="accent" href="/files/job-market-paper.pdf">PAPER</a>
             
@@ -215,6 +240,7 @@ poor households.</p></div></div></div>
         <div class="entry-meta">with Katherine Casey, Niccoló Meriggi, Abou Bakarr Kamara · Randomized trial · Sierra Leone</div>
         <div class="entry-more">
           <p class="takeaway">How do you get high-integrity, representative citizens to stand for local office? We evaluate an intervention designed with government and civil-society partners ahead of Sierra Leone's 2023 local council elections.</p>
+          
           <div class="entry-links mono">
             <a class="accent" href="/files/pap-candidate-entry.pdf">PAPER</a>
             
@@ -231,6 +257,7 @@ poor households.</p></div></div></div>
         <div class="entry-meta">with Katherine Casey, Jeremy Bowles, Shahrukh Wani · Intervention design with government partners · Zambia</div>
         <div class="entry-more">
           <p class="takeaway">Zambia massively scaled its Constituency Development Fund to decentralize public infrastructure spending. We work with government partners on how the fund's design shapes what communities actually get.</p>
+          
           <div class="entry-links mono">
             
             
@@ -247,6 +274,7 @@ poor households.</p></div></div></div>
         <div class="entry-meta">with Réka Zempléni · Lab-in-the-field · Colombia</div>
         <div class="entry-more">
           <p class="takeaway">Most new businesses in Colombia fail. Do entrepreneurs enter because they misjudge their odds? We separate the roles of ambiguity preferences, confidence, and optimism.</p>
+          
           <div class="entry-links mono">
             <a class="accent" href="/files/entrepreneurship_zempleni_rod.pdf">PAPER</a>
             
@@ -256,65 +284,39 @@ poor households.</p></div></div></div>
         </div>
       </div>
     </article></div>
-    
-<div class="colophon">
-  <div class="colophon-links">
-    <a class="accent" href="mailto:afrodrig@stanford.edu">EMAIL</a>
-    
-    
-    <a href="/files/cv.pdf">CV</a>
-  </div>
-  <div>UPDATED AUG 2026</div>
-</div>
   </div>
 </section>
 
-<section class="panel panel-section" id="panel-practice" data-key="practice">
-  
-  <button class="sliver-face" data-open="practice" aria-label="Open Practice">
-    <span class="mono">02</span><span class="sliver-title">Practice</span>
-  </button>
-  <div class="section-preview" data-open="practice">
-    <div class="eyebrow mono">02 · CASE STUDIES, ESSAYS &AMP; TOOLS</div>
-    <h2 class="display-2">Practice</h2>
-    <p class="section-desc">How impact measurement works in the field — and the tools I build doing it.</p>
-    <div class="preview-list">
-      <div class="preview-row">Scoring a portfolio of research bets</div><div class="preview-row">Evaluation that gets used</div><div class="preview-row">A theory of change you can test</div><div class="preview-row">Portfolio learning dashboard</div>
+<section class="practice-sec" id="practice">
+  <header class="section-head" data-reveal style="--i:0">
+    <div class="head-stack">
+      <div class="eyebrow mono">02 · CASE STUDIES, ESSAYS &AMP; TOOLS</div>
+      <h2 class="display-2">Practice</h2>
     </div>
+  </header>
+  <p class="section-intro" data-reveal style="--i:1">Impact measurement as it actually happens: real cases from portfolio work, and essays on <mark class="band">evaluation that gets used</mark> rather than performed.</p>
+  <div class="practice-note mono" data-reveal style="--i:2">FIRST PIECES IN PROGRESS — CASE STUDIES AND ESSAYS LAND HERE.</div>
+  <div class="artifacts-label eyebrow mono" data-reveal style="--i:3">ARTIFACTS</div>
+  <div class="lab-cards">
     
-    <button class="enter mono" data-open="practice" aria-label="Open Practice">ENTER
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
-    </button>
-  </div>
-  <div class="section-full">
-    <header class="section-head">
-      <div class="head-stack">
-        <div class="eyebrow mono">02 · CASE STUDIES, ESSAYS &AMP; TOOLS</div>
-        <h2 class="display-2">Practice</h2>
-      </div>
-    </header>
-    <p class="section-intro">Impact measurement as it actually happens: real cases from portfolio work, and essays on <mark class="band">evaluation that gets used</mark> rather than performed.</p>
-    <div class="practice-note mono">FIRST PIECES IN PROGRESS — CASE STUDIES AND ESSAYS LAND HERE.</div>
-    <div class="artifacts-label eyebrow mono">ARTIFACTS</div>
-    <div class="lab-cards">
-      
-      <article class="lab-card lab-focal">
-        <div class="lab-cover lab-cover-dashboard" aria-hidden="true"></div>
-        <div class="lab-body">
-          <div class="eyebrow mono">ARTIFACT · 01 · INTERACTIVE DASHBOARD</div>
-          <h3 class="lab-title">Portfolio learning dashboard</h3>
-          <p class="lab-pitch">Every investment in one live view: what each project proposed, what it has produced, and what that means for the next decision.</p>
-          
-          <div class="lab-keyline mono">what changed, project by project</div>
-          <div class="lab-foot">
-            <span class="mono muted">IN-PROGRESS</span>
-            <span class="mono muted">COMING SOON</span>
-          </div>
+    <article class="lab-card lab-focal" data-reveal style="--i:4">
+      <div class="lab-cover lab-cover-dashboard" aria-hidden="true"></div>
+      <div class="lab-body">
+        <div class="eyebrow mono">ARTIFACT · 01 · INTERACTIVE DASHBOARD</div>
+        <h3 class="lab-title">Portfolio learning dashboard</h3>
+        <p class="lab-pitch">Every investment in one live view: what each project proposed, what it has produced, and what that means for the next decision.</p>
+        
+        <div class="lab-keyline mono">what changed, project by project</div>
+        <div class="lab-foot">
+          <span class="mono muted">IN-PROGRESS</span>
+          <span class="mono muted">COMING SOON</span>
         </div>
-      </article>
-    </div>
-    
-<div class="colophon">
+      </div>
+    </article>
+  </div>
+</section>
+
+<footer class="colophon">
   <div class="colophon-links">
     <a class="accent" href="mailto:afrodrig@stanford.edu">EMAIL</a>
     
@@ -322,10 +324,9 @@ poor households.</p></div></div></div>
     <a href="/files/cv.pdf">CV</a>
   </div>
   <div>UPDATED AUG 2026</div>
-</div>
-  </div>
-</section>
+</footer>
 </main>
-<script src="assets/site.js?v=mt6k0sms"></script>
+</div>
+<script src="assets/site.js?v=mt6lk3rb"></script>
 </body>
 </html>

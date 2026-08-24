@@ -115,13 +115,12 @@ const papers = readdirSync(C('papers')).filter(f => f.endsWith('.md'))
     slug: f.replace(/\.md$/, '').replace(/^\d{4}-/, '') }))
   .sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
 
-// Wheel display order: the featured paper sits mid-arc (one neighbor above, the rest
-// below) so the circle reads immediately — see DESIGN.md §8.
+// Scroll sequence (Ledger Scroll, 2026-08-23): the featured paper LEADS the wheel —
+// it is focal when the Research track pins, and the rest trail below along the arc.
 const featured = papers.find(p => p.featured) ?? papers[0];
-const others = papers.filter(p => p !== featured);
-const wheelPapers = others.length ? [others[0], featured, ...others.slice(1)] : [featured];
-const wheelIndex = (p) => wheelPapers.indexOf(p);
+const wheelPapers = [featured, ...papers.filter(p => p !== featured)];
 const yearLabel = (p) => p.status === 'In design' ? 'now' : (p.year ?? '');
+const pad2 = (n) => String(n).padStart(2, '0');
 const labDir = C('lab');
 const labItems = readdirSync(labDir).filter(f => f.endsWith('.md') && f !== 'README.md')
   .map(f => parseDoc(join(labDir, f))).map(d => ({ ...d.meta, body: d.body }))
@@ -131,9 +130,15 @@ const STAMP = new Date().toLocaleDateString('en-US', { month: 'short', year: 'nu
 const V = Date.now().toString(36); // asset cache-buster, refreshed every build
 const authorsLine = (a) => (Array.isArray(a) && a.length) ? `with ${a.join(', ')}` : '';
 
+// Section descriptions shown in the hero index (structural copy, not bio content).
+const SECTION_DESC = {
+  research: 'Governance, public goods and beliefs — Sierra Leone, Zambia, Colombia.',
+  practice: 'How impact measurement works in the field — and the tools I build doing it.',
+};
+
 /* ---------- shared bits ---------- */
 const colophon = `
-<div class="colophon">
+<footer class="colophon">
   <div class="colophon-links">
     <a class="accent" href="mailto:${site.email}">EMAIL</a>
     ${site.links.scholar ? `<a href="${site.links.scholar}">SCHOLAR</a>` : ''}
@@ -141,27 +146,36 @@ const colophon = `
     <a href="${site.links.cv}">CV</a>
   </div>
   <div>UPDATED ${STAMP}</div>
-</div>`;
+</footer>`;
 
-// Every section panel carries its own sliver face (shown when another section is open).
-const sliverFace = (num, key, title) => `
-  <button class="sliver-face" data-open="${key}" aria-label="Open ${esc(title)}">
-    <span class="mono">${num}</span><span class="sliver-title">${esc(title)}</span>
-  </button>`;
-
-/* ---------- section renderers ---------- */
-function identityPanel() {
+/* ---------- identity spine (sticky left panel) ---------- */
+function identityAside() {
   return `
-<section class="panel panel-identity" id="panel-identity">
-  <div class="identity-full">
-    <div class="identity-head">
-      <h1 class="display">${esc(site.name).replace(' F. ', ' F.<br>')}</h1>
-      <img class="portrait" src="assets/avatar.jpg" alt="Portrait of ${esc(site.name)}">
-    </div>
+<aside class="identity" id="identity">
+  <div class="id-full">
+    <img class="portrait" src="assets/avatar.jpg" alt="Portrait of ${esc(site.name)}">
+    <h1 class="display id-name">${esc(site.name).replace(' F. ', ' F.<br>')}</h1>
     <div class="role">${esc(site.role)}</div>
-    <p class="statement">${band(bio.body, bio.meta.highlight)}</p>
-    <div class="nowline mono"><span class="nowrule"></span>NOW: ${esc(bio.meta.now).toUpperCase()}</div>
-    <div class="identity-foot">
+    <div class="id-loc mono">${esc(site.location).toUpperCase()}</div>
+  </div>
+  <div class="id-scrolled">
+    <div class="idc-head">
+      <span class="portrait-dock" aria-hidden="true"></span>
+      <a class="idc-name" href="#top" aria-label="Back to the top">${esc(site.name)}</a>
+    </div>
+    <nav class="id-index" aria-label="Sections">
+      ${site.sections.map((s, i) => `
+      <a class="idx" href="#${s.key}" data-idx="${s.key}">
+        <span class="idx-inner">
+          <span class="idx-num mono">0${i + 1}</span>
+          <span class="idx-title">${esc(s.title)}</span>
+          ${s.key === 'research' ? `<span class="idx-count mono" aria-hidden="true"><span class="idx-cur">01</span>/${pad2(wheelPapers.length)}</span>` : ''}
+        </span>
+      </a>`).join('')}
+    </nav>
+  </div>
+  <div class="id-foot">
+    <div class="id-contacts">
       <a class="accent" href="mailto:${site.email}">${esc(site.email)}</a>
       <div class="identity-links">
         ${site.links.scholar ? `<a href="${site.links.scholar}">Scholar</a>` : ''}
@@ -169,16 +183,41 @@ function identityPanel() {
         <a href="${site.links.cv}">CV (PDF)</a>
       </div>
     </div>
-  </div>
-  <div class="identity-rail">
-    <img src="assets/avatar.jpg" alt="" class="rail-photo">
-    <div class="rail-name">${esc(site.name)}</div>
-    <button class="rail-back" data-open="landing" aria-label="Back to landing">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 8H3M7 4L3 8l4 4"/></svg>
+    <button class="id-collapse" aria-label="Collapse the identity panel" aria-expanded="true">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg>
     </button>
   </div>
+  <div class="id-rail">
+    <img src="assets/avatar.jpg" alt="" class="rail-photo">
+    <div class="rail-name">${esc(site.name)}</div>
+    <button class="id-expand" aria-label="Expand the identity panel">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg>
+    </button>
+  </div>
+</aside>`;
+}
+
+/* ---------- hero: lede + the typographic index ---------- */
+function hero() {
+  return `
+<section class="hero" id="top">
+  <p class="lede">${band(bio.body, bio.meta.highlight)}</p>
+  <div class="nowline mono"><span class="nowrule"></span>NOW: ${esc(bio.meta.now).toUpperCase()}</div>
+  <nav class="hero-index" aria-label="Site sections">
+    ${site.sections.map((s, i) => `
+    <a class="hix" href="#${s.key}">
+      <span class="eyebrow mono">0${i + 1} · ${esc(s.eyebrow).toUpperCase()}</span>
+      <span class="hix-row">
+        <span class="hix-title">${esc(s.title)}</span>
+        <svg class="hix-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v17M5 13l7 7 7-7"/></svg>
+      </span>
+      <span class="hix-desc">${esc(SECTION_DESC[s.key] ?? '')}</span>
+    </a>`).join('')}
+  </nav>
 </section>`;
 }
+
+/* ---------- research: the pinned wheel track ---------- */
 
 // Optional full abstract, shown behind a mono toggle (grid-rows unfold — DESIGN.md §6 exception).
 const abstractBlock = (p) => !p.abstract ? '' : `
@@ -187,22 +226,16 @@ const abstractBlock = (p) => !p.abstract ? '' : `
             <div class="abstract-wrap"><div><div class="abstract-body">${mdLite(p.abstract)}</div></div></div>
           </div>`;
 
-const enterBtn = (key, label) => `
-    <button class="enter mono" data-open="${key}" aria-label="Open ${esc(label)}">ENTER
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h11M9 4l4 4-4 4"/></svg>
-    </button>`;
+const paperLinks = (p) => `
+          <div class="entry-links mono">
+            ${p.links?.pdf ? `<a class="accent" href="${p.links.pdf}">PAPER</a>` : ''}
+            ${p.links?.slides ? `<a href="${p.links.slides}">SLIDES</a>` : ''}
+            ${p.links?.data ? `<a href="${p.links.data}">DATA</a>` : ''}
+          </div>`;
 
-function researchPanel() {
-  const preview = `
-  <div class="preview-list preview-papers">
-    ${papers.map(p => `
-    <button class="preview-paper" data-focus-paper="${wheelIndex(p)}" aria-label="Open ${esc(p.title)} in the wheel">
-      <span class="pp-year mono">${esc(yearLabel(p))}</span>
-      <span class="pp-title">${esc(p.short ?? p.title.split(':')[0])}</span>
-    </button>`).join('')}
-  </div>
-  ${enterBtn('research', 'Research')}`;
-  const entries = papers.map((p, i) => `
+function researchSection() {
+  const eyebrow = site.sections.find(s => s.key === 'research').eyebrow;
+  const entries = wheelPapers.map((p, i) => `
     <article class="entry ${i === 0 ? 'entry-open' : ''}" data-paper="${i}">
       <div class="entry-year mono">${esc(yearLabel(p))}</div>
       <div class="entry-main">
@@ -210,54 +243,42 @@ function researchPanel() {
         <div class="entry-meta">${esc([authorsLine(p.authors), p.method, p.country].filter(Boolean).join(' · '))}</div>
         <div class="entry-more">
           <p class="takeaway">${band(p.takeaway, p.highlight)}</p>
-          <div class="entry-links mono">
-            ${p.links?.pdf ? `<a class="accent" href="${p.links.pdf}">PAPER</a>` : ''}
-            ${p.links?.slides ? `<a href="${p.links.slides}">SLIDES</a>` : ''}
-            ${p.links?.data ? `<a href="${p.links.data}">DATA</a>` : ''}
-          </div>
+          ${paperLinks(p)}
           ${abstractBlock(p)}
         </div>
       </div>
     </article>`).join('');
   return `
-<section class="panel panel-section" id="panel-research" data-key="research">
-  ${sliverFace('01', 'research', 'Research')}
-  <div class="section-preview" data-open="research">
-    <div class="eyebrow mono">01 · ${esc(site.sections.find(s => s.key === 'research').eyebrow).toUpperCase()}</div>
-    <h2 class="display-2">Research</h2>
-    <p class="section-desc">Governance, public goods and beliefs — Sierra Leone, Zambia, Colombia.</p>
-    ${preview}
-  </div>
-  <div class="section-full" data-view="wheel">
+<section class="track" id="research" style="--steps:${wheelPapers.length - 1}" data-view="wheel">
+  <div class="pin">
     <header class="section-head">
       <div class="head-stack">
-        <div class="eyebrow mono">01 · ${esc(site.sections.find(s => s.key === 'research').eyebrow).toUpperCase()} · 2019–PRESENT</div>
+        <div class="eyebrow mono">01 · ${esc(eyebrow).toUpperCase()} · 2019–PRESENT</div>
         <h2 class="display-2">Research</h2>
       </div>
-      <div class="view-toggle mono">
-        <button class="view-btn" data-view-set="list">LIST</button>
-        <span class="muted">/</span>
-        <button class="view-btn is-active" data-view-set="wheel">WHEEL</button>
+      <div class="head-side">
+        <div class="view-toggle mono">
+          <button class="view-btn" data-view-set="list">LIST</button>
+          <span class="muted">/</span>
+          <button class="view-btn is-active" data-view-set="wheel">WHEEL</button>
+        </div>
+        <div class="wheel-count mono" aria-hidden="true"><span class="count-cur">01</span> / ${pad2(wheelPapers.length)}</div>
       </div>
     </header>
 
     <div class="wheel-view">
       <div class="wheel-details">
         ${wheelPapers.map((p, i) => `
-        <article class="wheel-detail ${p === featured ? 'is-current' : ''}" data-detail="${i}">
+        <article class="wheel-detail ${i === 0 ? 'is-current' : ''}" data-detail="${i}">
           <div class="wd-eyebrow mono">${esc([p.status, p.method, p.country, p.year].filter(Boolean).join(' · ')).toUpperCase()}</div>
           <h3 class="wd-title">${esc(p.title)}</h3>
           ${authorsLine(p.authors) ? `<div class="wd-authors">${esc(authorsLine(p.authors))}</div>` : ''}
           <p class="takeaway">${band(p.takeaway, p.highlight)}</p>
-          <div class="entry-links mono">
-            ${p.links?.pdf ? `<a class="accent" href="${p.links.pdf}">PAPER</a>` : ''}
-            ${p.links?.slides ? `<a href="${p.links.slides}">SLIDES</a>` : ''}
-            ${p.links?.data ? `<a href="${p.links.data}">DATA</a>` : ''}
-          </div>
+          ${paperLinks(p)}
           ${abstractBlock(p)}
         </article>`).join('')}
       </div>
-      <div class="wheel" data-initial="${wheelIndex(featured)}" aria-label="Papers — scroll or use arrow keys to rotate">
+      <div class="wheel" data-initial="0" aria-label="Papers — scroll to rotate the wheel">
         <svg class="wheel-arc" fill="none" aria-hidden="true">
           <path d="" stroke="#669bbc" stroke-width="1" stroke-dasharray="3 6" opacity="0.55"/>
         </svg>
@@ -267,66 +288,51 @@ function researchPanel() {
           <span class="wc-tag mono">${esc(p.status ?? '').toUpperCase()}</span>
         </button>`).join('')}
         <div class="wheel-hint mono">
-          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 2v11M4 9l4 4 4-4"/></svg>
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M8 2v11M4 9l4 4 4-4"/></svg>
           SCROLL ROTATES THE WHEEL
         </div>
       </div>
     </div>
 
     <div class="entry-list">${entries}</div>
-    ${colophon}
   </div>
 </section>`;
 }
 
-function practicePanel() {
-  // Practice absorbed The Lab (2026-08-23): case studies + essays + artifact cards.
+/* ---------- practice (absorbed The Lab 2026-08-23) ---------- */
+function practiceSection() {
   const items = practice.meta.items ?? [];
   const cards = labItems.length ? labItems : [
     { title: 'Portfolio learning dashboard', kind: 'interactive dashboard', status: 'in-progress',
       pitch: 'Every investment in one live view: what each project proposed, what it has produced, and what that means for the next decision.', keyline: 'what changed, project by project', link: '' },
   ];
-  const previewRows = [...items, ...cards.map(c => c.title)].slice(0, 4);
   return `
-<section class="panel panel-section" id="panel-practice" data-key="practice">
-  ${sliverFace('02', 'practice', 'Practice')}
-  <div class="section-preview" data-open="practice">
-    <div class="eyebrow mono">02 · ${esc(practice.meta.eyebrow).toUpperCase()}</div>
-    <h2 class="display-2">Practice</h2>
-    <p class="section-desc">How impact measurement works in the field — and the tools I build doing it.</p>
-    <div class="preview-list">
-      ${previewRows.map(it => `<div class="preview-row">${esc(it)}</div>`).join('')}
+<section class="practice-sec" id="practice">
+  <header class="section-head" data-reveal style="--i:0">
+    <div class="head-stack">
+      <div class="eyebrow mono">02 · ${esc(practice.meta.eyebrow).toUpperCase()}</div>
+      <h2 class="display-2">Practice</h2>
     </div>
-    ${enterBtn('practice', 'Practice')}
-  </div>
-  <div class="section-full">
-    <header class="section-head">
-      <div class="head-stack">
-        <div class="eyebrow mono">02 · ${esc(practice.meta.eyebrow).toUpperCase()}</div>
-        <h2 class="display-2">Practice</h2>
-      </div>
-    </header>
-    <p class="section-intro">${band(practice.meta.intro, practice.meta.highlight)}</p>
-    <div class="practice-note mono">FIRST PIECES IN PROGRESS — CASE STUDIES AND ESSAYS LAND HERE.</div>
-    <div class="artifacts-label eyebrow mono">ARTIFACTS</div>
-    <div class="lab-cards">
-      ${cards.map((c, i) => `
-      <article class="lab-card ${i === 0 ? 'lab-focal' : ''}">
-        <div class="lab-cover lab-cover-${(c.kind ?? 'tool').split(' ').pop()}" aria-hidden="true"></div>
-        <div class="lab-body">
-          <div class="eyebrow mono">ARTIFACT · 0${i + 1} · ${esc(c.kind ?? '').toUpperCase()}</div>
-          <h3 class="lab-title">${esc(c.title)}</h3>
-          <p class="lab-pitch">${esc(c.pitch ?? c.body ?? '')}</p>
-          ${/* no band here: the Practice intro already carries this screen's one marigold band */''}
-          ${c.keyline ? `<div class="lab-keyline mono">${esc(c.keyline)}</div>` : ''}
-          <div class="lab-foot">
-            <span class="mono muted">${esc(c.status ?? '').toUpperCase()}</span>
-            ${c.link ? `<a class="accent mono" href="${c.link}">OPEN &nearr;</a>` : `<span class="mono muted">COMING SOON</span>`}
-          </div>
+  </header>
+  <p class="section-intro" data-reveal style="--i:1">${band(practice.meta.intro, practice.meta.highlight)}</p>
+  <div class="practice-note mono" data-reveal style="--i:2">FIRST PIECES IN PROGRESS — CASE STUDIES AND ESSAYS LAND HERE.</div>
+  <div class="artifacts-label eyebrow mono" data-reveal style="--i:3">ARTIFACTS</div>
+  <div class="lab-cards">
+    ${cards.map((c, i) => `
+    <article class="lab-card ${i === 0 ? 'lab-focal' : ''}" data-reveal style="--i:${4 + i}">
+      <div class="lab-cover lab-cover-${(c.kind ?? 'tool').split(' ').pop()}" aria-hidden="true"></div>
+      <div class="lab-body">
+        <div class="eyebrow mono">ARTIFACT · 0${i + 1} · ${esc(c.kind ?? '').toUpperCase()}</div>
+        <h3 class="lab-title">${esc(c.title)}</h3>
+        <p class="lab-pitch">${esc(c.pitch ?? c.body ?? '')}</p>
+        ${/* no band here: the Practice intro already carries this screen's one marigold band */''}
+        ${c.keyline ? `<div class="lab-keyline mono">${esc(c.keyline)}</div>` : ''}
+        <div class="lab-foot">
+          <span class="mono muted">${esc(c.status ?? '').toUpperCase()}</span>
+          ${c.link ? `<a class="accent mono" href="${c.link}">OPEN &nearr;</a>` : `<span class="mono muted">COMING SOON</span>`}
         </div>
-      </article>`).join('')}
-    </div>
-    ${colophon}
+      </div>
+    </article>`).join('')}
   </div>
 </section>`;
 }
@@ -364,11 +370,15 @@ const html = `<!doctype html>
 <script type="application/ld+json">${jsonLd}</script>
 </head>
 <body>
-<main class="stage" data-state="landing">
-${identityPanel()}
-${researchPanel()}
-${practicePanel()}
+<div class="frame" id="frame">
+${identityAside()}
+<main class="flow">
+${hero()}
+${researchSection()}
+${practiceSection()}
+${colophon}
 </main>
+</div>
 <script src="assets/site.js?v=${V}"></script>
 </body>
 </html>`;
