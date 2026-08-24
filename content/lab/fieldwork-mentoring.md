@@ -2,7 +2,7 @@
 title: "Field research at every scale"
 kind: "talks & mentoring"
 status: "ongoing"
-pitch: "Supporting graduate students through experimental field research at every scale — from large partnerships with government entities to smaller lab-in-the-field data collection — and what each approach means for the kind of knowledge it can produce."
+pitch: "Supporting graduate students through experimental field research at every scale — from large partnerships with government entities to smaller lab-in-the-field data collection — and what each approach means for the kind of knowledge it can produce. Guest speaker for Stanford courses POLISCI 150C/355C and EDUC 318."
 keyline: ""
 link: "https://kingcenter.stanford.edu/events/student-event/research-roadmap-mastering-fieldwork-essentials"
 repo: ""
