@@ -81,23 +81,25 @@ mark.band {
   background: var(--color-panel);
   padding: 24px 0; display: flex; flex-direction: column; align-items: center; gap: 20px;
   width: 100%; cursor: pointer;
-  transition: background var(--dur-micro) var(--ease-out);
+  transition: background var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
 }
-/* hover = ink flood, shared with the section slivers: inked = "you can go here" */
-.identity-rail:hover, .identity-rail:focus-visible { background: var(--color-ink); }
+/* hover = accent edge, shared with the section slivers: red bar + subtle darkening */
+.identity-rail:hover, .identity-rail:focus-visible {
+  background: var(--color-rule);
+  box-shadow: inset 3px 0 0 var(--color-accent);
+}
 .rail-photo { width: 40px; height: 40px; object-fit: cover; object-position: 50% 22%; border-radius: 50%; border: 1px solid var(--color-rule-strong); }
-.identity-rail:hover .rail-photo { border-color: var(--color-muted); }
 .rail-tag { font-size: 10px; letter-spacing: 0.14em; color: var(--color-muted); }
-.identity-rail:hover .rail-tag { color: var(--color-muted-inverse); }
+.identity-rail:hover .rail-tag, .identity-rail:focus-visible .rail-tag { color: var(--color-accent); }
 .rail-name { font-family: var(--font-display); font-size: 20px; writing-mode: vertical-rl; color: var(--color-muted-2); }
-.identity-rail:hover .rail-name { color: var(--color-ink-inverse); }
+.identity-rail:hover .rail-name, .identity-rail:focus-visible .rail-name { color: var(--color-ink); }
 .rail-back {
   margin-top: auto; width: 40px; height: 40px; flex: none;
   border: 1px solid var(--color-rule-strong);
   display: flex; align-items: center; justify-content: center; color: var(--color-accent);
-  transition: border-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
+  transition: border-color var(--dur-micro) var(--ease-out);
 }
-.identity-rail:hover .rail-back { border-color: var(--color-muted); color: var(--color-ink-inverse); }
+.identity-rail:hover .rail-back, .identity-rail:focus-visible .rail-back { border-color: var(--color-accent); }
 
 /* ---------- section previews (landing) ---------- */
 .section-preview { padding: 44px 32px 36px 36px; display: flex; flex-direction: column; cursor: pointer; text-align: left; }
@@ -165,14 +167,16 @@ mark.band {
 /* ---------- sliver faces ---------- */
 .sliver-face {
   display: flex; flex-direction: column; align-items: center; padding: 36px 0 28px 0; width: 100%;
-  transition: background var(--dur-micro) var(--ease-out);
+  transition: background var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
 }
 .sliver-face .mono { font-size: 10.5px; color: var(--color-muted); }
 .sliver-title { font-family: var(--font-display); font-size: 24px; writing-mode: vertical-rl; margin-top: 16px; }
-/* same ink flood as the identity rail — one hover language for all vertical bars */
-.sliver-face:hover, .sliver-face:focus-visible { background: var(--color-ink); }
-.sliver-face:hover .mono, .sliver-face:focus-visible .mono { color: var(--color-muted-inverse); }
-.sliver-face:hover .sliver-title, .sliver-face:focus-visible .sliver-title { color: var(--color-ink-inverse); }
+/* same accent edge as the identity rail — one hover language for all vertical bars */
+.sliver-face:hover, .sliver-face:focus-visible {
+  background: var(--color-panel);
+  box-shadow: inset 3px 0 0 var(--color-accent);
+}
+.sliver-face:hover .mono, .sliver-face:focus-visible .mono { color: var(--color-accent); }
 
 /* ---------- open sections ---------- */
 .section-full { padding: 44px 52px 0 56px; display: flex; flex-direction: column; overflow-y: auto; }
