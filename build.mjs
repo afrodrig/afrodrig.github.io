@@ -196,12 +196,44 @@ function recordNav() {
 </header>`;
 }
 
-/* ---------- about: the record opens with the bridge statement ---------- */
+/* ---------- about: a full page — statement on top, vitae ledger at the bottom ----------
+   The vitae is DATA: cv.yml (current position, education) + the papers' own countries.
+   Nothing here is written by hand — edit cv.yml / papers to change it. */
 function aboutSection() {
+  const currently = (cv.positions ?? [])[0] ?? {};
+  const phd = (cv.education ?? [])[0] ?? {};
+  const prior = (cv.education ?? []).slice(1);
+  // "M.A. & B.A." from the remaining entries (they share one institution)
+  const priorLine = prior.length
+    ? `${prior.map(e => String(e.degree).split(',')[0]).join(' & ')} — ${prior[0].org}`
+    : '';
+  const countries = [...new Set(papers.map(p => p.country).filter(Boolean))];
+  const researchEyebrow = site.sections.find(s => s.key === 'research')?.eyebrow ?? '';
   return `
 <section class="about" id="about">
+  <div class="eyebrow mono">00 · ABOUT</div>
   <p class="lede">${band(bio.body, bio.meta.highlight)}</p>
   <div class="nowline mono"><span class="nowrule"></span>NOW: ${esc(bio.meta.now).toUpperCase()}</div>
+  <div class="vitae">
+    <div class="vita">
+      <div class="eyebrow mono">CURRENTLY</div>
+      <p class="vita-line">${esc(currently.role)}</p>
+      <p class="vita-line vita-sub">${esc(currently.org)}</p>
+      <div class="vita-years mono">${esc(currently.years)}</div>
+    </div>
+    <div class="vita">
+      <div class="eyebrow mono">EDUCATION</div>
+      <p class="vita-line">${esc(phd.degree)} — ${esc(phd.org)}</p>
+      ${priorLine ? `<p class="vita-line vita-sub">${esc(priorLine)}</p>` : ''}
+      <div class="vita-years mono">${esc(phd.years)}</div>
+    </div>
+    <div class="vita">
+      <div class="eyebrow mono">FIELDWORK</div>
+      <p class="vita-line">${esc(countries.join(' · '))}</p>
+      <p class="vita-line vita-sub">${esc(researchEyebrow)}</p>
+      <div class="vita-years mono">2019—</div>
+    </div>
+  </div>
 </section>`;
 }
 

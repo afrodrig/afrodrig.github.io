@@ -117,15 +117,35 @@ mark.band {
 /* sticky-nav offset for native anchor jumps and the pinned track (gate 56) */
 .about, .track, .practice-sec { scroll-margin-top: var(--nav-h); }
 
-/* ---------- about: the record opens with the lede ---------- */
-.about { padding: 56px 64px 88px; max-width: 900px; }
+/* ---------- about: a full page of the record ----------
+   Fills the viewport below the strip (nothing peeks from Research on landing).
+   Composition: statement anchored top, vitae ledger anchored bottom — the space
+   between is deliberate, a title page, not a dead middle. */
+.about {
+  padding: 56px 64px 56px; max-width: 980px;
+  min-height: calc(100vh - var(--nav-h)); min-height: calc(100dvh - var(--nav-h));
+  display: flex; flex-direction: column; align-items: flex-start;
+}
 .lede {
   font-family: var(--font-display);
   font-size: clamp(1.4rem, 1.9vw, 1.75rem); line-height: 1.45;
   color: var(--color-ink); max-width: 48ch;
+  margin-top: var(--s-16);
 }
-.nowline { margin-top: var(--s-24); display: flex; align-items: center; gap: 12px; font-size: 11px; letter-spacing: 0.1em; color: var(--color-accent); line-height: 1; }
+.nowline { margin-top: var(--s-24); margin-bottom: var(--s-40); display: flex; align-items: center; gap: 12px; font-size: 11px; letter-spacing: 0.1em; color: var(--color-accent); line-height: 1; }
 .nowrule { width: 22px; height: 1px; background: var(--color-accent); flex: none; }
+
+/* the vitae ledger: three ruled columns of facts, rendered from cv.yml + papers */
+.vitae {
+  margin-top: auto; align-self: stretch;
+  border-top: 1px solid var(--color-rule);
+  padding-top: var(--s-24);
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-40);
+}
+.vita-line { margin-top: 10px; font-size: 14px; line-height: 1.5; color: var(--color-ink-body); }
+.vita-line + .vita-line { margin-top: 4px; }
+.vita-sub { color: var(--color-muted-2); }
+.vita-years { margin-top: 10px; font-size: 10.5px; letter-spacing: 0.1em; color: var(--color-muted); font-variant-numeric: tabular-nums; }
 
 /* ---------- shared section chrome ---------- */
 .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-24); flex-wrap: wrap; }
@@ -235,9 +255,9 @@ mark.band {
    Content lives ONLY in the boxes (2026-08-23): one horizontally scrolled rail of
    uniform cards — pieces and artifacts alike. Hairline-square prev/next + mono
    counter; the rail itself scroll-snaps and hides its scrollbar. */
-.practice-sec { padding: 96px 64px 64px; }
+.practice-sec { padding: 48px 64px 64px; }
 .shelf-controls {
-  margin-top: var(--s-40); padding-top: var(--s-12);
+  margin-top: var(--s-24); padding-top: var(--s-12);
   border-top: 1px solid var(--color-rule);
   display: flex; align-items: center; justify-content: space-between;
 }
@@ -269,7 +289,7 @@ mark.band {
   display: flex; flex-direction: column;
   background: var(--color-card); border: 1px solid var(--color-rule);
 }
-.lab-cover { flex: none; height: 200px; background: var(--color-ink); position: relative; overflow: hidden; }
+.lab-cover { flex: none; height: 180px; background: var(--color-ink); position: relative; overflow: hidden; }
 /* original CSS art per kind (never borrowed illustration) — all ride the same ledger grid */
 .lab-cover::after {
   content: ""; position: absolute; inset: 0;
@@ -341,8 +361,10 @@ html:not(.js) [data-reveal] { opacity: 1; transform: none; }
 .js .id-full > :nth-child(2) { animation-delay: 80ms; }
 .js .id-full > :nth-child(3) { animation-delay: 160ms; }
 .js .id-full > :nth-child(4) { animation-delay: 240ms; }
-.js .about > :nth-child(1) { animation-delay: 140ms; }
-.js .about > :nth-child(2) { animation-delay: 240ms; }
+.js .about > :nth-child(1) { animation-delay: 120ms; }
+.js .about > :nth-child(2) { animation-delay: 200ms; }
+.js .about > :nth-child(3) { animation-delay: 280ms; }
+.js .about > :nth-child(4) { animation-delay: 360ms; }
 
 /* ---------- no-JS: everything reads as a plain vertical page ---------- */
 html:not(.js) .track { height: auto; }
@@ -375,7 +397,8 @@ html:not(.js) .id-collapse { display: none; }
   .record-nav { gap: 28px; height: 56px; }
   .rnav-title { font-size: 17px; }
   .rnav.is-active::before { display: none; }
-  .about { padding: 40px 24px 64px; }
+  .about { padding: 40px 24px 64px; min-height: 0; display: block; }
+  .vitae { margin-top: var(--s-40); grid-template-columns: 1fr; gap: var(--s-24); }
   .js .about > * { animation: none; opacity: 1; transform: none; }
   .track { height: auto; }
   .pin { position: static; height: auto; min-height: 0; overflow: visible; padding: 48px 24px 56px; }

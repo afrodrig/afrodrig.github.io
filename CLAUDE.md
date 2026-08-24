@@ -18,7 +18,9 @@ don't extend it, don't imitate it.
 ```
 content/
   site.yml              # name, role, email, external links, section order
-  bio.md                # landing identity panel: bridge statement + NOW line
+  bio.md                # About page lede: bridge statement + NOW line
+  cv.yml                # positions[0] + education feed the About vitae ledger;
+                        # FIELDWORK derives from papers' country fields
   practice.md           # Practice section copy
   papers/*.md           # one file per paper (front-matter schema inside each file)
   lab/*.md              # one file per artifact (dashboards, frameworks, datasets) —

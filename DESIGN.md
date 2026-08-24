@@ -26,11 +26,12 @@ too much"). One vertical page: a **sticky identity spine** on the left, the **re
 spine; the record carries its own **section strip** (a column header, not a site nav —
 see below). Generic wordmark-plus-links top navs remain banned (§9).
 
-**Sections**: Research (01), Practice (02). Practice absorbs the former Lab — case studies,
-essays, and shareable artifacts live in one section (decided 2026-08-23; the `content/lab/`
-folder still feeds the artifact cards). There is NO About/CV pane — the spine
-already carries the portrait, role, contact, and the CV (PDF) link (decided 2026-08-22; the
-web-CV content in `content/cv.yml` is parked for future use).
+**Sections**: About (00), Research (01), Practice (02). Practice absorbs the former
+Lab — case studies, essays, and shareable artifacts live in one section (decided
+2026-08-23; the `content/lab/` folder still feeds the shelf boxes). There is NO
+separate CV page — the spine carries portrait, role, contact, and the CV (PDF) link,
+and `content/cv.yml` feeds the About page's vitae ledger (positions + education;
+the rest of the web-CV data stays parked).
 
 **The spine** (left column, `clamp(300px, 32vw, 430px)`, tinted `--color-panel`,
 `position: sticky; top: 0; height: 100dvh`) — **STATIC** (amended 2026-08-23 evening:
@@ -58,9 +59,15 @@ Andrés cut the scroll-shrink morph; the photo stays prominent at every scroll d
   (§7 menu-row convention). Hover is color-only — **nothing moves on targets you're
   about to click** (principle merged from main d0c41fe). Every entry returns to its
   section's START, from anywhere. Static (non-sticky) on mobile.
-- **ABOUT** — the bridge statement as a display-serif lede (one marigold-banded
-  phrase) and the `NOW:` line in accent mono. Deliberately short; the pinned Research
-  head peeking below it is the scroll invitation (no dead middle).
+- **ABOUT** — a FULL PAGE of the record (amended 2026-08-23 late: "feels like a
+  separate page" — nothing peeks from Research on landing). It fills the viewport
+  below the strip (`min-height: 100dvh − --nav-h`), composed as a title page:
+  `00 · ABOUT` eyebrow, the bridge statement as a display-serif lede (one
+  marigold-banded phrase) and the `NOW:` line anchored at the top; the **vitae
+  ledger** anchored at the bottom — a ruled three-column strip of facts rendered
+  from DATA (never hand-written copy): CURRENTLY (cv.yml positions[0]),
+  EDUCATION (cv.yml education), FIELDWORK (the papers' own `country` fields +
+  the Research eyebrow). The space between the two masses is deliberate.
 - **RESEARCH** — a pinned track: the section wrapper is `100vh + (papers − 1) × 55vh`
   tall; its inner pane sticks at `top: 0` while page scroll rotates the Paper Wheel
   card-by-card (§8). Header keeps the stacked eyebrow + serif title left and the
@@ -89,9 +96,10 @@ all work; scrolling updates the hash (replaceState) so the current paper is alwa
 shareable. ESC returns to the top.
 
 **Practice section anatomy** (re-amended 2026-08-23 late — content lives ONLY in the
-boxes): intro line (one banded phrase allowed), then **the shelf** — a horizontal
-scroll rail (`overflow-x: auto`, snap-start, hidden scrollbar) of uniform boxes,
-~400px wide, equal height. One box per piece, whatever its stream: `practice.md` items
+boxes, and the section is sized as ONE PAGE: 48px top padding, 180px covers, so
+head → shelf fits a laptop fold after the snap): intro line (one banded phrase
+allowed), then **the shelf** — a horizontal scroll rail (`overflow-x: auto`,
+snap-start, hidden scrollbar) of uniform boxes, ~400px wide, equal height. One box per piece, whatever its stream: `practice.md` items
 and `content/lab/` artifacts render identically. Controls row above the rail:
 hairline top rule, mono `01 / 04` counter left, hairline-square prev/next buttons
 right (disabled at the ends; the whole row hides when everything fits). Box anatomy,

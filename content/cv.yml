@@ -1,4 +1,5 @@
-# Web CV — rendered as the About section's always-current vita.
+# Web CV data. positions[0] + education feed the About page's VITAE LEDGER
+# (CURRENTLY / EDUCATION columns); the rest is parked for future use.
 # Populated from files/cv.pdf (job-market-era). Edit here to update the site; keep the PDF for long form.
 
 positions:
