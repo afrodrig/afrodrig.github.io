@@ -1,27 +1,44 @@
 ---
 title: "Candidate Entry Into Local Government"
 short: "Candidate entry into local government"   # TODO(update): display title for landing rows + wheel cards
-keywords: ["local elections", "candidate selection", "governance"]   # TODO(update): shown under the title on the landing
-authors: ["Katherine Casey", "Niccoló Meriggi", "Abou Bakarr Kamara"]
-# NOTE: cv.pdf lists Casey, Meriggi, Kamara; the OLD site page also listed Jeremy Bowles.
-# TODO(confirm): final author set. A blog post about the project exists (linked in cv.pdf).
-year: 2023
-status: "Working paper"        # TODO(update)
+keywords: ["candidate quality", "political selection", "party gatekeeping"]   # TODO(update): shown under the title on the landing
+authors: [Katherine Casey, Abou Bakarr Kamara, Niccolò Meriggi]   # order per cv.pdf
+year: 2026
+status: "Registered report · JDE"   # conditionally accepted as a pre-results registered report, Journal of Development Economics
 country: "Sierra Leone"
-method: "Randomized trial"
+method: "Field experiment"
 takeaway: >
-  How do you get high-integrity, representative citizens to stand for local office?
-  We evaluate an intervention designed with government and civil-society partners ahead
-  of Sierra Leone's 2023 local council elections.
-highlight: ""
+  Are there better potential candidates for local office — and will parties run them?
+  Community nominations plus technocratic screening surface higher-quality, broadly
+  supported people, and a quarter of top nominees enter politics. The bottleneck isn't
+  supply: party gatekeepers still favor their own incumbents.
+highlight: "The bottleneck isn't supply"   # phrase eligible for the marigold band (must appear in takeaway)
 links:
-  pdf: "/files/pap-candidate-entry.pdf"   # TODO(update)
+  pdf: ""       # intentionally unlinked for now (2026-08-24) — supplemental links only
   slides: ""
   bibtex: ""
   data: ""
+extra_links:
+  - label: "IGC blog"
+    url: "https://www.theigc.org/blogs/gender-equality/improving-womens-political-representation-insights-sierra-leone"
 figure:
-  src: ""
+  src: ""     # TODO(update): key-figure asset for the Wheel unfold (SVG/PNG)
   alt: ""
-featured: false
-order: 2
+featured: true    # featured = the focal card when the Wheel is at rest (strongest status per CV)
+order: 1
 ---
+
+The competence of public officials affects state performance and economic growth, yet
+building this capacity is difficult: it requires protocols to identify more capable,
+representative individuals; their willingness to run for office; and party interest in
+supporting their candidacies. We evaluate an experiment designed to parse these problems
+of identification, entry and gatekeeping in advance of the 2023 local elections in Sierra
+Leone. A combination of community nominations and technocratic screening identifies
+individuals who are substantially higher quality and enjoy broader popular support than
+both incumbents and status quo aspirants. One quarter of top nominees formally enter
+politics, positively self-selected on quality, and their entry improves the maximum
+quality observed in candidate applicant pools. Party gatekeepers, however, are not more
+likely to select these capable, popular nominees and instead favor their own re-running
+incumbents. Results suggest that the challenge for political renewal is less about supply
+than demand in this context: there are indeed better potential candidates out there who
+are willing to run, but institutional party incentives work against selecting them.

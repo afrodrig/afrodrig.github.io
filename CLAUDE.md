@@ -60,7 +60,12 @@ content/
   papers as a clean clickable list (papers carry a `short:` display title), per-paper
   deep links (`#/research/<slug>`), abstract toggles, favicon + og/JSON-LD meta,
   build-versioned asset URLs.
-- TODO: content pass (bio and paper metadata are seeded from the OLD site and need
-  Andrés's updates — grep for `TODO(update)`; Scholar/GitHub URLs empty in site.yml);
-  artifact items are placeholders pending real deliverables; key-figure data per paper
-  (schema wired, no fabricated numbers).
+- 2026-08-24 content pass from cv.pdf: five papers in CV order (candidate entry
+  featured, registered report at JDE; limits-exposure added), real abstracts behind
+  toggles, supplemental IGC/SIL links via `extra_links:`, paper PDFs intentionally
+  UNLINKED and left untracked in files/ (drafts marked do-not-disseminate — Andrés
+  decides when to host them); first real Practice card (AI-assisted grant review);
+  bio/role/NOW rebuilt around scholar + SIL dual identity; GitHub/LinkedIn links live.
+- TODO: Scholar URL; tune `TODO(update)` seeds (keywords, short titles, takeaways,
+  bio voice); practice case-study/essay teasers still placeholders; key-figure data
+  per paper (schema wired, no fabricated numbers).

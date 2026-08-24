@@ -115,11 +115,12 @@ const papers = readdirSync(C('papers')).filter(f => f.endsWith('.md'))
     slug: f.replace(/\.md$/, '').replace(/^\d{4}-/, '') }))
   .sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
 
-// Wheel display order: the featured paper sits mid-arc (one neighbor above, the rest
-// below) so the circle reads immediately — see DESIGN.md §8.
+// Wheel display order: the featured paper sits mid-arc (neighbors split evenly above
+// and below) so the circle reads immediately — see DESIGN.md §8.
 const featured = papers.find(p => p.featured) ?? papers[0];
 const others = papers.filter(p => p !== featured);
-const wheelPapers = others.length ? [others[0], featured, ...others.slice(1)] : [featured];
+const half = Math.floor(others.length / 2);
+const wheelPapers = [...others.slice(0, half), featured, ...others.slice(half)];
 const wheelIndex = (p) => wheelPapers.indexOf(p);
 const yearLabel = (p) => p.status === 'In design' ? 'now' : (p.year ?? '');
 const labDir = C('lab');
@@ -138,6 +139,7 @@ const colophon = `
     <a class="accent" href="mailto:${site.email}">EMAIL</a>
     ${site.links.scholar ? `<a href="${site.links.scholar}">SCHOLAR</a>` : ''}
     ${site.links.github ? `<a href="${site.links.github}">GITHUB</a>` : ''}
+    ${site.links.linkedin ? `<a href="${site.links.linkedin}">LINKEDIN</a>` : ''}
     <a href="${site.links.cv}">CV</a>
   </div>
   <div>UPDATED ${STAMP}</div>
@@ -164,6 +166,7 @@ function identityPanel() {
       <div class="identity-links">
         ${site.links.scholar ? `<a href="${site.links.scholar}">Scholar</a>` : ''}
         ${site.links.github ? `<a href="${site.links.github}">GitHub</a>` : ''}
+        ${site.links.linkedin ? `<a href="${site.links.linkedin}">LinkedIn</a>` : ''}
         <a href="${site.links.cv}">CV (PDF)</a>
       </div>
     </div>
@@ -178,6 +181,15 @@ function identityPanel() {
   </button>
 </section>`;
 }
+
+// Mono links row: primary links + supplemental links (extra_links: [{label, url}]).
+const linksRow = (p) => `
+          <div class="entry-links mono">
+            ${p.links?.pdf ? `<a class="accent" href="${p.links.pdf}">PAPER</a>` : ''}
+            ${p.links?.slides ? `<a href="${p.links.slides}">SLIDES</a>` : ''}
+            ${p.links?.data ? `<a href="${p.links.data}">DATA</a>` : ''}
+            ${(p.extra_links ?? []).map(l => `<a href="${l.url}">${esc(l.label).toUpperCase()}</a>`).join('')}
+          </div>`;
 
 // Optional full abstract, shown behind a mono toggle (grid-rows unfold — DESIGN.md §6 exception).
 const abstractBlock = (p) => !p.abstract ? '' : `
@@ -216,11 +228,7 @@ function researchPanel() {
         <div class="entry-meta">${esc([authorsLine(p.authors), p.method, p.country].filter(Boolean).join(' · '))}</div>
         <div class="entry-more">
           <p class="takeaway">${band(p.takeaway, p.highlight)}</p>
-          <div class="entry-links mono">
-            ${p.links?.pdf ? `<a class="accent" href="${p.links.pdf}">PAPER</a>` : ''}
-            ${p.links?.slides ? `<a href="${p.links.slides}">SLIDES</a>` : ''}
-            ${p.links?.data ? `<a href="${p.links.data}">DATA</a>` : ''}
-          </div>
+          ${linksRow(p)}
           ${abstractBlock(p)}
         </div>
       </div>
@@ -231,7 +239,7 @@ function researchPanel() {
   <div class="section-preview" data-open="research">
     <div class="eyebrow mono">01 · ${esc(site.sections.find(s => s.key === 'research').eyebrow).toUpperCase()}</div>
     <h2 class="display-2">Research</h2>
-    <p class="section-desc">Governance, public goods and beliefs — Sierra Leone, Zambia, Colombia.</p>
+    <p class="section-desc">Governance, public goods, beliefs and education — Sierra Leone, Zambia, Colombia.</p>
     ${preview}
   </div>
   <div class="section-full" data-view="wheel">
@@ -255,11 +263,7 @@ function researchPanel() {
           <h3 class="wd-title">${esc(p.title)}</h3>
           ${authorsLine(p.authors) ? `<div class="wd-authors">${esc(authorsLine(p.authors))}</div>` : ''}
           <p class="takeaway">${band(p.takeaway, p.highlight)}</p>
-          <div class="entry-links mono">
-            ${p.links?.pdf ? `<a class="accent" href="${p.links.pdf}">PAPER</a>` : ''}
-            ${p.links?.slides ? `<a href="${p.links.slides}">SLIDES</a>` : ''}
-            ${p.links?.data ? `<a href="${p.links.data}">DATA</a>` : ''}
-          </div>
+          ${linksRow(p)}
           ${abstractBlock(p)}
         </article>`).join('')}
       </div>
@@ -336,7 +340,7 @@ function practicePanel() {
           ${c.keyline ? `<div class="lab-keyline mono">${esc(c.keyline)}</div>` : ''}
           <div class="lab-foot">
             <span class="mono muted">${esc(c.status ?? '').toUpperCase()}</span>
-            ${c.link ? `<a class="accent mono" href="${c.link}">OPEN &nearr;</a>` : `<span class="mono muted">COMING SOON</span>`}
+            ${c.link ? `<a class="accent mono" href="${c.link}">OPEN &nearr;</a>` : ''}
           </div>
         </div>
       </article>`).join('')}
