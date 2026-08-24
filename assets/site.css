@@ -102,33 +102,33 @@ mark.band {
 .stage[data-state="landing"] .panel-section:hover .preview-block { transform: translateY(-8px); }
 .ledger-fill {
   flex: 1; min-height: 0;
-  background: repeating-linear-gradient(180deg, var(--color-rule) 0 1px, transparent 1px 52px);
+  background: repeating-linear-gradient(180deg, var(--color-rule) 0 1px, transparent 1px 66px);
   -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 90%);
   mask-image: linear-gradient(180deg, #000 0%, transparent 90%);
 }
-.preview-row { padding: 15px 0; border-top: 1px solid var(--color-rule); font-size: 14px; font-weight: 400; color: var(--color-muted-2); }
+/* row anatomy (both panels): title line + mono keyword/kind line */
+.preview-row, .preview-paper {
+  display: flex; flex-direction: column; gap: 5px; width: 100%;
+  padding: 14px 0; border-top: 1px solid var(--color-rule);
+  text-align: left;
+}
+.row-meta { font-size: 10px; letter-spacing: 0.1em; color: var(--color-muted); text-transform: uppercase; }
+.pr-title { font-size: 14.5px; font-weight: 400; color: var(--color-muted-2); }
 
 /* landing paper rows — each opens Research focused on that paper */
-.preview-paper {
-  display: flex; align-items: baseline; gap: var(--s-16); width: 100%;
-  padding: 15px 0; border-top: 1px solid var(--color-rule);
-  text-align: left; cursor: pointer;
-  transition: color var(--dur-micro) var(--ease-out);
-}
-.pp-year { flex: none; width: 40px; font-size: 11px; color: var(--color-muted); font-variant-numeric: tabular-nums; }
+.preview-paper { cursor: pointer; transition: color var(--dur-micro) var(--ease-out); }
 .pp-title { font-family: var(--font-display); font-size: 17px; line-height: 1.25; color: var(--color-ink); }
 .preview-paper:hover .pp-title { color: var(--color-accent); }
 .preview-paper:active .pp-title { color: var(--color-accent-deep); }
 
-/* ENTER → : a real button, revealed on panel hover or keyboard focus */
+/* ENTER → : a real button, always visible (discoverability beats minimalism) */
 .enter {
   margin-top: var(--s-12); align-self: flex-end; flex: none;
   display: inline-flex; align-items: center; gap: 9px;
   font-size: 11px; letter-spacing: 0.1em; color: var(--color-accent); line-height: 1;
-  opacity: 0; transition: opacity var(--dur-micro) var(--ease-out);
 }
-.stage[data-state="landing"] .panel-section:hover .enter,
-.enter:focus-visible { opacity: 1; }
+.enter svg { transition: transform var(--dur-micro) var(--ease-out); }
+.stage[data-state="landing"] .panel-section:hover .enter svg { transform: translateX(4px); }
 
 /* ---------- sliver faces ---------- */
 .sliver-face { display: flex; flex-direction: column; align-items: center; padding: 36px 0 28px 0; width: 100%; }
@@ -277,12 +277,6 @@ mark.band {
 .js .stage[data-state="landing"] .is-shown > *:nth-child(4) { animation-delay: 180ms; }
 .js .stage[data-state="landing"] .is-shown > *:nth-child(5) { animation-delay: 240ms; }
 .js.revealed .stage .is-shown > * { animation: none; opacity: 1; transform: none; }
-/* the ENTER affordance sits out the reveal and stays hidden until hover/focus —
-   these rules must follow the reveal block (specificity tie, source order wins) */
-.js .stage[data-state="landing"] .is-shown > .enter { animation: none; opacity: 0; }
-.js.revealed .stage .is-shown > .enter { opacity: 0; }
-.stage[data-state="landing"] .panel-section:hover .is-shown > .enter,
-.js.revealed .stage .is-shown > .enter:focus-visible { opacity: 1; }
 
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {

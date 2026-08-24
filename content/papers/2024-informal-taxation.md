@@ -1,6 +1,7 @@
 ---
 title: "Informal Taxation in Development Projects: The Role of Chiefs in Sierra Leone"
 short: "Informal taxation & chiefs"   # TODO(update): display title for landing rows + wheel cards
+keywords: ["informal taxation", "traditional chiefs", "public goods"]   # TODO(update): shown under the title on the landing
 authors: []                    # solo-authored
 year: 2024                     # TODO(update): confirm
 status: "Job market paper"     # TODO(update): current status (working paper? under review?)

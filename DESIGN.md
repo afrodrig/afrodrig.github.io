@@ -39,13 +39,14 @@ web-CV content in `content/cv.yml` is parked for future use).
   stacked ABOVE a serif title (never beside it), 1–2 line description, then the preview
   as a **ruled ledger block** (amended 2026-08-23; the earlier bottom-anchored preview
   left a dead middle): hairline-separated entry rows flow down from the description
-  (Research: mono year + short serif title, individually clickable; Practice: muted
-  teaser titles), and **blank ruled lines at the same rhythm fill the remaining height,
+  (Research: short serif title over a mono keyword line from the paper's `keywords:` —
+  years live in the section, not the landing; Practice: muted teaser title over a mono
+  kind label), and **blank ruled lines at the same rhythm fill the remaining height,
   fading out** — the panel reads as a ledger page being filled in. No fanned/stacked
   cards (replaced 2026-08-23 — the mixed card states read as inconsistent).
 - Hover on a section panel: background tints to `--color-panel-hover`, preview rises 8px,
-  `ENTER →` affordance appears (a real focusable button — it also appears on keyboard
-  focus). All springs (§6).
+  the `ENTER →` arrow nudges right. The `ENTER →` button is **always visible** (amended
+  2026-08-23: hover-reveal hid the affordance — discoverability beats minimalism).
 - The Research preview rows are INDIVIDUALLY clickable: each opens Research with the
   Wheel focused on that paper (hover: accent). The panel itself and ENTER open Research
   at the featured paper. Papers carry a `short:` display title so rows never truncate.

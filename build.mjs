@@ -196,8 +196,8 @@ function researchPanel() {
     <div class="preview-papers">
       ${papers.map(p => `
       <button class="preview-paper" data-focus-paper="${wheelIndex(p)}" aria-label="Open ${esc(p.title)} in the wheel">
-        <span class="pp-year mono">${esc(yearLabel(p))}</span>
         <span class="pp-title">${esc(p.short ?? p.title.split(':')[0])}</span>
+        <span class="row-meta mono">${esc((Array.isArray(p.keywords) && p.keywords.length ? p.keywords : [p.status, p.country].filter(Boolean)).join(' · ')).toUpperCase()}</span>
       </button>`).join('')}
     </div>
     <div class="ledger-fill" aria-hidden="true"></div>
@@ -287,7 +287,10 @@ function practicePanel() {
     { title: 'Portfolio learning dashboard', kind: 'interactive dashboard', status: 'in-progress',
       pitch: 'Every investment in one live view: what each project proposed, what it has produced, and what that means for the next decision.', keyline: 'what changed, project by project', link: '' },
   ];
-  const previewRows = [...items, ...cards.map(c => c.title)].slice(0, 4);
+  const previewRows = [
+    ...items.map(it => typeof it === 'string' ? { title: it } : it),
+    ...cards.map(c => ({ title: c.title, kind: [c.kind, c.status === 'in-progress' ? 'in progress' : c.status].filter(Boolean).join(' · ') })),
+  ].slice(0, 4);
   return `
 <section class="panel panel-section" id="panel-practice" data-key="practice">
   ${sliverFace('02', 'practice', 'Practice')}
@@ -297,7 +300,11 @@ function practicePanel() {
     <p class="section-desc">How impact measurement works in the field — and the tools I build doing it.</p>
     <div class="preview-block">
       <div class="preview-list">
-        ${previewRows.map(it => `<div class="preview-row">${esc(it)}</div>`).join('')}
+        ${previewRows.map(it => `
+        <div class="preview-row">
+          <span class="pr-title">${esc(it.title)}</span>
+          ${it.kind ? `<span class="row-meta mono">${esc(it.kind).toUpperCase()}</span>` : ''}
+        </div>`).join('')}
       </div>
       <div class="ledger-fill" aria-hidden="true"></div>
     </div>
