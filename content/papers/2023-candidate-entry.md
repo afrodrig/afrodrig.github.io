@@ -1,5 +1,6 @@
 ---
 title: "Candidate Entry Into Local Government"
+short: "Candidate entry into local government"   # TODO(update): display title for landing rows + wheel cards
 authors: ["Katherine Casey", "Niccoló Meriggi", "Abou Bakarr Kamara"]
 # NOTE: cv.pdf lists Casey, Meriggi, Kamara; the OLD site page also listed Jeremy Bowles.
 # TODO(confirm): final author set. A blog post about the project exists (linked in cv.pdf).

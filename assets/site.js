@@ -4,7 +4,7 @@
   document.documentElement.classList.add('js');
 
   const stage = document.querySelector('.stage');
-  const SECTIONS = ['research', 'practice', 'lab'];
+  const SECTIONS = ['research', 'practice'];
   const mobile = () => matchMedia('(max-width: 880px)').matches;
 
   /* ================= the Paper Wheel ================= */
@@ -19,9 +19,11 @@
     const arcPath = wheelEl.querySelector('.wheel-arc path');
     const arcSvg = wheelEl.querySelector('.wheel-arc');
     const full = document.querySelector('#panel-research .section-full');
+    const hint = wheelEl.querySelector('.wheel-hint');
     const R = 900;                    // circle radius (px)
     const STEP = 6 * Math.PI / 180;   // 6° between cards
-    let focal = 0;
+    let focal = parseInt(wheelEl.dataset.initial ?? '0', 10) || 0;
+    let booted = false;               // first goTo after boot dismisses the scroll hint
 
     const pos = (off) => {
       const th = off * STEP;
@@ -60,7 +62,14 @@
       const next = Math.min(cards.length - 1, Math.max(0, i));
       focal = next;
       layout();
+      if (booted && hint) hint.classList.add('is-dismissed');
+      // keep the focused paper shareable: #/research/<slug>
+      if (booted && stage.dataset.state === 'research') {
+        const slug = cards[focal]?.dataset.slug;
+        if (slug) history.replaceState(null, '', '#/research/' + slug);
+      }
     }
+    const slugIndex = (slug) => cards.findIndex((c) => c.dataset.slug === slug);
 
     cards.forEach((c, i) => c.addEventListener('click', () => goTo(i)));
 
@@ -85,7 +94,7 @@
 
     window.addEventListener('resize', drawArc);
     layout();
-    return { goTo, drawArc };
+    return { goTo, drawArc, slugIndex, boot: () => { booted = true; } };
   })();
 
   /* ================= panel state machine ================= */
@@ -122,7 +131,15 @@
       if (full) full.scrollTop = 0;
     }
   }
-  const fromHash = () => (location.hash.match(/^#\/(\w+)/) || [])[1] || 'landing';
+  const fromHash = () => {
+    const m = location.hash.match(/^#\/(\w+)(?:\/([\w-]+))?/) || [];
+    return { state: m[1] || 'landing', slug: m[2] || null };
+  };
+  const focusSlug = (slug) => {
+    if (!slug || !wheelAPI) return;
+    const i = wheelAPI.slugIndex(slug);
+    if (i >= 0) wheelAPI.goTo(i);
+  };
 
   document.addEventListener('click', (e) => {
     // a specific paper card on the landing opens Research focused on that paper
@@ -140,9 +157,23 @@
     e.preventDefault();
     go(opener.dataset.open);
   });
-  window.addEventListener('popstate', () => apply(fromHash()));
+  window.addEventListener('popstate', () => {
+    const h = fromHash();
+    apply(h.state);
+    focusSlug(h.slug);
+  });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && stage.dataset.state !== 'landing') go('landing');
+  });
+
+  /* ---- abstract toggles ---- */
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest('.abstract-toggle');
+    if (!t) return;
+    const open = t.closest('.abstract').classList.toggle('is-open');
+    t.setAttribute('aria-expanded', String(open));
+    const sign = t.querySelector('.abstract-sign');
+    if (sign) sign.textContent = open ? '−' : '+';
   });
 
   /* ---- LIST / WHEEL toggle ---- */
@@ -165,6 +196,9 @@
   });
 
   /* ---- boot ---- */
-  apply(mobile() ? 'landing' : fromHash());
+  const h = fromHash();
+  apply(mobile() ? 'landing' : h.state);
+  if (!mobile()) focusSlug(h.slug);
+  if (wheelAPI) wheelAPI.boot();
   setTimeout(() => document.documentElement.classList.add('revealed'), 900);
 })();

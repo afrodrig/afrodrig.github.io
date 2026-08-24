@@ -1,6 +1,6 @@
 ---
 title: "Practice"
-eyebrow: "Case studies & essays"
+eyebrow: "Case studies, essays & tools"   # TODO(update): confirm wording (Practice absorbed The Lab 2026-08-23)
 intro: >
   Impact measurement as it actually happens: real cases from portfolio work, and essays
   on evaluation that gets used rather than performed.

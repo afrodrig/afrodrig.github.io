@@ -1,5 +1,6 @@
 ---
 title: "Too Much or Too Little Faith in Success? Experimental Evidence from Colombian Entrepreneurs"
+short: "Entrepreneurs' beliefs about success"   # TODO(update): display title for landing rows + wheel cards
 authors: ["Réka Zempléni"]     # confirmed via cv.pdf
 year: 2022                     # TODO(update)
 status: "Working paper"        # TODO(update)

@@ -1,5 +1,6 @@
 ---
 title: "Improving the Use of Zambia's Constituency Development Fund (CDF)"   # title per cv.pdf
+short: "Zambia's Constituency Development Fund"   # TODO(update): display title for landing rows + wheel cards
 authors: ["Katherine Casey", "Jeremy Bowles", "Shahrukh Wani"]
 # A public IGC policy report exists (linked in cv.pdf) — TODO(update): add report URL to links.
 year: 2024                     # TODO(update)

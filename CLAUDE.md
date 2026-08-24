@@ -21,7 +21,8 @@ content/
   bio.md                # landing identity panel: bridge statement + NOW line
   practice.md           # Practice section copy
   papers/*.md           # one file per paper (front-matter schema inside each file)
-  lab/*.md              # one file per Lab artifact (dashboards, frameworks, datasets)
+  lab/*.md              # one file per artifact (dashboards, frameworks, datasets) —
+                        # rendered as the ARTIFACTS stream INSIDE Practice (merged 2026-08-23)
 ```
 
 - **Add a paper**: copy an existing `content/papers/*.md`, edit the front matter
@@ -51,7 +52,13 @@ content/
 ## Current status (2026-08)
 
 - DONE: design direction (Ledger × Index hybrid), palette (Atlas Cooled + marigold band),
-  typography, motion rules, Paper Wheel spec — all in DESIGN.md.
-- TODO: build script + real pages; content pass (bio and paper metadata below are seeded
-  from the OLD site and need Andrés's updates — grep for `TODO(update)`); Lab items are
-  placeholders pending real artifacts; launch swap (remove legacy Hugo output).
+  typography (display = Lora since 2026-08-23), motion rules, Paper Wheel spec — all in
+  DESIGN.md. Build script + pages live. 2026-08-23 revision: Practice + Lab merged into
+  one Practice section (two-panel landing), circular portrait beside the name, landing
+  papers as a clean clickable list (papers carry a `short:` display title), per-paper
+  deep links (`#/research/<slug>`), abstract toggles, favicon + og/JSON-LD meta,
+  build-versioned asset URLs.
+- TODO: content pass (bio and paper metadata are seeded from the OLD site and need
+  Andrés's updates — grep for `TODO(update)`; Scholar/GitHub URLs empty in site.yml);
+  artifact items are placeholders pending real deliverables; key-figure data per paper
+  (schema wired, no fabricated numbers).

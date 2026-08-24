@@ -23,24 +23,30 @@ other way around.
 One page-level state machine. The viewport is divided into vertical panels; **no top nav bar
 exists anywhere**.
 
-**Sections**: Research (01), Practice (02), The Lab (03). There is NO About/CV pane —
-the identity panel already carries the short bio, contact, and the CV (PDF) link
-(decided 2026-08-22; the web-CV content in `content/cv.yml` is parked for future use).
+**Sections**: Research (01), Practice (02). Practice absorbs the former Lab — case studies,
+essays, and shareable artifacts live in one section (decided 2026-08-23; the `content/lab/`
+folder still feeds the artifact cards). There is NO About/CV pane — the identity panel
+already carries the short bio, contact, and the CV (PDF) link (decided 2026-08-22; the
+web-CV content in `content/cv.yml` is parked for future use).
 
-**State: LANDING** (grid at 1440px: `560 / 380 / 260 / 240`)
-- Panel 1 — identity (tinted `--color-panel`): name (display serif, ~62px, two lines),
-  role line, bridge statement (~65ch max, with one marigold-banded phrase), a `NOW:` line
-  in accent mono, contact links anchored at the bottom.
-- Panels 2–4 — Research / Practice / The Lab. Each: mono eyebrow (`01 · FOUR FIELD
-  EXPERIMENTS`) stacked ABOVE a serif title (never beside it), 1–2 line description,
-  bottom-anchored preview (Research: fanned paper cards; others: hairline-separated lists).
+**State: LANDING** (grid at 1440px: `39fr / 33fr / 28fr`)
+- Panel 1 — identity (tinted `--color-panel`): name (display serif, two lines) with the
+  **circular portrait beside it** (name left, photo right — decided 2026-08-23), role line,
+  bridge statement (~65ch max, with one marigold-banded phrase), a `NOW:` line in accent
+  mono, contact links anchored at the bottom.
+- Panels 2–3 — Research / Practice. Each: mono eyebrow (`01 · FOUR FIELD EXPERIMENTS`)
+  stacked ABOVE a serif title (never beside it), 1–2 line description, bottom-anchored
+  preview: **hairline-separated list rows** (Research: year in mono + short paper title;
+  Practice: piece/artifact titles). No fanned/stacked cards (replaced 2026-08-23 — the
+  mixed card states read as inconsistent).
 - Hover on a section panel: background tints to `--color-panel-hover`, preview rises 8px,
-  `ENTER →` affordance appears. All springs (§6).
-- The Research preview's stacked paper cards are INDIVIDUALLY clickable: each opens
-  Research with the Wheel focused on that paper (hover: accent border). The panel
-  itself and ENTER open Research at the featured paper.
+  `ENTER →` affordance appears (a real focusable button — it also appears on keyboard
+  focus). All springs (§6).
+- The Research preview rows are INDIVIDUALLY clickable: each opens Research with the
+  Wheel focused on that paper (hover: accent). The panel itself and ENTER open Research
+  at the featured paper. Papers carry a `short:` display title so rows never truncate.
 
-**State: SECTION OPEN** (e.g. Research; grid: `96 / expanded / 82 / 82`)
+**State: SECTION OPEN** (e.g. Research; grid: `96 / expanded / 82`)
 - Identity compresses to a 96px rail: monogram, vertical name (writing-mode: vertical-rl),
   back affordance at bottom. ESC or back restores LANDING.
 - The opened section expands; the other sections compress to labeled slivers (number +
@@ -54,26 +60,22 @@ toggle right; WHEEL is default on desktop). Wheel view: detail spread left (~60%
 the wheel at the right edge (§8). List view: hairline-separated entries, year in a
 mono side column.
 
-**Practice section anatomy** (settled: case studies + essays — NOT a services page):
-intro line (one banded phrase allowed), then two streams in an uneven grid (~1.25fr/1fr):
-CASE STUDIES — serif-titled entries using the expanded-entry pattern (title, 1–2 line
-context, mono links; may cross-link into Lab artifacts, e.g. `THE RUBRIC → LAB`);
-ESSAYS — dated list rows (title + mono year). Ends with the colophon.
-
-**Lab section anatomy** (settled: card carousel): intro clause in the header row, then a
-carousel of artifact cards — focal card centered (~600px), neighbors peeking from the
-panel edges, prev/next hairline-square buttons, numbered mono pagination (active number
-on a small red square) + `NN / NN` counter. Card anatomy, top to bottom: **cover image**
-(full-bleed top; original SVG art in the palette — never stock or borrowed illustration),
-mono eyebrow (`ARTIFACT · 02 · INTERACTIVE DASHBOARD`), serif title, 2–3 line
-description, ONE marigold-banded key line (focal card only), attribution line, and
-`OPEN THE <THING> →` in accent linking to the live deliverable (external or self-hosted).
-Cards spring across on navigation; on mobile the carousel becomes a swipeable
-single-card column.
+**Practice section anatomy** (amended 2026-08-23 — absorbs the former Lab): intro line
+(one banded phrase allowed), then the streams as content exists: CASE STUDIES —
+serif-titled entries using the expanded-entry pattern (title, 1–2 line context, mono
+links); ESSAYS — dated list rows (title + mono year); ARTIFACTS — the former Lab cards
+under a mono label. Card anatomy, top to bottom: **cover image** (full-bleed top;
+original SVG art in the palette — never stock or borrowed illustration), mono eyebrow
+(`ARTIFACT · 02 · INTERACTIVE DASHBOARD`), serif title, 2–3 line description, ONE
+marigold-banded key line (focal card only), attribution line, and `OPEN THE <THING> →`
+in accent linking to the live deliverable. If artifacts multiply, they get the carousel
+treatment (focal card ~600px, peeking neighbors, hairline-square prev/next, mono
+pagination); on mobile, a single-card column. Ends with the colophon.
 
 **Photo**: the real portrait (`avatar.jpg`, 270×270 from the current site) lives in the
-identity panel on the landing (~128px square, hairline border), and repeats small
-(~40px) at the top of the compressed rail in every open-section state — the photo
+identity panel on the landing — a **circle** (~124px, hairline border) sitting beside
+the name (amended 2026-08-23; the square read as stiff) — and repeats small (~40px
+circle) at the top of the compressed rail in every open-section state — the photo
 becomes the identity mark when the panel compresses.
 
 **Colophon (the footer)**: there is NO global footer chrome. Contact lives permanently
@@ -89,11 +91,12 @@ banned**; italics only for emphasis inside body prose.
 
 | Role | Family | Usage |
 | --- | --- | --- |
-| Display | **Instrument Serif** (400) | Name, section titles, paper titles. Tight leading 1.0–1.12. |
+| Display | **Lora** (400) | Name, section titles, paper titles. Leading 1.05–1.15. (Replaced Instrument Serif 2026-08-23 — too condensed/vertically stretched.) |
 | Body | **Geist** (300/400/500) | Prose, UI, descriptions. Body 15–17px, line-height 1.55–1.6. |
 | Meta | **Geist Mono** (400/500) | Eyebrows, labels, link rows, years. 10–12px, letter-spacing 0.06–0.14em, uppercase. |
 
-- Scale ratio 1.25 (major third). Max ~5 sizes per page. Display max 62px.
+- Scale ratio 1.25 (major third). Max ~5 sizes per page. Display max 56px (Lora runs
+  wider than Instrument did — sizes trimmed accordingly).
 - Measure: body text 45–75ch (`max-width: 65ch` default).
 - Eyebrow/label + heading always stack vertically in one column — never label-left/title-right.
 - Tabular numerals (`font-variant-numeric: tabular-nums`) on any data display.
@@ -178,6 +181,11 @@ or hand-rolled FLIP; kinetics.colorion.co presets are approved sources.
   wheel rotation snap, preview rise. Reference: stiffness ~170, damping ~24.
 - **Easing** (`--ease-out`): link hovers, crossfades, menu-row nudges (translateX 7px).
 - Animate ONLY `transform` and `opacity`. Never width/height/top/left/margin/padding.
+  **Conscious exception (amended 2026-08-23)**: the panel machine may transition
+  `grid-template-columns`, and the list-entry/abstract unfolds may transition
+  `grid-template-rows`, both with the spring-flavored `linear()` curve — a FLIP
+  implementation over text-filled columns distorts type mid-flight and isn't worth it.
+  These two cases only; everything else stays transform/opacity.
 - One orchestrated page-load reveal (staggered ≤500ms total, 60ms steps). No scroll-driven
   scrubbing; IntersectionObserver reveal-once only. No parallax. No infinite loops.
 - `@media (prefers-reduced-motion: reduce)`: all spatial motion collapses to opacity
@@ -208,11 +216,13 @@ point; each step is 6° along the circle (x = −R(1−cosθ), y = R·sinθ, til
 The arc path is drawn by JS through the cards' anchors at the current container size
 (redrawn on open and on resize) — never a static decorative curve.
 - At rest: focal card inked (`--color-ink` fill), neighbors recede (scale .92, 60% ink,
-  slight rotation following the arc).
-- Scroll/drag/arrow keys rotate the wheel; it carries momentum and snaps card-by-card
-  with a spring (slight overshoot, natural settle, interruptible).
-- Click unfolds the focal card into the detail spread: takeaway + key figure animate in,
-  links row. ESC or scroll folds back.
+  slight rotation following the arc). The featured paper starts **mid-arc** (a neighbor
+  above, the rest below) so the circle reads immediately — never top-of-stack.
+- Scroll/arrow keys rotate the wheel, snapping card-by-card with the spring curve. The
+  `SCROLL ROTATES THE WHEEL` hint fades out after the first rotation.
+- The detail spread (takeaway, links, abstract behind an `ABSTRACT` toggle) crossfades
+  with each rotation. The focused paper is deep-linkable: `#/research/<slug>` (slug =
+  paper filename, minus any year prefix).
 - Accessibility: the wheel is a progressive enhancement over a semantic `<ul>` of papers.
   Keyboard operable; reduced-motion and mobile get the list.
 

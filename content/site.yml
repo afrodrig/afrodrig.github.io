@@ -4,21 +4,17 @@ monogram: "AR"
 role: "Development economist · Impact & Learning, Stanford Impact Labs"  # TODO(update): confirm current title
 email: "afrodrig@stanford.edu"
 location: "Stanford, California"
+url: "https://afrodrig.github.io/"   # canonical URL — used for og: tags and JSON-LD
 
 # Section order defines panel order on the landing (identity panel is always first).
+# Practice absorbed The Lab (2026-08-23) — artifacts in content/lab/ render inside Practice.
 sections:
   - key: research
     title: "Research"
     eyebrow: "Four field experiments"   # keep honest — update the count with the papers
   - key: practice
     title: "Practice"
-    eyebrow: "Case studies & essays"
-  - key: lab
-    title: "The Lab"
-    eyebrow: "Built to share"
-  - key: about
-    title: "About & CV"
-    eyebrow: ""
+    eyebrow: "Case studies, essays & tools"   # TODO(update): Andrés — confirm wording
 
 links:
   scholar: ""      # TODO(update): Google Scholar URL
