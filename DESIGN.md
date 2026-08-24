@@ -36,10 +36,13 @@ web-CV content in `content/cv.yml` is parked for future use).
   the panel's anchor, not a badge) — then the bridge statement (~65ch max, with one
   marigold-banded phrase), a `NOW:` line in accent mono, contact links at the bottom.
 - Panels 2–3 — Research / Practice. Each: mono eyebrow (`01 · FOUR FIELD EXPERIMENTS`)
-  stacked ABOVE a serif title (never beside it), 1–2 line description, bottom-anchored
-  preview: **hairline-separated list rows** (Research: year in mono + short paper title;
-  Practice: piece/artifact titles). No fanned/stacked cards (replaced 2026-08-23 — the
-  mixed card states read as inconsistent).
+  stacked ABOVE a serif title (never beside it), 1–2 line description, then the preview
+  as a **ruled ledger block** (amended 2026-08-23; the earlier bottom-anchored preview
+  left a dead middle): hairline-separated entry rows flow down from the description
+  (Research: mono year + short serif title, individually clickable; Practice: muted
+  teaser titles), and **blank ruled lines at the same rhythm fill the remaining height,
+  fading out** — the panel reads as a ledger page being filled in. No fanned/stacked
+  cards (replaced 2026-08-23 — the mixed card states read as inconsistent).
 - Hover on a section panel: background tints to `--color-panel-hover`, preview rises 8px,
   `ENTER →` affordance appears (a real focusable button — it also appears on keyboard
   focus). All springs (§6).
@@ -58,8 +61,9 @@ web-CV content in `content/cv.yml` is parked for future use).
 
 **Research section anatomy**: header row (eyebrow + serif title left, `LIST / WHEEL`
 toggle right; WHEEL is default on desktop). Wheel view: detail spread left (~60%),
-the wheel at the right edge (§8). List view: hairline-separated entries, year in a
-mono side column.
+**vertically centered on the focal card's axis** (the wheel's focal card sits at
+mid-height; the detail shares that axis — amended 2026-08-23), the wheel at the right
+edge (§8). List view: hairline-separated entries, year in a mono side column.
 
 **Practice section anatomy** (amended 2026-08-23 — absorbs the former Lab): intro line
 (one banded phrase allowed), then the streams as content exists: CASE STUDIES —

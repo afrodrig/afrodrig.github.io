@@ -92,8 +92,20 @@ mark.band {
 .panel-section { transition: background var(--dur-micro) var(--ease-out); }
 .stage[data-state="landing"] .panel-section:hover { background: var(--color-panel-hover); }
 
-.preview-list { margin-top: auto; transition: transform var(--dur-short) var(--ease-out); }
-.stage[data-state="landing"] .panel-section:hover .preview-list { transform: translateY(-8px); }
+/* the preview is a ruled ledger block: entries flow from the top, then blank
+   rules fill the remaining height and fade out — the page is being filled in */
+.preview-block {
+  flex: 1; min-height: 0; margin-top: var(--s-24);
+  display: flex; flex-direction: column;
+  transition: transform var(--dur-short) var(--ease-out);
+}
+.stage[data-state="landing"] .panel-section:hover .preview-block { transform: translateY(-8px); }
+.ledger-fill {
+  flex: 1; min-height: 0;
+  background: repeating-linear-gradient(180deg, var(--color-rule) 0 1px, transparent 1px 52px);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 90%);
+  mask-image: linear-gradient(180deg, #000 0%, transparent 90%);
+}
 .preview-row { padding: 15px 0; border-top: 1px solid var(--color-rule); font-size: 14px; font-weight: 400; color: var(--color-muted-2); }
 
 /* landing paper rows — each opens Research focused on that paper */
@@ -163,6 +175,7 @@ mark.band {
 .wheel-details { position: relative; min-height: 300px; }
 .wheel-detail {
   position: absolute; inset: 0; max-width: 640px;
+  display: flex; flex-direction: column; justify-content: center;  /* centered on the focal card's axis */
   opacity: 0; visibility: hidden; transform: translateY(8px);
   transition: opacity var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out),
     visibility 0s linear var(--dur-short);
@@ -171,7 +184,7 @@ mark.band {
 .wd-eyebrow { font-size: 10.5px; letter-spacing: 0.1em; color: var(--color-muted); text-transform: uppercase; }
 .wd-title { font-family: var(--font-display); font-size: clamp(1.9rem, 2.9vw, 2.6rem); line-height: 1.1; margin-top: 14px; }
 .wd-authors { margin-top: 10px; font-size: 14px; color: var(--color-muted-2); }
-.wheel-detail .takeaway { margin-top: 16px; font-size: 16px; line-height: 1.65; max-width: 58ch; }
+.wheel-detail .takeaway { margin-top: 16px; font-size: 17px; line-height: 1.65; max-width: 58ch; }
 .wheel-detail .entry-links { margin-top: 20px; font-size: 11.5px; }
 
 /* abstract behind a toggle (grid-rows unfold — DESIGN.md §6 conscious exception) */

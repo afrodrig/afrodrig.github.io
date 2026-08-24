@@ -192,12 +192,15 @@ const enterBtn = (key, label) => `
 
 function researchPanel() {
   const preview = `
-  <div class="preview-list preview-papers">
-    ${papers.map(p => `
-    <button class="preview-paper" data-focus-paper="${wheelIndex(p)}" aria-label="Open ${esc(p.title)} in the wheel">
-      <span class="pp-year mono">${esc(yearLabel(p))}</span>
-      <span class="pp-title">${esc(p.short ?? p.title.split(':')[0])}</span>
-    </button>`).join('')}
+  <div class="preview-block">
+    <div class="preview-papers">
+      ${papers.map(p => `
+      <button class="preview-paper" data-focus-paper="${wheelIndex(p)}" aria-label="Open ${esc(p.title)} in the wheel">
+        <span class="pp-year mono">${esc(yearLabel(p))}</span>
+        <span class="pp-title">${esc(p.short ?? p.title.split(':')[0])}</span>
+      </button>`).join('')}
+    </div>
+    <div class="ledger-fill" aria-hidden="true"></div>
   </div>
   ${enterBtn('research', 'Research')}`;
   const entries = papers.map((p, i) => `
@@ -292,8 +295,11 @@ function practicePanel() {
     <div class="eyebrow mono">02 · ${esc(practice.meta.eyebrow).toUpperCase()}</div>
     <h2 class="display-2">Practice</h2>
     <p class="section-desc">How impact measurement works in the field — and the tools I build doing it.</p>
-    <div class="preview-list">
-      ${previewRows.map(it => `<div class="preview-row">${esc(it)}</div>`).join('')}
+    <div class="preview-block">
+      <div class="preview-list">
+        ${previewRows.map(it => `<div class="preview-row">${esc(it)}</div>`).join('')}
+      </div>
+      <div class="ledger-fill" aria-hidden="true"></div>
     </div>
     ${enterBtn('practice', 'Practice')}
   </div>
