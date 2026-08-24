@@ -323,14 +323,12 @@ function practicePanel() {
       </div>
     </header>
     <p class="section-intro">${band(practice.meta.intro, practice.meta.highlight)}</p>
-    <div class="practice-note mono">FIRST PIECES IN PROGRESS — CASE STUDIES AND ESSAYS LAND HERE.</div>
-    <div class="artifacts-label eyebrow mono">ARTIFACTS</div>
-    <div class="lab-cards">
+    <div class="card-stream">
       ${cards.map((c, i) => `
-      <article class="lab-card ${i === 0 ? 'lab-focal' : ''}">
+      <article class="lab-card">
         <div class="lab-cover lab-cover-${(c.kind ?? 'tool').split(' ').pop()}" aria-hidden="true"></div>
         <div class="lab-body">
-          <div class="eyebrow mono">ARTIFACT · 0${i + 1} · ${esc(c.kind ?? '').toUpperCase()}</div>
+          <div class="eyebrow mono">0${i + 1} · ${esc(c.kind ?? '').toUpperCase()}</div>
           <h3 class="lab-title">${esc(c.title)}</h3>
           <p class="lab-pitch">${esc(c.pitch ?? c.body ?? '')}</p>
           ${/* no band here: the Practice intro already carries this screen's one marigold band */''}
@@ -341,6 +339,15 @@ function practicePanel() {
           </div>
         </div>
       </article>`).join('')}
+    </div>
+    ${cards.length > 1 ? `<div class="stream-hint mono">SCROLL FOR MORE &rarr;</div>` : ''}
+    <div class="coming">
+      <div class="coming-label eyebrow mono">IN PROGRESS — CASE STUDIES AND ESSAYS LAND HERE</div>
+      ${items.map(it => `
+      <div class="coming-row">
+        <span>${esc(typeof it === 'string' ? it : it.title)}</span>
+        ${it.kind ? `<span class="row-meta mono">${esc(it.kind).toUpperCase()}</span>` : ''}
+      </div>`).join('')}
     </div>
     ${colophon}
   </div>

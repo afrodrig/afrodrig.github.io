@@ -249,14 +249,27 @@ mark.band {
   .section-full[data-view="wheel"] .entry-list { display: block; }
 }
 
-/* practice */
-.practice-note { margin-top: var(--s-40); font-size: 11px; color: var(--color-muted); border: 1px dashed var(--color-rule-strong); padding: 18px 22px; align-self: flex-start; }
+/* practice: the card stream — scrolls horizontally, snapping card by card */
+.card-stream {
+  margin-top: var(--s-24); flex: none; display: flex; gap: 24px; align-items: stretch;
+  overflow-x: auto; scroll-snap-type: x proximity;
+  padding-bottom: 6px; scrollbar-width: thin;
+}
+.stream-hint { margin-top: var(--s-8); align-self: flex-end; font-size: 10.5px; letter-spacing: 0.1em; color: var(--color-muted); }
+.lab-card {
+  background: var(--color-card); border: 1px solid var(--color-rule-strong);
+  width: min(520px, 86vw); flex: none; scroll-snap-align: start;
+}
 
-/* artifact cards (former Lab — now a stream inside Practice) */
-.artifacts-label { margin-top: var(--s-40); padding-bottom: var(--s-8); border-bottom: 1px solid var(--color-rule); }
-.lab-cards { margin-top: var(--s-24); display: flex; gap: 24px; align-items: flex-start; }
-.lab-card { background: var(--color-card); border: 1px solid var(--color-rule); width: 420px; flex: none; }
-.lab-card.lab-focal { width: 560px; border-color: var(--color-rule-strong); }
+/* simple "coming" lines anchored above the colophon */
+.coming { margin-top: auto; padding-top: var(--s-40); }
+.coming-label { padding-bottom: var(--s-8); border-bottom: 1px solid var(--color-rule); }
+.coming-row {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 12px 0; border-bottom: 1px solid var(--color-rule);
+  font-size: 14px; color: var(--color-muted-2);
+}
+.section-full > .coming + .colophon { margin-top: var(--s-24); }
 .lab-cover { height: 200px; background: var(--color-ink); position: relative; overflow: hidden; }
 .lab-cover::after {
   content: ""; position: absolute; inset: 0;
@@ -313,8 +326,6 @@ mark.band {
   .identity-full { padding: 36px 24px; }
   .portrait { flex: none; aspect-ratio: 4 / 5; height: auto; min-height: 0; }
   .section-full { padding: 36px 24px 0 24px; overflow: visible; }
-  .lab-cards { flex-direction: column; }
-  .lab-card, .lab-card.lab-focal { width: 100%; }
   .colophon { flex-wrap: wrap; gap: 10px; }
   .entry { grid-template-columns: 1fr; gap: 4px; }
   .entry-year { padding-top: 0; }

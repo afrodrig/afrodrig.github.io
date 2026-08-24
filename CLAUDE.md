@@ -21,8 +21,9 @@ content/
   bio.md                # landing identity panel: bridge statement + NOW line
   practice.md           # Practice section copy
   papers/*.md           # one file per paper (front-matter schema inside each file)
-  lab/*.md              # one file per artifact (dashboards, frameworks, datasets) —
-                        # rendered as the ARTIFACTS stream INSIDE Practice (merged 2026-08-23)
+  lab/*.md              # one file per card (dashboards, frameworks, datasets) —
+                        # rendered as Practice's horizontal card stream (merged 2026-08-23;
+                        # the word "artifact" is retired from the UI)
 ```
 
 - **Add a paper**: copy an existing `content/papers/*.md`, edit the front matter

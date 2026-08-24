@@ -73,17 +73,20 @@ toggle right; WHEEL is default on desktop). Wheel view: detail spread left (~60%
 mid-height; the detail shares that axis — amended 2026-08-23), the wheel at the right
 edge (§8). List view: hairline-separated entries, year in a mono side column.
 
-**Practice section anatomy** (amended 2026-08-23 — absorbs the former Lab): intro line
-(one banded phrase allowed), then the streams as content exists: CASE STUDIES —
-serif-titled entries using the expanded-entry pattern (title, 1–2 line context, mono
-links); ESSAYS — dated list rows (title + mono year); ARTIFACTS — the former Lab cards
-under a mono label. Card anatomy, top to bottom: **cover image** (full-bleed top;
-original SVG art in the palette — never stock or borrowed illustration), mono eyebrow
-(`ARTIFACT · 02 · INTERACTIVE DASHBOARD`), serif title, 2–3 line description, ONE
-marigold-banded key line (focal card only), attribution line, and `OPEN THE <THING> →`
-in accent linking to the live deliverable. If artifacts multiply, they get the carousel
-treatment (focal card ~600px, peeking neighbors, hairline-square prev/next, mono
-pagination); on mobile, a single-card column. Ends with the colophon.
+**Practice section anatomy** (amended 2026-08-23 — absorbs the former Lab; card stream
+moved first and the word "artifact" retired from the UI per Andrés): intro line (one
+banded phrase allowed), then immediately the **card stream** — a horizontally scrolling
+row (`overflow-x: auto`, scroll-snap card by card, uniform ~520px cards, next card
+peeking; a mono `SCROLL FOR MORE →` hint appears once there are 2+ cards; same
+horizontal swipe on mobile at ~86vw per card). Card anatomy, top to bottom: **cover
+image** (full-bleed top; original SVG art in the palette — never stock or borrowed
+illustration), mono eyebrow (`01 · INTERACTIVE DASHBOARD` — number + kind, no category
+word), serif title, 2–3 line description, mono key line (unbanded — the intro holds
+this screen's band), attribution line, and `OPEN THE <THING> →` in accent linking to
+the live deliverable. Below the stream, anchored above the colophon: **simple ruled
+text lines** — a mono `IN PROGRESS` label plus one line per upcoming case study/essay
+(title + mono kind). The content folder keeps its `content/lab/` name; only the
+user-facing label is gone. Ends with the colophon.
 
 **Photo**: the editorial portrait (`portrait.jpg`, 805×951, warm terracotta setting that
 echoes the accent red) is the identity panel's hero block on the landing — full inner
