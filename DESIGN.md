@@ -30,10 +30,11 @@ already carries the short bio, contact, and the CV (PDF) link (decided 2026-08-2
 web-CV content in `content/cv.yml` is parked for future use).
 
 **State: LANDING** (grid at 1440px: `39fr / 33fr / 28fr`)
-- Panel 1 — identity (tinted `--color-panel`): name (display serif, two lines) with the
-  **circular portrait beside it** (name left, photo right — decided 2026-08-23), role line,
-  bridge statement (~65ch max, with one marigold-banded phrase), a `NOW:` line in accent
-  mono, contact links anchored at the bottom.
+- Panel 1 — identity (tinted `--color-panel`): name (display serif, two lines), role line,
+  then the **hero portrait** — a full-width rectangular block that absorbs the panel's
+  leftover vertical space (flex-grow, object-fit crop; decided 2026-08-23: the photo is
+  the panel's anchor, not a badge) — then the bridge statement (~65ch max, with one
+  marigold-banded phrase), a `NOW:` line in accent mono, contact links at the bottom.
 - Panels 2–3 — Research / Practice. Each: mono eyebrow (`01 · FOUR FIELD EXPERIMENTS`)
   stacked ABOVE a serif title (never beside it), 1–2 line description, bottom-anchored
   preview: **hairline-separated list rows** (Research: year in mono + short paper title;
@@ -72,11 +73,13 @@ in accent linking to the live deliverable. If artifacts multiply, they get the c
 treatment (focal card ~600px, peeking neighbors, hairline-square prev/next, mono
 pagination); on mobile, a single-card column. Ends with the colophon.
 
-**Photo**: the real portrait (`avatar.jpg`, 270×270 from the current site) lives in the
-identity panel on the landing — a **circle** (~124px, hairline border) sitting beside
-the name (amended 2026-08-23; the square read as stiff) — and repeats small (~40px
-circle) at the top of the compressed rail in every open-section state — the photo
-becomes the identity mark when the panel compresses.
+**Photo**: the editorial portrait (`portrait.jpg`, 805×951, warm terracotta setting that
+echoes the accent red) is the identity panel's hero block on the landing — full inner
+width, hairline border, square corners, flex-grown to fill the panel's spare height
+(`object-position` keeps the face as it crops; mobile fixes it at 4:5). It repeats as a
+small **circle** (~40px, face-biased crop) at the top of the compressed rail in every
+open-section state — the photo becomes the identity mark when the panel compresses.
+Circles are for the small mark only; the hero is always a rectangle (amended 2026-08-23).
 
 **Colophon (the footer)**: there is NO global footer chrome. Contact lives permanently
 in the identity panel/rail. Every scrolling section pane ends with a colophon row:

@@ -154,11 +154,9 @@ function identityPanel() {
   return `
 <section class="panel panel-identity" id="panel-identity">
   <div class="identity-full">
-    <div class="identity-head">
-      <h1 class="display">${esc(site.name).replace(' F. ', ' F.<br>')}</h1>
-      <img class="portrait" src="assets/avatar.jpg" alt="Portrait of ${esc(site.name)}">
-    </div>
+    <h1 class="display">${esc(site.name).replace(' F. ', ' F.<br>')}</h1>
     <div class="role">${esc(site.role)}</div>
+    <img class="portrait" src="assets/portrait.jpg" alt="Portrait of ${esc(site.name)}">
     <p class="statement">${band(bio.body, bio.meta.highlight)}</p>
     <div class="nowline mono"><span class="nowrule"></span>NOW: ${esc(bio.meta.now).toUpperCase()}</div>
     <div class="identity-foot">
@@ -171,7 +169,7 @@ function identityPanel() {
     </div>
   </div>
   <div class="identity-rail">
-    <img src="assets/avatar.jpg" alt="" class="rail-photo">
+    <img src="assets/portrait.jpg" alt="" class="rail-photo">
     <div class="rail-name">${esc(site.name)}</div>
     <button class="rail-back" data-open="landing" aria-label="Back to landing">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 8H3M7 4L3 8l4 4"/></svg>
@@ -338,7 +336,7 @@ const jsonLd = JSON.stringify({
   name: site.name, jobTitle: 'Development economist',
   affiliation: { '@type': 'Organization', name: 'Stanford Impact Labs' },
   email: `mailto:${site.email}`, url: site.url,
-  image: `${site.url}assets/avatar.jpg`,
+  image: `${site.url}assets/portrait.jpg`,
   ...(sameAs.length ? { sameAs } : {}),
 });
 const html = `<!doctype html>
@@ -354,7 +352,7 @@ const html = `<!doctype html>
 <meta property="og:title" content="${esc(site.name)}">
 <meta property="og:description" content="${esc(site.role)}">
 <meta property="og:url" content="${site.url}">
-<meta property="og:image" content="${site.url}assets/avatar.jpg">
+<meta property="og:image" content="${site.url}assets/portrait.jpg">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -375,5 +373,4 @@ ${practicePanel()}
 
 writeFileSync(join(ROOT, 'index.html'), html);
 if (!existsSync(join(ROOT, 'assets'))) mkdirSync(join(ROOT, 'assets'));
-if (existsSync(join(ROOT, 'design/avatar.jpg'))) copyFileSync(join(ROOT, 'design/avatar.jpg'), join(ROOT, 'assets/avatar.jpg'));
 console.log(`built index.html — ${papers.length} papers, ${labItems.length} lab items, stamp ${STAMP}`);

@@ -54,7 +54,8 @@ content/
 - DONE: design direction (Ledger × Index hybrid), palette (Atlas Cooled + marigold band),
   typography (display = Lora since 2026-08-23), motion rules, Paper Wheel spec — all in
   DESIGN.md. Build script + pages live. 2026-08-23 revision: Practice + Lab merged into
-  one Practice section (two-panel landing), circular portrait beside the name, landing
+  one Practice section (two-panel landing), full-width hero portrait anchoring the
+  identity panel (portrait.jpg; avatar.jpg retired), landing
   papers as a clean clickable list (papers carry a `short:` display title), per-paper
   deep links (`#/research/<slug>`), abstract toggles, favicon + og/JSON-LD meta,
   build-versioned asset URLs.
