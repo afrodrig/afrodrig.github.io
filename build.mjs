@@ -342,7 +342,10 @@ function practicePanel() {
           ${c.keyline ? `<div class="lab-keyline mono">${esc(c.keyline)}</div>` : ''}
           <div class="lab-foot">
             <span class="mono muted">${esc(c.status ?? '').toUpperCase()}</span>
-            ${c.link ? `<a class="accent mono" href="${c.link}">OPEN &nearr;</a>` : ''}
+            <span class="lab-foot-links">
+              ${(c.extra_links ?? []).map(l => `<a class="mono" href="${l.url}">${esc(l.label).toUpperCase()} &nearr;</a>`).join('')}
+              ${c.link ? `<a class="accent mono" href="${c.link}">OPEN &nearr;</a>` : ''}
+            </span>
           </div>
         </div>
       </article>`).join('')}

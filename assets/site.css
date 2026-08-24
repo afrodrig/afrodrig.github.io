@@ -314,6 +314,9 @@ mark.band {
 .lab-pitch { font-size: 14px; color: var(--color-muted-2); max-width: 58ch; }
 .lab-keyline { font-size: 12.5px; }
 .lab-foot { display: flex; justify-content: space-between; align-items: baseline; margin-top: 6px; font-size: 10.5px; }
+.lab-foot-links { display: flex; gap: 16px; }
+.lab-foot-links a { color: var(--color-muted); }
+.lab-foot-links a:hover, .lab-foot-links a.accent { color: var(--color-accent); }
 
 /* colophon */
 .colophon {
