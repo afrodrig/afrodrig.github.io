@@ -37,20 +37,27 @@ the rest of the web-CV data stays parked).
 `position: sticky; top: 0; height: 100dvh`) — **STATIC** (amended 2026-08-23 evening:
 Andrés cut the scroll-shrink morph; the photo stays prominent at every scroll depth):
 - Name in display serif (two lines), role line, a mono **credentials line**
-  (`site.yml credentials` — merged from main 2026-08-24), then the **hero portrait** —
-  a full-width RECTANGULAR block that absorbs the panel's leftover vertical space
-  (flex-grow, `object-fit` crop at `50% 30%`, hairline border, square corners; merged
-  from main 2026-08-23: the photo is the panel's anchor, not a badge) — then the
-  location in mono as a caption. Contacts (email in accent, Scholar/GitHub/LinkedIn/CV)
-  anchored at the bottom, always visible.
+  (`site.yml credentials`; each `·`-separated segment wraps as a unit — never
+  mid-phrase), then the **hero portrait** — a full-width RECTANGULAR block that
+  absorbs the panel's leftover vertical space (flex-grow, `object-fit` crop at
+  `50% 30%`, hairline border, square corners; the photo is the panel's anchor, not a
+  badge) — then a casual location caption in body type ("Based in the Bay Area,
+  California" — 2026-08-24, replacing the mono STANFORD, CALIFORNIA). Contacts
+  anchored at the bottom, always visible: email displayed OBFUSCATED
+  ("afrodrig [at] stanford [dot] edu"; the mailto link still works), the
+  Scholar/GitHub/LinkedIn/CV row, and the tiny mono `UPDATED <stamp>` line
+  (moved here from the retired colophon — a static home, 2026-08-24).
 - **Manual collapse**: a 44px hairline-square button (chevron) beside the contacts
   collapses the spine to a 76px rail — small photo (40px circle, face-biased crop
   `50% 22%` — circles are for the small mark only), vertical name, chevron mark. The
   rail is **one whole click target** that expands the spine (merged from main c6aba8f),
   and it uses the shared vertical-bar hover language: **the accent edge** — a 3px
   `--color-accent` bar on its left edge, surface darkened one step to `--color-rule`,
-  name to ink (merged from main 8c839f2). The grid columns transition with the spring
-  curve (§6 conscious exception).
+  name to ink (merged from main 8c839f2). **Collapse motion simplified 2026-08-24**
+  (the spring squeeze read as clunky): the faces keep their expanded layout (fixed
+  width — no mid-flight text rewrap) and fade out fast (120ms) while the columns
+  transition with plain ease-out (§6 conscious exception, no spring here); the rail
+  crossfades in after the geometry lands.
 - Retired with the morph (2026-08-23 evening): the compact masthead, the spine's
   section index, and the spine ledger-fill. Navigation now lives in the record's
   section strip.
@@ -59,36 +66,42 @@ Andrés cut the scroll-shrink morph; the photo stays prominent at every scroll d
 - **THE SECTION STRIP** (replaces the oversized typographic index, 2026-08-23 evening:
   "the hero headings were too big — a normal horizontal hero controlling navigation").
   Sticky at the record's top (`--nav-h` = 64px, paper background, hairline bottom):
-  one entry per section — `00 About · 01 Research · 02 Practice` — mono number beside
-  a serif title (20px). The active entry gets the 6px accent square + accent text
-  (§7 menu-row convention). Hover is color-only — **nothing moves on targets you're
-  about to click** (principle merged from main d0c41fe). Every entry returns to its
-  section's START, from anywhere. Static (non-sticky) on mobile.
+  one serif title (20px) per section — `About · Research · Practice`. **No section
+  numbers anywhere** (dropped 2026-08-24: the 00/01/02 ledger numbering read as
+  clutter — in the strip, in section heads, and on shelf boxes alike). The active
+  entry gets the 6px accent square + accent text (§7 menu-row convention). Hover is
+  color-only — **nothing moves on targets you're about to click** (principle merged
+  from main d0c41fe). Every entry returns to its section's START, from anywhere.
+  Static (non-sticky) on mobile.
 - **ABOUT** — a FULL PAGE of the record (amended 2026-08-23 late: "feels like a
   separate page" — nothing peeks from Research on landing). It fills the viewport
   below the strip (`min-height: 100dvh − --nav-h`), composed as a title page:
-  `00 · ABOUT` eyebrow, the bridge statement as a display-serif lede (one
-  marigold-banded phrase) and the `NOW:` line anchored at the top; the **vitae
+  the bridge statement as a display-serif lede (one marigold-banded phrase, no
+  eyebrow, no heading) and the `NOW:` line anchored at the top; the **vitae
   ledger** anchored at the bottom — a ruled three-column strip of facts rendered
   from DATA (never hand-written copy): CURRENTLY (cv.yml positions[0]),
   EDUCATION (cv.yml education), FIELDWORK (the papers' own `country` fields +
   the Research eyebrow). The space between the two masses is deliberate.
-- **RESEARCH** — a pinned track: the section wrapper is `100vh + (papers − 1) × 55vh`
-  tall; its inner pane sticks at `top: 0` while page scroll rotates the Paper Wheel
-  card-by-card (§8). Header keeps the stacked eyebrow + serif title left and the
-  `LIST / WHEEL` toggle right (WHEEL default on desktop), plus a mono `01 / 04` counter.
-  The detail spread is **vertically centered on the focal card's axis** (the focal card
-  sits at mid-height; the detail shares that axis — merged from main 2026-08-23).
-  List view unpins the track and shows hairline-separated entries, year in a mono side
-  column.
-- **PRACTICE** — a flowing section (§ anatomy below): intro, then **THE SHELF** — one
-  horizontally scrolled rail of uniform boxes; every piece (case study, essay, tool)
-  is a box, and NOTHING in the section is loose text (decided 2026-08-23 late: the
-  teaser rows and in-progress note were removed — "content lives only in the boxes").
-  Content reveals once on entry.
-- **Record foot** — one per page, at the very end: the mono **funder line**
-  (`site.yml supported` — quiet credibility, merged from main 2026-08-24) above the
-  colophon row (EMAIL · SCHOLAR · GITHUB · LINKEDIN · CV + the UPDATED stamp).
+- **RESEARCH** — a pinned track: the section wrapper is `100dvh + (papers − 1) × 55dvh`
+  tall (ONE viewport basis everywhere — mixing vh and dvh made landings drift); its
+  inner pane docks beneath the strip while page scroll rotates the Paper Wheel
+  card-by-card (§8). Header is JUST the serif title over one context line
+  ("Governance, public goods and beliefs — …") — **no eyebrow, no numbering, no date
+  range** (cut 2026-08-24: "too much useless info around the title"); the
+  `LIST / WHEEL` toggle + mono `01 / 05` pager sit right. Pin top padding is tight
+  (28px). The detail spread is **vertically centered on the focal card's axis**. The
+  mono **funder line** (`site.yml supported`) rides the pin's foot — it applies to
+  all projects (moved from the page end, 2026-08-24). List view unpins the track and
+  shows hairline-separated entries, year in a mono side column.
+- **PRACTICE** — a full page (min-height 100dvh − --nav-h — a shorter last section
+  can never scroll flush beneath the strip, max-scroll clamps short): bare serif
+  title (no eyebrow), intro, then **THE SHELF** — one horizontally scrolled rail of
+  uniform boxes sized so the whole composition (title → cards) sits inside one
+  laptop fold; every piece (case study, essay, tool) is a box, and NOTHING in the
+  section is loose text (decided 2026-08-23 late). Content reveals once on entry.
+- **There is NO page footer** (colophon retired 2026-08-24: the EMAIL/GITHUB/… row
+  duplicated the spine contacts). The `UPDATED <stamp>` line lives statically in the
+  spine's contact block; the funder line lives in Research.
 
 **Magnetic snap** (2026-08-23 evening — "the scrolling should fall into the right
 place"): the page has exactly four desktop rest states — About (y = 0), the pinned
@@ -284,11 +297,14 @@ or hand-rolled FLIP; kinetics.colorion.co presets are approved sources.
 ## 8. The Paper Wheel
 
 Papers orbit ONE real circle — cards and the dashed arc share the same geometry, or the
-wheel reads as fake. Spec: radius R = 900px, circle center off-screen LEFT of the wheel
-column at (focal-anchor-x − R, mid-height); the focal card sits at the circle's rightmost
-point; each step is 6° along the circle (x = −R(1−cosθ), y = R·sinθ, tilt ≈ 5.1°/step).
-The arc path is drawn by JS through the cards' anchors at the current container size
-(redrawn on open and on resize) — never a static decorative curve.
+wheel reads as fake. Spec (FLIPPED 2026-08-24 at Andrés's request — the wheel should
+hug the OUTSIDE of the browser): radius R = 900px, circle center OFF-SCREEN RIGHT at
+(focal-anchor-x + R, mid-height) — the wheel reads as physically mounted just beyond
+the browser's right edge. The focal card sits at the circle's LEFTMOST point; each
+step is 6° along the circle (x = +R(1−cosθ), y = R·sinθ, tilt ≈ −5.1°/step), so
+receding cards drift toward the edge and may clip past it — that clipping is the
+point. The arc path is drawn by JS through the cards' anchors at the current
+container size (redrawn on open and on resize) — never a static decorative curve.
 - At rest: focal card inked (`--color-ink` fill), neighbors recede (scale .94, reduced
   opacity, slight rotation following the arc). **The featured paper LEADS the sequence**
   (amended 2026-08-23 for the Ledger Scroll: the wheel is now a scroll narrative, so the

@@ -80,7 +80,14 @@ content/
   link; field research talks & mentoring) leading the shelf, teasers trailing;
   bio/role/NOW rebuilt around scholar + SIL dual identity; credentials line + funder
   line from site.yml; GitHub/LinkedIn links live; rail = one click target with the
-  accent-edge hover.
+  accent-edge hover. 2026-08-24 polish round (Andrés's feedback): section numbers
+  (00/01/02) removed everywhere; section heads are bare titles (no eyebrows/date
+  ranges); About has no heading at all; colophon RETIRED (UPDATED stamp lives in the
+  spine contacts; funder line rides the research pin's foot); email displayed
+  obfuscated; casual "Based in…" location; credential segments wrap as units;
+  collapse motion simplified (fade + ease-out, no spring); Practice is a full page
+  with the shelf fully visible inside one fold; the wheel's circle center moved
+  OFF-SCREEN RIGHT (cards hug the browser edge).
 - TODO: Scholar URL; tune `TODO(update)` seeds (keywords, short titles, takeaways,
   bio voice); practice case-study/essay teasers still placeholders; key-figure data
   per paper (schema wired, no fabricated numbers).

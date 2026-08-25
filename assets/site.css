@@ -39,8 +39,9 @@ mark.band {
 .frame {
   --aside-w: clamp(300px, 32vw, 430px);
   display: grid; grid-template-columns: var(--aside-w) minmax(0, 1fr);
-  /* grid-template-columns transition = the DESIGN.md §6 conscious exception */
-  transition: grid-template-columns 560ms var(--ease-spring);
+  /* grid-template-columns transition = the DESIGN.md §6 conscious exception.
+     Plain ease-out — a spring wobble on a collapsing panel read as clunky. */
+  transition: grid-template-columns var(--dur-long) var(--ease-out);
 }
 .frame.is-collapsed { --aside-w: 76px; }
 .flow { min-width: 0; }
@@ -64,8 +65,21 @@ mark.band {
 }
 .id-name { flex: none; }
 .role { flex: none; margin-top: var(--s-12); font-size: 15px; font-weight: 400; color: var(--color-muted-2); max-width: 30ch; }
-.credline { flex: none; margin-top: var(--s-8); font-size: 10px; letter-spacing: 0.1em; color: var(--color-muted-2); }
-.id-loc { flex: none; margin-top: var(--s-12); font-size: 10.5px; letter-spacing: 0.12em; color: var(--color-muted-2); }
+.credline { flex: none; margin-top: var(--s-8); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-muted-2); }
+.cred-seg { white-space: nowrap; }
+.id-loc { flex: none; margin-top: var(--s-12); font-size: 13px; color: var(--color-muted-2); }
+
+/* collapse reads clean: the faces keep their expanded layout (no mid-flight
+   rewrapping) and fade out fast before the panel narrows over them */
+@media (min-width: 881px) {
+  .id-full, .id-foot {
+    width: clamp(300px, 32vw, 430px);
+    transition: opacity var(--dur-short) var(--ease-out) 240ms;
+  }
+  .frame.is-collapsed .id-full, .frame.is-collapsed .id-foot {
+    opacity: 0; transition: opacity 120ms var(--ease-out);
+  }
+}
 
 .id-foot {
   flex: none; padding: 20px 44px 28px;
@@ -73,6 +87,7 @@ mark.band {
 }
 .id-contacts { display: flex; flex-direction: column; gap: 10px; font-size: 13.5px; }
 .identity-links { display: flex; flex-wrap: wrap; gap: 18px; color: var(--color-muted-2); }
+.id-updated { font-size: 10px; letter-spacing: 0.1em; color: var(--color-muted-2); }
 .id-collapse {
   width: 44px; height: 44px; flex: none;
   border: 1px solid var(--color-rule-strong);
@@ -114,10 +129,9 @@ mark.band {
   padding: 0 64px;
 }
 .record-nav { display: flex; align-items: center; gap: 44px; height: var(--nav-h); }
-.rnav { position: relative; display: inline-flex; align-items: baseline; gap: 10px; line-height: 1; padding: 12px 0; }
-.rnav-num { font-size: 10.5px; color: var(--color-muted); }
+.rnav { position: relative; display: inline-flex; align-items: baseline; line-height: 1; padding: 12px 0; }
 .rnav-title { font-family: var(--font-display); font-size: 20px; line-height: 1; }
-.rnav:hover .rnav-title, .rnav:hover .rnav-num { color: var(--color-accent); }
+.rnav:hover .rnav-title { color: var(--color-accent); }
 .rnav:active .rnav-title { color: var(--color-accent-deep); }
 .rnav.is-active .rnav-title { color: var(--color-accent); }
 .rnav.is-active::before {
@@ -141,7 +155,6 @@ mark.band {
   font-family: var(--font-display);
   font-size: clamp(1.4rem, 1.9vw, 1.75rem); line-height: 1.45;
   color: var(--color-ink); max-width: 48ch;
-  margin-top: var(--s-16);
 }
 .nowline { margin-top: var(--s-24); margin-bottom: var(--s-40); display: flex; align-items: center; gap: 12px; font-size: 11px; letter-spacing: 0.1em; color: var(--color-accent); line-height: 1; }
 .nowrule { width: 22px; height: 1px; background: var(--color-accent); flex: none; }
@@ -167,14 +180,18 @@ mark.band {
 
 /* ---------- research: the pinned wheel track ----------
    Track height = 100vh + steps × 55vh; the pin stays while page scroll turns the wheel. */
-.track { height: calc(100vh + var(--steps, 3) * 55vh); }
+/* one viewport basis everywhere (dvh, with vh fallback) — mixing vh and dvh
+   made section landings drift wherever the two disagree */
+.track { height: calc(100vh + var(--steps, 3) * 55vh); height: calc(100dvh + var(--steps, 3) * 55dvh); }
 .pin {
   position: sticky; top: var(--nav-h);
   height: calc(100vh - var(--nav-h)); height: calc(100dvh - var(--nav-h));
   min-height: 540px;
   display: flex; flex-direction: column;
-  padding: 44px 64px 20px;
+  padding: 28px 64px 16px;
 }
+/* the funder line rides the pin's foot — it applies to all projects */
+.supported { flex: none; padding: 14px 0 6px; font-size: 10px; letter-spacing: 0.1em; color: var(--color-muted); }
 .track[data-view="wheel"] .pin { overflow: hidden; }
 .track[data-view="wheel"] .entry-list { display: none; }
 .track[data-view="list"] { height: auto; }
@@ -266,9 +283,14 @@ mark.band {
    Content lives ONLY in the boxes (2026-08-23): one horizontally scrolled rail of
    uniform cards — pieces and artifacts alike. Hairline-square prev/next + mono
    counter; the rail itself scroll-snaps and hides its scrollbar. */
-.practice-sec { padding: 48px 64px 64px; }
+/* a full page, like About — if the section were shorter than the viewport the page
+   could never scroll it flush beneath the strip (max-scroll clamps short) */
+.practice-sec {
+  padding: 28px 64px 64px;
+  min-height: calc(100vh - var(--nav-h)); min-height: calc(100dvh - var(--nav-h));
+}
 .shelf-controls {
-  margin-top: var(--s-24); padding-top: var(--s-12);
+  margin-top: var(--s-16); padding-top: var(--s-12);
   border-top: 1px solid var(--color-rule);
   display: flex; align-items: center; justify-content: space-between;
 }
@@ -287,7 +309,7 @@ mark.band {
 .shelf-btn:disabled { opacity: 0.55; cursor: not-allowed; }
 
 .lab-cards {
-  margin-top: var(--s-24);
+  margin-top: var(--s-16);
   display: flex; gap: var(--s-24); align-items: stretch;
   overflow-x: auto;
   scroll-snap-type: x proximity;
@@ -295,12 +317,12 @@ mark.band {
 }
 .lab-cards::-webkit-scrollbar { display: none; }
 .lab-card {
-  flex: none; width: min(400px, 86vw);
+  flex: none; width: min(380px, 86vw);
   scroll-snap-align: start;
   display: flex; flex-direction: column;
   background: var(--color-card); border: 1px solid var(--color-rule);
 }
-.lab-cover { flex: none; height: 180px; background: var(--color-ink); position: relative; overflow: hidden; }
+.lab-cover { flex: none; height: 150px; background: var(--color-ink); position: relative; overflow: hidden; }
 /* original CSS art per kind (never borrowed illustration) — all ride the same ledger grid */
 .lab-cover::after {
   content: ""; position: absolute; inset: 0;
@@ -361,27 +383,15 @@ mark.band {
     linear-gradient(0deg, var(--color-data) 0 0) 40px 114px/174px 8px no-repeat,
     linear-gradient(0deg, var(--color-data-strong) 0 0) 40px 132px/120px 8px no-repeat;
 }
-.lab-body { flex: 1; padding: 22px 26px 24px 26px; display: flex; flex-direction: column; gap: 10px; }
-.lab-title { font-family: var(--font-display); font-size: 25px; line-height: 1.12; overflow-wrap: anywhere; min-width: 0; }
-.lab-pitch { font-size: 14px; color: var(--color-muted-2); max-width: 58ch; }
-.lab-keyline { font-size: 12.5px; }
+.lab-body { flex: 1; padding: 18px 22px 20px 22px; display: flex; flex-direction: column; gap: 8px; }
+.lab-title { font-family: var(--font-display); font-size: 22px; line-height: 1.15; overflow-wrap: anywhere; min-width: 0; }
+.lab-pitch { font-size: 13.5px; line-height: 1.55; color: var(--color-muted-2); max-width: 58ch; }
+.lab-keyline { font-size: 12px; }
 .lab-foot { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-16); margin-top: auto; padding-top: var(--s-8); font-size: 10.5px; }
 .lab-foot-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px 14px; }
 .lab-foot-links a { color: var(--color-muted); }
 .lab-foot-links a:hover, .lab-foot-links a.accent { color: var(--color-accent); }
 .lab-foot-links a.accent:hover { color: var(--color-accent-deep); }
-
-/* ---------- record foot: funder line + colophon ---------- */
-.record-foot { margin: 0 64px; }
-.supported { padding: 0 0 14px 0; font-size: 10px; letter-spacing: 0.1em; color: var(--color-muted); }
-.colophon {
-  border-top: 1px solid var(--color-rule);
-  padding: 16px 0 22px 0; display: flex; justify-content: space-between; align-items: baseline;
-  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; color: var(--color-muted);
-}
-.colophon-links { display: flex; gap: 22px; }
-.colophon a { color: var(--color-muted); }
-.colophon a.accent { color: var(--color-accent); }
 
 /* ---------- scroll reveals (reveal-once via IntersectionObserver) ---------- */
 [data-reveal] {
@@ -402,7 +412,6 @@ html:not(.js) [data-reveal] { opacity: 1; transform: none; }
 .js .about > :nth-child(1) { animation-delay: 120ms; }
 .js .about > :nth-child(2) { animation-delay: 200ms; }
 .js .about > :nth-child(3) { animation-delay: 280ms; }
-.js .about > :nth-child(4) { animation-delay: 360ms; }
 
 /* ---------- no-JS: everything reads as a plain vertical page ---------- */
 html:not(.js) .track { height: auto; }
@@ -442,9 +451,8 @@ html:not(.js) .id-collapse { display: none; }
   .pin { position: static; height: auto; min-height: 0; overflow: visible; padding: 48px 24px 56px; }
   .wheel-view, .view-toggle, .wheel-count { display: none; }
   .track[data-view="wheel"] .entry-list { display: block; }
-  .practice-sec { padding: 64px 24px 48px; }
-  .record-foot { margin: 0 24px; }
-  .colophon { flex-wrap: wrap; gap: 10px; }
+  .practice-sec { padding: 56px 24px 48px; min-height: 0; }
+  .supported { padding: 20px 0 0; }
   .entry { grid-template-columns: 1fr; gap: 4px; }
   .entry-year { padding-top: 0; }
   /* the shelf stays horizontal on mobile — swipe with the next card peeking */

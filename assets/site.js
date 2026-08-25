@@ -18,8 +18,10 @@
   const navLinks = [...document.querySelectorAll('.rnav')];
 
   /* ============ the Paper Wheel ============
-     Cards ride one real circle (R = 900px, 6°/step); the dashed arc is drawn
-     through the same geometry. Page scroll through the pinned track rotates it. */
+     Cards ride one real circle (R = 900px, 6°/step) whose center sits OFF-SCREEN
+     to the RIGHT — the wheel reads as mounted just beyond the browser's edge, and
+     receding cards drift toward it. The dashed arc is drawn through the same
+     geometry. Page scroll through the pinned track rotates it. */
   const wheelAPI = (function () {
     const wheelEl = document.querySelector('.wheel');
     if (!wheelEl) return null;
@@ -36,7 +38,7 @@
 
     const pos = (off) => {
       const th = off * STEP;
-      return { x: -R * (1 - Math.cos(th)), y: R * Math.sin(th), deg: off * 5.1 };
+      return { x: R * (1 - Math.cos(th)), y: R * Math.sin(th), deg: -off * 5.1 };
     };
 
     function layout() {
@@ -55,18 +57,19 @@
       counters.forEach((el) => { el.textContent = label; });
     }
 
-    // Draw the arc through the cards' right-edge anchors, matching the same circle.
+    // Draw the arc through the cards' right-edge anchors, matching the same circle
+    // (center at focal-anchor + R, off past the right edge of the viewport).
     function drawArc() {
       const W = wheelEl.clientWidth, H = wheelEl.clientHeight;
       if (!W || !H) return;
-      const ax = W - 4, ay = H / 2;             // focal anchor (rightmost point)
+      const ax = W - 4, ay = H / 2;             // focal anchor (the circle's leftmost point)
       const span = 22 * Math.PI / 180;          // arc spans ±22°
-      const px = (th) => ax - R * (1 - Math.cos(th));
+      const px = (th) => ax + R * (1 - Math.cos(th));
       const py = (th) => ay + R * Math.sin(th);
       arcSvg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
       arcPath.setAttribute('d',
         'M ' + px(-span).toFixed(1) + ' ' + py(-span).toFixed(1) +
-        ' A ' + R + ' ' + R + ' 0 0 1 ' + px(span).toFixed(1) + ' ' + py(span).toFixed(1));
+        ' A ' + R + ' ' + R + ' 0 0 0 ' + px(span).toFixed(1) + ' ' + py(span).toFixed(1));
     }
 
     function setFocal(i, byScroll) {
@@ -158,6 +161,7 @@
 
   function maybeSnap() {
     if (snapping || !M || isStatic() || !track || track.dataset.view !== 'wheel') return;
+    measure();   // fresh geometry — late reflows must never leave stale snap targets
     const y = window.scrollY, EPS = 6;
     const endPin = M.trackTop + M.trackLen;
     let target = null;
@@ -195,6 +199,7 @@
     if (key === 'about') { window.scrollTo({ top: 0, behavior }); return; }
     const el = document.getElementById(key);
     if (!el) return;
+    measure();
     if (M && !isStatic()) {
       const top = key === 'research' ? M.trackTop : M.practiceTop;
       window.scrollTo({ top: Math.round(top), behavior });
@@ -203,7 +208,9 @@
     }
   }
   function scrollToPaper(i, animate) {
-    if (!M || !wheelAPI) return;
+    if (!wheelAPI) return;
+    measure();
+    if (!M) return;
     const top = M.trackTop + (i / Math.max(1, wheelAPI.count - 1)) * M.trackLen;
     window.scrollTo({ top: Math.round(top), behavior: animate === false ? 'auto' : smooth() });
   }

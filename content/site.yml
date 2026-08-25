@@ -4,8 +4,8 @@ monogram: "AR"
 role: "Development economist · Impact & Learning Manager, Stanford Impact Labs"  # title per cv.pdf 2026-08
 credentials: "PhD in Economics, Stanford · BA & MA, Universidad de los Andes"
 supported: "Work supported by J-PAL, the International Growth Centre, the Weiss Fund & the Stanford King Center"   # TODO(update): confirm funder list/wording
-email: "afrodrig@stanford.edu"
-location: "Stanford, California"
+email: "afrodrig@stanford.edu"   # displayed obfuscated ("afrodrig [at] stanford [dot] edu"); the mailto link still works
+location: "the Bay Area, California"   # rendered as "Based in <location>"
 url: "https://afrodrig.github.io/"   # canonical URL — used for og: tags and JSON-LD
 
 # Section order defines panel order on the landing (identity panel is always first).

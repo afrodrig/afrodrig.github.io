@@ -134,20 +134,14 @@ const authorsLine = (a) => (Array.isArray(a) && a.length) ? `with ${a.join(', ')
 const RESEARCH_DESC = 'Governance, public goods and beliefs — Sierra Leone, Zambia, Colombia.';
 
 /* ---------- shared bits ---------- */
-const colophon = `
-<footer class="record-foot">
-  ${site.supported ? `<div class="supported mono">${esc(site.supported).toUpperCase()}</div>` : ''}
-  <div class="colophon">
-    <div class="colophon-links">
-      <a class="accent" href="mailto:${site.email}">EMAIL</a>
-      ${site.links.scholar ? `<a href="${site.links.scholar}">SCHOLAR</a>` : ''}
-      ${site.links.github ? `<a href="${site.links.github}">GITHUB</a>` : ''}
-      ${site.links.linkedin ? `<a href="${site.links.linkedin}">LINKEDIN</a>` : ''}
-      <a href="${site.links.cv}">CV</a>
-    </div>
-    <div>UPDATED ${STAMP}</div>
-  </div>
-</footer>`;
+// Email shown obfuscated (the mailto link still works).
+const emailLabel = (() => {
+  const [local, domain] = String(site.email).split('@');
+  return `${local} [at] ${domain.split('.').join(' [dot] ')}`;
+})();
+// Credential segments never break mid-phrase — each wraps as a unit.
+const credline = String(site.credentials ?? '').split('·').map(s => s.trim()).filter(Boolean)
+  .map(s => `<span class="cred-seg">${esc(s)}</span>`).join(' · ');
 
 /* ---------- identity spine (sticky left panel) ---------- */
 function identityAside() {
@@ -156,19 +150,20 @@ function identityAside() {
   <div class="id-full">
     <h1 class="display id-name">${esc(site.name).replace(' F. ', ' F.<br>')}</h1>
     <div class="role">${esc(site.role)}</div>
-    ${site.credentials ? `<div class="credline mono">${esc(site.credentials).toUpperCase()}</div>` : ''}
+    ${credline ? `<div class="credline mono">${credline}</div>` : ''}
     <img class="portrait" src="assets/portrait.jpg" alt="Portrait of ${esc(site.name)}">
-    <div class="id-loc mono">${esc(site.location).toUpperCase()}</div>
+    <div class="id-loc">Based in ${esc(site.location)}</div>
   </div>
   <div class="id-foot">
     <div class="id-contacts">
-      <a class="accent" href="mailto:${site.email}">${esc(site.email)}</a>
+      <a class="accent" href="mailto:${site.email}">${esc(emailLabel)}</a>
       <div class="identity-links">
         ${site.links.scholar ? `<a href="${site.links.scholar}">Scholar</a>` : ''}
         ${site.links.github ? `<a href="${site.links.github}">GitHub</a>` : ''}
         ${site.links.linkedin ? `<a href="${site.links.linkedin}">LinkedIn</a>` : ''}
         <a href="${site.links.cv}">CV (PDF)</a>
       </div>
+      <div class="id-updated mono">UPDATED ${STAMP}</div>
     </div>
     <button class="id-collapse" aria-label="Collapse the identity panel" aria-expanded="true">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg>
@@ -188,15 +183,15 @@ function identityAside() {
    Sticky at the record's top; every entry returns to that section's start. */
 function recordNav() {
   const items = [
-    { key: 'about', num: '00', title: 'About' },
-    ...site.sections.map((s, i) => ({ key: s.key, num: '0' + (i + 1), title: s.title })),
+    { key: 'about', title: 'About' },
+    ...site.sections.map((s) => ({ key: s.key, title: s.title })),
   ];
   return `
 <header class="record-nav-wrap">
   <nav class="record-nav" aria-label="Sections">
     ${items.map(it => `
     <a class="rnav" href="#${it.key}" data-idx="${it.key}">
-      <span class="rnav-num mono">${it.num}</span><span class="rnav-title">${esc(it.title)}</span>
+      <span class="rnav-title">${esc(it.title)}</span>
     </a>`).join('')}
   </nav>
 </header>`;
@@ -217,7 +212,6 @@ function aboutSection() {
   const researchEyebrow = site.sections.find(s => s.key === 'research')?.eyebrow ?? '';
   return `
 <section class="about" id="about">
-  <div class="eyebrow mono">00 · ABOUT</div>
   <p class="lede">${band(bio.body, bio.meta.highlight)}</p>
   <div class="nowline mono"><span class="nowrule"></span>NOW: ${esc(bio.meta.now).toUpperCase()}</div>
   <div class="vitae">
@@ -268,7 +262,6 @@ const paperLinks = (p) => {
 };
 
 function researchSection() {
-  const eyebrow = site.sections.find(s => s.key === 'research').eyebrow;
   const entries = wheelPapers.map((p, i) => `
     <article class="entry ${i === 0 ? 'entry-open' : ''}" data-paper="${i}">
       <div class="entry-year mono">${esc(yearLabel(p))}</div>
@@ -287,7 +280,6 @@ function researchSection() {
   <div class="pin">
     <header class="section-head">
       <div class="head-stack">
-        <div class="eyebrow mono">01 · ${esc(eyebrow).toUpperCase()} · 2019–PRESENT</div>
         <h2 class="display-2">Research</h2>
         <p class="section-desc">${esc(RESEARCH_DESC)}</p>
       </div>
@@ -330,6 +322,7 @@ function researchSection() {
     </div>
 
     <div class="entry-list">${entries}</div>
+    ${site.supported ? `<div class="supported mono">${esc(site.supported).toUpperCase()}</div>` : ''}
   </div>
 </section>`;
 }
@@ -356,7 +349,6 @@ function practiceSection() {
 <section class="practice-sec" id="practice">
   <header class="section-head" data-reveal style="--i:0">
     <div class="head-stack">
-      <div class="eyebrow mono">02 · ${esc(practice.meta.eyebrow).toUpperCase()}</div>
       <h2 class="display-2">Practice</h2>
     </div>
   </header>
@@ -377,7 +369,7 @@ function practiceSection() {
     <article class="lab-card">
       <div class="lab-cover lab-cover-${kindKey(c.kind)}" aria-hidden="true"></div>
       <div class="lab-body">
-        <div class="eyebrow mono">${pad2(i + 1)} · ${esc(c.kind).toUpperCase()}</div>
+        <div class="eyebrow mono">${esc(c.kind).toUpperCase()}</div>
         <h3 class="lab-title">${esc(c.title)}</h3>
         ${c.pitch ? `<p class="lab-pitch">${esc(c.pitch)}</p>` : ''}
         ${/* no band here: the Practice intro already carries this screen's one marigold band */''}
@@ -436,7 +428,6 @@ ${recordNav()}
 ${aboutSection()}
 ${researchSection()}
 ${practiceSection()}
-${colophon}
 </main>
 </div>
 <script src="assets/site.js?v=${V}"></script>
