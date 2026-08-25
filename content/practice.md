@@ -10,6 +10,7 @@ highlight: "evaluation that gets used"   # marigold band phrase — must appear 
 items:
   - title: "Impact measurement methodology at SIL"
     kind: "Methodology"
+    pitch: "How Stanford Impact Labs measures the impact of its applied social science portfolio — the framework I lead as Impact & Learning Manager: what each funded project set out to change, what it delivers, and how that evidence feeds the next decision."
 ---
 
 <!--

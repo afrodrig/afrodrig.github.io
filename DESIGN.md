@@ -67,7 +67,8 @@ Andrés cut the scroll-shrink morph; the photo stays prominent at every scroll d
 - **THE SECTION STRIP** (replaces the oversized typographic index, 2026-08-23 evening:
   "the hero headings were too big — a normal horizontal hero controlling navigation").
   Sticky at the record's top (`--nav-h` = 64px, paper background, hairline bottom):
-  one serif title (20px) per section — `About · Research · Practice`. **No section
+  one serif title (20px) per section — `About · Research · Practice` — **centered**
+  in the strip (amended 2026-08-24). **No section
   numbers anywhere** (dropped 2026-08-24: the 00/01/02 ledger numbering read as
   clutter — in the strip, in section heads, and on shelf boxes alike). The entries
   are **ruled cells** — full-height hairline separators between them, like a
@@ -84,8 +85,9 @@ Andrés cut the scroll-shrink morph; the photo stays prominent at every scroll d
   eyebrow, no heading) and the `NOW:` line anchored at the top; the **vitae
   ledger** anchored at the bottom — a ruled three-column strip of facts rendered
   from DATA (never hand-written copy): CURRENTLY (cv.yml positions[0]),
-  EDUCATION (cv.yml education), FIELDWORK (the papers' own `country` fields +
-  the Research eyebrow). The space between the two masses is deliberate.
+  EDUCATION (cv.yml education), RESEARCH & FIELDWORK (`site.yml interests` over the
+  papers' own `country` fields — no paper counts, no year ranges; amended
+  2026-08-24). The space between the two masses is deliberate.
 - **RESEARCH** — a pinned track: the section wrapper is `100dvh + (papers − 1) × 55dvh`
   tall (ONE viewport basis everywhere — mixing vh and dvh made landings drift); its
   inner pane docks beneath the strip while page scroll rotates the Paper Wheel
@@ -122,7 +124,8 @@ a glide in flight. Off on mobile, in list view, and under reduced motion.
 
 **Deep links**: `#about`, `#research`, `#practice`, and per-paper `#/research/<slug>`
 all work; scrolling updates the hash (replaceState) so the current paper is always
-shareable. ESC returns to the top.
+shareable. ESC returns to the top. **External links and PDFs open in a new tab**
+(`target="_blank" rel="noopener"`, applied at boot); in-page navigation never does.
 
 **Practice section anatomy** (re-amended 2026-08-23 late — content lives ONLY in the
 boxes, and the section is sized as ONE PAGE: 48px top padding, 180px covers, so

@@ -4,8 +4,11 @@ kind: "talks & mentoring"
 status: "ongoing"
 pitch: "Supporting graduate students through experimental field research at every scale — from large partnerships with government entities to smaller lab-in-the-field data collection — and what each approach means for the kind of knowledge it can produce. Guest speaker for Stanford courses POLISCI 150C/355C and EDUC 318 and at the Stanford King Center on Global Development."
 keyline: ""
-link: "https://kingcenter.stanford.edu/events/student-event/research-roadmap-mastering-fieldwork-essentials"
-link_label: "Example"
+link: ""            # no main destination — the title stays unlinked
+link_label: ""
+extra_links:
+  - label: "Example"
+    url: "https://kingcenter.stanford.edu/events/student-event/research-roadmap-mastering-fieldwork-essentials"
 repo: ""
 order: 2
 ---

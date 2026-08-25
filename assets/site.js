@@ -356,6 +356,12 @@
   }
 
   /* ============ boot ============ */
+  // external links and PDFs open in their own tab; in-page navigation never does
+  document.querySelectorAll('a[href^="http"], a[href$=".pdf"]').forEach((a) => {
+    a.target = '_blank';
+    a.rel = 'noopener';
+  });
+
   measure();
   // the hash the page ARRIVED with — never the ones our own scrollspy writes later
   const bootHash = location.hash;

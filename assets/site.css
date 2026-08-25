@@ -130,13 +130,13 @@ mark.band {
 }
 /* ruled cells, like a ledger's column headers; the active cell carries an
    accent tab bar that interrupts the strip's bottom hairline */
-.record-nav { display: flex; align-items: stretch; height: var(--nav-h); }
+.record-nav { display: flex; align-items: stretch; justify-content: center; height: var(--nav-h); }
 .rnav {
   position: relative; display: flex; align-items: center;
   line-height: 1; padding: 0 32px;
   border-left: 1px solid var(--color-rule);
 }
-.rnav:first-child { border-left: 0; padding-left: 0; }
+.rnav:first-child { border-left: 0; }
 .rnav-title { font-family: var(--font-display); font-size: 20px; line-height: 1; }
 .rnav:hover .rnav-title { color: var(--color-accent); }
 .rnav:active .rnav-title { color: var(--color-accent-deep); }

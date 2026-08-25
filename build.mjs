@@ -209,7 +209,7 @@ function aboutSection() {
     ? `${prior.map(e => String(e.degree).split(',')[0]).join(' & ')} — ${prior[0].org}`
     : '';
   const countries = [...new Set(papers.map(p => p.country).filter(Boolean))];
-  const researchEyebrow = site.sections.find(s => s.key === 'research')?.eyebrow ?? '';
+  const interests = Array.isArray(site.interests) ? site.interests : [];
   return `
 <section class="about" id="about">
   <p class="lede">${band(bio.body, bio.meta.highlight)}</p>
@@ -228,10 +228,9 @@ function aboutSection() {
       <div class="vita-years mono">${esc(phd.years)}</div>
     </div>
     <div class="vita">
-      <div class="eyebrow mono">FIELDWORK</div>
-      <p class="vita-line">${esc(countries.join(' · '))}</p>
-      <p class="vita-line vita-sub">${esc(researchEyebrow)}</p>
-      <div class="vita-years mono">2019—</div>
+      <div class="eyebrow mono">RESEARCH &amp; FIELDWORK</div>
+      <p class="vita-line">${esc(interests.join(' · '))}</p>
+      <p class="vita-line vita-sub">${esc(countries.join(' · '))}</p>
     </div>
   </div>
 </section>`;
@@ -341,7 +340,7 @@ function practiceSection() {
     ...labCards.map(c => ({ title: c.title, kind: c.kind ?? 'tool', status: c.status ?? '',
       pitch: c.pitch ?? c.body ?? '', keyline: c.keyline ?? '', link: c.link ?? '',
       link_label: c.link_label ?? 'Open', extra_links: c.extra_links ?? [] })),
-    ...items.map(it => ({ title: it.title, kind: it.kind ?? 'Piece', status: 'in progress', pitch: '', keyline: '', link: '', link_label: '', extra_links: [] })),
+    ...items.map(it => ({ title: it.title, kind: it.kind ?? 'Piece', status: 'in progress', pitch: it.pitch ?? '', keyline: '', link: '', link_label: '', extra_links: [] })),
   ];
   const kindKey = (k) => String(k).toLowerCase().split(' ').pop().replace(/[^a-z]/g, '');
   return `

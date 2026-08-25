@@ -6,6 +6,7 @@ credentials: "PhD in Economics, Stanford · BA & MA, Universidad de los Andes"
 supported: "Work supported by J-PAL, the International Growth Centre, the Weiss Fund & the Stanford King Center"   # TODO(update): confirm funder list/wording
 email: "afrodrig@stanford.edu"   # displayed obfuscated ("afrodrig [at] stanford [dot] edu"); the mailto link still works
 location: "the Bay Area, California"   # rendered as "Based in <location>"
+interests: ["Governance", "Global development", "Field experiments"]   # About vitae: RESEARCH & FIELDWORK line
 url: "https://afrodrig.github.io/"   # canonical URL — used for og: tags and JSON-LD
 
 # Section order defines panel order on the landing (identity panel is always first).
