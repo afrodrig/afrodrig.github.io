@@ -233,8 +233,19 @@ mark.band {
 .wd-eyebrow { font-size: 10.5px; letter-spacing: 0.1em; color: var(--color-muted); text-transform: uppercase; }
 .wd-title { font-family: var(--font-display); font-size: clamp(1.5rem, 2.1vw, 1.9rem); line-height: 1.2; margin-top: 10px; overflow-wrap: anywhere; min-width: 0; }
 .wd-authors { margin-top: 10px; font-size: 14px; color: var(--color-muted-2); }
-.wheel-detail .takeaway { margin-top: var(--s-16); font-size: 17px; line-height: 1.65; max-width: 58ch; }
-.wheel-detail .entry-links { margin-top: 20px; font-size: 11.5px; }
+/* the description is the abstract — quiet, readable body text.
+   Inside the pinned pane it clamps to what the viewport height can hold
+   (the LIST view always carries the full abstract). */
+.wd-desc { margin-top: var(--s-16); max-width: 60ch; }
+.wd-desc p { font-size: 14px; line-height: 1.6; color: var(--color-ink-body); }
+.wd-desc p + p { margin-top: var(--s-8); }
+.wheel-detail .wd-desc p {
+  display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden;
+  -webkit-line-clamp: 12;
+}
+@media (min-height: 880px) { .wheel-detail .wd-desc p { -webkit-line-clamp: 17; } }
+@media (min-height: 980px) { .wheel-detail .wd-desc p { -webkit-line-clamp: 24; } }
+.wheel-detail .entry-links { margin-top: 20px; }
 
 .wheel {
   position: relative; min-height: 380px; overflow: visible;
@@ -290,10 +301,19 @@ mark.band {
 .entry-more { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows var(--dur-long) var(--ease-out), opacity var(--dur-long) var(--ease-out); }
 .entry-more > .em-inner { overflow: hidden; min-height: 0; }
 .entry-open .entry-more { grid-template-rows: 1fr; opacity: 1; }
-.em-inner { padding-bottom: 2px; }
-.takeaway { margin-top: var(--s-12); font-size: 15px; color: var(--color-ink-body); max-width: 58ch; }
-.entry-links { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 11px; letter-spacing: 0.06em; }
-.entry-links a { color: var(--color-muted); }
+.em-inner { padding-bottom: 4px; }
+.em-inner .wd-desc { margin-top: var(--s-12); }
+.em-inner .wd-desc p { font-size: 13.5px; }
+/* paper links as soft outlined chips — clickability visible at rest */
+.entry-links { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; font-size: 10.5px; letter-spacing: 0.08em; }
+.entry-links a {
+  display: inline-flex; align-items: center; line-height: 1;
+  padding: 9px 14px; border: 1px solid var(--color-rule-strong);
+  color: var(--color-muted-2);
+  transition: color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+}
+.entry-links a:hover { color: var(--color-accent); border-color: var(--color-accent); }
+.entry-links a:active { color: var(--color-accent-deep); border-color: var(--color-accent-deep); }
 .entry-links a.accent { color: var(--color-accent); }
 .entry-open .entry-year { color: var(--color-accent); }
 
@@ -368,8 +388,21 @@ mark.band {
     linear-gradient(0deg, var(--color-accent) 0 0) 180px 92px/16px 16px no-repeat,
     linear-gradient(0deg, var(--color-data) 0 0) 242px 92px/16px 16px no-repeat;
 }
-/* applied AI pilot: a review pipeline — a queue of proposals flowing to one decision */
-.lab-cover-pilot::after {
+/* rubric rows — the methodology cover */
+.lab-cover-methodology::after {
+  background:
+    linear-gradient(transparent 61px, #24506e 61px, #24506e 62px, transparent 62px) 0 0/100% 62px,
+    linear-gradient(90deg, transparent 119px, #24506e 119px, #24506e 120px, transparent 120px) 0 0/120px 100%,
+    linear-gradient(0deg, var(--color-data) 0 0) 40px 42px/16px 16px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) 66px 46px/128px 8px no-repeat,
+    linear-gradient(0deg, var(--color-data-strong) 0 0) 40px 72px/16px 16px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) 66px 76px/96px 8px no-repeat,
+    linear-gradient(0deg, var(--color-accent) 0 0) 40px 102px/16px 16px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) 66px 106px/148px 8px no-repeat;
+}
+/* review pipeline — a queue of proposals flowing to one decision
+   (kinds "applied AI pilot" and "Pilot & evaluation" share it) */
+.lab-cover-pilot::after, .lab-cover-evaluation::after {
   background:
     linear-gradient(transparent 61px, #24506e 61px, #24506e 62px, transparent 62px) 0 0/100% 62px,
     linear-gradient(90deg, transparent 119px, #24506e 119px, #24506e 120px, transparent 120px) 0 0/120px 100%,
@@ -403,6 +436,10 @@ mark.band {
 }
 .lab-body { flex: 1; padding: 18px 22px 20px 22px; display: flex; flex-direction: column; gap: 8px; }
 .lab-title { font-family: var(--font-display); font-size: 22px; line-height: 1.15; overflow-wrap: anywhere; min-width: 0; }
+/* a linked box title is the main way in — the ↗ mark shows it at rest */
+.lab-title a { color: inherit; }
+.lab-title a:hover { color: var(--color-accent); }
+.lt-mark { font-size: 0.65em; color: var(--color-accent); }
 .lab-pitch { font-size: 13.5px; line-height: 1.55; color: var(--color-muted-2); max-width: 58ch; }
 .lab-keyline { font-size: 12px; }
 .lab-foot { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-16); margin-top: auto; padding-top: var(--s-8); font-size: 10.5px; }

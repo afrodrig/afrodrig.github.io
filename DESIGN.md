@@ -138,8 +138,12 @@ right (disabled at the ends; the whole row hides when everything fits). Box anat
 top to bottom: **cover art** (full-bleed top; original CSS/SVG art in the palette,
 one composition per `kind` — dashboard bars, case-study timeline, essay manuscript
 lines — never stock or borrowed illustration), mono eyebrow (`02 · ESSAY`), serif
-title, optional 2–3 line description and mono key line, and a foot with status +
-`OPEN →` in accent when a live deliverable exists (else `COMING SOON`). No marigold
+title — **linked, with a small accent ↗, when the piece has a destination** (the
+title is the main way in; amended 2026-08-24), optional description and mono key
+line, and a foot with optional status left and NAMED links right: `link_label:`
+gives the primary link its word (`READ THE MEMO`, `EXAMPLE` — never a bare `OPEN`),
+`extra_links:` trail as labeled ↗ links (`BLOG POST`, `AFIRE TALK`), and
+`COMING SOON` appears only when nothing is linkable. No marigold
 inside boxes — the intro carries the section's one band. On mobile the shelf stays
 horizontal (full-bleed gutters, ~86vw cards, next box peeking). Ends with the colophon.
 
@@ -339,11 +343,16 @@ container size (redrawn on open and on resize) — never a static decorative cur
   merged from main 2026-08-24). Papers may legitimately have NO links (drafts marked
   do-not-disseminate stay unlinked); the row is omitted entirely then — never a dead
   or placeholder link.
-- The detail spread (takeaway + links ONLY; the title sits at ~28px max — the
-  takeaway is the reading content, the title must not shout) crossfades with each
-  rotation. It sits on a **weighted seat, not dead-center**: 35% of the spare
-  vertical space above, 65% below (amended 2026-08-24 — a 50-50 float read as odd
-  empty space around the text). The focused paper is deep-linkable:
+- The detail spread crossfades with each rotation: a mono eyebrow carrying the
+  **publication status ONLY** (verbatim from the paper's `status:` — e.g.
+  `COND. ACCEPTED JDE PRE-RESULTS`; method/country/year live nowhere in the spread),
+  the title (~28px max — it must not shout), authors, and **the abstract as the
+  description** (amended 2026-08-24; the markdown body, takeaway as fallback). In
+  the pinned pane the abstract clamps to what the viewport height holds (12/17/24
+  lines by height, ellipsized); the LIST view always carries it in full. Links
+  render as **soft outlined chips** (mono label in a hairline box, accent border on
+  hover) so they read as clickable at rest. The spread sits on a **weighted seat**:
+  35% of spare space above, 65% below. The focused paper is deep-linkable:
   `#/research/<slug>` (slug = paper filename, minus any year prefix).
 - Accessibility: the wheel is a progressive enhancement over a semantic `<ul>` of papers.
   Keyboard operable; reduced-motion and mobile get the list.

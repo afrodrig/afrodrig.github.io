@@ -239,8 +239,10 @@ function aboutSection() {
 
 /* ---------- research: the pinned wheel track ---------- */
 
-// NOTE: paper abstracts (the markdown bodies) are deliberately NOT rendered anywhere
-// (2026-08-24) — they stay in content/papers/*.md for future use.
+// The paper's description IS its abstract (2026-08-24) — the markdown body, or the
+// plain-language takeaway as a fallback for papers without one.
+const paperDesc = (p) => `
+          <div class="wd-desc">${p.abstract ? mdLite(p.abstract) : `<p>${band(p.takeaway, p.highlight)}</p>`}</div>`;
 
 // Mono links row: primary links + supplemental links (extra_links: [{label, url}]).
 // Omitted entirely when a paper has no links at all.
@@ -267,7 +269,7 @@ function researchSection() {
         <h3 class="entry-title">${esc(p.title)}</h3>
         ${authorsLine(p.authors) ? `<div class="entry-meta">${esc(authorsLine(p.authors))}</div>` : ''}
         <div class="entry-more"><div class="em-inner">
-          <p class="takeaway">${band(p.takeaway, p.highlight)}</p>
+          ${paperDesc(p)}
           ${paperLinks(p)}
         </div></div>
       </div>
@@ -295,10 +297,10 @@ function researchSection() {
       <div class="wheel-details">
         ${wheelPapers.map((p, i) => `
         <article class="wheel-detail ${i === 0 ? 'is-current' : ''}" data-detail="${i}">
-          <div class="wd-eyebrow mono">${esc([p.status, p.method, p.country, p.year].filter(Boolean).join(' · ')).toUpperCase()}</div>
+          <div class="wd-eyebrow mono">${esc(p.status ?? '').toUpperCase()}</div>
           <h3 class="wd-title">${esc(p.title)}</h3>
           ${authorsLine(p.authors) ? `<div class="wd-authors">${esc(authorsLine(p.authors))}</div>` : ''}
-          <p class="takeaway">${band(p.takeaway, p.highlight)}</p>
+          ${paperDesc(p)}
           ${paperLinks(p)}
         </article>`).join('')}
       </div>
@@ -338,8 +340,8 @@ function practiceSection() {
   const boxes = [
     ...labCards.map(c => ({ title: c.title, kind: c.kind ?? 'tool', status: c.status ?? '',
       pitch: c.pitch ?? c.body ?? '', keyline: c.keyline ?? '', link: c.link ?? '',
-      extra_links: c.extra_links ?? [] })),
-    ...items.map(it => ({ title: it.title, kind: it.kind ?? 'Piece', status: 'in progress', pitch: '', keyline: '', link: '', extra_links: [] })),
+      link_label: c.link_label ?? 'Open', extra_links: c.extra_links ?? [] })),
+    ...items.map(it => ({ title: it.title, kind: it.kind ?? 'Piece', status: 'in progress', pitch: '', keyline: '', link: '', link_label: '', extra_links: [] })),
   ];
   const kindKey = (k) => String(k).toLowerCase().split(' ').pop().replace(/[^a-z]/g, '');
   return `
@@ -367,7 +369,9 @@ function practiceSection() {
       <div class="lab-cover lab-cover-${kindKey(c.kind)}" aria-hidden="true"></div>
       <div class="lab-body">
         <div class="eyebrow mono">${esc(c.kind).toUpperCase()}</div>
-        <h3 class="lab-title">${esc(c.title)}</h3>
+        <h3 class="lab-title">${c.link
+          ? `<a href="${c.link}">${esc(c.title)} <span class="lt-mark" aria-hidden="true">&nearr;</span></a>`
+          : esc(c.title)}</h3>
         ${c.pitch ? `<p class="lab-pitch">${esc(c.pitch)}</p>` : ''}
         ${/* no band here: the Practice intro already carries this screen's one marigold band */''}
         ${c.keyline ? `<div class="lab-keyline mono">${esc(c.keyline)}</div>` : ''}
@@ -375,7 +379,7 @@ function practiceSection() {
           <span class="mono muted">${esc(c.status).toUpperCase()}</span>
           <span class="lab-foot-links">
             ${(c.extra_links ?? []).map(l => `<a class="mono" href="${l.url}">${esc(l.label).toUpperCase()} &nearr;</a>`).join('')}
-            ${c.link ? `<a class="accent mono" href="${c.link}">OPEN &nearr;</a>`
+            ${c.link ? `<a class="accent mono" href="${c.link}">${esc(c.link_label || 'Open').toUpperCase()} &nearr;</a>`
               : (c.extra_links?.length ? '' : `<span class="mono muted">COMING SOON</span>`)}
           </span>
         </div>

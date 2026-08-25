@@ -25,26 +25,18 @@ featured: false
 order: 5
 ---
 
+<!-- Condensed for display from the paper's full abstract — TODO(update): confirm wording. -->
 The high failure rate of new businesses in Colombia suggests a high entry rate among
-entrepreneurs with only low success potential. We test the hypothesis that this may be
-driven by the tendency to incorrectly estimate their success likelihoods. Specifically,
-we test the relative roles of ambiguity preferences, confidence, and optimism and
-whether there are heterogeneities in these biases with regard to the true underlying
-potential for success as an entrepreneur. We recruit current, past, and aspiring
-Colombian entrepreneurs to participate in an online experiment. As part of the study, we
-simulate the decision to become an entrepreneur by having participants make an "entry
-decision" about playing an entrepreneurship-related game for stakes or taking a certain
-payment. We vary the available information to disentangle the potential behavioral
-biases leading to over-entry. We find a high degree of entry at the baseline, with over
-80% of participants choosing to play the game for stakes across the board that is
-statistically significantly higher than what risk preferences can account for combined
-with the expectation of 20% succeeding. Providing information about the average
-likelihood of success encourages the lower potential participants to enter more, closing
-the slight gap between them and their higher potential counterparts at baseline.
-Information about the individual-specific skill-based success likelihood discourages
-some lower potential individuals, in some circumstances, suggesting over-confidence.
-Sharing information about the role of luck may discourage the lower potential
-participants, providing evidence against high levels of optimism or risk-seeking in this
-group. Taken together, the findings show that overconfidence among the lower potential
-individuals generates over-entry in this group, but the resulting high failure rate does
-not deter high-potential individuals' entry.
+entrepreneurs with only low success potential. We test whether this is driven by
+incorrectly estimated success likelihoods — the relative roles of ambiguity preferences,
+confidence, and optimism — and whether these biases vary with true underlying potential.
+We recruit current, past, and aspiring Colombian entrepreneurs for an online experiment
+that simulates the decision to become an entrepreneur: participants choose between
+playing an entrepreneurship-related game for stakes or taking a certain payment, with
+randomized variation in the information available. Entry is high at baseline — over 80%
+choose to play — well above what risk preferences can account for. Information about
+individual, skill-based success likelihoods discourages some lower-potential
+participants, suggesting overconfidence, while information about the role of luck
+provides evidence against high optimism or risk-seeking. Overconfidence among
+lower-potential individuals generates over-entry, but the resulting high failure rate
+does not deter high-potential individuals' entry.

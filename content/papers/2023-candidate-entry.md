@@ -4,7 +4,7 @@ short: "Candidate Entry Into Local Government"   # card title — tracks the pap
 keywords: ["candidate entry", "local government", "party gatekeeping"]   # echo the title on the wheel card
 authors: [Katherine Casey, Abou Bakarr Kamara, Niccolò Meriggi]   # order per cv.pdf
 year: 2026
-status: "Registered report · JDE"   # conditionally accepted as a pre-results registered report, Journal of Development Economics
+status: "Cond. accepted JDE pre-results"   # shown as the paper's eyebrow, verbatim per Andrés (registered report, Journal of Development Economics)
 country: "Sierra Leone"
 method: "Field experiment"
 takeaway: >

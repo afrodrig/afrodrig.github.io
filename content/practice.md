@@ -8,12 +8,8 @@ highlight: "evaluation that gets used"   # marigold band phrase — must appear 
 # Each item renders as a BOX on the Practice shelf (title + kind; placeholders until
 # real pieces exist). Kinds with their own cover art: Case study, Essay, dashboard.
 items:
-  - title: "Scoring a portfolio of research bets"
-    kind: "Case study"
-  - title: "Evaluation that gets used"
-    kind: "Essay"
-  - title: "A theory of change you can test"
-    kind: "Essay"
+  - title: "Impact measurement methodology at SIL"
+    kind: "Methodology"
 ---
 
 <!--
