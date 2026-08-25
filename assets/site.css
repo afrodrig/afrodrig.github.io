@@ -130,13 +130,13 @@ mark.band {
 }
 /* ruled cells, like a ledger's column headers; the active cell carries an
    accent tab bar that interrupts the strip's bottom hairline */
-.record-nav { display: flex; align-items: stretch; justify-content: center; height: var(--nav-h); }
+.record-nav { display: flex; align-items: stretch; height: var(--nav-h); }
 .rnav {
   position: relative; display: flex; align-items: center;
   line-height: 1; padding: 0 32px;
   border-left: 1px solid var(--color-rule);
 }
-.rnav:first-child { border-left: 0; }
+.rnav:first-child { border-left: 0; padding-left: 0; }
 .rnav-title { font-family: var(--font-display); font-size: 20px; line-height: 1; }
 .rnav:hover .rnav-title { color: var(--color-accent); }
 .rnav:active .rnav-title { color: var(--color-accent-deep); }
@@ -231,7 +231,7 @@ mark.band {
 .wheel-detail::after { content: ""; flex: 65 0 0; }
 .wheel-detail.is-current { opacity: 1; visibility: visible; transform: none; transition-delay: 140ms, 140ms, 0s; }
 .wd-eyebrow { font-size: 10.5px; letter-spacing: 0.1em; color: var(--color-muted); text-transform: uppercase; }
-.wd-title { font-family: var(--font-display); font-size: clamp(1.5rem, 2.1vw, 1.9rem); line-height: 1.2; margin-top: 10px; overflow-wrap: anywhere; min-width: 0; }
+.wd-title { font-family: var(--font-display); font-size: clamp(1.25rem, 1.8vw, 1.6rem); line-height: 1.25; margin-top: 10px; overflow-wrap: anywhere; min-width: 0; }
 .wd-authors { margin-top: 10px; font-size: 14px; color: var(--color-muted-2); }
 /* the description is the abstract — quiet, readable body text.
    Inside the pinned pane it clamps to what the viewport height can hold
@@ -355,12 +355,18 @@ mark.band {
 }
 .lab-cards::-webkit-scrollbar { display: none; }
 .lab-card {
-  flex: none; width: min(380px, 86vw);
+  flex: none; width: min(330px, 86vw);
   scroll-snap-align: start;
   display: flex; flex-direction: column;
   background: var(--color-card); border: 1px solid var(--color-rule);
 }
-.lab-cover { flex: none; height: 150px; background: var(--color-ink); position: relative; overflow: hidden; }
+.lab-cover { flex: none; height: 190px; background: var(--color-ink); position: relative; overflow: hidden; }
+/* short viewports trade cover height for the full card staying inside the fold */
+@media (max-height: 850px) {
+  .lab-cover { height: 150px; }
+  .lab-body { padding: 16px 20px 18px; }
+  .lab-pitch { font-size: 13px; }
+}
 /* original CSS art per kind (never borrowed illustration) — all ride the same ledger grid */
 .lab-cover::after {
   content: ""; position: absolute; inset: 0;

@@ -334,14 +334,13 @@ function practiceSection() {
     { title: 'Portfolio learning dashboard', kind: 'interactive dashboard', status: 'in-progress',
       pitch: 'Every investment in one live view: what each project proposed, what it has produced, and what that means for the next decision.', keyline: 'what changed, project by project', link: '' },
   ];
-  // Real pieces lead the shelf; placeholder teasers trail (per main 75a6697:
-  // "card stream first, teasers to the bottom").
+  // One stream, ordered by each piece's `order:` (lab cards and practice.md items alike).
   const boxes = [
     ...labCards.map(c => ({ title: c.title, kind: c.kind ?? 'tool', status: c.status ?? '',
       pitch: c.pitch ?? c.body ?? '', keyline: c.keyline ?? '', link: c.link ?? '',
-      link_label: c.link_label ?? 'Open', extra_links: c.extra_links ?? [] })),
-    ...items.map(it => ({ title: it.title, kind: it.kind ?? 'Piece', status: 'in progress', pitch: it.pitch ?? '', keyline: '', link: '', link_label: '', extra_links: [] })),
-  ];
+      link_label: c.link_label ?? 'Open', extra_links: c.extra_links ?? [], order: c.order ?? 99 })),
+    ...items.map(it => ({ title: it.title, kind: it.kind ?? 'Piece', status: 'in progress', pitch: it.pitch ?? '', keyline: '', link: '', link_label: '', extra_links: [], order: it.order ?? 99 })),
+  ].sort((a, b) => a.order - b.order);
   const kindKey = (k) => String(k).toLowerCase().split(' ').pop().replace(/[^a-z]/g, '');
   return `
 <section class="practice-sec" id="practice">
