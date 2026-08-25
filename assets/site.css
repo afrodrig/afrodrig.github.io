@@ -215,7 +215,7 @@ mark.band {
 .wheel-view {
   position: relative;
   flex: 1; min-height: 0; margin-top: var(--s-24);
-  display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 48px;
+  display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 48px;
 }
 .wheel-details { position: relative; min-height: 300px; }
 .wheel-detail {
@@ -227,7 +227,7 @@ mark.band {
 }
 .wheel-detail.is-current { opacity: 1; visibility: visible; transform: none; transition-delay: 140ms, 140ms, 0s; }
 .wd-eyebrow { font-size: 10.5px; letter-spacing: 0.1em; color: var(--color-muted); text-transform: uppercase; }
-.wd-title { font-family: var(--font-display); font-size: clamp(1.9rem, 2.9vw, 2.6rem); line-height: 1.1; margin-top: 14px; overflow-wrap: anywhere; min-width: 0; }
+.wd-title { font-family: var(--font-display); font-size: clamp(1.5rem, 2.1vw, 1.9rem); line-height: 1.2; margin-top: 10px; overflow-wrap: anywhere; min-width: 0; }
 .wd-authors { margin-top: 10px; font-size: 14px; color: var(--color-muted-2); }
 .wheel-detail .takeaway { margin-top: var(--s-16); font-size: 17px; line-height: 1.65; max-width: 58ch; }
 .wheel-detail .entry-links { margin-top: 20px; font-size: 11.5px; }
@@ -244,11 +244,11 @@ mark.band {
 }
 .wheel-arc { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
 .wheel-card {
-  position: absolute; right: 0; top: calc(50% - 36px); width: min(340px, 100%);
-  padding: 13px 17px; text-align: left;
+  position: absolute; right: 0; top: calc(50% - 32px); width: min(300px, 100%);
+  padding: 11px 15px; text-align: left;
   background: var(--color-paper); border: 1px solid var(--color-rule-strong);
-  font-size: 13px; font-weight: 500; color: var(--color-muted-2);
-  display: flex; flex-direction: column; gap: 5px;
+  font-size: 12.5px; font-weight: 500; color: var(--color-muted-2);
+  display: flex; flex-direction: column; gap: 4px;
   transition: transform 520ms var(--ease-spring), opacity 300ms var(--ease-out),
     background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
 }
@@ -260,7 +260,7 @@ mark.band {
 }
 .wc-tag { font-size: 9px; letter-spacing: 0.1em; color: var(--color-muted); }
 .wheel-card.is-focal {
-  background: var(--color-ink); border-color: var(--color-ink); color: var(--color-ink-inverse); font-size: 14px;
+  background: var(--color-ink); border-color: var(--color-ink); color: var(--color-ink-inverse); font-size: 13px;
 }
 .wheel-card.is-focal .wc-tag { color: var(--color-muted-inverse); }
 .wheel-hint {
@@ -272,32 +272,26 @@ mark.band {
 }
 .wheel-hint.is-dismissed { opacity: 0; pointer-events: none; }
 
-/* research entries (list view + mobile/reduced fallback) */
-.entry-list { margin-top: var(--s-24); }
-.entry { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--color-rule); }
-.entry-year { font-size: 12px; color: var(--color-muted); padding-top: 6px; }
-.entry-title { font-family: var(--font-display); font-size: 24px; line-height: 1.2; cursor: pointer; overflow-wrap: anywhere; min-width: 0; }
+/* research entries (list view + mobile/reduced fallback) — minimal collapsed rows;
+   a click unfolds the takeaway + links (grid-rows unfold — DESIGN.md §6 exception) */
+.entry-list { margin-top: var(--s-16); }
+.entry { display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--color-rule); }
+.entry-year { font-size: 11px; color: var(--color-muted); padding-top: 4px; }
+.entry-title { font-family: var(--font-display); font-size: 19px; line-height: 1.25; cursor: pointer; overflow-wrap: anywhere; min-width: 0; }
 .entry-title:hover { color: var(--color-accent); }
-.entry-meta { margin-top: 6px; font-size: 13.5px; color: var(--color-muted-2); }
+.entry-meta { margin-top: 3px; font-size: 12.5px; color: var(--color-muted-2); }
+.entry-sign { align-self: start; padding-top: 4px; font-size: 12px; color: var(--color-muted); }
+.entry-sign::before { content: "+"; }
+.entry-open .entry-sign::before { content: "−"; }
 .entry-more { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows var(--dur-long) var(--ease-out), opacity var(--dur-long) var(--ease-out); }
-.entry-more > * { overflow: hidden; min-height: 0; }
+.entry-more > .em-inner { overflow: hidden; min-height: 0; }
 .entry-open .entry-more { grid-template-rows: 1fr; opacity: 1; }
+.em-inner { padding-bottom: 2px; }
 .takeaway { margin-top: var(--s-12); font-size: 15px; color: var(--color-ink-body); max-width: 58ch; }
-.entry-links { margin-top: 14px; display: flex; gap: 22px; font-size: 11px; letter-spacing: 0.06em; }
+.entry-links { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 11px; letter-spacing: 0.06em; }
 .entry-links a { color: var(--color-muted); }
 .entry-links a.accent { color: var(--color-accent); }
 .entry-open .entry-year { color: var(--color-accent); }
-
-/* abstract behind a toggle (grid-rows unfold — DESIGN.md §6 conscious exception) */
-.abstract { margin-top: var(--s-16); }
-.abstract-toggle { font-size: 10.5px; letter-spacing: 0.1em; color: var(--color-muted); padding: 4px 0; }
-.abstract-toggle:hover { color: var(--color-accent); }
-.abstract-wrap { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows var(--dur-long) var(--ease-out), opacity var(--dur-long) var(--ease-out); }
-.abstract-wrap > * { overflow: hidden; min-height: 0; }
-.abstract.is-open .abstract-wrap { grid-template-rows: 1fr; opacity: 1; }
-.abstract-body { padding-top: var(--s-8); }
-.abstract-body p { font-size: 14px; line-height: 1.6; color: var(--color-muted-2); max-width: 58ch; }
-.abstract-body p + p { margin-top: var(--s-8); }
 
 /* ---------- practice: the shelf ----------
    Content lives ONLY in the boxes (2026-08-23): one horizontally scrolled rail of
@@ -473,8 +467,8 @@ html:not(.js) .id-collapse { display: none; }
   .track[data-view="wheel"] .entry-list { display: block; }
   .practice-sec { padding: 56px 24px 48px; min-height: 0; }
   .supported { padding: 20px 0 0; }
-  .entry { grid-template-columns: 1fr; gap: 4px; }
-  .entry-year { padding-top: 0; }
+  .entry { grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; }
+  .entry-year { grid-column: 1 / -1; padding-top: 0; }
   /* the shelf stays horizontal on mobile — swipe with the next card peeking */
   .lab-cards { margin-inline: -24px; padding-inline: 24px; scroll-padding-inline: 24px; }
   .js .id-full > * { animation: none; opacity: 1; transform: none; }

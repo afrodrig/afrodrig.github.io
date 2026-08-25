@@ -283,16 +283,6 @@
   if (collapseBtn) collapseBtn.addEventListener('click', () => setCollapsed(true));
   if (railBtn) railBtn.addEventListener('click', () => setCollapsed(false));
 
-  /* ============ abstract toggles ============ */
-  document.addEventListener('click', (e) => {
-    const t = e.target.closest('.abstract-toggle');
-    if (!t) return;
-    const open = t.closest('.abstract').classList.toggle('is-open');
-    t.setAttribute('aria-expanded', String(open));
-    const sign = t.querySelector('.abstract-sign');
-    if (sign) sign.textContent = open ? '−' : '+';
-  });
-
   /* ============ research entries (list view): click a title to unfold ============ */
   document.querySelectorAll('.entry-title').forEach((t) => {
     t.setAttribute('tabindex', '0');

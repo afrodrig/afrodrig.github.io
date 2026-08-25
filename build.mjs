@@ -239,12 +239,8 @@ function aboutSection() {
 
 /* ---------- research: the pinned wheel track ---------- */
 
-// Optional full abstract, shown behind a mono toggle (grid-rows unfold — DESIGN.md §6 exception).
-const abstractBlock = (p) => !p.abstract ? '' : `
-          <div class="abstract">
-            <button class="abstract-toggle mono" aria-expanded="false">ABSTRACT <span class="abstract-sign" aria-hidden="true">+</span></button>
-            <div class="abstract-wrap"><div><div class="abstract-body">${mdLite(p.abstract)}</div></div></div>
-          </div>`;
+// NOTE: paper abstracts (the markdown bodies) are deliberately NOT rendered anywhere
+// (2026-08-24) — they stay in content/papers/*.md for future use.
 
 // Mono links row: primary links + supplemental links (extra_links: [{label, url}]).
 // Omitted entirely when a paper has no links at all.
@@ -262,18 +258,20 @@ const paperLinks = (p) => {
 };
 
 function researchSection() {
+  // List rows start CLOSED and stay minimal; a click unfolds the takeaway (the same
+  // plain-language description the Wheel shows) + links.
   const entries = wheelPapers.map((p, i) => `
-    <article class="entry ${i === 0 ? 'entry-open' : ''}" data-paper="${i}">
+    <article class="entry" data-paper="${i}">
       <div class="entry-year mono">${esc(yearLabel(p))}</div>
       <div class="entry-main">
         <h3 class="entry-title">${esc(p.title)}</h3>
         <div class="entry-meta">${esc([authorsLine(p.authors), p.method, p.country].filter(Boolean).join(' · '))}</div>
-        <div class="entry-more">
+        <div class="entry-more"><div class="em-inner">
           <p class="takeaway">${band(p.takeaway, p.highlight)}</p>
           ${paperLinks(p)}
-          ${abstractBlock(p)}
-        </div>
+        </div></div>
       </div>
+      <span class="entry-sign mono" aria-hidden="true"></span>
     </article>`).join('');
   return `
 <section class="track" id="research" style="--steps:${wheelPapers.length - 1}" data-view="wheel">

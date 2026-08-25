@@ -16,7 +16,8 @@ other way around.
 - **The test every page must pass**: "would any other researcher's site look like this?"
   If yes, it fails. No template energy, no AI-default patterns (see §9).
 - **Copy voice**: first person, plain language, short sentences. Every paper gets a
-  1–2 sentence plain-language takeaway; abstracts are secondary, behind a toggle.
+  1–2 sentence plain-language takeaway. Full abstracts are NOT rendered anywhere
+  (retired 2026-08-24) — they stay in `content/papers/*.md` bodies for future use.
 
 ## 2. Architecture — the "Ledger Scroll" (spine + record)
 
@@ -95,7 +96,11 @@ Andrés cut the scroll-shrink morph; the photo stays prominent at every scroll d
   (28px). The detail spread is **vertically centered on the focal card's axis**. The
   mono **funder line** (`site.yml supported`) rides the pin's foot — it applies to
   all projects (moved from the page end, 2026-08-24). List view unpins the track and
-  shows hairline-separated entries, year in a mono side column.
+  shows MINIMAL hairline rows (amended 2026-08-24: year in a mono side column, full
+  title at 19px, one meta line, a resting `+` at the row's right edge); all rows
+  start CLOSED, and a click unfolds the takeaway — the same plain-language
+  description the Wheel shows — plus the links row (`+` flips to `−`, year turns
+  accent). The wheel column is 300px so the detail spread keeps prominence.
 - **PRACTICE** — a full page (min-height 100dvh − --nav-h — a shorter last section
   can never scroll flush beneath the strip, max-scroll clamps short): bare serif
   title (no eyebrow), intro, then **THE SHELF** — one horizontally scrolled rail of
@@ -333,11 +338,10 @@ container size (redrawn on open and on resize) — never a static decorative cur
   merged from main 2026-08-24). Papers may legitimately have NO links (drafts marked
   do-not-disseminate stay unlinked); the row is omitted entirely then — never a dead
   or placeholder link.
-- The detail spread (takeaway + links ONLY — the abstract toggle was cut from the
-  wheel 2026-08-24, the unfold read poorly there; abstracts live in the LIST view)
-  crossfades with each rotation, **vertically centered on the focal card's axis**.
-  The focused paper is deep-linkable: `#/research/<slug>` (slug = paper filename,
-  minus any year prefix).
+- The detail spread (takeaway + links ONLY; the title sits at ~28px max — the
+  takeaway is the reading content, the title must not shout) crossfades with each
+  rotation, **vertically centered on the focal card's axis**. The focused paper is
+  deep-linkable: `#/research/<slug>` (slug = paper filename, minus any year prefix).
 - Accessibility: the wheel is a progressive enhancement over a semantic `<ul>` of papers.
   Keyboard operable; reduced-motion and mobile get the list.
 
