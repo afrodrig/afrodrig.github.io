@@ -1,7 +1,7 @@
 ---
 title: "The Limits of Exposure: Socioeconomic Diversity and Teamwork in College"
-short: "Socioeconomic diversity & teamwork"   # TODO(update): display title for landing rows + wheel cards
-keywords: ["economic connectedness", "higher education", "social networks"]   # TODO(update): shown under the title on the landing
+short: "The Limits of Exposure"   # card title — the paper title, pre-colon
+keywords: ["socioeconomic diversity", "teamwork", "college"]   # echo the title on the wheel card
 authors: [Leopoldo Fergusson, Juliana Londoño-Vélez]   # order per cv.pdf
 year: 2026
 status: "Working paper"

@@ -1,7 +1,7 @@
 ---
 title: "Candidate Entry Into Local Government"
-short: "Candidate entry into local government"   # TODO(update): display title for landing rows + wheel cards
-keywords: ["candidate quality", "political selection", "party gatekeeping"]   # TODO(update): shown under the title on the landing
+short: "Candidate Entry Into Local Government"   # card title — tracks the paper title
+keywords: ["candidate entry", "local government", "party gatekeeping"]   # echo the title on the wheel card
 authors: [Katherine Casey, Abou Bakarr Kamara, Niccolò Meriggi]   # order per cv.pdf
 year: 2026
 status: "Registered report · JDE"   # conditionally accepted as a pre-results registered report, Journal of Development Economics

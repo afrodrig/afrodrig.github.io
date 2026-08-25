@@ -1,7 +1,7 @@
 ---
 title: "An Experiment in Decentralization: Evidence from the Zambian Constituency Development Fund"   # title per cv.pdf + June 2026 draft
-short: "Zambia's Constituency Development Fund"   # TODO(update): display title for landing rows + wheel cards
-keywords: ["decentralization", "local public finance", "state capacity"]   # TODO(update): shown under the title on the landing
+short: "An Experiment in Decentralization"   # card title — the paper title, pre-colon
+keywords: ["decentralization", "constituency development fund", "Zambia"]   # echo the title on the wheel card
 authors: [Jeremy Bowles, Katherine Casey, Danielle Handel]   # order per cv.pdf
 year: 2026
 status: "Working paper"

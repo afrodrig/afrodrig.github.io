@@ -29,7 +29,7 @@
     const details = [...document.querySelectorAll('.wheel-detail')];
     const arcSvg = wheelEl.querySelector('.wheel-arc');
     const arcPath = arcSvg.querySelector('path');
-    const hint = wheelEl.querySelector('.wheel-hint');
+    const hint = document.querySelector('.wheel-hint');
     const counters = [...document.querySelectorAll('.count-cur')];
     const R = 900;                    // circle radius (px)
     const STEP = 6 * Math.PI / 180;   // 6° between cards

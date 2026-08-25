@@ -68,11 +68,14 @@ Andrés cut the scroll-shrink morph; the photo stays prominent at every scroll d
   Sticky at the record's top (`--nav-h` = 64px, paper background, hairline bottom):
   one serif title (20px) per section — `About · Research · Practice`. **No section
   numbers anywhere** (dropped 2026-08-24: the 00/01/02 ledger numbering read as
-  clutter — in the strip, in section heads, and on shelf boxes alike). The active
-  entry gets the 6px accent square + accent text (§7 menu-row convention). Hover is
-  color-only — **nothing moves on targets you're about to click** (principle merged
-  from main d0c41fe). Every entry returns to its section's START, from anywhere.
-  Static (non-sticky) on mobile.
+  clutter — in the strip, in section heads, and on shelf boxes alike). The entries
+  are **ruled cells** — full-height hairline separators between them, like a
+  ledger's column headers — and the active cell carries a **2px accent tab bar**
+  that interrupts the strip's bottom hairline (amended 2026-08-24: the accent
+  square read as noise; this shares the LIST/WHEEL toggle's underline convention).
+  Hover is color-only — **nothing moves on targets you're about to click**
+  (principle merged from main d0c41fe). Every entry returns to its section's START,
+  from anywhere. Static (non-sticky) on mobile.
 - **ABOUT** — a FULL PAGE of the record (amended 2026-08-23 late: "feels like a
   separate page" — nothing peeks from Research on landing). It fills the viewport
   below the strip (`min-height: 100dvh − --nav-h`), composed as a title page:
@@ -315,18 +318,26 @@ container size (redrawn on open and on resize) — never a static decorative cur
   position and wheel state never disagree. The wheel rolls into place (an arc-following
   entrance) the first time the track shows. The `SCROLL ROTATES THE WHEEL` hint fades
   out after the first rotation.
-- Cards carry the paper's `short:` title over a mono line of its `keywords:` (fallback:
-  status · country — merged from main 2026-08-23; keywords differentiate cards better
-  than repeated status tags, which live in the detail eyebrow).
+- Cards carry the paper's `short:` title (up to two lines) over a mono line of its
+  `keywords:` (fallback: status · country). **Both track the real paper** (amended
+  2026-08-24): `short:` is the paper title itself, or its pre-colon main clause when
+  the full title is long; keywords echo the title's own terms.
+- **The dissolve** (2026-08-24 — "the wheel should disappear so it doesn't clash"):
+  the wheel is masked with a vertical fade (96px bands at the track's top and bottom),
+  so receding cards dissolve before they can collide with the section head, the
+  LIST/WHEEL toggle, or the funder line — while `mask-repeat: repeat-x` still lets
+  cards ride out past the browser's right edge. The scroll hint sits OUTSIDE the
+  masked element, anchored to the wheel column's foot.
 - **Links row**: PAPER (accent, only when a PDF is actually hosted) · SLIDES · DATA,
   then any `extra_links:` (`[{label, url}]` — IGC blogs, policy briefs, project pages;
   merged from main 2026-08-24). Papers may legitimately have NO links (drafts marked
   do-not-disseminate stay unlinked); the row is omitted entirely then — never a dead
   or placeholder link.
-- The detail spread (takeaway, links, abstract behind an `ABSTRACT` toggle) crossfades
-  with each rotation, **vertically centered on the focal card's axis**. The focused
-  paper is deep-linkable: `#/research/<slug>` (slug = paper filename, minus any year
-  prefix).
+- The detail spread (takeaway + links ONLY — the abstract toggle was cut from the
+  wheel 2026-08-24, the unfold read poorly there; abstracts live in the LIST view)
+  crossfades with each rotation, **vertically centered on the focal card's axis**.
+  The focused paper is deep-linkable: `#/research/<slug>` (slug = paper filename,
+  minus any year prefix).
 - Accessibility: the wheel is a progressive enhancement over a semantic `<ul>` of papers.
   Keyboard operable; reduced-motion and mobile get the list.
 

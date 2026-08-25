@@ -302,7 +302,6 @@ function researchSection() {
           ${authorsLine(p.authors) ? `<div class="wd-authors">${esc(authorsLine(p.authors))}</div>` : ''}
           <p class="takeaway">${band(p.takeaway, p.highlight)}</p>
           ${paperLinks(p)}
-          ${abstractBlock(p)}
         </article>`).join('')}
       </div>
       <div class="wheel" data-initial="0" aria-label="Papers — scroll to rotate the wheel">
@@ -314,10 +313,10 @@ function researchSection() {
           <span class="wc-title">${esc(p.short ?? p.title.split(':')[0])}</span>
           <span class="wc-tag mono">${esc((Array.isArray(p.keywords) && p.keywords.length ? p.keywords : [p.status, p.country].filter(Boolean)).join(' · ')).toUpperCase()}</span>
         </button>`).join('')}
-        <div class="wheel-hint mono">
-          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M8 2v11M4 9l4 4 4-4"/></svg>
-          SCROLL ROTATES THE WHEEL
-        </div>
+      </div>
+      <div class="wheel-hint mono">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M8 2v11M4 9l4 4 4-4"/></svg>
+        SCROLL ROTATES THE WHEEL
       </div>
     </div>
 

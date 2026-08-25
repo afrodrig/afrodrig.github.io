@@ -1,7 +1,7 @@
 ---
 title: "Informal Taxation in Rural Sierra Leone"   # title per cv.pdf (June 2024 draft carries the longer chiefs title)
-short: "Informal taxation & chiefs"   # TODO(update): display title for landing rows + wheel cards
-keywords: ["informal taxation", "traditional chiefs", "public goods"]   # TODO(update): shown under the title on the landing
+short: "Informal Taxation in Rural Sierra Leone"   # card title — tracks the paper title
+keywords: ["informal taxation", "rural Sierra Leone", "chiefs"]   # echo the title on the wheel card
 authors: []                    # solo-authored
 year: 2024
 status: "Working paper"
