@@ -265,7 +265,7 @@ function researchSection() {
       <div class="entry-year mono">${esc(yearLabel(p))}</div>
       <div class="entry-main">
         <h3 class="entry-title">${esc(p.title)}</h3>
-        <div class="entry-meta">${esc([authorsLine(p.authors), p.method, p.country].filter(Boolean).join(' · '))}</div>
+        ${authorsLine(p.authors) ? `<div class="entry-meta">${esc(authorsLine(p.authors))}</div>` : ''}
         <div class="entry-more"><div class="em-inner">
           <p class="takeaway">${band(p.takeaway, p.highlight)}</p>
           ${paperLinks(p)}

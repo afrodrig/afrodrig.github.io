@@ -97,7 +97,8 @@ Andrés cut the scroll-shrink morph; the photo stays prominent at every scroll d
   mono **funder line** (`site.yml supported`) rides the pin's foot — it applies to
   all projects (moved from the page end, 2026-08-24). List view unpins the track and
   shows MINIMAL hairline rows (amended 2026-08-24: year in a mono side column, full
-  title at 19px, one meta line, a resting `+` at the row's right edge); all rows
+  title at 19px, a co-authors line — nothing else, omitted for solo papers — and a
+  resting `+` at the row's right edge); all rows
   start CLOSED, and a click unfolds the takeaway — the same plain-language
   description the Wheel shows — plus the links row (`+` flips to `−`, year turns
   accent). The wheel column is 300px so the detail spread keeps prominence.
