@@ -220,11 +220,15 @@ mark.band {
 .wheel-details { position: relative; min-height: 300px; }
 .wheel-detail {
   position: absolute; inset: 0; max-width: 640px;
-  display: flex; flex-direction: column; justify-content: center;  /* centered on the focal card's axis */
+  display: flex; flex-direction: column;
   opacity: 0; visibility: hidden; transform: translateY(8px);
   transition: opacity var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out),
     visibility 0s linear var(--dur-short);
 }
+/* weighted seat, not dead-center: 35% of the spare space above, 65% below —
+   the spread sits slightly high, which reads better than a 50-50 float */
+.wheel-detail::before { content: ""; flex: 35 0 0; }
+.wheel-detail::after { content: ""; flex: 65 0 0; }
 .wheel-detail.is-current { opacity: 1; visibility: visible; transform: none; transition-delay: 140ms, 140ms, 0s; }
 .wd-eyebrow { font-size: 10.5px; letter-spacing: 0.1em; color: var(--color-muted); text-transform: uppercase; }
 .wd-title { font-family: var(--font-display); font-size: clamp(1.5rem, 2.1vw, 1.9rem); line-height: 1.2; margin-top: 10px; overflow-wrap: anywhere; min-width: 0; }

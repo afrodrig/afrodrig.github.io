@@ -93,7 +93,7 @@ Andrés cut the scroll-shrink morph; the photo stays prominent at every scroll d
   ("Governance, public goods and beliefs — …") — **no eyebrow, no numbering, no date
   range** (cut 2026-08-24: "too much useless info around the title"); the
   `LIST / WHEEL` toggle + mono `01 / 05` pager sit right. Pin top padding is tight
-  (28px). The detail spread is **vertically centered on the focal card's axis**. The
+  (28px). The detail spread sits on a **weighted 35/65 seat** (see §8). The
   mono **funder line** (`site.yml supported`) rides the pin's foot — it applies to
   all projects (moved from the page end, 2026-08-24). List view unpins the track and
   shows MINIMAL hairline rows (amended 2026-08-24: year in a mono side column, full
@@ -340,8 +340,10 @@ container size (redrawn on open and on resize) — never a static decorative cur
   or placeholder link.
 - The detail spread (takeaway + links ONLY; the title sits at ~28px max — the
   takeaway is the reading content, the title must not shout) crossfades with each
-  rotation, **vertically centered on the focal card's axis**. The focused paper is
-  deep-linkable: `#/research/<slug>` (slug = paper filename, minus any year prefix).
+  rotation. It sits on a **weighted seat, not dead-center**: 35% of the spare
+  vertical space above, 65% below (amended 2026-08-24 — a 50-50 float read as odd
+  empty space around the text). The focused paper is deep-linkable:
+  `#/research/<slug>` (slug = paper filename, minus any year prefix).
 - Accessibility: the wheel is a progressive enhancement over a semantic `<ul>` of papers.
   Keyboard operable; reduced-motion and mobile get the list.
 
