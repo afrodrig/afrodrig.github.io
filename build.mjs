@@ -249,7 +249,7 @@ const paperDesc = (p) => {
   const bullets = Array.isArray(p.takeaway) ? p.takeaway : [p.takeaway].filter(Boolean);
   const toggle = p.abstract ? `
             <div class="view-toggle mono wd-desc-toggle">
-              <button class="view-btn is-active" data-desc-set="takeaway">TAKEAWAY</button>
+              <button class="view-btn is-active" data-desc-set="takeaway">TAKEAWAYS</button>
               <span class="muted">/</span>
               <button class="view-btn" data-desc-set="abstract">ABSTRACT</button>
             </div>` : '';

@@ -1,7 +1,7 @@
 ---
 intro: >
   Collection of work related to impact measurement, research grant making, and best
-  practices for fieldwork and partnership-based impact-oriented research. 
+  practices for fieldwork and impact-oriented research. 
 highlight: "impact-oriented research."   # marigold band phrase — must appear in intro
 
 # Every card on the Practice shelf lives here, one entry per box, in one horizontally

@@ -9,6 +9,6 @@ highlight: "Impact and Learning Manager"
 
 Welcome to my website! Here you can learn more about my research and about my work on impact measurement and research grant making.
 
-As a researcher, I study how governments in developing countries build state capacity and become more effective. My work combines government partnerships evaluating large policy reforms on governance and decentralization with field experiments on poverty-targeting, entrepreneurship, and how diversity affects education.
+As a researcher, I study how governments in developing countries build state capacity and become more effective. My work combines government partnerships evaluating large policy reforms on governance and decentralization with field experiments on poverty-targeting and redistribution, entrepreneurship, and the implications of increasing diversity in educational environments.
 
 As the Impact and Learning Manager at [Stanford Impact Labs](https://impact.stanford.edu), I lead our impact measurement methodology and support the investment pipeline, from funding recommendations to monitoring and evaluation. I also build our internal AI systems, for selection support and knowledge management.

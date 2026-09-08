@@ -364,15 +364,17 @@ mark.band {
 }
 .lab-cards::-webkit-scrollbar { display: none; }
 .lab-card {
-  flex: none; width: min(330px, 86vw);
+  flex: none; width: min(400px, 86vw);
   scroll-snap-align: start;
   display: flex; flex-direction: column;
   background: var(--color-card); border: 1px solid var(--color-rule);
 }
-.lab-cover { flex: none; height: 190px; background: var(--color-ink); position: relative; overflow: hidden; }
-/* short viewports trade cover height for the full card staying inside the fold */
+/* wider cards wrap the pitch into fewer lines; a shorter, smaller cover (the art is
+   decorative, not informational) frees up the vertical room that used to run out
+   before the foot (status + links) fit inside the fold */
+.lab-cover { flex: none; height: 120px; background: var(--color-ink); position: relative; overflow: hidden; }
 @media (max-height: 850px) {
-  .lab-cover { height: 150px; }
+  .lab-cover { height: 90px; }
   .lab-body { padding: 16px 20px 18px; }
   .lab-pitch { font-size: 13px; }
 }
