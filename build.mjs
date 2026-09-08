@@ -240,10 +240,25 @@ function aboutSection() {
 
 /* ---------- research: the pinned wheel track ---------- */
 
-// The paper's description IS its abstract (2026-08-24) — the markdown body, or the
-// plain-language takeaway as a fallback for papers without one.
-const paperDesc = (p) => `
-          <div class="wd-desc">${p.abstract ? mdLite(p.abstract) : `<p>${band(p.takeaway, p.highlight)}</p>`}</div>`;
+// Takeaway (plain-language bullets) is the default description; the full abstract is
+// one click away via an inline TAKEAWAY/ABSTRACT toggle (2026-09) — same .view-toggle/
+// .view-btn component as LIST/WHEEL, so it reads as the same kind of control. One
+// shared state drives every paper at once (.track[data-desc]); a paper with no
+// abstract just renders bullets with no toggle, never a dead button.
+const paperDesc = (p) => {
+  const bullets = Array.isArray(p.takeaway) ? p.takeaway : [p.takeaway].filter(Boolean);
+  const toggle = p.abstract ? `
+            <div class="view-toggle mono wd-desc-toggle">
+              <button class="view-btn is-active" data-desc-set="takeaway">TAKEAWAY</button>
+              <span class="muted">/</span>
+              <button class="view-btn" data-desc-set="abstract">ABSTRACT</button>
+            </div>` : '';
+  return `
+          <div class="wd-desc">${toggle}
+            <ul class="wd-takeaway">${bullets.map(b => `<li>${band(b, p.highlight)}</li>`).join('')}</ul>
+            ${p.abstract ? `<div class="wd-abstract">${mdLite(p.abstract)}</div>` : ''}
+          </div>`;
+};
 
 // Mono links row: primary links + supplemental links (extra_links: [{label, url}]).
 // Omitted entirely when a paper has no links at all.
@@ -277,7 +292,7 @@ function researchSection() {
       <span class="entry-sign mono" aria-hidden="true"></span>
     </article>`).join('');
   return `
-<section class="track" id="research" style="--steps:${wheelPapers.length - 1}" data-view="wheel">
+<section class="track" id="research" style="--steps:${wheelPapers.length - 1}" data-view="wheel" data-desc="takeaway">
   <div class="pin">
     <header class="section-head">
       <div class="head-stack">

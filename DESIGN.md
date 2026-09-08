@@ -16,8 +16,11 @@ other way around.
 - **The test every page must pass**: "would any other researcher's site look like this?"
   If yes, it fails. No template energy, no AI-default patterns (see §9).
 - **Copy voice**: first person, plain language, short sentences. Every paper gets a
-  1–2 sentence plain-language takeaway. Full abstracts are NOT rendered anywhere
-  (retired 2026-08-24) — they stay in `content/papers/*.md` bodies for future use.
+  takeaway: 3 plain-language bullets (context, finding, why it matters). It's the
+  default description everywhere the paper appears; the full abstract is one click
+  away via the TAKEAWAY/ABSTRACT toggle (§8) for readers who want it (superseded
+  2026-09 — this corrects an earlier version of this line that said abstracts were
+  retired; that was never true of the shipped code, only of an intermediate design).
 
 ## 2. Architecture — the "Ledger Scroll" (spine + record)
 
@@ -350,9 +353,17 @@ container size (redrawn on open and on resize) — never a static decorative cur
 - The detail spread crossfades with each rotation: a mono eyebrow carrying the
   **publication status ONLY** (verbatim from the paper's `status:` — e.g.
   `COND. ACCEPTED JDE PRE-RESULTS`; method/country/year live nowhere in the spread),
-  the title (~28px max — it must not shout), authors, and **the abstract as the
-  description** (amended 2026-08-24; the markdown body, takeaway as fallback). In
-  the pinned pane the abstract clamps to what the viewport height holds (12/17/24
+  the title (~28px max — it must not shout), authors, and **the description**
+  (superseded 2026-09): `takeaway:` (3 plain-language bullets — context, finding,
+  why it matters) is the default; a paper with a markdown body also gets an inline
+  TAKEAWAY/ABSTRACT toggle — same `.view-toggle`/`.view-btn` component as LIST/WHEEL,
+  so it reads as the same kind of control, placed right above the description it
+  controls rather than grouped in the header (considered both, picked proximity over
+  header discoverability). One shared state drives every paper's toggle at once
+  (`.track[data-desc]`), same mechanic as LIST/WHEEL; flipping it is a plain content
+  swap, never a height animation. A paper with no markdown body just shows bullets,
+  no toggle, never a dead button. In the pinned pane the abstract clamps to what the
+  viewport height holds (12/17/24
   lines by height, ellipsized); the LIST view always carries it in full. Links
   render as **soft outlined chips** (mono label in a hairline box, accent border on
   hover) so they read as clickable at rest. The spread sits on a **weighted seat**:

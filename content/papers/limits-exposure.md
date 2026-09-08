@@ -7,11 +7,11 @@ year: 2026
 status: "Working paper"
 country: "Colombia"
 method: "Field experiment"
-takeaway: >
-  Can structured collaboration across social classes in college build economic
-  connectedness? In a field experiment at an elite Colombian university, we experimentally identify 
-  how socioeconomically diverse teams meet less, report lower satisfaction, and are less willing to work
-  together again, showing the limits of cross-class contact within education environments.
+# 3 plain-language bullets: context, finding, why it matters (2026-09)
+takeaway:
+  - "Can putting students from different economic backgrounds on the same team help bridge Colombia's class divides? We tested this inside a required course at an elite Colombian university."
+  - "Mixed-background teams met less, liked working together less, and were less willing to team up again, even though grades didn't suffer. Pairing students with an existing friend helped, but mainly for lower-income students."
+  - "Mixing students by class doesn't build lasting bonds on its own, and it can even backfire. Programs aiming for real integration should probably lean on existing friendships, not just mixed rosters."
 highlight: ""
 links:
   pdf: ""       # intentionally unlinked for now (2026-08-24) — draft marked very preliminary

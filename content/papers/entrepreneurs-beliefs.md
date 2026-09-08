@@ -7,11 +7,11 @@ year: 2024
 status: "Working paper"
 country: "Colombia"
 method: "Lab-in-the-field"
-takeaway: >
-  Why do so many low-potential entrepreneurs start businesses that fail? In an experiment with
-  current, past, and aspiring Colombian entrepreneurs, we find overconfidence among lower-potential
-  founders drives over-entry. Telling people information about their relative skills discourages
-  some of them, while high-potential entrepreneurs keep entering despite high failure rates.
+# 3 plain-language bullets: context, finding, why it matters (2026-09)
+takeaway:
+  - "Most new businesses in Colombia fail, yet people keep starting them anyway, even ones with clearly bad odds. We ran an experiment with real entrepreneurs to find out why."
+  - "People with the weakest odds were also the most overconfident about their chances. Telling them their real, skill-based odds made some of them back out. People with strong odds kept going regardless."
+  - "Overconfidence, not a love of risk, is what drives weaker-prospect entrepreneurs to start businesses likely to fail. Something as simple as honest feedback on the odds could help people make better calls."
 highlight: ""
 links:
   pdf: ""       # intentionally unlinked for now (2026-08-24) — supplemental links only

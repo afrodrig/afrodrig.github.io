@@ -269,6 +269,19 @@
     });
   });
 
+  /* ============ TAKEAWAY / ABSTRACT toggle (one state, every paper at once) ============
+     Every paper renders its own copy of this control (inline, next to its own
+     description) but they all share one attribute on .track — flipping any of them
+     flips what every paper shows, the same way LIST/WHEEL is one state for the whole
+     section. A plain content swap, not a layout change, so no measure()/apply() needed. */
+  document.querySelectorAll('[data-desc-set]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const desc = btn.dataset.descSet;
+      track.dataset.desc = desc;
+      document.querySelectorAll('[data-desc-set]').forEach((b) => b.classList.toggle('is-active', b.dataset.descSet === desc));
+    });
+  });
+
   /* ============ identity panel collapse ============
      The collapsed rail is ONE whole click target that expands the spine. */
   const collapseBtn = document.querySelector('.id-collapse');

@@ -7,13 +7,11 @@ year: 2026
 status: "Working paper"
 country: "Zambia"
 method: "Randomized evaluation"
-takeaway: >
-  Zambia's Constituency Development Fund has expanded twenty-fold since 2021. In
-  partnership with the government, we randomly assign districts more control over
-  project selection and procurement: officials get projects approved substantially
-  faster, shift tenders into simpler processes, and spending aligns modestly better
-  with what communities ask for. Early results also suggest this can speed up project
-  completion without hurting quality.
+# 3 plain-language bullets: context, finding, why it matters (2026-09)
+takeaway:
+  - "Zambia dramatically expanded the fund that lets local districts run their own development projects. Working with the government, we tested what happens when districts get even more control over how that money gets spent."
+  - "Districts with more control got projects approved much faster and moved toward simpler, quicker ways of awarding contracts. Spending also matched what communities actually asked for a bit better. Early signs point to faster completion too, without cutting quality."
+  - "More local control looks good on paper, but the real result here is faster spending that lines up better with what people want, and no obvious cost in quality. That's a concrete case for decentralizing decisions, not just a theoretical one."
 highlight: ""
 links:
   pdf: ""       # intentionally unlinked for now (2026-08-24) — draft marked "do not disseminate"; supplemental links only

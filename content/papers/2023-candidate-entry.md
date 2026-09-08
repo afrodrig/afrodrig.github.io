@@ -7,12 +7,12 @@ year: 2026
 status: "Cond. accepted JDE pre-results"   # shown as the paper's eyebrow, verbatim per Andrés (registered report, Journal of Development Economics)
 country: "Sierra Leone"
 method: "Field experiment"
-takeaway: >
-  Are there better potential candidates for local office and will parties run them?
-  We developed and tested an intervention that successfully surfaced higher-quality, broadly
-  supported potential candidates. A quarter of our best people entered politics, but the bottleneck 
-  was not the supply side: party gatekeepers mostly favored their own incumbents.
-highlight: "the bottleneck was not the supply side"   # phrase eligible for the marigold band (must appear in takeaway)
+# 3 plain-language bullets: context, finding, why it matters (2026-09)
+takeaway:
+  - "Local governments often struggle to attract capable, popular leaders. Is that because good candidates don't exist, or because parties won't pick them? We tested this ahead of Sierra Leone's 2023 local elections."
+  - "Combining community nominations with basic vetting surfaced people who were clearly more qualified and more popular than the usual candidates. A quarter of them went on to actually run for office."
+  - "The bottleneck isn't a shortage of good candidates. Party leaders keep re-running their own incumbents instead of picking them. Real renewal means changing who parties choose, not just who's available."
+highlight: "The bottleneck isn't a shortage of good candidates"   # phrase eligible for the marigold band (must appear verbatim in one takeaway bullet)
 links:
   pdf: ""       # intentionally unlinked for now (2026-08-24) — supplemental links only
   slides: ""

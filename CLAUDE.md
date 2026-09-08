@@ -30,8 +30,10 @@ content/
 
 - **Add a paper**: copy an existing `content/papers/*.md`, edit the front matter
   (title, authors, year, status, country, method, takeaway, links), drop the PDF in
-  `files/`. The `takeaway` is the 1–2 plain-language sentences shown in the Wheel —
-  it is required; the abstract (markdown body) is optional.
+  `files/`. `takeaway` is a YAML list of 3 plain-language bullets (context, finding,
+  why it matters) — it is required and is the default description everywhere the
+  paper appears; the abstract (markdown body) is optional, and when present adds an
+  inline TAKEAWAY/ABSTRACT toggle so either view is one click away (2026-09).
 - **Update the bio**: edit `content/bio.md` only.
 - **Add a Practice/shelf item**: add an entry to `items:` in `content/practice.md`
   (see the field comment above `items:` in that file). No separate folder anymore.
@@ -95,7 +97,12 @@ content/
   list-of-maps entry (needed for per-item `extra_links:`); bio.md rewritten in
   Andrés's own voice with a working inline link (`band()` now parses `[text](url)`);
   dead fields removed (`site.yml`/`practice.md` section `eyebrow:`/`title:` were
-  never read); PhD listed as completed (2024).
+  never read); PhD listed as completed (2024). Papers' `takeaway:` rewritten as 3
+  plain-language bullets (context, finding, why it matters) and made the default
+  description everywhere; an inline TAKEAWAY/ABSTRACT toggle (reusing the LIST/WHEEL
+  `.view-toggle` component, one shared state for the whole section) makes the full
+  abstract one click away — resolves a standing contradiction where DESIGN.md §1
+  said abstracts were retired while §8 and the shipped code always preferred them.
 - TODO: Scholar URL; tune `TODO(update)` seeds (keywords, short titles, takeaways,
   bio voice); practice case-study/essay teasers still placeholders; key-figure data
   per paper (schema wired, no fabricated numbers).

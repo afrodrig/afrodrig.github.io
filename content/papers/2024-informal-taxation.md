@@ -7,12 +7,12 @@ year: 2024
 status: "Working paper"
 country: "Sierra Leone"
 method: "Field experiment"
-takeaway: >
-  When chiefs mobilize labor for public goods, who actually pays? Randomizing how
-  contributors to a public good are selected, comparing traditional leaders (chiefs) to 
-  standard methods of progressive targeting, I show chiefs distort behavior slightly less 
-  than the alternatives, but their redistribution approach still lands hardest on poorer households.
-highlight: "their redistribution approach still lands hardest on poorer households"   # phrase eligible for the marigold band (must appear in takeaway)
+# 3 plain-language bullets: context, finding, why it matters (2026-09)
+takeaway:
+  - "In many rural communities, local chiefs decide who has to contribute unpaid labor to public projects. Is that fairer than the alternatives, or does it just fall hardest on the poor? I tested this with a field experiment in rural Sierra Leone."
+  - "Letting chiefs pick who contributes caused slightly less dodging of the work than choosing people at random or by household survey. But people still went out of their way, like accepting lower pay elsewhere, to avoid being picked, and that burden lands hardest on poorer households."
+  - "Traditional authority does about as well as these seemingly fairer alternatives at getting people to pitch in. None of the options tested here stopped the cost from falling on the poor, so fixing that will take more than changing who decides."
+highlight: "that burden lands hardest on poorer households"   # phrase eligible for the marigold band (must appear verbatim in one takeaway bullet)
 links:
   pdf: ""       # intentionally unlinked for now (2026-08-24) — supplemental links only
   slides: ""
