@@ -1,12 +1,12 @@
 # Site-wide settings. Rendered into the identity panel, rail, and contact rows.
 name: "Andrés F. Rodríguez"
-monogram: "AR"
+monogram: "AFR"
 role: "Development economist · Impact & Learning Manager, Stanford Impact Labs"  # title per cv.pdf 2026-08
 credentials: "PhD in Economics, Stanford · BA & MA, Universidad de los Andes"
 supported: "Work supported by J-PAL, the International Growth Centre, the Weiss Fund & the Stanford King Center"   # TODO(update): confirm funder list/wording
 email: "afrodrig@stanford.edu"   # displayed obfuscated ("afrodrig [at] stanford [dot] edu"); the mailto link still works
 location: "the Bay Area, California"   # rendered as "Based in <location>"
-interests: ["Governance", "Global development", "Field experiments"]   # About vitae: RESEARCH & FIELDWORK line
+interests: ["Governance", "Global development", "Field experiments", "AI and Social Science", "Impact Measurement"]   # About vitae: RESEARCH & FIELDWORK line
 url: "https://afrodrig.github.io/"   # canonical URL — used for og: tags and JSON-LD
 
 # Section order defines panel order on the landing (identity panel is always first).
@@ -14,10 +14,8 @@ url: "https://afrodrig.github.io/"   # canonical URL — used for og: tags and J
 sections:
   - key: research
     title: "Research"
-    eyebrow: "Five working papers"   # keep honest — update the count with the papers
   - key: practice
     title: "Practice"
-    eyebrow: "Case studies, essays & tools"   # TODO(update): Andrés — confirm wording
 
 links:
   scholar: ""      # TODO(update): Google Scholar URL (not on cv.pdf)

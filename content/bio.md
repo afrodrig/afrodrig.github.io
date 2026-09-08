@@ -3,17 +3,10 @@
 # it must appear verbatim inside the statement below.
 # The NOW line is the page's one LIVE wire: what is on your desk right now, in red.
 # Keep it fresh (update it every month or two) — never a static brag.
-now: "Building how Stanford Impact Labs measures the impact of funded research"   # TODO(update): keep fresh
-highlight: "this site is the bridge"
+now: "Building a framework to assess the social impact of a wide portfolio of research projects"   # TODO(update): keep fresh
+highlight: "Impact & Learning Manager"
 ---
 
-I'm a development economist who studies how governments in developing countries can
-become more effective and inclusive — through field experiments on governance and
-public goods in Sierra Leone, Zambia, and Colombia. At Stanford Impact Labs I work the
-other side: measuring the impact of applied research across domains — patient with the
-time science takes to shape decisions, balancing rigor with practical use, and honest
-about what can and cannot be measured. Research on one side, practice on the other;
-this site is the bridge.
+As a researcher, I specialize in development economics, in particular studying how governments in developing countries can become more effective and increase their state capacity. My work spans government partnerships to experimentally evaluate large policy reforms on governance and decentralization, and field experiments on the behavioral mechanics of different phenomena — from poverty-targeting methods, to entrepreneurship, to how diversity affects education environments.
 
-<!-- TODO(update): Andrés — tune to your own voice; trim if it reads long on landing.
-     Must contain the `highlight` phrase verbatim. -->
+As the Impact & Learning Manager at [Stanford Impact Labs](https://impact.stanford.edu), I lead the development and deployment of our impact measurement methodology. I also support the whole investment pipeline to fund socially impactful science, from funding recommendations to monitoring and evaluation. As part of my job, I develop our internal systems for using AI — from how it aids our selections, to how it's used within our knowledge management systems, to how it can be deployed strategically for impact measurement.

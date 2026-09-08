@@ -20,7 +20,6 @@ positions:
     org: "Universidad de los Andes"
 
 education:
-  # NOTE: cv.pdf says "Ph.D. Candidate in Economics, 2018-2024" — TODO(confirm): completed?
   - years: "2018–2024"
     degree: "Ph.D., Economics"
     org: "Stanford University"

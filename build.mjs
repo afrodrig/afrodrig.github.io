@@ -98,8 +98,9 @@ function mdLite(s) {
     .split(/\n\s*\n/).map(p => `<p>${p.trim()}</p>`).join('\n');
 }
 // Wrap `highlight` phrase in the marigold band (one per screen — caller's duty).
+// Also supports inline [text](url) links — same lite-markdown syntax as mdLite().
 function band(text, phrase) {
-  const e = esc(text);
+  const e = esc(text).replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
   if (!phrase) return e;
   return e.replace(esc(phrase), `<mark class="band">${esc(phrase)}</mark>`);
 }
