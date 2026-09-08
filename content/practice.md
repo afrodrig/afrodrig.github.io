@@ -1,29 +1,48 @@
 ---
-title: "Practice"
-eyebrow: "Case studies, essays & tools"   # TODO(update): confirm wording (Practice absorbed The Lab 2026-08-23)
 intro: >
-  Impact measurement as it actually happens: real cases from portfolio work, and essays
-  on evaluation that gets used rather than performed.
-highlight: "evaluation that gets used"   # marigold band phrase — must appear in intro
-# Each item renders as a BOX on the Practice shelf (title + kind; placeholders until
-# real pieces exist). Kinds with their own cover art: Case study, Essay, dashboard.
+  Collection of work related to impact measurement, research grant making, and best
+  practices for fieldwork and partnership-based impact-oriented research. 
+highlight: "impact-oriented research."   # marigold band phrase — must appear in intro
+
+# Every card on the Practice shelf lives here, one entry per box, in one horizontally
+# scrolled rail ordered by `order:`. Fields:
+#   title        required
+#   kind         shown as the box's eyebrow (e.g. "Methodology", "Pilot & evaluation")
+#   status       shown bottom-left, muted (e.g. "ongoing"); "" is fine, just renders blank
+#   pitch        1-3 sentence description
+#   keyline      optional mono credit line under the pitch (e.g. co-authors)
+#   link         the box title becomes a link to this URL if set
+#   link_label   label for `link`'s call-to-action (defaults to "Open")
+#   extra_links  supplemental links: [{label, url}]
+#   order        sort position on the shelf
 items:
+  - title: "AI-assisted grant making"
+    kind: "Pilot & evaluation"
+    status: ""
+    pitch: "A multi-agent AI pipeline that reviews research proposals and supports funding decisions, benchmarked against historical decisions — designed, piloted, and evaluated at Stanford Impact Labs. Presented at Research on Research Institute, the Impact Funders Forum, and the Canadian Institutes of Health Research."
+    keyline: "joint work with Michael Eddy & Julia Spencer"
+    link: "https://stanfordimpact.github.io/sil_documents/analytical-pieces/ai-memo-website/AI%20Memo%20-%20Production.html"   # the memo — the main destination (linked from the box title too)
+    link_label: "Read the memo"
+    extra_links:
+      - label: "Blog post"
+        url: "https://impact.stanford.edu/article/responsible-ai-accelerate-research-funding"   # Eddy, Spencer & Rodríguez, Feb 2026
+      - label: "AFIRE talk"
+        url: "https://youtu.be/v8hbJEExd5I"   # Impact Funders Forum + CIHR talks have no public links
+    order: 1
+
   - title: "Impact measurement methodology at SIL"
     kind: "Methodology"
+    status: ""
+    pitch: "How Stanford Impact Labs measures the impact of its diverse social science portfolio. I lead the development of this framework analyzing what each funded project set out to achieve and the evidence of what it delivers, balancing rigor and the limitations of quantifying impact for complex research projects. "
+    link: "https://impact.stanford.edu/impact-measurement"
     order: 2
-    pitch: "How Stanford Impact Labs measures the impact of its applied social science portfolio — the framework I lead as Impact & Learning Manager: what each funded project set out to change, what it delivers, and how that evidence feeds the next decision."
+
+  - title: "Field research at every scale"
+    kind: "Talks & mentoring"
+    status: "ongoing"
+    pitch: "Supporting graduate students doing experimental field research at every scale, from large partnerships with government entities to smaller lab-in-the-field data collection, carefully thinking about the role that each approach plays in advancing science and having impact by supporting better policies. Guest speaker for Stanford courses POLISCI 150C/355C and EDUC 318, and at the Stanford King Center on Global Development."
+    extra_links:
+      - label: "Example"
+        url: "https://kingcenter.stanford.edu/events/student-event/research-roadmap-mastering-fieldwork-essentials"
+    order: 3
 ---
-
-<!--
-Practice = TWO streams (settled 2026-08). One file per piece:
-
-content/practice/cases/*.md   — case studies of impact work
-  front matter: title, year, context (1-2 lines), links: {read: "", lab: ""} , order
-content/practice/essays/*.md  — how-I-think pieces
-  front matter: title, year, order; body = the essay (markdown)
-
-The titles currently shown in the design mocks ("Scoring a portfolio of research bets",
-"Evaluation that gets used", "A theory of change you can test", etc.) are ILLUSTRATIVE
-PLACEHOLDERS — TODO(update): Andrés defines the real first pieces. Case studies may
-cross-link to Lab artifacts (e.g. a rubric kit).
--->
