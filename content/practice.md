@@ -14,6 +14,9 @@ highlight: "impact-oriented research."   # marigold band phrase — must appear 
 #   link         the box title becomes a link to this URL if set
 #   link_label   label for `link`'s call-to-action (defaults to "Open")
 #   extra_links  supplemental links: [{label, url}]
+#   image        optional cover photo/illustration (path under assets/); shown letterboxed
+#                (never cropped) since source art won't always match the cover's aspect
+#                ratio. Omit to keep the default hand-drawn CSS art for that `kind`.
 #   order        sort position on the shelf
 items:
   - title: "AI-assisted grant making"
@@ -21,6 +24,7 @@ items:
     status: ""
     pitch: "A multi-agent AI pipeline that reviews research proposals and supports funding decisions, benchmarked against historical decisions — designed, piloted, and evaluated at Stanford Impact Labs. Presented at Research on Research Institute, the Impact Funders Forum, and the Canadian Institutes of Health Research."
     keyline: "joint work with Michael Eddy & Julia Spencer"
+    image: "assets/practice-ai-review.jpg"
     link: "https://stanfordimpact.github.io/sil_documents/analytical-pieces/ai-memo-website/AI%20Memo%20-%20Production.html"   # the memo — the main destination (linked from the box title too)
     link_label: "Read the memo"
     extra_links:
@@ -35,6 +39,7 @@ items:
     status: ""
     pitch: "How Stanford Impact Labs measures the impact of its diverse social science portfolio. I lead the development of this framework analyzing what each funded project set out to achieve and the evidence of what it delivers, balancing rigor and the limitations of quantifying impact for complex research projects. "
     link: "https://impact.stanford.edu/impact-measurement"
+    image: "assets/practice-impact-measurement.jpg"
     order: 2
 
   - title: "Field research at every scale"
@@ -44,5 +49,6 @@ items:
     extra_links:
       - label: "Example"
         url: "https://kingcenter.stanford.edu/events/student-event/research-roadmap-mastering-fieldwork-essentials"
+    image: "assets/practice-fieldwork.jpg"
     order: 3
 ---

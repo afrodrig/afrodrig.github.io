@@ -350,7 +350,8 @@ function practiceSection() {
     .map(it => (typeof it === 'string' ? { title: it } : it))
     .map(it => ({ title: it.title, kind: it.kind ?? 'Piece', status: it.status ?? '',
       pitch: it.pitch ?? '', keyline: it.keyline ?? '', link: it.link ?? '',
-      link_label: it.link_label ?? 'Open', extra_links: it.extra_links ?? [], order: it.order ?? 99 }))
+      link_label: it.link_label ?? 'Open', extra_links: it.extra_links ?? [],
+      image: it.image ?? '', order: it.order ?? 99 }))
     .sort((a, b) => a.order - b.order);
   const kindKey = (k) => String(k).toLowerCase().split(' ').pop().replace(/[^a-z]/g, '');
   return `
@@ -375,7 +376,7 @@ function practiceSection() {
   <div class="lab-cards" data-reveal style="--i:3" role="region" aria-label="Practice pieces" tabindex="0">
     ${boxes.map((c, i) => `
     <article class="lab-card">
-      <div class="lab-cover lab-cover-${kindKey(c.kind)}" aria-hidden="true"></div>
+      <div class="lab-cover lab-cover-${kindKey(c.kind)}${c.image ? ' has-image' : ''}" aria-hidden="true">${c.image ? `<img class="lab-cover-img" src="${c.image}" alt="">` : ''}</div>
       <div class="lab-body">
         <div class="eyebrow mono">${esc(c.kind).toUpperCase()}</div>
         <h3 class="lab-title">${c.link

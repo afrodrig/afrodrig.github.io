@@ -374,6 +374,10 @@ mark.band {
    cluster's own midpoint) so it re-centers and stops clipping at any cover size,
    instead of the old left-anchored fixed px positions tuned to one exact box */
 .lab-cover { flex: none; height: 140px; background: var(--color-ink); position: relative; overflow: hidden; }
+/* a real cover photo/illustration replaces the CSS art entirely; shown letterboxed
+   (never cropped) since source art won't always share the cover's exact aspect ratio */
+.lab-cover.has-image::after { content: none; }
+.lab-cover-img { width: 100%; height: 100%; object-fit: contain; display: block; }
 @media (max-height: 850px) {
   .lab-cover { height: 120px; }
   .lab-body { padding: 16px 20px 18px; }
