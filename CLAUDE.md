@@ -21,11 +21,11 @@ content/
   bio.md                # About page lede: bridge statement + NOW line
   cv.yml                # positions[0] + education feed the About vitae ledger;
                         # FIELDWORK derives from papers' country fields
-  practice.md           # Practice section copy
+  practice.md           # Practice section intro + EVERY card on the shelf (`items:`,
+                        # full schema: title/kind/status/pitch/keyline/link/
+                        # link_label/extra_links/order) — one file, one horizontal
+                        # rail (content/lab/ folded in here 2026-09; no longer exists)
   papers/*.md           # one file per paper (front-matter schema inside each file)
-  lab/*.md              # one file per artifact (dashboards, frameworks, datasets) —
-                        # rendered as boxes on the Practice SHELF, together with
-                        # practice.md items (one horizontal rail; merged 2026-08-23)
 ```
 
 - **Add a paper**: copy an existing `content/papers/*.md`, edit the front matter
@@ -33,7 +33,8 @@ content/
   `files/`. The `takeaway` is the 1–2 plain-language sentences shown in the Wheel —
   it is required; the abstract (markdown body) is optional.
 - **Update the bio**: edit `content/bio.md` only.
-- **Add a Lab item**: new file in `content/lab/` with title, status, link, one-line pitch.
+- **Add a Practice/shelf item**: add an entry to `items:` in `content/practice.md`
+  (see the field comment above `items:` in that file). No separate folder anymore.
 
 ## Working rules
 
@@ -88,6 +89,13 @@ content/
   collapse motion simplified (fade + ease-out, no spring); Practice is a full page
   with the shelf fully visible inside one fold; the wheel's circle center moved
   OFF-SCREEN RIGHT (cards hug the browser edge).
+- 2026-09 cleanup: `content/lab/` folded into `content/practice.md`'s `items:` (one
+  file, full card schema for every shelf box — no more location/capability split);
+  the hand-rolled YAML parser in build.mjs now supports a list nested inside a
+  list-of-maps entry (needed for per-item `extra_links:`); bio.md rewritten in
+  Andrés's own voice with a working inline link (`band()` now parses `[text](url)`);
+  dead fields removed (`site.yml`/`practice.md` section `eyebrow:`/`title:` were
+  never read); PhD listed as completed (2024).
 - TODO: Scholar URL; tune `TODO(update)` seeds (keywords, short titles, takeaways,
   bio voice); practice case-study/essay teasers still placeholders; key-figure data
   per paper (schema wired, no fabricated numbers).

@@ -8,11 +8,11 @@ status: "Cond. accepted JDE pre-results"   # shown as the paper's eyebrow, verba
 country: "Sierra Leone"
 method: "Field experiment"
 takeaway: >
-  Are there better potential candidates for local office — and will parties run them?
-  Community nominations plus technocratic screening surface higher-quality, broadly
-  supported people, and a quarter of top nominees enter politics. The bottleneck isn't
-  supply: party gatekeepers still favor their own incumbents.
-highlight: "The bottleneck isn't supply"   # phrase eligible for the marigold band (must appear in takeaway)
+  Are there better potential candidates for local office and will parties run them?
+  We developed and tested an intervention that successfully surfaced higher-quality, broadly
+  supported potential candidates. A quarter of our best people entered politics, but the bottleneck 
+  was not the supply side: party gatekeepers mostly favored their own incumbents.
+highlight: "the bottleneck was not the supply side"   # phrase eligible for the marigold band (must appear in takeaway)
 links:
   pdf: ""       # intentionally unlinked for now (2026-08-24) — supplemental links only
   slides: ""

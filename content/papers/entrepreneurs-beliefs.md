@@ -8,10 +8,10 @@ status: "Working paper"
 country: "Colombia"
 method: "Lab-in-the-field"
 takeaway: >
-  Why do so many low-potential businesses launch anyway? In an experiment with current,
-  past, and aspiring Colombian entrepreneurs, overconfidence among lower-potential
-  founders drives over-entry — and telling people their skill-based odds discourages
-  some of them, while high-potential founders keep entering despite high failure rates.
+  Why do so many low-potential entrepreneurs start businesses that fail? In an experiment with
+  current, past, and aspiring Colombian entrepreneurs, we find overconfidence among lower-potential
+  founders drives over-entry. Telling people information about their relative skills discourages
+  some of them, while high-potential entrepreneurs keep entering despite high failure rates.
 highlight: ""
 links:
   pdf: ""       # intentionally unlinked for now (2026-08-24) — supplemental links only

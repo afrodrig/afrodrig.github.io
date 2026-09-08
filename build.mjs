@@ -10,7 +10,7 @@ const ROOT = new URL('.', import.meta.url).pathname;
 const C = (p) => join(ROOT, 'content', p);
 
 /* ---------- tiny YAML-subset parser (scalars, quoted strings, inline lists,
-   block lists of scalars/maps, one-level nested maps, folded `>` scalars) ---------- */
+   block lists of scalars/maps at any nesting depth, folded `>` scalars) ---------- */
 function parseYaml(src) {
   const lines = src.split('\n').filter(l => !/^\s*#/.test(l) && l.trim() !== '');
   const root = {};
@@ -31,6 +31,23 @@ function parseYaml(src) {
     return v.replace(/\s+#.*$/, '');
   }
   function indentOf(l) { return l.match(/^ */)[0].length; }
+  // Assigns target[key] from a `key: rawVal` line already consumed at column `fieldInd`
+  // (folded `>` text, or a nested map/list read via parseBlock, or a plain scalar).
+  // Shared by top-level keys AND list-item fields, so a list nested inside a list-of-maps
+  // entry (e.g. one `items:` entry with its own `extra_links:` list) parses correctly.
+  function consumeField(key, rawVal, fieldInd, target) {
+    if (rawVal === '>' || rawVal === '>-' || rawVal === '|') {
+      const buf = [];
+      while (i < lines.length && indentOf(lines[i]) > fieldInd) { buf.push(lines[i].trim()); i++; }
+      target[key] = buf.join(' ').trim();
+    } else if (rawVal === '') {
+      const child = {};
+      parseBlock(fieldInd + 1, child);
+      target[key] = Array.isArray(child._list) ? child._list : child;
+    } else {
+      target[key] = parseScalar(rawVal);
+    }
+  }
   function parseBlock(indent, target) {
     while (i < lines.length) {
       const line = lines[i];
@@ -41,16 +58,17 @@ function parseYaml(src) {
         // list item at this indent
         if (!Array.isArray(target._list)) target._list = [];
         const rest = t.slice(2);
-        if (/^[\w-]+:\s/.test(rest) || /^[\w-]+:$/.test(rest)) {
-          // list of maps: first key on the dash line, siblings indented deeper
+        const dm = rest.match(/^([\w-]+):\s*(.*)$/);
+        if (dm) {
+          // list of maps: first key on the dash line, siblings (any depth) indented deeper
           const item = {};
-          const m = rest.match(/^([\w-]+):\s*(.*)$/);
-          if (m[2] !== '') item[m[1]] = parseScalar(m[2]);
           i++;
+          consumeField(dm[1], dm[2], ind + 2, item);
           while (i < lines.length && indentOf(lines[i]) > ind && !lines[i].trim().startsWith('- ')) {
+            const fieldInd = indentOf(lines[i]);
             const mm = lines[i].trim().match(/^([\w-]+):\s*(.*)$/);
-            if (mm) item[mm[1]] = parseScalar(mm[2]);
             i++;
+            if (mm) consumeField(mm[1], mm[2], fieldInd, item);
           }
           target._list.push(item);
         } else {
@@ -61,21 +79,8 @@ function parseYaml(src) {
       }
       const m = t.match(/^([\w-]+):\s*(.*)$/);
       if (!m) { i++; continue; }
-      const [, key, rawVal] = m;
-      if (rawVal === '>' || rawVal === '>-' || rawVal === '|') {
-        i++;
-        const buf = [];
-        while (i < lines.length && indentOf(lines[i]) > ind) { buf.push(lines[i].trim()); i++; }
-        target[key] = buf.join(' ').trim();
-      } else if (rawVal === '') {
-        i++;
-        const child = {};
-        parseBlock(ind + 1, child);
-        target[key] = Array.isArray(child._list) ? child._list : child;
-      } else {
-        target[key] = parseScalar(rawVal);
-        i++;
-      }
+      i++;
+      consumeField(m[1], m[2], ind, target);
     }
   }
   parseBlock(0, root);
@@ -122,10 +127,6 @@ const featured = papers.find(p => p.featured) ?? papers[0];
 const wheelPapers = [featured, ...papers.filter(p => p !== featured)];
 const yearLabel = (p) => p.status === 'In design' ? 'now' : (p.year ?? '');
 const pad2 = (n) => String(n).padStart(2, '0');
-const labDir = C('lab');
-const labItems = readdirSync(labDir).filter(f => f.endsWith('.md') && f !== 'README.md')
-  .map(f => parseDoc(join(labDir, f))).map(d => ({ ...d.meta, body: d.body }))
-  .sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
 
 const STAMP = new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' }).toUpperCase();
 const V = Date.now().toString(36); // asset cache-buster, refreshed every build
@@ -328,20 +329,14 @@ function researchSection() {
 
 /* ---------- practice (absorbed The Lab 2026-08-23) ---------- */
 function practiceSection() {
-  // ONE stream (2026-08-23: content lives only in the boxes) — practice.md items and
-  // content/lab/ artifacts render as uniform boxes on a horizontally scrolled shelf.
-  const items = (practice.meta.items ?? []).map(it => typeof it === 'string' ? { title: it } : it);
-  const labCards = labItems.length ? labItems : [
-    { title: 'Portfolio learning dashboard', kind: 'interactive dashboard', status: 'in-progress',
-      pitch: 'Every investment in one live view: what each project proposed, what it has produced, and what that means for the next decision.', keyline: 'what changed, project by project', link: '' },
-  ];
-  // One stream, ordered by each piece's `order:` (lab cards and practice.md items alike).
-  const boxes = [
-    ...labCards.map(c => ({ title: c.title, kind: c.kind ?? 'tool', status: c.status ?? '',
-      pitch: c.pitch ?? c.body ?? '', keyline: c.keyline ?? '', link: c.link ?? '',
-      link_label: c.link_label ?? 'Open', extra_links: c.extra_links ?? [], order: c.order ?? 99 })),
-    ...items.map(it => ({ title: it.title, kind: it.kind ?? 'Piece', status: 'in progress', pitch: it.pitch ?? '', keyline: '', link: '', link_label: '', extra_links: [], order: it.order ?? 99 })),
-  ].sort((a, b) => a.order - b.order);
+  // ONE source (2026-09: folded content/lab/ into practice.md's items — every card on
+  // the shelf, full schema, one file) rendered as uniform boxes on a horizontal rail.
+  const boxes = (practice.meta.items ?? [])
+    .map(it => (typeof it === 'string' ? { title: it } : it))
+    .map(it => ({ title: it.title, kind: it.kind ?? 'Piece', status: it.status ?? '',
+      pitch: it.pitch ?? '', keyline: it.keyline ?? '', link: it.link ?? '',
+      link_label: it.link_label ?? 'Open', extra_links: it.extra_links ?? [], order: it.order ?? 99 }))
+    .sort((a, b) => a.order - b.order);
   const kindKey = (k) => String(k).toLowerCase().split(' ').pop().replace(/[^a-z]/g, '');
   return `
 <section class="practice-sec" id="practice">
@@ -435,4 +430,4 @@ ${practiceSection()}
 </html>`;
 
 writeFileSync(join(ROOT, 'index.html'), html);
-console.log(`built index.html — ${papers.length} papers, ${labItems.length} lab items, stamp ${STAMP}`);
+console.log(`built index.html — ${papers.length} papers, ${(practice.meta.items ?? []).length} practice items, stamp ${STAMP}`);

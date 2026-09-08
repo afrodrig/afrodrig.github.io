@@ -9,10 +9,10 @@ country: "Sierra Leone"
 method: "Field experiment"
 takeaway: >
   When chiefs mobilize labor for public goods, who actually pays? Randomizing how
-  contributors are selected — chiefs versus lotteries versus progressive surveys —
-  shows chiefs distort behavior slightly less than the alternatives, but their taxes
-  still land hardest on poorer households, who accept lower wages to avoid the call.
-highlight: "who actually pays?"   # phrase eligible for the marigold band (must appear in takeaway)
+  contributors to a public good are selected, comparing traditional leaders (chiefs) to 
+  standard methods of progressive targeting, I show chiefs distort behavior slightly less 
+  than the alternatives, but their redistribution approach still lands hardest on poorer households.
+highlight: "their redistribution approach still lands hardest on poorer households"   # phrase eligible for the marigold band (must appear in takeaway)
 links:
   pdf: ""       # intentionally unlinked for now (2026-08-24) — supplemental links only
   slides: ""

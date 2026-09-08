@@ -12,7 +12,8 @@ takeaway: >
   partnership with the government, we randomize giving districts more control over
   project selection and procurement: officials get projects approved substantially
   faster, shift tenders into simpler processes, and spending aligns modestly better
-  with what communities ask for.
+  with what communities ask for. Early results suggest this can speed up project
+  completion without negative effects on quality.
 highlight: ""
 links:
   pdf: ""       # intentionally unlinked for now (2026-08-24) — draft marked "do not disseminate"; supplemental links only
@@ -44,6 +45,5 @@ simpler procurement processes. Increased discretion modestly improves the sector
 alignment of selected projects with local demand while, at a minimum, not exacerbating
 existing biases in the spatial allocation of resources. Reduced bidding on tenders
 appears to reflect a reduction in non-competitive bids rather than a consequential
-reduction in competition. Ongoing and future data collection seeks to evaluate
-downstream outcomes on project construction, utilization, financial management, and
-electoral accountability.
+reduction in competition. Early results suggest this can speed up project completion 
+without negative effects on project quality. 

@@ -8,11 +8,10 @@ status: "Working paper"
 country: "Colombia"
 method: "Field experiment"
 takeaway: >
-  Can structured collaboration across class lines in college build economic
-  connectedness? In a field experiment at Universidad de los Andes, socioeconomically
-  diverse teams meet less, report lower satisfaction, and are less willing to work
-  together again — while pairing students with a friend mainly benefits low-SES
-  students.
+  Can structured collaboration across social classes in college build economic
+  connectedness? In a field experiment at an elite Colombian university, we experimentally identify 
+  how socioeconomically diverse teams meet less, report lower satisfaction, and are less willing to work
+  together again, showing the limits of cross-class contact within education environments.
 highlight: ""
 links:
   pdf: ""       # intentionally unlinked for now (2026-08-24) — draft marked very preliminary

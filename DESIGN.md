@@ -29,7 +29,8 @@ see below). Generic wordmark-plus-links top navs remain banned (§9).
 
 **Sections**: About (00), Research (01), Practice (02). Practice absorbs the former
 Lab — case studies, essays, and shareable artifacts live in one section (decided
-2026-08-23; the `content/lab/` folder still feeds the shelf boxes). There is NO
+2026-08-23; `content/practice.md`'s `items:` feeds every shelf box — the separate
+`content/lab/` folder was folded in 2026-09). There is NO
 separate CV page — the spine carries portrait, role, contact, and the CV (PDF) link,
 and `content/cv.yml` feeds the About page's vitae ledger (positions + education;
 the rest of the web-CV data stays parked).
@@ -131,9 +132,9 @@ shareable. ESC returns to the top. **External links and PDFs open in a new tab**
 boxes, and the section is sized as ONE PAGE: 48px top padding, 180px covers, so
 head → shelf fits a laptop fold after the snap): intro line (one banded phrase
 allowed), then **the shelf** — a horizontal scroll rail (`overflow-x: auto`,
-snap-start, hidden scrollbar) of uniform boxes, ~400px wide, equal height. One box per piece, whatever its stream: `content/lab/`
-pieces and `practice.md` items render identically, **real pieces first, placeholder
-teasers last** (merged from main 75a6697). A box foot carries status left and links
+snap-start, hidden scrollbar) of uniform boxes, ~400px wide, equal height. One box
+per `practice.md` item, **real pieces first, placeholder teasers last** (merged from
+main 75a6697). A box foot carries status left and links
 right: any `extra_links:` (mono, muted → accent on hover) plus `OPEN →` in accent
 when a live deliverable exists; `COMING SOON` only when there is nothing to link. Controls row above the rail:
 hairline top rule, mono `01 / 04` counter left, hairline-square prev/next buttons
