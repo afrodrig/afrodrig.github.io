@@ -364,17 +364,18 @@ mark.band {
 }
 .lab-cards::-webkit-scrollbar { display: none; }
 .lab-card {
-  flex: none; width: min(400px, 86vw);
+  flex: none; width: min(350px, 86vw);
   scroll-snap-align: start;
   display: flex; flex-direction: column;
   background: var(--color-card); border: 1px solid var(--color-rule);
 }
-/* wider cards wrap the pitch into fewer lines; a shorter, smaller cover (the art is
-   decorative, not informational) frees up the vertical room that used to run out
-   before the foot (status + links) fit inside the fold */
-.lab-cover { flex: none; height: 120px; background: var(--color-ink); position: relative; overflow: hidden; }
+/* the cover is decorative, not informational, so it stays compact; each kind's icon
+   cluster below is centered on the box (calc(50% + Npx) per shape, anchored to the
+   cluster's own midpoint) so it re-centers and stops clipping at any cover size,
+   instead of the old left-anchored fixed px positions tuned to one exact box */
+.lab-cover { flex: none; height: 140px; background: var(--color-ink); position: relative; overflow: hidden; }
 @media (max-height: 850px) {
-  .lab-cover { height: 90px; }
+  .lab-cover { height: 120px; }
   .lab-body { padding: 16px 20px 18px; }
   .lab-pitch { font-size: 13px; }
 }
@@ -389,33 +390,33 @@ mark.band {
   background:
     linear-gradient(transparent 61px, #24506e 61px, #24506e 62px, transparent 62px) 0 0/100% 62px,
     linear-gradient(90deg, transparent 119px, #24506e 119px, #24506e 120px, transparent 120px) 0 0/120px 100%,
-    linear-gradient(0deg, var(--color-data) 0 0) 40px 120px/28px 60px no-repeat,
-    linear-gradient(0deg, var(--color-accent) 0 0) 118px 70px/28px 110px no-repeat,
-    linear-gradient(0deg, var(--color-data) 0 0) 79px 95px/28px 85px no-repeat,
-    linear-gradient(0deg, var(--color-data-strong) 0 0) 157px 140px/28px 40px no-repeat;
+    linear-gradient(0deg, var(--color-data) 0 0) calc(50% - 58.5px) calc(50% + 25px)/28px 60px no-repeat,
+    linear-gradient(0deg, var(--color-accent) 0 0) calc(50% + 19.5px) 50%/28px 110px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) calc(50% - 19.5px) calc(50% + 12.5px)/28px 85px no-repeat,
+    linear-gradient(0deg, var(--color-data-strong) 0 0) calc(50% + 58.5px) calc(50% + 35px)/28px 40px no-repeat;
 }
 /* case study: a field timeline — baseline with square waypoints */
 .lab-cover-study::after {
   background:
     linear-gradient(transparent 61px, #24506e 61px, #24506e 62px, transparent 62px) 0 0/100% 62px,
     linear-gradient(90deg, transparent 119px, #24506e 119px, #24506e 120px, transparent 120px) 0 0/120px 100%,
-    linear-gradient(0deg, var(--color-data) 0 0) 40px 99px/240px 2px no-repeat,
-    linear-gradient(0deg, var(--color-data) 0 0) 56px 92px/16px 16px no-repeat,
-    linear-gradient(0deg, var(--color-data-strong) 0 0) 118px 92px/16px 16px no-repeat,
-    linear-gradient(0deg, var(--color-accent) 0 0) 180px 92px/16px 16px no-repeat,
-    linear-gradient(0deg, var(--color-data) 0 0) 242px 92px/16px 16px no-repeat;
+    linear-gradient(0deg, var(--color-data) 0 0) 50% 50%/240px 2px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) calc(50% - 96px) 50%/16px 16px no-repeat,
+    linear-gradient(0deg, var(--color-data-strong) 0 0) calc(50% - 34px) 50%/16px 16px no-repeat,
+    linear-gradient(0deg, var(--color-accent) 0 0) calc(50% + 28px) 50%/16px 16px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) calc(50% + 90px) 50%/16px 16px no-repeat;
 }
 /* rubric rows — the methodology cover */
 .lab-cover-methodology::after {
   background:
     linear-gradient(transparent 61px, #24506e 61px, #24506e 62px, transparent 62px) 0 0/100% 62px,
     linear-gradient(90deg, transparent 119px, #24506e 119px, #24506e 120px, transparent 120px) 0 0/120px 100%,
-    linear-gradient(0deg, var(--color-data) 0 0) 40px 42px/16px 16px no-repeat,
-    linear-gradient(0deg, var(--color-data) 0 0) 66px 46px/128px 8px no-repeat,
-    linear-gradient(0deg, var(--color-data-strong) 0 0) 40px 72px/16px 16px no-repeat,
-    linear-gradient(0deg, var(--color-data) 0 0) 66px 76px/96px 8px no-repeat,
-    linear-gradient(0deg, var(--color-accent) 0 0) 40px 102px/16px 16px no-repeat,
-    linear-gradient(0deg, var(--color-data) 0 0) 66px 106px/148px 8px no-repeat;
+    linear-gradient(0deg, var(--color-data) 0 0) calc(50% - 79px) calc(50% - 30px)/16px 16px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) calc(50% + 3px) calc(50% - 30px)/128px 8px no-repeat,
+    linear-gradient(0deg, var(--color-data-strong) 0 0) calc(50% - 79px) 50%/16px 16px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) calc(50% - 13px) 50%/96px 8px no-repeat,
+    linear-gradient(0deg, var(--color-accent) 0 0) calc(50% - 79px) calc(50% + 30px)/16px 16px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) calc(50% + 13px) calc(50% + 30px)/148px 8px no-repeat;
 }
 /* review pipeline — a queue of proposals flowing to one decision
    (kinds "applied AI pilot" and "Pilot & evaluation" share it) */
@@ -423,33 +424,33 @@ mark.band {
   background:
     linear-gradient(transparent 61px, #24506e 61px, #24506e 62px, transparent 62px) 0 0/100% 62px,
     linear-gradient(90deg, transparent 119px, #24506e 119px, #24506e 120px, transparent 120px) 0 0/120px 100%,
-    linear-gradient(0deg, var(--color-data) 0 0) 40px 79px/22px 22px no-repeat,
-    linear-gradient(0deg, var(--color-data) 0 0) 72px 79px/22px 22px no-repeat,
-    linear-gradient(0deg, var(--color-data-strong) 0 0) 104px 79px/22px 22px no-repeat,
-    linear-gradient(0deg, var(--color-data) 0 0) 134px 89px/34px 2px no-repeat,
-    linear-gradient(0deg, var(--color-accent) 0 0) 176px 71px/38px 38px no-repeat;
+    linear-gradient(0deg, var(--color-data) 0 0) calc(50% - 76px) 50%/22px 22px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) calc(50% - 44px) 50%/22px 22px no-repeat,
+    linear-gradient(0deg, var(--color-data-strong) 0 0) calc(50% - 12px) 50%/22px 22px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) calc(50% + 24px) 50%/34px 2px no-repeat,
+    linear-gradient(0deg, var(--color-accent) 0 0) calc(50% + 68px) 50%/38px 38px no-repeat;
 }
 /* talks & mentoring: fieldwork at every scale — ascending blocks */
 .lab-cover-mentoring::after {
   background:
     linear-gradient(transparent 61px, #24506e 61px, #24506e 62px, transparent 62px) 0 0/100% 62px,
     linear-gradient(90deg, transparent 119px, #24506e 119px, #24506e 120px, transparent 120px) 0 0/120px 100%,
-    linear-gradient(0deg, var(--color-data) 0 0) 40px 118px/24px 24px no-repeat,
-    linear-gradient(0deg, var(--color-data) 0 0) 76px 96px/32px 46px no-repeat,
-    linear-gradient(0deg, var(--color-data-strong) 0 0) 120px 72px/42px 70px no-repeat,
-    linear-gradient(0deg, var(--color-accent) 0 0) 174px 40px/12px 12px no-repeat;
+    linear-gradient(0deg, var(--color-data) 0 0) calc(50% - 61px) calc(50% + 39px)/24px 24px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) calc(50% - 21px) calc(50% + 28px)/32px 46px no-repeat,
+    linear-gradient(0deg, var(--color-data-strong) 0 0) calc(50% + 28px) calc(50% + 16px)/42px 70px no-repeat,
+    linear-gradient(0deg, var(--color-accent) 0 0) calc(50% + 67px) calc(50% - 45px)/12px 12px no-repeat;
 }
 /* essay: manuscript lines with a drop-cap block */
 .lab-cover-essay::after {
   background:
     linear-gradient(transparent 61px, #24506e 61px, #24506e 62px, transparent 62px) 0 0/100% 62px,
     linear-gradient(90deg, transparent 119px, #24506e 119px, #24506e 120px, transparent 120px) 0 0/120px 100%,
-    linear-gradient(0deg, var(--color-accent) 0 0) 40px 52px/26px 26px no-repeat,
-    linear-gradient(0deg, var(--color-data) 0 0) 78px 52px/180px 8px no-repeat,
-    linear-gradient(0deg, var(--color-data) 0 0) 78px 70px/142px 8px no-repeat,
-    linear-gradient(0deg, var(--color-data) 0 0) 40px 96px/218px 8px no-repeat,
-    linear-gradient(0deg, var(--color-data) 0 0) 40px 114px/174px 8px no-repeat,
-    linear-gradient(0deg, var(--color-data-strong) 0 0) 40px 132px/120px 8px no-repeat;
+    linear-gradient(0deg, var(--color-accent) 0 0) calc(50% - 96px) calc(50% - 31px)/26px 26px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) calc(50% + 19px) calc(50% - 40px)/180px 8px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) 50% calc(50% - 22px)/142px 8px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) 50% calc(50% + 4px)/218px 8px no-repeat,
+    linear-gradient(0deg, var(--color-data) 0 0) calc(50% - 22px) calc(50% + 22px)/174px 8px no-repeat,
+    linear-gradient(0deg, var(--color-data-strong) 0 0) calc(50% - 49px) calc(50% + 40px)/120px 8px no-repeat;
 }
 .lab-body { flex: 1; padding: 18px 22px 20px 22px; display: flex; flex-direction: column; gap: 8px; }
 .lab-title { font-family: var(--font-display); font-size: 22px; line-height: 1.15; overflow-wrap: anywhere; min-width: 0; }
