@@ -214,7 +214,7 @@ function aboutSection() {
   const interests = Array.isArray(site.interests) ? site.interests : [];
   return `
 <section class="about" id="about">
-  <p class="lede">${band(bio.body, bio.meta.highlight)}</p>
+  <div class="lede">${bio.body.split(/\n\s*\n/).map(para => `<p>${band(para.trim(), bio.meta.highlight)}</p>`).join('')}</div>
   <div class="nowline mono"><span class="nowrule"></span>NOW: ${esc(bio.meta.now).toUpperCase()}</div>
   <div class="vitae">
     <div class="vita">
