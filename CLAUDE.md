@@ -66,6 +66,10 @@ content/
   UNLINKED and left untracked in files/ (drafts marked do-not-disseminate — Andrés
   decides when to host them); first real Practice card (AI-assisted grant review);
   bio/role/NOW rebuilt around scholar + SIL dual identity; GitHub/LinkedIn links live.
+- 2026-10-02: candidate-entry draft (1 Oct 2026) cleared for public posting and linked
+  as PAPER (`files/candidate_entry_1oct2026.pdf`). Other paper PDFs still unlinked.
+  Node isn't installed on Andrés's Mac; `deno run --allow-read=. --allow-write=. --allow-env build.mjs`
+  produces the same build.
 - TODO: Scholar URL; tune `TODO(update)` seeds (keywords, short titles, takeaways,
   bio voice); practice case-study/essay teasers still placeholders; key-figure data
   per paper (schema wired, no fabricated numbers).

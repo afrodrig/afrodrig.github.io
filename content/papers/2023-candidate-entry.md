@@ -14,7 +14,7 @@ takeaway: >
   supply: party gatekeepers still favor their own incumbents.
 highlight: "The bottleneck isn't supply"   # phrase eligible for the marigold band (must appear in takeaway)
 links:
-  pdf: ""       # intentionally unlinked for now (2026-08-24) — supplemental links only
+  pdf: "files/candidate_entry_1oct2026.pdf"   # public draft, 1 Oct 2026 (cleared for posting 2026-10-02)
   slides: ""
   bibtex: ""
   data: ""
