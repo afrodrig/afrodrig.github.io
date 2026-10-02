@@ -103,6 +103,11 @@ content/
   `.view-toggle` component, one shared state for the whole section) makes the full
   abstract one click away — resolves a standing contradiction where DESIGN.md §1
   said abstracts were retired while §8 and the shipped code always preferred them.
+- 2026-10-02: candidate-entry draft (1 Oct 2026) cleared for public posting and linked
+  as PAPER (`files/candidate_entry_1oct2026.pdf`). Other paper PDFs still unlinked.
+  GitHub Pages publishes from THIS branch (`claude/website-vertical-redesign-061bd7`),
+  not `main` — `main` is ~25 commits behind. Node isn't installed on Andrés's Mac;
+  `deno run --allow-read=. --allow-write=. --allow-env build.mjs` produces the same build.
 - TODO: Scholar URL; tune `TODO(update)` seeds (keywords, short titles, takeaways,
   bio voice); practice case-study/essay teasers still placeholders; key-figure data
   per paper (schema wired, no fabricated numbers).

@@ -14,7 +14,7 @@ takeaway:
   - "The bottleneck isn't a shortage of good candidates. Party leaders keep re-running their own incumbents instead of picking them. Real renewal means changing who parties choose, not just who's available."
 highlight: "The bottleneck isn't a shortage of good candidates"   # phrase eligible for the marigold band (must appear verbatim in one takeaway bullet)
 links:
-  pdf: ""       # intentionally unlinked for now (2026-08-24) — supplemental links only
+  pdf: "files/candidate_entry_1oct2026.pdf"   # public draft, 1 Oct 2026 (cleared for posting 2026-10-02)
   slides: ""
   bibtex: ""
   data: ""
